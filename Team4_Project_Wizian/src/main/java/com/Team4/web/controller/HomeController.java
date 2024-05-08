@@ -31,9 +31,5 @@ public class HomeController {
 		return mav;
 	}
 	
-    @GetMapping({"/","/list"})
-    public String list(){
-        return "/guestbook/list";
-    }	
 }
 

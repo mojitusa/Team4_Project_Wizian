@@ -18,5 +18,10 @@ public class UserRepoService {
 	public List<User> doSelectAll() {
 		return userRepo.findAll();
 	}
+	
+	//삽입
+	public void doInsert(User user) {
+		userRepo.save(user);
+	}
 
 }

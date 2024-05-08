@@ -2,6 +2,7 @@ package com.Team4.web.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = " USER") // 테이블 이름. 없으면 클래스 명과 동일
 public class User {
 	
 	@Id
