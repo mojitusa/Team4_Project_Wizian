@@ -406,7 +406,7 @@ h6 {
 # Global Footer
 --------------------------------------------------------------*/
 .footer {
-  --background-color: #f4f4f4;
+  --background-color: silver;
   color: var(--default-color);
   background-color: var(--background-color);
   font-size: 14px;
