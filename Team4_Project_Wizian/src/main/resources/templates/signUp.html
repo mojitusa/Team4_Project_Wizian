@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <title>회원 등록 </title>
+    </head>
+    <body>
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        <form action="/signUp" method="post">
+            <!-- <div><label> User Name : <input type="text" name="USER_NO"/> </label></div> -->
+            <div><label> Password: <input type="password" name="PW"/> </label></div>
+            <div><input type="submit" value="회원 등록"/></div>
+        </form>
+    </body>
+</html>

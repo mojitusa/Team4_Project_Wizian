@@ -21,6 +21,8 @@ public class UserRepoService {
 	
 	//삽입
 	public void doInsert(User user) {
+		
+		
 		userRepo.save(user);
 	}
 
