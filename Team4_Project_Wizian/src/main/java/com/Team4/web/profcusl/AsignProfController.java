@@ -8,6 +8,11 @@ public class AsignProfController {
 	
 	@GetMapping("/profcusl")
 	public String profCusl() {
-		return "professerConsultation";
+		return "profcusl/professerConsultation";
+	}
+	
+	@GetMapping("/calendar")
+	public String calendar() {
+		return "profcusl/calendartest";
 	}
 }
