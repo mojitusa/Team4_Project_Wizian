@@ -5,9 +5,13 @@
 <title>Insert title here</title>
 <script
 	src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript">
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
+		
+		var time = '15:00';
+		var startdate = '2024-05-10';
 		
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			initialView : 'dayGridMonth',
@@ -18,31 +22,145 @@
 			 },
 			 events:[
 				 {
-			        title: 'All Day Event',
-			        start: '2024-05-08'
+			        title: '14:00',
+			        start: '2024-05-09',
+			        url: 'https://google.com/',
+			        extendedProps: {
+	                    info: 'This is an additional event information.'
+	                }
+			      },
+			      {
+			    	  title: time,
+			    	  start: startdate
 			      }
-			 ]
+			 ],
+			 eventClick: function(info) {
+				info.jsEvent.preventDefault(); // 페이지 이동을 막음(url이동)
+		            
+		         // 이벤트 정보로 모달 업데이트
+		         $('#event-modal .modal-title').text(info.event.title);
+		         $('#event-modal .modal-body').text(info.event.extendedProps.info);
+
+		          // 모달 표시
+		         $('#event-modal').show();
+		     }
 		});
+		
 		calendar.render();
+		
+	
+		// Add event button
+	    document.getElementById('add-event-btn').addEventListener('click', function() {
+	        calendar.addEvent({
+	            title: 'New Event',
+	            start: '2024-05-15'
+	        });
+	    });
+
+	    // Clear events button
+	    document.getElementById('clear-events-btn').addEventListener('click', function() {
+	        calendar.getEvents().forEach(event => {
+	            event.remove();
+	        });
+	    });
+	    
+		//모달 끄기 버튼
+		$('#modal-close-btn').click(function() {
+	        $('#event-modal').hide();
+	        $('#modal-overlay').hide();
+	    });
+	    
 	});
 	
 </script>
 <style type="text/css">
 html, body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-  font-size: 14px;
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+	font-size: 14px;
 }
 
 #calendar {
-  max-width: 800px;
-  margin: 40px auto;
+	max-width: 800px;
+	margin: 40px auto;
 }
+
+.fc-event {
+	background-color: #007bff;
+	color: white;
+	border-radius: 5px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.fc-event:hover {
+	background-color: #0056b3;
+}
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* 반투명 검정 */
+  z-index: 10; /* 모달보다 아래 */
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  z-index: 20; /* 오버레이보다 위 */
+}
+
+.modal-header {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.modal-body {
+	margin-top: 10px;
+}
+
+.modal-footer {
+	text-align: right;
+}
+
+.button-wrapper {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+
 </style>
 </head>
 <body>
+	<div class="button-wrapper">
+		<button id="add-event-btn">Add Event</button>
+		<button id="clear-events-btn">Clear Events</button>
+	</div>
 
 	<div id='calendar'></div>
+	
+	
+<div id="modal-overlay" class="modal-overlay"></div>
+	
+<!-- 모달 구조 -->
+	<div id="event-modal" class="modal">
+	    <button id="modal-close-btn">X</button>
+	    <div class="modal-header modal-title">Event Title</div>
+	    <div class="modal-body">Event Info</div>
+	    <div class="modal-footer">
+    </div>
+</div>
 </body>
 </html>
