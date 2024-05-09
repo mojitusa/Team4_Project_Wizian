@@ -6,73 +6,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript">
-	document.addEventListener('DOMContentLoaded', function() {
-		var calendarEl = document.getElementById('calendar');
-		
-		var time = '15:00';
-		var startdate = '2024-05-10';
-		
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-			initialView : 'dayGridMonth',
-			headerToolbar: {
-			      left: 'prev,next today',
-			      center: 'title',
-			      right: 'dayGridMonth,timeGridWeek'
-			 },
-			 events:[
-				 {
-			        title: '14:00',
-			        start: '2024-05-09',
-			        url: 'https://google.com/',
-			        extendedProps: {
-	                    info: 'This is an additional event information.'
-	                }
-			      },
-			      {
-			    	  title: time,
-			    	  start: startdate
-			      }
-			 ],
-			 eventClick: function(info) {
-				info.jsEvent.preventDefault(); // 페이지 이동을 막음(url이동)
-		            
-		         // 이벤트 정보로 모달 업데이트
-		         $('#event-modal .modal-title').text(info.event.title);
-		         $('#event-modal .modal-body').text(info.event.extendedProps.info);
 
-		          // 모달 표시
-		         $('#event-modal').show();
-		     }
-		});
-		
-		calendar.render();
-		
-	
-		// Add event button
-	    document.getElementById('add-event-btn').addEventListener('click', function() {
-	        calendar.addEvent({
-	            title: 'New Event',
-	            start: '2024-05-15'
-	        });
-	    });
-
-	    // Clear events button
-	    document.getElementById('clear-events-btn').addEventListener('click', function() {
-	        calendar.getEvents().forEach(event => {
-	            event.remove();
-	        });
-	    });
-	    
-		//모달 끄기 버튼
-		$('#modal-close-btn').click(function() {
-	        $('#event-modal').hide();
-	        $('#modal-overlay').hide();
-	    });
-	    
-	});
-	
-</script>
 <style type="text/css">
 html, body {
 	margin: 0;
@@ -162,5 +96,76 @@ html, body {
 	    <div class="modal-footer">
     </div>
 </div>
+<script type="text/javascript">
+	document.addEventListener('DOMContentLoaded', function() {
+
+		$.ajax({
+			url: '/'
+		});
+		
+		var time = '15:00';
+		var startdate = '2024-05-10';
+		
+		var calendarEl = document.getElementById('calendar');
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			initialView : 'dayGridMonth',
+			headerToolbar: {
+			      left: 'prev,next today',
+			      center: 'title',
+			      right: 'dayGridMonth,timeGridWeek'
+			 },
+			 events:[
+				 {
+			        title: '14:00',
+			        start: '2024-05-09',
+			        url: 'https://google.com/',
+			        extendedProps: {
+	                    info: 'This is an additional event information.'
+	                }
+			      },
+			      {
+			    	  title: time,
+			    	  start: startdate
+			      }
+			 ],
+			 eventClick: function(info) {
+				info.jsEvent.preventDefault(); // 페이지 이동을 막음(url이동)
+		            
+		         // 이벤트 정보로 모달 업데이트
+		         $('#event-modal .modal-title').text(info.event.title);
+		         $('#event-modal .modal-body').text(info.event.extendedProps.info);
+
+		          // 모달 표시
+		         $('#event-modal').show();
+		     }
+		});
+		
+		calendar.render();
+		
+	
+		// Add event button
+	    document.getElementById('add-event-btn').addEventListener('click', function() {
+	        calendar.addEvent({
+	            title: 'New Event',
+	            start: '2024-05-15'
+	        });
+	    });
+
+	    // Clear events button
+	    document.getElementById('clear-events-btn').addEventListener('click', function() {
+	        calendar.getEvents().forEach(event => {
+	            event.remove();
+	        });
+	    });
+	    
+		//모달 끄기 버튼
+		$('#modal-close-btn').click(function() {
+	        $('#event-modal').hide();
+	        $('#modal-overlay').hide();
+	    });
+	    
+	});
+	
+</script>
 </body>
 </html>
