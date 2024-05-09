@@ -24,6 +24,5 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "department_id")  //FK를 써 준다.
     private Department department;
-    // 다른 필드 및 메소드 생략	
-
+    
 }

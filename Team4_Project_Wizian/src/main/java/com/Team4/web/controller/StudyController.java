@@ -1,5 +1,6 @@
 package com.Team4.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import com.Team4.web.entity.Department;
 import com.Team4.web.entity.Employee;
 import com.Team4.web.entity.Study;
 import com.Team4.web.entity.User;
+import com.Team4.web.repository.JoinExamRepo;
+import com.Team4.web.service.JoinExamRepoService;
 import com.Team4.web.service.StudyRepoService;
 import com.Team4.web.service.UserRepoService;
 
@@ -26,6 +29,9 @@ public class StudyController {
 	
 	@Autowired
 	UserRepoService userRepoService;
+	
+	@Autowired
+	JoinExamRepoService joinExamRepoService;
 	
 	@GetMapping("/list")
 	public String doStudyList(Model model) {
@@ -61,24 +67,30 @@ public class StudyController {
 		
 		
 		//JOIN 부분 ------------------
+//		
+//		Employee emp = new Employee();
+//		emp.setId(1234L);
+//		emp.setName("홍길동");
+//		
+//		Department dep = new Department();
+//		dep.setId(0000L);
+//		dep.setName("총무부");
+//		emp.setDepartment(dep);  //이렇게 emp에 넣을 수 있다.
+//		
+//		Employee emp2 = new Employee();
+//		emp2.setId(9876L);
+//		emp2.setName("김누구");
+//		emp2.setDepartment(dep);
+//
+//		System.out.println(emp);
 		
-		Employee emp = new Employee();
-		emp.setId(1234L);
-		emp.setName("홍길동");
-		
-		Department dep = new Department();
-		dep.setId(0000L);
-		dep.setName("총무부");
-		emp.setDepartment(dep);  //이렇게 emp에 넣을 수 있다.
-		
-		Employee emp2 = new Employee();
-		emp2.setId(9876L);
-		emp2.setName("김누구");
-		emp2.setDepartment(dep);
-
-		System.out.println(emp);
-		
-		
+		List<Employee> empList = joinExamRepoService.doSelAll();
+		for (Employee emp : empList) {
+			System.out.println(emp.getId());
+			System.out.println(emp.getName());
+		    System.out.println(emp.getDepartment().getId());
+		    System.out.println(emp.getDepartment().getName());
+		}
 		
 		
 		return "redirect:index";

@@ -12,6 +12,6 @@ import com.Team4.web.entity.Study;
 public interface JoinExamRepo extends JpaRepository<Employee, Long>{
 
 	//JPQL 사용
-	@Query("select e from Emplyee e join e.department d")
-	List<Study> findByKey_id(@Param("id") int id);	
+	//@Query("select e from Emplyee e join e.department d")
+	//List<Employee> joinTest();	
 }

@@ -29,5 +29,5 @@ public class Department {
     //주인은 외래키가 존재하는 곳이다. 
     
     private List<Employee> employees;
-    // 다른 필드 및 메소드 생략	
+
 }
