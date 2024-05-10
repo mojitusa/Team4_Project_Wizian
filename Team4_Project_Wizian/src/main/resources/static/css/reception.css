@@ -1,0 +1,58 @@
+@charset "UTF-8";
+#wrapNcs .tit_complete {
+    padding-top: 43px;
+    text-align: center;
+    font-size: 225%;
+    color: #444;
+    font-weight: bold;
+}
+
+    #wrapNcs .tit_complete .txt_red {
+        color: #e1493b;
+    }
+
+#wrapNcs .desc_complete1 {
+    padding: 20px 0 30px;
+    text-align: center;
+    color: #777;
+    font-size: 130%;
+}
+
+#wrapNcs .desc_complete2 {
+    margin: 0 4%;
+    padding: 30px 0;
+    border: 1px solid #c6c6c6;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    text-align: center;
+    background: #f8f8f8;
+    font-size: 125%;
+    color: #777;
+}
+
+    #wrapNcs .desc_complete2 .txt {
+        font-size: 85%;
+    }
+
+    #wrapNcs .desc_complete2 .txt_black {
+        color: #555;
+        font-weight: bold;
+    }
+    
+    #wrapNcs .wrap_btn {
+    text-align: center;
+    padding: 40px 30px;
+}
+#wrapNcs .btn_round {
+    width: 100%;
+    line-height: 47px;
+    border: 1px solid #e78117;
+    border-radius: 3px;
+    text-align: center;
+    background-color: #e78117; 
+    font-weight: bold;
+    font-size: 1.625rem;
+    color: #fff;
+    text-decoration: none; /* 링크에 밑줄 제거 */
+}
