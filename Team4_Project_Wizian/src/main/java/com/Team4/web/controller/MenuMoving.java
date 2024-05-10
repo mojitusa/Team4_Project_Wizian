@@ -35,9 +35,4 @@ public class MenuMoving {
 	public String showPsychoPage() {
 		return "content/psycho";
 	}
-	
-	@GetMapping("/group")
-	public String showGroupPage() {
-		return "content/group";
-	}
 }
