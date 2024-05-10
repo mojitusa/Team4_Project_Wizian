@@ -32,9 +32,9 @@ public class MenuMovingController {
 		return "content/professor";
 	}
 	
-	@GetMapping("/psycho")
+	@GetMapping("/psy")
 	public String showPsychoPage() {
-		return "content/psycho";
+		return "content/psycsl";
 	}
 	
 	@GetMapping("/group")

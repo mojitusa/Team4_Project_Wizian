@@ -84,14 +84,36 @@ public class StudyController {
 //
 //		System.out.println(emp);
 		
-		List<Employee> empList = joinExamRepoService.doSelAll();
-		for (Employee emp : empList) {
-			System.out.println(emp.getId());
-			System.out.println(emp.getName());
-		    System.out.println(emp.getDepartment().getId());
-		    System.out.println(emp.getDepartment().getName());
+//		List<Employee> empList = joinExamRepoService.doSelAll();
+//		for (Employee emp : empList) {
+//			System.out.println(emp.getId());
+//			System.out.println(emp.getName());
+//		    System.out.println(emp.getDepartment().getId());
+//		    System.out.println(emp.getDepartment().getName());
+//		    System.out.println(emp.getDepartment2().getId());
+//		    System.out.println(emp.getDepartment2().getName());
+//		}
+		
+		List<Department> department = joinExamRepoService.doFindAllDe();
+		
+		for (Department dep : department) {
+			System.out.println(dep.getId());
+			System.out.println(dep.getName());
+			for (Employee emp : dep.getEmployees()) {
+				System.out.println(emp.getId());
+				System.out.println(emp.getName());
+			}
 		}
 		
+//		List<Employee> empList = joinExamRepoService.joinTest();
+//		for (Employee emp : empList) {
+//			System.out.println(emp.getId());
+//			System.out.println(emp.getName());
+//		    System.out.println(emp.getDepartment().getId());
+//		    System.out.println(emp.getDepartment().getName());
+//		    System.out.println(emp.getDepartment2().getId());
+//		    System.out.println(emp.getDepartment2().getName());
+//		}		
 		
 		return "redirect:index";
 	}
