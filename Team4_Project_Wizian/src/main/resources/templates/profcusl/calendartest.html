@@ -85,6 +85,7 @@ html, body {
 
 	<div id='calendar'></div>
 	
+	<button id="pfData">교수님 데이터 적용</button>
 	
 <div id="modal-overlay" class="modal-overlay"></div>
 	
@@ -98,10 +99,22 @@ html, body {
 </div>
 <script type="text/javascript">
 	document.addEventListener('DOMContentLoaded', function() {
-
+	var pfNo = '2017125001';
+	
+	$('#pfData').click(function(){
 		$.ajax({
-			url: '/'
+			url: '/calendarData',
+			method: 'Post',
+			data: {pfNo: pfNo},
+			success: function(data){
+				console.log(data);
+			},
+			error: function(error){
+				console.error('에러' + error);
+			}
 		});
+	});
+		
 		
 		var time = '15:00';
 		var startdate = '2024-05-10';
