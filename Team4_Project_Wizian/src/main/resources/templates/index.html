@@ -39,16 +39,13 @@
 <body class="index-page">
 	<header id="header" class="header d-flex align-items-center fixed-top">
 			<div th:replace="../templates/fragments/header"></div>
-			반갑습니다 <span th:remove="tag" sec:authentication="name">님</span>!
+			반갑습니다 님!<button>로그아웃</button>
 	</header>
 
 	<main class="main">
 		<section id="mainSection" class="">
 			<div class="container">
 				<!-- Content here -->
-				<form th:action="@{/logout}" method="post">
-					<input type="submit" value="Sign Out" />
-				</form>
 			</div>
 		</section>
 	</main>
