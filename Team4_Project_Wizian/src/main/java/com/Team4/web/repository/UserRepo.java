@@ -6,4 +6,6 @@ import com.Team4.web.entity.User;
 
 public interface UserRepo extends JpaRepository<User, String>{
 
+	 User findByUser_noAndPw(String userNo, String pw);
+
 }

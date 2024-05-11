@@ -14,28 +14,28 @@ import com.Team4.web.service.GroupService;
 @Controller
 public class groupController{
 	
-	@Autowired
-	GroupService groupService;
-	
-	@GetMapping("/group")
-	public String showGroupPage(Model model) {
-		List<Map<String, Object>> gclist = groupService.gclist();
-		model.addAttribute("gclist", gclist);
-		
-		for (Object item : gclist) {
-		    System.out.println(item);
-		}
-		System.out.println();
-		
-		return "content/group";
-	}
-	
-	@GetMapping("/groupDetail")
-	public String showGroupDetailPage(@RequestParam(value = "no", required = false, defaultValue = "") int procd, Model model) {
-		
-		List<Map<String, Object>> proDetail = groupService.proDetail(procd);
-		model.addAttribute("proDetail", proDetail);
-		
-		return "content/groupDetail";
-	}
+//	@Autowired
+//	GroupService groupService;
+//	
+//	@GetMapping("/group")
+//	public String showGroupPage(Model model) {
+//		List<Map<String, Object>> gclist = groupService.gclist();
+//		model.addAttribute("gclist", gclist);
+//		
+//		for (Object item : gclist) {
+//		    System.out.println(item);
+//		}
+//		System.out.println();
+//		
+//		return "content/group";
+//	}
+//	
+//	@GetMapping("/groupDetail")
+//	public String showGroupDetailPage(@RequestParam(value = "no", required = false, defaultValue = "") int procd, Model model) {
+//		
+//		List<Map<String, Object>> proDetail = groupService.proDetail(procd);
+//		model.addAttribute("proDetail", proDetail);
+//		
+//		return "content/groupDetail";
+//	}
 }
