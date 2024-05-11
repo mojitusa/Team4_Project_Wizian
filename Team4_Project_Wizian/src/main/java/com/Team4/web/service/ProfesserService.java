@@ -12,10 +12,10 @@ import com.Team4.web.repository.ProfSucheduleRepo;
 @Service
 public class ProfesserService {
 
-	@Autowired
-	private ProfSucheduleRepo profSucheduleRepo;
-	
-	public List<ProfSchedule> getProfSchedules(String pfNo){
-		return profSucheduleRepo.findByPF_NO(pfNo);
-	}
+//	@Autowired
+//	private ProfSucheduleRepo profSucheduleRepo;
+//	
+//	public List<ProfSchedule> getProfSchedules(String pfNo){
+//		return profSucheduleRepo.findByPF_NO(pfNo);
+//	}
 }
