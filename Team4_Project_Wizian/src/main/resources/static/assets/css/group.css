@@ -3,7 +3,7 @@
 /*--------------------------------------------------------------
 # group Section
 --------------------------------------------------------------*/
-.group{
+.groupBox{
 	margin-top: 50px;
 }
 
@@ -12,9 +12,19 @@
     margin: 0 auto; /* 좌우 여백을 자동으로 설정하여 수평 가운데 정렬 */
  }
  
+ .gcpage2{
+ 	width: 80vh;
+ 	margin: 0 auto;
+ }
+ 
+ .proDetailPage{
+ 	width: 90vh;
+ 	background-color: silver;
+ }
+ 
  .gcpa{
  	font-weight: bolder;
- 	font-size: 28px;
+ 	font-size: 24px;
  }
 
 #groupSection {
@@ -145,6 +155,20 @@
     margin-right: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+#gcdFont{
+	font-size: 20px;
+}
+
+.applyMember{
+	float: right;
+	font-weight: bold;
+	background-color: aqua;
+}
+
+a:link {
+  color : blue;
 }
 
 @media (max-width: 768px) {

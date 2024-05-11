@@ -14,4 +14,6 @@ public interface GroupMapper {
 	List<GroupModel> getCategory();
 
 	List<Map<String, Object>> getgcList();
+
+	List<Map<String, Object>> getproDetail(int procd);
 }

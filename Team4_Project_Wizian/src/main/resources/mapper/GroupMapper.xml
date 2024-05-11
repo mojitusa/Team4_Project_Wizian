@@ -5,4 +5,10 @@
     <select id="getgcList" resultType="java.util.Map">
         SELECT * FROM GC_PROGRAM;
     </select>
+    
+    <select id="getproDetail" resultType="Map" parameterType="int">
+    	SELECT * FROM GC_PROGRAM
+    	WHERE PRGRM_CD = #{procd};
+    </select>
+    
 </mapper>

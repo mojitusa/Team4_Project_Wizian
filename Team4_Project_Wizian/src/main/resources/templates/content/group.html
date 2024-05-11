@@ -34,7 +34,7 @@
     <div th:replace="../templates/fragments/header"></div>
   </header>
   
-  <main class="group">
+  <main class="groupBox">
     <section id="groupSection">
 	    <div class="gcpage1">
 	    	<div class="gcpa">
@@ -95,9 +95,25 @@
 			<div class="card" style="display: inline-block;" th:each="gc : ${gclist}">
 			    <div>
 			        <div style="display: inline-block;"><p th:text="${gc.GC_CONTS_CN}"></p></div>
-			        <div style="display: inline-block;">신청인원<p th:text="${gc.APLY_CNT}"></p></div>
-			        <div style="display: inline-block;">모집인원<p th:text="${gc.NOPE}"></p></div>
-			        <div class="context type"><p th:text="${gc.PRGRM_NM}"></p></div>
+			        <div class="applyMember">
+					<div>
+					    <!-- 모집 상태 -->
+					    <th:block th:if="${gc.APLY_CNT} &lt; ${gc.NOPE}">
+					        <span>모집중</span>
+					    </th:block>
+					    <th:block th:if="${gc.APLY_CNT} == ${gc.NOPE}">
+					        <span>마감</span>
+					    </th:block>
+					    
+					    <!-- 수강신청/정원 -->
+					    <span th:text="${gc.APLY_CNT}"></span>
+					    <span>/</span>
+					    <span th:text="${gc.NOPE}"></span>
+					</div>
+				    </div>
+			        <div class="context type">
+						<a th:href="@{./groupDetail(no=${gc.PRGRM_CD}) }" th:text="${gc.PRGRM_NM}" ></a>
+			        </div>
 			        <br>
 			        <div>
 			            <b>신청기간</b><p th:text="${gc.SCHDL_BGNG_YMD}"></p>~<p th:text="${gc.SCHDL_END_YMD}"></p><br>

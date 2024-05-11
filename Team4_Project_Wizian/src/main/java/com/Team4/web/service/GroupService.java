@@ -16,4 +16,8 @@ public class GroupService {
 	public List<Map<String, Object>> gclist() {
 		return groupMapper.getgcList();
 	}
+
+	public List<Map<String, Object>> proDetail(int procd) {
+		return groupMapper.getproDetail(procd);
+	}
 }
