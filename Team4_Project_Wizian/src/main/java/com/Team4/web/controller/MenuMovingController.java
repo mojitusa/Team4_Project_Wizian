@@ -41,9 +41,4 @@ public class MenuMovingController {
 	public String showLoginPage() {
 		return "/login";
 	}
-	
-	@GetMapping("/logout")
-	public String showLogOutPage() {
-		return "/index";
-	}
 }

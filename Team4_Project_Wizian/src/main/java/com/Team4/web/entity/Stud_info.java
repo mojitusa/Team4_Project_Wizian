@@ -1,5 +1,6 @@
 package com.Team4.web.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -13,20 +14,22 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = " USERS") // 테이블 이름. 없으면 클래스 명과 동일
-public class User {
+@Table(name = "STUD_INFO")
+public class Stud_info {
 	
 	@Id
-	private String user_no;
+	private String STUD_NO;
 	
-	private String se_cd;
+	private String MTCLTN_YMD;
 	
 	private Integer no;
 	
-	private String pw;
+	private String ST;
 	
-	private String frst_reg_tm;
+	private String C_CD;
 	
-	private String email;
+	private String USER_NO;
+	
+	private String STUD_NM;
 
 }

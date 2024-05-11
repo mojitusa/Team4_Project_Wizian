@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.Team4.web.entity.Department;
 import com.Team4.web.entity.Employee;
 import com.Team4.web.entity.Study;
-import com.Team4.web.entity.User;
+import com.Team4.web.entity.Users;
 import com.Team4.web.repository.JoinExamRepo;
 import com.Team4.web.service.JoinExamRepoService;
 import com.Team4.web.service.StudyRepoService;
