@@ -1,0 +1,81 @@
+@charset "UTF-8";
+
+/* 버튼 컨테이너 스타일 */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 50%; /* 부모 요소의 50%로 지정하여 반반씩 나오도록 설정 */
+    margin: 0 auto; /* 가운데 정렬 */
+}
+
+/* 버튼 스타일링 */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 48%; /* 부모 요소의 너비를 반반씩 나누기 위해 조정 */
+}
+
+/* 문의 등록 버튼 스타일 */
+#inquiryBtn {
+    background-color: #3498db;
+    color: white;
+}
+
+/* 문의 내역 버튼 스타일 */
+#historyBtn {
+    background-color: #ccc;
+    color: white;
+}
+
+#inquiryForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* 수직 가운데 정렬 */
+    height: 100vh; /* 화면 전체 높이를 차지하도록 설정 */
+}
+
+/* 폼 요소 스타일 */
+form {
+    width: 60%;
+    margin: 0 auto;
+}
+
+/* 라벨 스타일 */
+label {
+    margin-top: 10px;
+}
+
+/* 입력 필드 스타일 */
+input[type="text"],
+input[type="email"],
+textarea,select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* 내용 영역 포함 */
+}
+
+#inquiryContent {
+    height: 500px; /* 더 높이 설정 */
+}
+
+/* 보내기 버튼 스타일 */
+input[type="submit"] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #3498db;
+    color: white;
+    margin-top: 10px;
+}
+
+/* 보내기 버튼 호버 효과 */
+input[type="submit"]:hover {
+    background-color: #2980b9;
+}

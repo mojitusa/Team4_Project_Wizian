@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>상담센터</title>
+<link th:href="@{/css/center.css}" rel="stylesheet" />
+<style>
+    
+</style>
+</head>
+<body>
+    <!-- Header include -->
+    <div id="header"></div>
+    
+    <div id="wrapNcs">
+      <div class="section_home">
+      <img th:src="@{/image/image.png}" alt="image">
+            <h2 class="tit_home">상담센터</h2>
+            
+        <div class="btn_home">
+            <a href="/inquiry" class="btn">
+                <span class="inner">
+                    <span class="title">일반문의</span>
+                    <span class="txt">학생상담관련</span>
+                </span>
+            </a>
+            <a href="/inquiry/history" class="btn">
+                <span class="inner">
+                  <span class="title">내 문의내역</span>
+                </span>
+            </a>
+        </div>
+            
+        
+      </div>
+    </div>
+
+    
+
+    <!-- Footer include -->
+    <div id="footer"></div>
+
+    
+</body>
+</html>

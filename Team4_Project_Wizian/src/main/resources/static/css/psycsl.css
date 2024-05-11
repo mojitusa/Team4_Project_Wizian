@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+
+
+#psy_csl_cont {
+	width: 1200px;
+	margin: 0 auto; /* 가운데 정렬 */
+}
+
+#psy_csl_top_info {
+	margin-top: 50px;
+}
+
+#psy_csl_top_emp {
+	
+}
+
+#cslor-img-container {
+	/* border: 1px solid black; */
+	position: absolute;
+	right: 0;
+	top: 30px;
+	
+}
+
+.image {
+	width: 100px;
+	height: auto;
+	float: right;
+}
+
+.csl_info_title {
+	font-size: 15px;
+	
+}
+
+.csl_info_content {
+	font-size: 14px;
+}
+
+.emp {
+	background-color: #F0DCCA;
+	font-weight: bold;
+}

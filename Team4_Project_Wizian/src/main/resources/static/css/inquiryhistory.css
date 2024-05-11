@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+/* 버튼 컨테이너 스타일 */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 50%; /* 부모 요소의 50%로 지정하여 반반씩 나오도록 설정 */
+    margin: 0 auto; /* 가운데 정렬 */
+}
+
+/* 버튼 스타일링 */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 48%; /* 부모 요소의 너비를 반반씩 나누기 위해 조정 */
+}
+
+/* 문의 등록 버튼 스타일 */
+#inquiryBtn {
+    background-color: #3498db;
+    color: white;
+}
+
+/* 문의 내역 버튼 스타일 */
+#historyBtn {
+    background-color: #ccc;
+    color: white;
+}

@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = " USER") // 테이블 이름. 없으면 클래스 명과 동일
+@Table(name = " USERS") // 테이블 이름. 없으면 클래스 명과 동일
 public class User {
 	
 	@Id
@@ -21,13 +21,11 @@ public class User {
 	
 	private String se_cd;
 	
-	private String no;
+	private Integer no;
 	
 	private String pw;
 	
 	private String frst_reg_tm;
-	
-	private String user_cd;
 	
 	private String email;
 

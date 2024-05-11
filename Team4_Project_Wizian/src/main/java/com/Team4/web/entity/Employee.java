@@ -25,4 +25,8 @@ public class Employee {
     @JoinColumn(name = "department_id")  //FK를 써 준다.
     private Department department;
     
+//    @ManyToOne
+//    @JoinColumn(name = "department_id2")  //FK를 써 준다.
+//    private Department department2;
+    //하나의 엔티티(테이블)을 두 번 조인할 수도 있다. 
 }
