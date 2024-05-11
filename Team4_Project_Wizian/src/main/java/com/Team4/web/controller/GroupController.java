@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.Team4.web.service.GroupService;
 
 @Controller
-public class groupController{
+public class GroupController{
 	
 	@Autowired
 	GroupService groupService;

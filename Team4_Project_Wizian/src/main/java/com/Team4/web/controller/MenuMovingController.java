@@ -37,11 +37,6 @@ public class MenuMovingController {
 		return "content/psycsl";
 	}
 	
-	@GetMapping("/group")
-	public String showGroupPage() {
-		return "content/group";
-	}
-	
 	@GetMapping("/login")
 	public String showLoginPage() {
 		return "/login";
