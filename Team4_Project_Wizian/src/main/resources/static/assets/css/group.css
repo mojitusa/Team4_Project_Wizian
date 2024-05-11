@@ -167,6 +167,15 @@
 	background-color: aqua;
 }
 
+#listBtn{
+	background-color: white;
+}
+
+#applyBtn{
+	background-color: #87CEFA;
+	font-weight: bold;
+}
+
 a:link {
   color : blue;
 }

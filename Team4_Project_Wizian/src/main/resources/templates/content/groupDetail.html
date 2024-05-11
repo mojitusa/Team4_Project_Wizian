@@ -73,8 +73,16 @@
 			    <div>
 			        강좌 정보
 			    </div>
-			    <button>목록</button>
-			    <button>신청</button>
+			    <div style="display: flex; justify-content: space-between;">
+				    <div>
+				    	<a th:href="@{./group}">
+					    	<button id="listBtn" style="margin-left: 10px; width: 100px; height: 40px;">목록</button>
+				    	</a>
+				    </div>
+				    <div style="text-align: right;">
+				    	<button id="applyBtn" style="margin-right: 10px; width: 100px; height: 40px;">신청</button>
+				    </div>
+			    </div>
 			</div>
 		</div>
     </section>
