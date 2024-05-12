@@ -19,6 +19,10 @@ public class JoinExamRepoService {
 		return joinExamrepo.findAll();
 	}
 	
+	public List<Employee> doFindByDepName(String name) {
+		return joinExamrepo.findByDepartmentName(name);
+	}
+	
 	public List<Department> doFindAllDe() {
 		return joinExamrepo.findAllDepartments();
 	}

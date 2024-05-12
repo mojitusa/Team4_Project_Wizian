@@ -26,7 +26,8 @@ public interface JoinExamRepo extends JpaRepository<Employee, Long> {
 	
 	//이 쿼리는 Employee 엔티티와 Department 엔티티를 조인하고,
 	//Department 엔티티의 이름이 특정 부서 이름과 일치하는 Employee 엔티티들을 반환합니다.
-	
+	//이것도 쓸 필요 없다. 서비스에서 직원을 findByDepartmentName() 메소드로 가져 오면
+	//알아서 가져 온다.
 	
 	//JPQL 사용
 	@Query("SELECT e, d FROM Employee e JOIN e.department d")
