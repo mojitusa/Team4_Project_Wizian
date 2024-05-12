@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.Team4.web.entity.Department;
 import com.Team4.web.entity.Employee;
 import com.Team4.web.entity.Study;
-import com.Team4.web.entity.Users;
+import com.Team4.web.entity.User;
 import com.Team4.web.repository.JoinExamRepo;
 import com.Team4.web.service.JoinExamRepoService;
 import com.Team4.web.service.StudyRepoService;
@@ -115,8 +115,13 @@ public class StudyController {
 //		    System.out.println(emp.getDepartment2().getName());
 //		}	
 		
-		
-	
+		List<Employee> empList = joinExamRepoService.doFindByDepName("외각정보처리학원");
+		for (Employee employee : empList) {
+			System.out.println(employee.getId());
+			System.out.println(employee.getName());
+			System.out.println(employee.getDepartment().getId() );
+			System.out.println(employee.getDepartment().getName() );
+		}
 		
 		return "redirect:index";
 	}
