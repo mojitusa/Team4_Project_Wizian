@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Team4.web.entity.ProfSchedule;
+import com.Team4.web.entity.Professer;
 import com.Team4.web.service.ProfesserService;
 
 @RestController
@@ -21,6 +22,12 @@ public class RestProfController {
 	@ResponseBody
 	public List<ProfSchedule> calendarData(@RequestParam("pfNo") String pfNo) {
 		return professerService.getProfSchedules(pfNo);
+	}
+	
+	@PostMapping("/pfInfoData")
+	@ResponseBody
+	public List<Professer> pfInfoData(@RequestParam("pfNo") String pfNo){
+		return professerService.getProfData(pfNo);
 	}
 	
 }

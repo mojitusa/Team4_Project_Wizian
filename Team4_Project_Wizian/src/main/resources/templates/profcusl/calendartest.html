@@ -69,19 +69,9 @@ html, body {
 	text-align: right;
 }
 
-.button-wrapper {
-	text-align: center;
-	margin-bottom: 20px;
-}
-
-
 </style>
 </head>
 <body>
-	<div class="button-wrapper">
-		<button id="add-event-btn">Add Event</button>
-		<button id="clear-events-btn">Clear Events</button>
-	</div>
 
 	<div id='calendar'></div>
 	
@@ -98,27 +88,110 @@ html, body {
     </div>
 </div>
 <script type="text/javascript">
+//시간코드(t0900 기준) -> 시간으로 변환()
+function convertTime(timeString) {
+    var hour = parseInt(timeString.substr(1, 2));
+    var minutes = parseInt(timeString.substr(3, 2)); 
+    var formattedTime = ('0' + hour).slice(-2) + ':' + ('0' + minutes).slice(-2);
+    return formattedTime;
+}
+//날짜코드(YMD) -> YYYY-MM-DD로 바꾸기
+function formatDate(dateString) {
+    var year = dateString.substr(0, 4);
+    var month = dateString.substr(4, 2);
+    var day = dateString.substr(6, 2);
+    return year + '-' + month + '-' + day;
+}
+
+//시간코드 있는 시간 제외하고 시간표나타내기
+function generateHourlyEvents(formattedDate, convertedTimes) {
+    var events = [];
+    var startTime = formattedDate + 'T09:00'; // 시작 시간: 09:00
+    var endTime = formattedDate + 'T18:00'; // 종료 시간: 18:00
+
+    var currentTime = new Date(startTime);
+    var endTimeObj = new Date(endTime);
+
+    while (currentTime < endTimeObj) {
+        var hour = ('0' + currentTime.getHours()).slice(-2); // 시간을 2자리로 포맷팅
+        var minutes = '00'; // 분은 항상 00으로 설정
+        var time = hour + ':' + minutes; // 시간과 분을 합침
+
+        // 제외할 시간인지 확인
+        if (!convertedTimes.includes(time)) {
+            events.push({
+                title: time,
+                start: new Date(currentTime) 
+            });
+        }
+
+        // 다음 시간으로 이동
+        currentTime.setHours(currentTime.getHours() + 1);
+    }
+
+    return events;
+}
+
+
 	document.addEventListener('DOMContentLoaded', function() {
-	var pfNo = '2017125001';
-	
-	$('#pfData').click(function(){
-		$.ajax({
-			url: '/calendarData',
-			method: 'Post',
-			data: {pfNo: pfNo},
-			success: function(data){
-				console.log(data);
-			},
-			error: function(error){
-				console.error('에러' + error);
-			}
+		var pfNo = '2017125001';
+		
+		//시간데이터 변환해서 배열에 넣기(예시데이터)
+		var pf_scd_hmcd = 't0900';
+		var pf_scd_hmcd2 = 't1200';
+		var pf_scd_hmcd3 = 't1500';
+		var convertedTime = convertTime(pf_scd_hmcd);
+		var convertedTime2 = convertTime(pf_scd_hmcd2);
+		var convertedTime3 = convertTime(pf_scd_hmcd3);
+		var convertedTimes = [];
+		convertedTimes.push(convertedTime);
+		convertedTimes.push(convertedTime2);
+		convertedTimes.push(convertedTime3);
+
+		//날짜데이터 예시
+		var date = '20240514';
+		var formattedDate = formatDate(date);
+		console.log(formattedDate);
+		
+		//스케쥴 테이블 불러오기 ->캘린더 만들기
+		$('#pfData').click(function(){
+			$.ajax({
+				url: '/calendarData',
+				method: 'Post',
+				data: {pfNo: pfNo},
+				success: function(data){
+					console.log(data);
+					console.log(data[0].pf_SCD_HMCD);
+				},
+				error: function(error){
+					console.error('에러' + error);
+				}
+			});
 		});
-	});
+		
+		//교수님(교번으로) 정보 불러오기 -> 모달에 넣기
+		$('#pfInformation').click(function(){
+			$.ajax({
+				url: '/pfInfoData',
+				method: 'Post',
+				data: {pfNo: pfNo},
+				success: function(data){
+					console.log(data);
+				},
+				error: function(error){
+					console.error('에러' + error);
+				}
+			});
+		});
 		
 		
+		
+		
+		//예시 데이터
 		var time = '15:00';
-		var startdate = '2024-05-10';
+		var startdate = '2024-05-10T15:00';
 		
+		//캘린더 그리는 스크립트
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			initialView : 'dayGridMonth',
@@ -139,7 +212,8 @@ html, body {
 			      {
 			    	  title: time,
 			    	  start: startdate
-			      }
+			      },
+			      ...generateHourlyEvents(formattedDate, convertedTimes),
 			 ],
 			 eventClick: function(info) {
 				info.jsEvent.preventDefault(); // 페이지 이동을 막음(url이동)
@@ -155,22 +229,6 @@ html, body {
 		
 		calendar.render();
 		
-	
-		// Add event button
-	    document.getElementById('add-event-btn').addEventListener('click', function() {
-	        calendar.addEvent({
-	            title: 'New Event',
-	            start: '2024-05-15'
-	        });
-	    });
-
-	    // Clear events button
-	    document.getElementById('clear-events-btn').addEventListener('click', function() {
-	        calendar.getEvents().forEach(event => {
-	            event.remove();
-	        });
-	    });
-	    
 		//모달 끄기 버튼
 		$('#modal-close-btn').click(function() {
 	        $('#event-modal').hide();
@@ -178,7 +236,6 @@ html, body {
 	    });
 	    
 	});
-	
 </script>
 </body>
 </html>

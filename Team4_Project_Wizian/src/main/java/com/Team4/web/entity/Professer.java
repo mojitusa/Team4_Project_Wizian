@@ -22,7 +22,7 @@ public class Professer {
 	private String PF_TELNO;
 	
 	@Column(length = 1000)
-	private String PF_SC_PART;
+	private String PF_CS_PART;
 	
 	@Column(length = 4000)
 	private String PF_CS_PART_DETAIL;
