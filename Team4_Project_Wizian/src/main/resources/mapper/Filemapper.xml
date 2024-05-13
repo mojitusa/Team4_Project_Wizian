@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="file">
+
+	<insert id="fileInsert" parameterType="FileModel">
+		INSERT INTO COMMON_FILE (FILE_SN, ACTL_FILE_NM, UUID_FILE_NM, FILE_SZ,
+		FILE_PATH_NM, FILE_EXTN_NM)
+		VALUES (#{file_sn}, #{actl_file_nm}, #{uuid_file_Nm}, #{file_sz},
+		#{file_path_nm}, #{file_extn_nm})
+	</insert>
+
+</mapper>

@@ -26,7 +26,7 @@ public class LoginController {
 	        return "redirect:/index";
 	    } else {
 	    	model.addAttribute("errorMessage", "입력한 정보가 올바르지 않습니다. 다시 시도해주세요.");
-	        return "login";
+	        return "/login";
 	    }
 	}
 	
