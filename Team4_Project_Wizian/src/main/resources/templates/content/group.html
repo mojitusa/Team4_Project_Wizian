@@ -34,12 +34,94 @@
     <div th:replace="../templates/fragments/header"></div>
   </header>
   
-  <main class="group">
+  <main class="groupBox">
     <section id="groupSection">
-      <div class="container">
-        <!-- Content here -->
-        <h1>123123122test</h1>
-      </div>
+	    <div class="gcpage1">
+	    	<div class="gcpa">
+		      	집단 상담 프로그램 신청
+	    	</div>
+	    	<br>
+		    <div>여기엔 카테고리 검색창</div>
+		    <div>
+		    	<div class="programType">
+		    		프로그램 유형
+		    	</div>
+		    </div>
+			<div class="category-selector">
+			    <label><input type="checkbox" name="category" value="group-counseling"> 특강형</label>
+			    <label><input type="checkbox" name="category" value="group-counseling"> 참여형</label>
+			    <label><input type="checkbox" name="category" value="group-counseling"> 봉사형</label>
+			    <label><input type="checkbox" name="category" value="group-counseling"> 실습형</label>
+			    <label><input type="checkbox" name="category" value="group-counseling"> 자격형</label>
+			</div>
+			<br>
+			<div>
+		    	<div class="programType">
+		    		핵심역량
+		    	</div>
+		    </div>
+			<div class="category-selector">
+			    <label><input type="checkbox" name="category" value="group-counseling"> 창의융합</label>
+			    <label><input type="checkbox" name="category" value="group-counseling"> 전문지식탐구</label>
+			    <label><input type="checkbox" name="category" value="group-counseling"> 의사소통</label>
+			    <label><input type="checkbox" name="category" value="group-counseling"> 세계시민의식</label>
+			    <label><input type="checkbox" name="category" value="group-counseling"> 자기성찰</label>
+			    <label><input type="checkbox" name="category" value="group-counseling"> 도전</label>
+			</div>
+			<br>
+			<div>
+		    	<div class="programType">
+		    		기간
+		    	</div>
+		    </div>
+			<div class="category-selector">
+			    <label><input type="checkbox" name="category" value="group-counseling"> 모집중</label>
+			    <label><input type="checkbox" name="category" value="group-counseling"> 금일등록</label>
+			    <label><input type="checkbox" name="category" value="group-counseling"> 1주일 내 등록</label>
+			    <label><input type="checkbox" name="category" value="group-counseling"> 당일 마감</label>
+			    <label><input type="checkbox" name="category" value="group-counseling"> 1주일 내 마감</label>
+			    <label><input type="checkbox" name="category" value="group-counseling"> 모집마감</label>
+			</div>
+			
+			<br>
+		    <div class="search-box">
+			    <input type="text" placeholder="프로그램명을 입력해 주세요">
+			    <button type="submit">검색</button>
+			</div>
+		    <div>
+		    	프로그램 리스트 나열해주는 곳
+		    </div>
+		    
+			<div class="card" style="display: inline-block;" th:each="gc : ${gclist}">
+			    <div>
+			        <div style="display: inline-block;"><p th:text="${gc.GC_CONTS_CN}"></p></div>
+			        <div class="applyMember">
+					<div>
+					    <!-- 모집 상태 -->
+					    <th:block th:if="${gc.APLY_CNT} &lt; ${gc.NOPE}">
+					        <span>모집중</span>
+					    </th:block>
+					    <th:block th:if="${gc.APLY_CNT} == ${gc.NOPE}">
+					        <span>마감</span>
+					    </th:block>
+					    
+					    <!-- 수강신청/정원 -->
+					    <span th:text="${gc.APLY_CNT}"></span>
+					    <span>/</span>
+					    <span th:text="${gc.NOPE}"></span>
+					</div>
+				    </div>
+			        <div class="context type">
+						<a th:href="@{./groupDetail(no=${gc.PRGRM_CD}) }" th:text="${gc.PRGRM_NM}" ></a>
+			        </div>
+			        <br>
+			        <div>
+			            <b>신청기간</b><p th:text="${gc.SCHDL_BGNG_YMD}"></p>~<p th:text="${gc.SCHDL_END_YMD}"></p><br>
+			            <b>교육일시</b><p th:text="${gc.GC_DT}"></p><br>
+			        </div>
+			    </div>
+			</div>
+		</div>
     </section>
   </main>
   
