@@ -16,6 +16,6 @@ public class ProfesserService {
 	private ProfSucheduleRepo profSucheduleRepo;
 	
 	public List<ProfSchedule> getProfSchedules(String pfNo){
-		return profSucheduleRepo.findByPF_NO(pfNo);
+		return profSucheduleRepo.findByPFNo(pfNo);
 	}
 }

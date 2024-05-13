@@ -10,6 +10,6 @@ import com.Team4.web.entity.ProfSchedule;
 
 public interface ProfSucheduleRepo extends JpaRepository<ProfSchedule, Integer> {
 
-	@Query("SELECT u FROM ProfSchedule u WHERE u.professer.PF_NO = :PFNo")
-	List<ProfSchedule> findByPF_NO(@Param("PFNo") String pfNo);
+	@Query("SELECT p FROM ProfSchedule p JOIN p.professer d WHERE d.PF_NO= :PFNo")
+	List<ProfSchedule> findByPFNo(@Param("PFNo") String PFNo);
 }
