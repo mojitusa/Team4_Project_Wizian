@@ -1,19 +1,33 @@
-<div class="container-fluid position-relative d-flex align-items-center justify-content-between">
-      <a href="/index" class="logo d-flex align-items-center me-auto me-xl-0">
-        <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1 class="sitename">중앙 상담 센터</h1>
-      </a>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="/ec">취업/진로상담</a></li>
-          <li><a href="/disability">장애상담</a></li>
-          <li><a href="/sex">성 상담</a></li>
-          <li><a href="/psy">심리 상담</a></li>
-          <li><a href="/professor">지도교수 상담</a></li>
-          <li><a href="/group">집단 상담</a></li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
-      <a class="btn-getstarted" href="/login">로그인</a>
-    </div>
+<div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+	<a href="/index" class="logo d-flex align-items-center me-auto me-xl-0">
+		<!-- <img src="assets/img/logo.png" alt=""> -->
+		<h1 class="sitename">중앙 상담 센터</h1>
+	</a>
+
+	<nav id="navmenu" class="navmenu">
+		<ul>
+			<li><a href="/ec">취업/진로상담</a></li>
+			<li><a href="/disability">장애상담</a></li>
+			<li><a href="/sex">성 상담</a></li>
+			<li><a href="/psy">심리 상담</a></li>
+			<li><a href="/professor">지도교수 상담</a></li>
+			<li><a href="/group">집단 상담</a></li>
+		</ul>
+		<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+	</nav>
+	<div th:if="${session.username != null}" class="d-flex justify-content-center">
+		<h3>반갑습니다. <span th:text="${session.username}"></span>님!&nbsp;</h3>
+		<div>
+			<form action="/logout" method="post">
+				<button type="submit" class="btn btn-danger">로그아웃</button>
+			</form>
+		</div>
+	</div>
+
+	<div th:unless="${session.username != null}">
+		<a class="btn-getstarted" href="/login">로그인</a>
+	</div>
+</div>

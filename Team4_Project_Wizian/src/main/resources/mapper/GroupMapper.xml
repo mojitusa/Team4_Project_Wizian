@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.Team4.web.mapper.GroupMapper">
+    <select id="getgcList" resultType="java.util.Map">
+        SELECT * FROM GC_PROGRAM;
+    </select>
+    
+    <select id="getproDetail" resultType="Map" parameterType="int">
+    	SELECT * FROM GC_PROGRAM
+    	WHERE PRGRM_CD = #{procd};
+    </select>
+    
+</mapper>

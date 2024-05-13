@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.Team4.web.entity.Department;
 import com.Team4.web.entity.Employee;
 import com.Team4.web.entity.Study;
-import com.Team4.web.entity.User;
+import com.Team4.web.entity.Users;
 import com.Team4.web.repository.JoinExamRepo;
 import com.Team4.web.service.JoinExamRepoService;
 import com.Team4.web.service.StudyRepoService;
@@ -94,16 +94,16 @@ public class StudyController {
 //		    System.out.println(emp.getDepartment2().getName());
 //		}
 		
-		List<Department> department = joinExamRepoService.doFindAllDe();
-		
-		for (Department dep : department) {
-			System.out.println(dep.getId());
-			System.out.println(dep.getName());
-			for (Employee emp : dep.getEmployees()) {
-				System.out.println(emp.getId());
-				System.out.println(emp.getName());
-			}
-		}
+//		List<Department> department = joinExamRepoService.doFindAllDe();
+//		
+//		for (Department dep : department) {
+//			System.out.println(dep.getId());
+//			System.out.println(dep.getName());
+//			for (Employee emp : dep.getEmployees()) {
+//				System.out.println(emp.getId());
+//				System.out.println(emp.getName());
+//			}
+//		}
 		
 //		List<Employee> empList = joinExamRepoService.joinTest();
 //		for (Employee emp : empList) {
@@ -113,7 +113,10 @@ public class StudyController {
 //		    System.out.println(emp.getDepartment().getName());
 //		    System.out.println(emp.getDepartment2().getId());
 //		    System.out.println(emp.getDepartment2().getName());
-//		}		
+//		}	
+		
+		
+	
 		
 		return "redirect:index";
 	}
