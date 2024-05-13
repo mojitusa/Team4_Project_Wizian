@@ -27,7 +27,4 @@ public class Users{
     private String frst_reg_time;
     private String email;
     
-    @DBRef
-    private Counselor counselor;
-    
 }

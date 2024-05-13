@@ -1,1 +1,4 @@
 ﻿application.properties
+Team4_Project_Wizian/src/main/java/com/Team4/web/mapper/SalaryMapper.java
+Team4_Project_Wizian/src/main/java/com/Team4/web/model/SalaryModel.java
+Team4_Project_Wizian/src/main/java/com/Team4/web/service/SalaryService.java

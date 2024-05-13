@@ -1,0 +1,31 @@
+package com.Team4.web.mongodbrepository;
+
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.match;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregation;
+
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.stereotype.Repository;
+
+import com.Team4.web.mongodbclass.Counselor;
+
+@Repository
+public class CounselorCustomRepository {
+	
+	private final MongoTemplate mongoTemplate;
+
+    public CounselorCustomRepository(MongoTemplate mongoTemplate) {
+        this.mongoTemplate = mongoTemplate;
+    }
+
+    public Counselor findByUsersUserNo(String userNo) {
+        Aggregation aggregation = newAggregation(
+                match(Criteria.where("users.user_no").is(userNo))
+        );
+        
+        return mongoTemplate.aggregate(aggregation, "counselor", Counselor.class).getUniqueMappedResult();
+    }
+	
+
+}

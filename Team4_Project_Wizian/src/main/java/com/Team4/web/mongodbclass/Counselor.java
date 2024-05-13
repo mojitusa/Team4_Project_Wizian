@@ -1,5 +1,6 @@
 package com.Team4.web.mongodbclass;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
@@ -15,8 +16,11 @@ import lombok.NoArgsConstructor;
 @Component //빈으로 연결
 public class Counselor{
 
+	@Id
+	private String id;
+	
 	@DBRef
-	private Users user;
+	private Users users;
 	
 	private String c_cd;
     private String csl_loc;
