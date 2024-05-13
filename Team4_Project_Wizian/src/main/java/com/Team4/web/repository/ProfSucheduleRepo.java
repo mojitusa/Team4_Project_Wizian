@@ -12,4 +12,5 @@ public interface ProfSucheduleRepo extends JpaRepository<ProfSchedule, Integer> 
 
 	@Query("SELECT p FROM ProfSchedule p JOIN p.professer d WHERE d.PF_NO= :PFNo")
 	List<ProfSchedule> findByPFNo(@Param("PFNo") String PFNo);
+	
 }
