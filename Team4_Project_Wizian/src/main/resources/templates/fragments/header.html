@@ -18,16 +18,5 @@
 		</ul>
 		<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
 	</nav>
-	<div th:if="${session.username != null}" class="d-flex justify-content-center">
-		<h3>반갑습니다. <span th:text="${session.username}"></span>님!&nbsp;</h3>
-		<div>
-			<form action="/logout" method="post">
-				<button type="submit" class="btn btn-danger">로그아웃</button>
-			</form>
-		</div>
-	</div>
 
-	<div th:unless="${session.username != null}">
-		<a class="btn-getstarted" href="/login">로그인</a>
-	</div>
 </div>

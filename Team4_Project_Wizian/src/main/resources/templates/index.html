@@ -30,7 +30,24 @@
 </head>
 
 <body class="index-page">
-	<header id="header" class="header d-flex align-items-center fixed-top">
+	<header id="top" class="d-flex justify-content-between align-items-center">
+		<div>
+			<img id="logo" src="/image/logo.jpg">
+		</div>
+		<div>
+			<div th:unless="${session.username != null}">
+				<a class="btn-getstarted" href="/login">로그인</a>
+			</div>
+			<div th:if="${session.username != null}" class="d-flex">
+				<h2>반갑습니다. <span th:text="${session.username}"></span>님!&nbsp;</h2>
+					<form action="/logout" method="post">
+						<button type="submit" class="btn">로그아웃</button>
+					</form>
+			</div>
+		</div>
+	</header>
+
+	<header id="header" class="header d-flex align-items-center">
 		<div th:replace="../templates/fragments/header"></div>
 	</header>
 
@@ -38,14 +55,62 @@
 		<section id="mainSection" class="">
 			<div class="container">
 				<!-- Content here -->
-				<form action="./fileInsert" method="post" enctype="multipart/form-data" >
-				     <div class="input-group mb-3">
-  						<input type="file" accept="image/*" id="file1" name="file1" class="form-control">
+				<div class="cardWrap">
+					<div class="card">
+						<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
+						<div class="card-body">
+							<p class="card-text">Some quick example text to build on the card title and make up the bulk
+								of
+								the card's content.</p>
+							<button>상담 바로가기</button>
+						</div>
 					</div>
-					<div class="input-group mb-3">
-  						<button class="btn btn-outline-secondary" type="submit">업로드</button>
-  					</div>
-  				</form>
+					<div class="card">
+						<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
+						<div class="card-body">
+							<p class="card-text">Some quick example text to build on the card title and make up the bulk
+								of
+								the card's content.</p>
+							<button>상담 바로가기</button>
+						</div>
+					</div>
+					<div class="card">
+						<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
+						<div class="card-body">
+							<p class="card-text">Some quick example text to build on the card title and make up the bulk
+								of
+								the card's content.</p>
+							<button>상담 바로가기</button>
+						</div>
+					</div>
+					<div class="card">
+						<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
+						<div class="card-body">
+							<p class="card-text">Some quick example text to build on the card title and make up the bulk
+								of
+								the card's content.</p>
+							<button>상담 바로가기</button>
+						</div>
+					</div>
+					<div class="card">
+						<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
+						<div class="card-body">
+							<p class="card-text">Some quick example text to build on the card title and make up the bulk
+								of
+								the card's content.</p>
+							<button>상담 바로가기</button>
+						</div>
+					</div>
+					<div class="card">
+						<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
+						<div class="card-body">
+							<p class="card-text">Some quick example text to build on the card title and make up the bulk
+								of
+								the card's content.</p>
+							<button>상담 바로가기</button>
+						</div>
+					</div>
+				</div>
 			</div>
 		</section>
 	</main>
