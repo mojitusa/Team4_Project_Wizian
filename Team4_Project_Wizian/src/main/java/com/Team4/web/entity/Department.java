@@ -20,6 +20,7 @@ public class Department {
     private Long id;
     
     private String name;
+    private String loc;
     
     @OneToMany(mappedBy = "department") //mappedBy는 연관관계의 주인을 나타낸다.
     

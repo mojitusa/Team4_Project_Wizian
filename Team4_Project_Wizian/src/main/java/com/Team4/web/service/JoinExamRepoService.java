@@ -27,5 +27,9 @@ public class JoinExamRepoService {
 		return joinExamrepo.findAllDepartments();
 	}
 	
+	public List<Employee> doFindByDepLoc(String loc) {
+		return joinExamrepo.findByDepartmentLoc(loc);
+	}
+	
 	
 }

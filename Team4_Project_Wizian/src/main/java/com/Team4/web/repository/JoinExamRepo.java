@@ -21,13 +21,18 @@ public interface JoinExamRepo extends JpaRepository<Employee, Long> {
 	
 	
 	//JPQL 사용
-	@Query("SELECT e FROM Employee e JOIN e.department d WHERE d.name = :departmentName")
-	List<Employee> findByDepartmentName(@Param("departmentName") String departmentName);
+	//@Query("SELECT e FROM Employee e JOIN e.department d WHERE d.name = :departmentName")
+	//List<Employee> findByDepartmentName(@Param("departmentName") String departmentName);
 	
 	//이 쿼리는 Employee 엔티티와 Department 엔티티를 조인하고,
 	//Department 엔티티의 이름이 특정 부서 이름과 일치하는 Employee 엔티티들을 반환합니다.
-	//이것도 쓸 필요 없다. 서비스에서 직원을 findByDepartmentName() 메소드로 가져 오면
-	//알아서 가져 온다.
+	//이것도 쓸 필요 없다.
+	List<Employee> findByDepartmentName(String departmentName);
+	List<Employee> findByDepartmentLoc(String departmentLoc);
+	//이렇게 써 주면 알아서 메소드 이름 가지고 쿼리를 짜 준다. 
+	//당연히 메소드 이름은 엔티티 필드와 일치해야 한다.
+	
+
 	
 	//JPQL 사용
 	@Query("SELECT e, d FROM Employee e JOIN e.department d")

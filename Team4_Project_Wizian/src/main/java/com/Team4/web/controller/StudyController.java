@@ -1,14 +1,12 @@
 package com.Team4.web.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.Team4.web.entity.Employee;
+import com.Team4.web.mongodbclass.Counselor;
 import com.Team4.web.service.JoinExamRepoService;
 import com.Team4.web.service.StudyRepoService;
 import com.Team4.web.service.UserRepoService;
@@ -108,13 +106,22 @@ public class StudyController {
 //		    System.out.println(emp.getDepartment2().getName());
 //		}	
 		
-		List<Employee> empList = joinExamRepoService.doFindByDepName("외각정보처리학원");
-		for (Employee employee : empList) {
-			System.out.println(employee.getId());
-			System.out.println(employee.getName());
-			System.out.println(employee.getDepartment().getId() );
-			System.out.println(employee.getDepartment().getName() );
-		}
+//		List<Employee> empList = joinExamRepoService.doFindByDepName("외각정보처리학원");
+//		for (Employee employee : empList) {
+//			System.out.println(employee.getId());
+//			System.out.println(employee.getName());
+//			System.out.println(employee.getDepartment().getId() );
+//			System.out.println(employee.getDepartment().getName() );
+//		}
+		
+//		List<Employee> empList = joinExamRepoService.doFindByDepLoc("신촌");
+//		for (Employee employee : empList) {
+//			System.out.println(employee.getId());
+//			System.out.println(employee.getName());
+//			System.out.println(employee.getDepartment().getId() );
+//			System.out.println(employee.getDepartment().getName() );
+//			System.out.println(employee.getDepartment().getLoc() );
+//		}
 		
 		return "redirect:index";
 	}

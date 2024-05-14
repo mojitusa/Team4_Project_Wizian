@@ -1,25 +1,44 @@
 @charset "UTF-8";
 
+.psycho {
+	margin-top: 160px;
+}
+
 #psy_csl_cont {
 	width: 1200px;
 	margin: 0 auto; /* 가운데 정렬 */
 }
 
-#psy_csl_top_info {
-	margin-top: 50px;
-}
-
-#psy_csl_top_emp {
-	
+#psy_csl_top {
+	position: relative;
 }
 
 #cslor-img-container {
-	/* border: 1px solid black; */
 	position: absolute;
 	right: 0;
 	top: 30px;
 	
 }
+
+#psy_csl_top_headline {
+	font-size: 28px;
+	font-weight: bold;
+}
+
+#psy_csl_top_info {
+	margin-top: 50px;
+	margin-left: 40px;
+}
+
+#psy_csl_top_info_top {
+	font-weight: bold;
+	font-size: 19px;
+}
+#psy_csl_top_emp {
+	
+}
+
+
 
 .image {
 	width: 100px;
@@ -40,3 +59,96 @@
 	background-color: #F0DCCA;
 	font-weight: bold;
 }
+
+#psy_csl_bottom {
+	margin-top: 50px;
+}
+
+.psy_csl_bottom_title {
+	font-size: 18px;
+	font-weight: bold;
+	margin-top: 30px; 
+}
+
+.psy_csl_bottom_info {
+	
+}
+
+.psy_csl_bottom_info_main {
+	border: 1px solid #cccccc;
+	padding: 30px;
+	background-color: #f8f9fa;
+}
+
+#psy_csl_bottom_info_qa {
+	font-weight: bold;
+}
+
+.psy_csl_bottom_info_bottom {
+	/* border: 1px solid #ffa69e; */
+	font-weight: bold;
+	font-size: 17px;
+	padding: 14px;
+	text-align: right;
+	margin-bottom: 60px;
+}
+
+.psy_csl_bottom_info_main_table {
+	border-top: 2px solid black;
+	border-bottom: 1px solid #cccccc;
+}
+
+.psy_csl_bottom_info_main_table_row {
+	display: flex;
+	background-color: white;
+	border-bottom: 1px solid #f8f9fa;
+}
+
+.psy_csl_bottom_info_main_table_left {
+	font-weight:bold;
+	width: 200px;
+	padding: 14px;
+	background-color: #edf2fb;
+	border-right: 1px solid #f8f9fa;
+    display: flex; /* Flexbox를 사용하여 요소를 정렬합니다. */
+    align-items: center; /* 텍스트를 세로로 가운데로 정렬합니다. */
+}
+
+.psy_csl_bottom_info_main_table_right {
+	width: calc(100% - 200px);
+	padding: 10px;
+	align-self: center;
+	
+}
+
+.psy_csl_bottom_info_main_guide {
+	margin-top: 15px;
+}
+
+#psy_csl_bottom_info_bottom_last {
+	margin-bottom: 10px;
+}
+
+#psy_csl_bottom_footer {
+	font-size: 12px;
+	margin-bottom: 60px;
+	text-align: right;
+}
+
+#next-page-button-container {
+    text-align: center;
+}
+
+#next-page-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+#next-page-button:hover {
+    background-color: #0056b3;
+}
+
