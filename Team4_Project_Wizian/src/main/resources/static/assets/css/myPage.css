@@ -10,7 +10,20 @@
     flex-direction: column;
     height: 100%;
 }
+.dropdown-content {
+  display: none;
+  transition: display 0.5s ease;
+}
 
+.dropdown-content.show {
+  display: block;
+}
+.dropdown-content li {
+  list-style-type: disc; /* 앞에 점을 나타내는 스타일 */
+}
+#dropdownOptions {
+  margin-left: 20px; /* 원하는 만큼의 마진 값 설정 */
+}
 html, body {
     height: 100%;
     margin: 0;
