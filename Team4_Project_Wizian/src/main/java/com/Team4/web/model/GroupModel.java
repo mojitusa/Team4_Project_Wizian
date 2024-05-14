@@ -8,7 +8,7 @@ import lombok.NonNull;
 public class GroupModel {	
 	private String PRGRM_CD, GC_OG_NM, USER_NO, SCHDL_BGNG_YMD, SCHDL_END_YMD, GC_DT, 
 				   PRGRM_NM, GC_CONTS_CN, GC_DTL_CN, PRGRM_TYPE;
-	private int NOPE, APLY_CNT;
+	private int NOPE, APPLY_CNT;
 	
 	
 }
