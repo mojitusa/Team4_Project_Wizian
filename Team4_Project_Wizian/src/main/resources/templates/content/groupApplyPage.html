@@ -73,9 +73,17 @@
 				    	<button id="cancelBtn" style="margin-left: 10px; width: 100px; height: 40px;">취 소</button>
 			    	</a>
 			    </div>
+			    
+			    <!-- 상담 신청 삭제 버튼(남규님이 쓰실 기능) -->
+			    <div style="text-align: center;">
+			    	<button id="applyDeleteBtn" th:data-proCd="${pd.PRGRM_CD}" style="margin-right: 10px; width: 100px; height: 40px;">상담 취소</button>
+			    </div>
+			    <!-- 상담 신청 삭제 버튼 div 영역 끝 -->
+			    
 			    <div style="text-align: right;" th:if="${pd.NOPE > pd.APPLY_CNT}">
 			    	<button id="applyBtn" th:data-proCd="${pd.PRGRM_CD}" style="margin-right: 10px; width: 100px; height: 40px;">신 청</button>
 			    </div>
+
 			    
 		    </div>
 		</div>
@@ -84,64 +92,126 @@
   
 <script th:inline="javascript">
 		$(document).ready(function() {
-		    // 버튼 클릭 이벤트 핸들러 추가
+		    // 신청 버튼 핸들러
 		    $("#applyBtn").click(function() {
 		        // 서버로 전송할 데이터 설정
 		        var proCd = $(this).attr('data-proCd');
-		        
+
 		        var formData = {
 		            name: '홍길동',
 		            stud_no: '1100000001',
 		            proCd: proCd
 		        };
-		
+
 		        // JSON 형식으로 데이터 변환
 		        var jsonData = JSON.stringify(formData);
-		
+
 		        // AJAX를 사용하여 서버로 데이터 전송
 		        $.ajax({
 		            type: "POST", // 데이터 전송 방식 설정 (POST)
 		            url: "/groupApplyPage", // 데이터를 전송할 URL 설정
 		            data: {
-		            	proCd : proCd,
-		            	name : "홍길동",
-		            	stud_no : "1100000001"
+		                proCd: proCd,
+		                name: "홍길동",
+		                stud_no: "1100000001"
 		            },
-		            
+
 		            success: function(response) {
-				        if (response === "success") {
-				            Swal.fire({
-				                title: "신청이 완료되었습니다.",
-				                icon: "success",
-				                confirmButtonText: "확인"
-				            });
-				        } else if (response === "already_applied") {
-				            Swal.fire({
-				                title: "이미 신청하셨습니다.",
-				                icon: "warning",
-				                confirmButtonText: "확인"
-				            });
-				        } else {
-				            // 기타 다른 응답 처리
-				            Swal.fire({
-				                title: "오류가 발생했습니다.",
-				                text: "다시 시도해 주세요.",
-				                icon: "error",
-				                confirmButtonText: "확인"
-				            });
-				        }
-				    },
-		            error: function(xhr, status, error) {
+		                if (response === "success") {
 		                    Swal.fire({
-					            title: "오류가 발생했습니다.",
-					            text: "다시 시도해 주세요.",
-					            icon: "error",
-					            confirmButtonText: "확인"
-					        });
-		            	}
-		        	});
-		    	});
-			});
+		                        title: "신청이 완료되었습니다.",
+		                        icon: "success",
+		                        confirmButtonText: "확인"
+		                    }).then(function() {
+		                        window.location.href = "/group"
+		                    });
+		                } else if (response === "already_applied") {
+		                    Swal.fire({
+		                        title: "이미 신청하셨습니다.",
+		                        icon: "warning",
+		                        confirmButtonText: "확인"
+		                    }).then(function() {
+		                        window.location.href = "/group"
+		                    });
+
+		                } else {
+		                    // 기타 다른 응답 처리
+		                    Swal.fire({
+		                        title: "오류가 발생했습니다.",
+		                        text: "다시 시도해 주세요.",
+		                        icon: "error",
+		                        confirmButtonText: "확인"
+		                    });
+		                }
+		            },
+		            error: function(xhr, status, error) {
+		                Swal.fire({
+		                    title: "오류가 발생했습니다.",
+		                    text: "다시 시도해 주세요.",
+		                    icon: "error",
+		                    confirmButtonText: "확인"
+		                });
+		            }
+		        });
+		    });
+
+		    //삭제 버튼 핸들러
+		    $("#applyDeleteBtn").click(function() {
+		        // 서버로 전송할 데이터 설정
+		        var proCd = $(this).attr('data-proCd');
+
+		        var formData = {
+		            stud_no: '1100000001',
+		            proCd: proCd
+		        };
+
+		        // JSON 형식으로 데이터 변환
+		        var jsonData = JSON.stringify(formData);
+
+				$("#applyDeleteBtn").click(function() {
+				  // 서버로 전송할 데이터 설정
+				  var proCd = $(this).attr('data-proCd');
+				  
+				  var formData = {
+				      stud_no: '1100000001',
+				      proCd: proCd
+				  };
+				
+				  // AJAX를 사용하여 서버로 데이터 전송
+				  $.ajax({
+				      type: "POST", // 데이터 전송 방식 설정 (POST)
+				      url: "/groupapplyDelete", // 데이터를 전송할 URL 설정
+				      data: formData,
+				      success: function(response) {
+				          if (response === "success") {
+				              Swal.fire({
+				                  title: "삭제가 완료되었습니다.",
+				                  icon: "success",
+				                  confirmButtonText: "확인"
+				              }).then(function() {
+				                  window.location.href = "/group";
+				              });
+				          } else if (response === "no_exist") {
+				              Swal.fire({
+				                  title: "신청 기록이 없습니다.",
+				                  icon: "warning",
+				                  confirmButtonText: "확인"
+				              }).then(function() {
+				                  window.location.href = "/group";
+				              });
+				          }
+				      },
+				      error: function(xhr, status, error) {
+				          Swal.fire({
+				              title: "오류가 발생했습니다.",
+				              text: "다시 시도해 주세요.",
+				              icon: "error",
+				              confirmButtonText: "확인"
+				          });
+				      }
+				  });
+				});
+		});
 </script>
   <footer id="footer">
     <div th:replace="../templates/fragments/footer"></div>
