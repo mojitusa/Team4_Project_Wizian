@@ -13,7 +13,6 @@
 }
 
 .disability img {
-  position: absolute;
   inset: 0;
   display: block;
   width: 100%;
@@ -24,7 +23,6 @@
 
 .disability:before {
   content: "";
-  position: absolute;
   inset: 0;
   z-index: 2;
 }

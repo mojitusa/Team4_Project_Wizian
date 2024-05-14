@@ -30,24 +30,7 @@
 </head>
 
 <body class="index-page">
-	<header id="top" class="d-flex justify-content-between align-items-center">
-		<div>
-			<img id="logo" src="/image/logo.jpg">
-		</div>
-		<div>
-			<div th:unless="${session.username != null}">
-				<a class="btn-getstarted" href="/login">로그인</a>
-			</div>
-			<div th:if="${session.username != null}" class="d-flex">
-				<h2>반갑습니다. <span th:text="${session.username}"></span>님!&nbsp;</h2>
-					<form action="/logout" method="post">
-						<button type="submit" class="btn">로그아웃</button>
-					</form>
-			</div>
-		</div>
-	</header>
-
-	<header id="header" class="header d-flex align-items-center">
+	<header class="header">
 		<div th:replace="../templates/fragments/header"></div>
 	</header>
 
