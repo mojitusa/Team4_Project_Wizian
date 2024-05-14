@@ -43,7 +43,8 @@ dependencies {
 	// stomp
 	implementation 'org.webjars:stomp-websocket:2.3.4'
 	// 아마존
-	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.121' 
+	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.121'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 }
 
 tasks.named('test') {
