@@ -167,6 +167,78 @@
 	background-color: aqua;
 }
 
+.gcgroupApplyBox1{
+	font-size: 18px;
+	background-color: silver;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	display: flex;
+	align-items: center;
+}
+
+.gcgroupApplyBox2{
+	font-size: 18px;
+	background-color: silver;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	display: flex;
+}
+
+.gcgroupApplyInput1{
+	font-size: 24px;
+	background-color: white;
+	margin-left: 20px;
+	padding-left: 10px;
+	padding-right: 5px;
+	width: 55vh;
+	font-weight: bold;
+}
+
+.gcgroupApplyInput2{
+	font-size: 24px;
+	background-color: white;
+	margin-left: 20px;
+	padding-left: 10px;
+	padding-right: 5px;
+	width: 25vh;
+	font-weight: bold;
+}
+
+.gcgroupApplyInput3{
+	font-size: 24px;
+	background-color: white;
+	margin-left: 20px;
+	padding-left: 10px;
+	padding-right: 5px;
+	width: 30vh;
+	font-weight: bold;
+}
+
+.gcgroupApplyInput4{
+	font-size: 20px;
+	background-color: white;
+	margin-left: 20px;
+	padding-left: 10px;
+	padding-right: 5px;
+	width: 56vh;
+}
+
+.nameBox1{
+	margin-left: 20px;
+}
+
+.nameBox2{
+	margin-left: 20px;
+}
+
+.nameBox3 {
+    display: block;
+    margin-left: 20px;
+    margin-top: 1px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 #listBtn{
 	background-color: white;
 }

@@ -98,15 +98,15 @@
 			        <div class="applyMember">
 					<div>
 					    <!-- 모집 상태 -->
-					    <th:block th:if="${gc.APLY_CNT} &lt; ${gc.NOPE}">
+					    <th:block th:if="${gc.APPLY_CNT} &lt; ${gc.NOPE}">
 					        <span>모집중</span>
 					    </th:block>
-					    <th:block th:if="${gc.APLY_CNT} == ${gc.NOPE}">
+					    <th:block th:if="${gc.APPLY_CNT} == ${gc.NOPE}">
 					        <span>마감</span>
 					    </th:block>
 					    
 					    <!-- 수강신청/정원 -->
-					    <span th:text="${gc.APLY_CNT}"></span>
+					    <span th:text="${gc.APPLY_CNT}"></span>
 					    <span>/</span>
 					    <span th:text="${gc.NOPE}"></span>
 					</div>

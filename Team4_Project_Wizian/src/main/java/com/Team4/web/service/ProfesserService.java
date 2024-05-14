@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Team4.web.entity.ProfSchedule;
-import com.Team4.web.repository.ProfSucheduleRepo;
 
 
 @Service
