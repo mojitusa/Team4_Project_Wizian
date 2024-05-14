@@ -22,6 +22,7 @@ public class Counselor{
 	@DBRef
 	private Users users;
 	
+	private String name;
 	private String c_cd;
     private String csl_loc;
     private int non_face;

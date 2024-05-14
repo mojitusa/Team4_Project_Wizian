@@ -1,13 +1,14 @@
 package com.Team4.web.controller;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.Team4.web.mongodbclass.Counselor;
-import com.Team4.web.mongodbclass.CslSch;
+import com.Team4.web.mongodbclass.CslState;
+import com.Team4.web.mongodbclass.Student;
 import com.Team4.web.mongodbclass.Users;
 import com.Team4.web.service.MongoDbService;
 
@@ -99,13 +100,17 @@ public class MongoDbTestController {
 //			System.out.println(counselor.getUsers().getId());
 //			System.out.println(counselor.getUsers().getUser_no());
 //		}
-		Counselor counselor = mongoDbService.getCounselorByUserNo("3320000002");
-		CslSch cslSch = new CslSch();
-		cslSch.setCounselor(counselor);
-		cslSch.setOpen_date(LocalDate.parse("2024-05-13"));
-		cslSch.setBook(false);
-		cslSch.setCsl_time("09시 ~ 10시");
-		mongoDbService.setSclSch(cslSch);
+//		Counselor counselor = mongoDbService.getCounselorByUserNo("3320000002");
+//		counselor.setName("김상담");
+//		CslSch cslSch = new CslSch();
+//		cslSch.setCounselor(counselor);
+//		cslSch.setOpen_date(LocalDate.parse("2024-05-13"));
+//		cslSch.setBook(false);
+//		cslSch.setCsl_time("0900");
+//		mongoDbService.setSclSch(cslSch);
+//		mongoDbService.setCounselorClass(counselor);
+		
+		
 		
 		
 
