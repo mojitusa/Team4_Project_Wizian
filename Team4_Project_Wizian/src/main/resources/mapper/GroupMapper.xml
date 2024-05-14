@@ -11,4 +11,17 @@
     	WHERE PRGRM_CD = #{procd};
     </select>
     
+	<insert id="insertApply" parameterType="Map">
+	    INSERT INTO PRGRM_APP (STUD_NO, PRGRM_CD, RSVT_YMD) VALUES (
+	        #{studNumber},
+	        #{proCode},
+	        NOW()
+	    )
+	</insert>
+	
+	<select id="checkDuplicate" resultType="int" parameterType="Map">
+		SELECT COUNT(*) FROM PRGRM_APP 
+		WHERE STUD_NO = #{studNumber} 
+		AND PRGRM_CD = #{proCode}
+	</select>
 </mapper>

@@ -20,11 +20,9 @@ button {
 /* 문의 등록 버튼 스타일 */
 #inquiryBtn {
     background-color: #3498db;
-    color: white;
 }
 
 /* 문의 내역 버튼 스타일 */
 #historyBtn {
     background-color: #ccc;
-    color: white;
 }

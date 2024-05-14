@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>중앙 - 상담 시스템</title>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <!-- jQuery UI -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <!-- SweetAlert -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/group.css" rel="stylesheet">
+</head>
+
+<body class="index-page">
+  <header class="header">
+    <div th:replace="../templates/fragments/header"></div>
+  </header>
+  
+  <main class="groupBox">
+    <section id="groupSection">
+		<div class="gcpage2" th:each="pd : ${proDetail}">
+			<div class="gcpa">
+				상담 신청
+	    	</div>
+			<div class="gcgroupApplyBox1">
+			    <div class="nameBox1">집단상담 이름  </div>
+			    <div class="gcgroupApplyInput1" th:text="${pd.PRGRM_NM}"></div>
+			</div>
+			<br>
+			<div class="gcgroupApplyBox1">
+			    <div class="nameBox1">이름  </div>
+			    <div class="gcgroupApplyInput2">홍길동</div>
+			    <div class="nameBox2">학번&nbsp;&nbsp;&nbsp;  </div>
+			    <div class="gcgroupApplyInput3">123412312312</div>
+			</div>
+			<div class="gcgroupApplyBox1">
+			    <div class="nameBox1">소속  </div>
+			    <div class="gcgroupApplyInput2">중앙정보 처리학원</div>
+			    <div class="nameBox2">이메일  </div>
+			    <div class="gcgroupApplyInput3">choogang@naver.com</div>
+			</div>
+			<div class="gcgroupApplyBox1">
+			    <div class="nameBox1">연락처  </div>
+			    <div class="gcgroupApplyInput1">01012341234</div>
+			</div>
+			<br>
+			<div class="gcgroupApplyBox1">
+			    <div class="nameBox1">신청 상담 내용  </div>
+			    <div class="gcgroupApplyInput4" th:text="${pd.GC_DTL_CN}"></div>
+			</div>
+			<br><br>
+			<div style="display: flex; justify-content: space-between;">
+			    <div>
+			    	<a th:href="@{./groupDetail(no=${pd.PRGRM_CD}) }">
+				    	<button id="cancelBtn" style="margin-left: 10px; width: 100px; height: 40px;">취 소</button>
+			    	</a>
+			    </div>
+			    <div style="text-align: right;" th:if="${pd.NOPE > pd.APPLY_CNT}">
+			    	<button id="applyBtn" th:data-proCd="${pd.PRGRM_CD}" style="margin-right: 10px; width: 100px; height: 40px;">신 청</button>
+			    </div>
+			    
+		    </div>
+		</div>
+    </section>
+  </main>
+  
+<script th:inline="javascript">
+		$(document).ready(function() {
+		    // 버튼 클릭 이벤트 핸들러 추가
+		    $("#applyBtn").click(function() {
+		        // 서버로 전송할 데이터 설정
+		        var proCd = $(this).attr('data-proCd');
+		        
+		        var formData = {
+		            name: '홍길동',
+		            stud_no: '1100000001',
+		            proCd: proCd
+		        };
+		
+		        // JSON 형식으로 데이터 변환
+		        var jsonData = JSON.stringify(formData);
+		
+		        // AJAX를 사용하여 서버로 데이터 전송
+		        $.ajax({
+		            type: "POST", // 데이터 전송 방식 설정 (POST)
+		            url: "/groupApplyPage", // 데이터를 전송할 URL 설정
+		            data: {
+		            	proCd : proCd,
+		            	name : "홍길동",
+		            	stud_no : "1100000001"
+		            },
+		            
+		            success: function(response) {
+				        if (response === "success") {
+				            Swal.fire({
+				                title: "신청이 완료되었습니다.",
+				                icon: "success",
+				                confirmButtonText: "확인"
+				            });
+				        } else if (response === "already_applied") {
+				            Swal.fire({
+				                title: "이미 신청하셨습니다.",
+				                icon: "warning",
+				                confirmButtonText: "확인"
+				            });
+				        } else {
+				            // 기타 다른 응답 처리
+				            Swal.fire({
+				                title: "오류가 발생했습니다.",
+				                text: "다시 시도해 주세요.",
+				                icon: "error",
+				                confirmButtonText: "확인"
+				            });
+				        }
+				    },
+		            error: function(xhr, status, error) {
+		                    Swal.fire({
+					            title: "오류가 발생했습니다.",
+					            text: "다시 시도해 주세요.",
+					            icon: "error",
+					            confirmButtonText: "확인"
+					        });
+		            	}
+		        	});
+		    	});
+			});
+</script>
+  <footer id="footer">
+    <div th:replace="../templates/fragments/footer"></div>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script
+	src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<style type="text/css">
+html, body {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+	font-size: 14px;
+}
+
+#calendar {
+	max-width: 800px;
+	margin: 40px auto;
+}
+
+.fc-event {
+	background-color: #007bff;
+	color: white;
+	border-radius: 5px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.fc-event:hover {
+	background-color: #0056b3;
+}
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* 반투명 검정 */
+  z-index: 10; /* 모달보다 아래 */
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  z-index: 20; /* 오버레이보다 위 */
+}
+
+.modal-header {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.modal-body {
+	margin-top: 10px;
+}
+
+.modal-footer {
+	text-align: right;
+}
+
+</style>
+</head>
+<body>
+
+	<div id='calendar'></div>
+	
+	<button id="pfData">교수님 데이터 적용</button>
+	<button id="pfInformation">교수님 데이터 적용</button>
+	
+<div id="modal-overlay" class="modal-overlay"></div>
+	
+<!-- 모달 구조 -->
+	<div id="event-modal" class="modal">
+	    <button id="modal-close-btn">X</button>
+	    <div class="modal-header modal-title">Event Title</div>
+	    <div class="modal-body">Event Info</div>
+	    <div class="modal-footer">
+    </div>
+</div>
+<script type="text/javascript">
+//시간코드(t0900 기준) -> 시간으로 변환()
+function convertTime(timeString) {
+    var hour = parseInt(timeString.substr(1, 2));
+    var minutes = parseInt(timeString.substr(3, 2)); 
+    var formattedTime = ('0' + hour).slice(-2) + ':' + ('0' + minutes).slice(-2);
+    return formattedTime;
+}
+//날짜코드(YMD) -> YYYY-MM-DD로 바꾸기
+function formatDate(dateString) {
+    var year = dateString.substr(0, 4);
+    var month = dateString.substr(4, 2);
+    var day = dateString.substr(6, 2);
+    return year + '-' + month + '-' + day;
+}
+
+//시간코드 있는 시간 제외하고 시간표나타내기
+function generateHourlyEvents(formattedDate, convertedTimes) {
+    var events = [];
+    var startTime = formattedDate + 'T09:00'; // 시작 시간: 09:00
+    var endTime = formattedDate + 'T18:00'; // 종료 시간: 18:00
+
+    var currentTime = new Date(startTime);
+    var endTimeObj = new Date(endTime);
+
+    while (currentTime < endTimeObj) {
+        var hour = ('0' + currentTime.getHours()).slice(-2); // 시간을 2자리로 포맷팅
+        var minutes = '00'; // 분은 항상 00으로 설정
+        var time = hour + ':' + minutes; // 시간과 분을 합침
+
+        // 제외할 시간인지 확인
+        if (!convertedTimes.includes(time)) {
+            events.push({
+                title: time,
+                start: new Date(currentTime) 
+            });
+        }
+
+        // 다음 시간으로 이동
+        currentTime.setHours(currentTime.getHours() + 1);
+    }
+
+    return events;
+}
+
+
+	document.addEventListener('DOMContentLoaded', function() {
+		var pfNo = '2017125001';
+		
+		//시간데이터 변환해서 배열에 넣기(예시데이터)
+		var pf_scd_hmcd = 't0900';
+		var pf_scd_hmcd2 = 't1200';
+		var pf_scd_hmcd3 = 't1500';
+		var convertedTime = convertTime(pf_scd_hmcd);
+		var convertedTime2 = convertTime(pf_scd_hmcd2);
+		var convertedTime3 = convertTime(pf_scd_hmcd3);
+		var convertedTimes = [];
+		convertedTimes.push(convertedTime);
+		convertedTimes.push(convertedTime2);
+		convertedTimes.push(convertedTime3);
+
+		//날짜데이터 예시
+		var date = '20240514';
+		var formattedDate = formatDate(date);
+		console.log(formattedDate);
+		
+		//스케쥴 테이블 불러오기 ->캘린더 만들기
+		$('#pfData').click(function(){
+			$.ajax({
+				url: '/calendarData',
+				method: 'Post',
+				data: {pfNo: pfNo},
+				success: function(data){
+					console.log(data);
+					console.log(data[0].pf_SCD_HMCD);
+				},
+				error: function(error){
+					console.error('에러' + error);
+				}
+			});
+		});
+		
+		//교수님(교번으로) 정보 불러오기 -> 모달에 넣기
+		$('#pfInformation').click(function(){
+			$.ajax({
+				url: '/pfInfoData',
+				method: 'Post',
+				data: {pfNo: pfNo},
+				success: function(data){
+					console.log(data);
+				},
+				error: function(error){
+					console.error('에러' + error);
+				}
+			});
+		});
+		
+		
+		
+		
+		//예시 데이터
+		var time = '15:00';
+		var startdate = '2024-05-10T15:00';
+		
+		//캘린더 그리는 스크립트
+		var calendarEl = document.getElementById('calendar');
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			initialView : 'dayGridMonth',
+			headerToolbar: {
+			      left: 'prev,next today',
+			      center: 'title',
+			      right: 'dayGridMonth,timeGridWeek'
+			 },
+			 events:[
+				 {
+			        title: '14:00',
+			        start: '2024-05-09',
+			        url: 'https://google.com/',
+			        extendedProps: {
+	                    info: 'This is an additional event information.'
+	                }
+			      },
+			      {
+			    	  title: time,
+			    	  start: startdate
+			      },
+			      ...generateHourlyEvents(formattedDate, convertedTimes),
+			 ],
+			 eventClick: function(info) {
+				info.jsEvent.preventDefault(); // 페이지 이동을 막음(url이동)
+		            
+		         // 이벤트 정보로 모달 업데이트
+		         $('#event-modal .modal-title').text(info.event.title);
+		         $('#event-modal .modal-body').text(info.event.extendedProps.info);
+
+		          // 모달 표시
+		         $('#event-modal').show();
+		     }
+		});
+		
+		calendar.render();
+		
+		//모달 끄기 버튼
+		$('#modal-close-btn').click(function() {
+	        $('#event-modal').hide();
+	        $('#modal-overlay').hide();
+	    });
+	    
+	});
+</script>
+</body>
+</html>

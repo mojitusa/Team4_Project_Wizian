@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>문의 내역</title>
+</head>
+<body>
+    <h2>문의 내역</h2>
+    <div>
+        <p>제목: <span th:text="${inquiry.CSL_TITLE}"></span></p>
+        <p>유형: <span th:text="${inquiry.CSL_CATEGORY}"></span></p>
+        <p>내용: <span th:text="${inquiry.CSL_CONTENT}"></span></p>
+        <p>작성일: <span th:text="${#dates.format(inquiry.CSL_DATE, 'yyyy-MM-dd')}"></span></p>
+    </div>
+</body>
+</html>

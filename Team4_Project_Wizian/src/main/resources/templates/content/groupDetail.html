@@ -44,7 +44,7 @@
 			    <div id="gcdFont">
 				    <div class="applyMember">
 				        <div>
-				            <th:block th:text="${pd.APLY_CNT}"></th:block>/<th:block th:text="${pd.NOPE}"></th:block>
+				            <th:block th:text="${pd.APPLY_CNT}"></th:block>/<th:block th:text="${pd.NOPE}"></th:block>
 				        </div>
 				        <div>
 				            
@@ -76,12 +76,14 @@
 			    <div style="display: flex; justify-content: space-between;">
 				    <div>
 				    	<a th:href="@{./group}">
-					    	<button id="listBtn" style="margin-left: 10px; width: 100px; height: 40px;">목록</button>
+					    	<button id="listBtn" style="margin-left: 10px; width: 100px; height: 40px;">목 록</button>
 				    	</a>
 				    </div>
-				    <div style="text-align: right;">
-				    	<button id="applyBtn" style="margin-right: 10px; width: 100px; height: 40px;">신청</button>
-				    </div>
+					<div style="text-align: right;" th:if="${pd.NOPE > pd.APPLY_CNT}">
+					    <a th:href="@{./groupApplyPage(no=${pd.PRGRM_CD})}">
+					        <button id="applyBtn" style="margin-right: 10px; width: 100px; height: 40px;">접 수</button>
+					    </a>
+					</div>
 			    </div>
 			</div>
 		</div>
