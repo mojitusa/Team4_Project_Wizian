@@ -51,6 +51,7 @@ public class GroupController {
 		return "content/groupApplyPage";
 	}
 	
+	//그룹 상담 신청 메소드
 	@PostMapping("/groupApplyPage")
 	@ResponseBody
 	public String groupapplyProgram(@RequestParam(name = "stud_no", required = false, defaultValue = "") String studNumber,
@@ -68,10 +69,33 @@ public class GroupController {
 		// 프로그램 신청 TB에 저장
 		int result = groupService.insertApply(studNumber, proCode);
 		System.out.println("결과 확인 : " + result);
-		// 신청 인원 증가 코드 추가
 		
 		// 성공 응답 반환
 		return "success";
 		}
-
+	
+	
+	//그룹 상담 삭제 메소드
+	@PostMapping("/groupapplyDelete")
+	@ResponseBody
+	public String groupapplyDelete(@RequestParam(name = "stud_no", required = false, defaultValue = "") String studNumber,
+		            @RequestParam(name = "proCd", required = false, defaultValue = "") String proCode) {
+		
+		System.out.println("학번 : " + studNumber);
+		System.out.println("프로그램 코드 : " + proCode);
+		
+		// 중복 검사 체크
+		if(groupService.checkDuplicate(studNumber, proCode)) {
+			System.out.println("유효성 검사가 정상적으로 작동하였습니다.");
+			return "no_exist";
+		}
+		
+		// 프로그램 신청 TB에 저장
+		// 16일 아침에 할 부분
+		//int result = groupService.deleteApply(studNumber, proCode);
+		//System.out.println("결과 확인 : " + result);
+		
+		// 성공 응답 반환
+		return "success";
+		}
 }
