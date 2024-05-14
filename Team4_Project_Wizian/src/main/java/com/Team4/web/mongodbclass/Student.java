@@ -26,6 +26,7 @@ public class Student{
 	private String st;
     private String cCd;
     private String name;
+    private String birth;
     private String genCd;
     private String address;
     private String telNo;
