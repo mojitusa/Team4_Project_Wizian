@@ -12,7 +12,6 @@
 }
 
 .ec img {
-  position: absolute;
   inset: 0;
   display: block;
   width: 100%;
@@ -23,9 +22,7 @@
 
 .ec:before {
   content: "";
-  position: absolute;
   inset: 0;
-  z-index: 2;
 }
 
 .ec .container {

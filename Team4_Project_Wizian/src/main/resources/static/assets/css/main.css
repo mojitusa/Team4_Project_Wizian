@@ -111,16 +111,14 @@ h6 {
 .header {
   color: white;
   background-color: #222;
-  padding: 20px 0;
   transition: all 0.5s;
-  z-index: 997;
-      width: 100%; /* 전체 너비를 차지하도록 설정 */
-    max-width: 1440px; /* 최대 너비를 1440px로 제한 */
-    margin: 0 auto; /* 가운데 정렬을 위해 좌우 마진을 자동으로 조정 */
+  width: 100%; 
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 #leftlogo {
-    margin-right: 10px; /* 로고와 텍스트 사이 간격 조정 */
+    margin-right: 10px;
 }
 .header .logo {
   line-height: 1;
