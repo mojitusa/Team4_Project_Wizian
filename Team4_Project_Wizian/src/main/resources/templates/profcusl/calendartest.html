@@ -76,18 +76,19 @@ html, body {
 	<div id='calendar'></div>
 	
 	<button id="pfData">교수님 데이터 적용</button>
-	<button id="pfInformation">교수님 데이터 적용</button>
+	<button id="pfInformation">교수님 정보</button>
 	
 <div id="modal-overlay" class="modal-overlay"></div>
 	
 <!-- 모달 구조 -->
 	<div id="event-modal" class="modal">
 	    <button id="modal-close-btn">X</button>
-	    <div class="modal-header modal-title">Event Title</div>
-	    <div class="modal-body">Event Info</div>
+	    <div class="modal-header modal-title">Event Title//</div>
+	    <div class="modal-body">Event Info+++++</div>
 	    <div class="modal-footer">
     </div>
 </div>
+
 <script type="text/javascript">
 //시간코드(t0900 기준) -> 시간으로 변환()
 function convertTime(timeString) {
@@ -161,8 +162,15 @@ function generateHourlyEvents(formattedDate, convertedTimes) {
 				method: 'Post',
 				data: {pfNo: pfNo},
 				success: function(data){
-					console.log(data);
-					console.log(data[0].pf_SCD_HMCD);
+					if(data.length > 0) {
+						console.log(data);
+		                var professorScd = data[0]; // 첫 번째 교수 정보를 사용
+		                var time = convertTime(professorScd.pf_SCD_HMCD);
+		                $('.modal-body').html('상담시간 ' + convertTime(professorScd.pf_SCD_HMCD) + '<br>' +
+		                                      '상담일자: ' + formatDate(professorScd.pf_SCD_YMD)); // 모달 내용 업데이트
+		            } else {
+		                console.log('No data received');
+		            }
 				},
 				error: function(error){
 					console.error('에러' + error);
@@ -170,14 +178,23 @@ function generateHourlyEvents(formattedDate, convertedTimes) {
 			});
 		});
 		
-		//교수님(교번으로) 정보 불러오기 -> 모달에 넣기
+		//교수님(교번으로) 정보 불러오기(장소, 번호등) -> 모달에 넣기
 		$('#pfInformation').click(function(){
 			$.ajax({
 				url: '/pfInfoData',
 				method: 'Post',
 				data: {pfNo: pfNo},
 				success: function(data){
-					console.log(data);
+					if(data.length > 0) {
+						console.log(data);
+		                var professor = data[0]; // 첫 번째 교수 정보를 사용
+		                
+		                $('.modal-title').append('<br>'+professor.pf_NO); // 모달 타이틀에 추가
+		                $('.modal-body').append('<br>상담장소: ' + professor.pf_PLC_NM + '<br>' +
+		                                        '전화번호: ' + professor.pf_TELNO); // 모달 내용에 추가
+		            } else {
+		                console.log('No data received');
+		            }
 				},
 				error: function(error){
 					console.error('에러' + error);
@@ -214,7 +231,7 @@ function generateHourlyEvents(formattedDate, convertedTimes) {
 			    	  title: time,
 			    	  start: startdate
 			      },
-			      ...generateHourlyEvents(formattedDate, convertedTimes),
+			      ...generateHourlyEvents(formattedDate, convertedTimes)
 			 ],
 			 eventClick: function(info) {
 				info.jsEvent.preventDefault(); // 페이지 이동을 막음(url이동)
