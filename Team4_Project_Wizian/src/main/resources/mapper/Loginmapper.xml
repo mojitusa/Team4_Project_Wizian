@@ -4,11 +4,11 @@
 <mapper namespace="LoginMapper">
 
    	<select id="check" resultType="int" parameterType="map">
-    	SELECT COUNT(*) FROM users WHERE user_no = #{userNo} AND pw = #{pw}
+    	SELECT COUNT(*) FROM USERS WHERE user_no = #{userNo} AND pw = #{pw}
 	</select>
 	
 	<select id="getName" resultType="String" parameterType="String">
-    	SELECT s.stud_nm FROM STUD_INFO s join users u on s.stud_no = u.user_no  WHERE u.user_no = #{userNo}
+    	SELECT s.stud_nm FROM STUD_INFO s join USERS u on s.stud_no = u.user_no  WHERE u.user_no = #{userNo}
 	</select>
  
 </mapper>
