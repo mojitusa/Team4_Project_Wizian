@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>문의 상담 페이지</title>
+    <title>문의 내역</title>
     <link th:href="@{/css/inquiryhistory.css}" rel="stylesheet" />
 </head>
 <body>
@@ -10,6 +10,35 @@
         <a href="/inquiry"><button>문의 등록</button></a>
         <a href="/inquiry/history"><button>문의 내역</button></a>
     </div>
+
+    <div class="inquiry-history">
+        <h2>문의 내역</h2>
+        <table>
+            <thead>
+                <tr>  
+                    <th>제목</th>               
+                    <th>유형</th>                    
+                    <th>내용</th>
+                    <th>작성일</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Thymeleaf를 사용하여 문의 내역을 동적으로 표시 -->
+                <tr th:each="inquiry : ${inquiries}" th:onclick="'showDetail(\'' + ${inquiry.CSL_NO} + '\')'">
+                    <td th:text="${inquiry.CSL_TITLE}"></td>
+                    <td th:text="${ '[' + inquiry.CSL_CATEGORY + ']' }"></td>
+                    <td th:text="${inquiry.CSL_CONTENT}"></td>
+                    <td th:text="${#dates.format(inquiry.CSL_DATE, 'yyyy-MM-dd')}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <script th:inline="javascript">
+        function showDetail(cslNo) {
+            alert("상세 정보를 표시합니다" +  cslNo);
+        }
+    </script>
 
 </body>
 </html>

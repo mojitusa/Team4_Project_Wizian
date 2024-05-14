@@ -1,19 +1,67 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
-    <head>
-        <title>로그인</title>
-    </head>
-    <body>
-        <div th:if="${param.error}">
-            Invalid username and password.
-        </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
-        </div>
-        <form action="/loginProc" method="post">
-            <div><label> User Name : <input type="text" name="username"/> </label></div>
-            <div><label> Password: <input type="password" name="password"/> </label></div>
-            <div><input type="submit" value="로그인"/></div>
-        </form>
-    </body>
+
+<head>
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+	<title>로그인</title>
+</head>
+<style>
+	body {
+		background-color: #f8f9fa;
+		height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.card {
+		max-width: 400px;
+		padding: 20px;
+		border-radius: 10px;
+		box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+	}
+
+	/* 중앙 정렬을 위한 추가 스타일 */
+	.center-card {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100vh;
+	}
+</style>
+
+<body>
+	<div th:if="${param.error}">
+		Invalid username and password.
+	</div>
+	<div th:if="${param.logout}">
+		You have been logged out.
+	</div>
+	<div class="error-message" th:if="${errorMessage}">
+        <script th:inline="javascript">
+        /*<![CDATA[*/
+        alert([[${errorMessage}]]);
+        /*]]>*/
+    </script>
+	</div>
+	<div class="card">
+
+		<form action="/login" method="post">
+			<div class="mb-3">
+				<div class="input-group-text" id="basic-addon1"><label> 아이디 : <input type="text" name="user_no" />
+					</label></div>
+			</div>
+			<div class="mb-3">
+				<div class="input-group-text" id="basic-addon1"><label> 비밀번호 : <input type="password" name="pw" />
+					</label></div>
+			</div>
+			<div><input type="submit" value="로그인" /></div>
+		</form>
+
+	</div>
+</body>
+
 </html>

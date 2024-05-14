@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -37,18 +38,73 @@
 </head>
 
 <body class="index-page">
-	<header id="header" class="header d-flex align-items-center fixed-top">
-			<div th:replace="../templates/fragments/header"></div>
-			반갑습니다 <span th:remove="tag" sec:authentication="name">님</span>!
+	<header class="header">
+		<div th:replace="../templates/fragments/header"></div>
 	</header>
 
 	<main class="main">
 		<section id="mainSection" class="">
 			<div class="container">
 				<!-- Content here -->
-				<form th:action="@{/logout}" method="post">
-					<input type="submit" value="Sign Out" />
-				</form>
+				<div>
+					<div id = "myPage" class="card border-light mb-3" style="max-width: 18rem;">
+						<div class="card-header">나의 활동</div>
+						<div class="card-body">
+							<p class="card-text">상담 일정</p>
+							<p class="card-text">상담 내역</p>
+						</div>
+					</div>
+				</div>
+				<div class="cardWrap">
+					<div class="card">
+						<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
+						<div class="card-body">
+							<p class="card-text">Some quick example text to build on the
+								card title and make up the bulk of the card's content.</p>
+							<button>상담 바로가기</button>
+						</div>
+					</div>
+					<div class="card">
+						<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
+						<div class="card-body">
+							<p class="card-text">Some quick example text to build on the
+								card title and make up the bulk of the card's content.</p>
+							<button>상담 바로가기</button>
+						</div>
+					</div>
+					<div class="card">
+						<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
+						<div class="card-body">
+							<p class="card-text">Some quick example text to build on the
+								card title and make up the bulk of the card's content.</p>
+							<button>상담 바로가기</button>
+						</div>
+					</div>
+					<div class="card">
+						<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
+						<div class="card-body">
+							<p class="card-text">Some quick example text to build on the
+								card title and make up the bulk of the card's content.</p>
+							<button>상담 바로가기</button>
+						</div>
+					</div>
+					<div class="card">
+						<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
+						<div class="card-body">
+							<p class="card-text">Some quick example text to build on the
+								card title and make up the bulk of the card's content.</p>
+							<button>상담 바로가기</button>
+						</div>
+					</div>
+					<div class="card">
+						<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
+						<div class="card-body">
+							<p class="card-text">Some quick example text to build on the
+								card title and make up the bulk of the card's content.</p>
+							<button>상담 바로가기</button>
+						</div>
+					</div>
+				</div>
 			</div>
 		</section>
 	</main>

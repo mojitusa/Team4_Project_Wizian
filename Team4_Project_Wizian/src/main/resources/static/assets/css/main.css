@@ -54,6 +54,27 @@ body {
   font-family: var(--default-font);
   height:80%;
 }
+#session{
+	color : black;
+}
+.cardWrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: auto; /* 높이를 자동으로 조정 */
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.card {
+    width: calc(33.333% - 20px); /* 한 줄에 3개의 카드가 나오도록 설정 */
+    padding: 5px;
+    margin: 5px;
+    max-width: 250px; /* 카드의 최대 너비 설정 */
+}
+
 
 a {
   color: var(--accent-color);
@@ -79,14 +100,32 @@ h6 {
 /*--------------------------------------------------------------
 # Global Header
 --------------------------------------------------------------*/
-.header {
-  color: white;
-  background-color: black;
-  padding: 20px 0;
-  transition: all 0.5s;
-  z-index: 997;
+#top {
+    top: 0;
+    width: 100%;
+    background-color: white; /* 배경색 지정 */
+    z-index: 999; /* 다른 요소 위에 표시되도록 설정 */
+    width: 100%; /* 전체 너비를 차지하도록 설정 */
+    max-width: 1440px; /* 최대 너비를 1440px로 제한 */
+    margin: 0 auto; /* 가운데 정렬을 위해 좌우 마진을 자동으로 조정 */
 }
 
+.header {
+  color: white;
+  background-color: #222;
+  transition: all 0.5s;
+  width: 100%; 
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+#myPage{
+	float: right;
+}
+
+#leftlogo {
+    margin-right: 10px;
+}
 .header .logo {
   line-height: 1;
 }
@@ -172,6 +211,7 @@ h6 {
 --------------------------------------------------------------*/
 /* Navmenu - Desktop */
 @media (min-width: 1200px) {
+
   .navmenu {
     padding: 0;
   }
@@ -281,11 +321,14 @@ h6 {
 # Global Footer
 --------------------------------------------------------------*/
 .footer {
-  --background-color: silver;
-  color: var(--default-color);
+  --background-color: #222;
+  color: white;
   background-color: var(--background-color);
   font-size: 14px;
-  padding-bottom: 0;
+  width: 100%;
+  max-width: 1400px;
+  margin-bottom: 0;
+  margin: 0 auto;
 }
 
 .copyrightName{
@@ -325,6 +368,18 @@ h6 {
   font-size: 13px;
 }
 
+.footerContent {
+    padding: 5px;
+}
+
+.footerContent .menu,
+.footerContent div > div {
+    padding: 5px; /* 내부의 각각의 요소들에도 padding을 적용 */
+}
+
+.footerContent .menu .copyright {
+    padding: 0 5px; /* 각 링크 요소에도 좌우 padding 적용 */
+}
 /*--------------------------------------------------------------
 # Scroll Top Button
 --------------------------------------------------------------*/
@@ -418,7 +473,7 @@ section,
 .section {
   color: var(--default-color);
   background-color: var(--background-color);
-  padding: 60px 0;
+  padding: 30px 0;
   scroll-margin-top: 98px;
   overflow: clip;
 }
@@ -471,12 +526,22 @@ section,
 /*--------------------------------------------------------------
 # Main Section
 --------------------------------------------------------------*/
-.main{
-	margin-top: 50px;
-}
 #mainSection {
   width: 100%;
   min-height: 88.7vh
+}
+
+#myPage {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* 추가 스타일이 필요할 경우 */
+#myPage .card-header {
+    background-color: #f8f9fa;
+}
+
+#myPage .card-body {
+    background-color: #ffffff;
 }
 
 .hero img {

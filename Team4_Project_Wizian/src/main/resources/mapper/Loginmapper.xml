@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="LoginMapper">
+
+   	<select id="check" resultType="int" parameterType="map">
+    	SELECT COUNT(*) FROM USERS WHERE user_no = #{userNo} AND pw = #{pw}
+	</select>
+	
+	<select id="getName" resultType="String" parameterType="String">
+    	SELECT s.stud_nm FROM STUD_INFO s join USERS u on s.stud_no = u.user_no  WHERE u.user_no = #{userNo}
+	</select>
+ 
+</mapper>

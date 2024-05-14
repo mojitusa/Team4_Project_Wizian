@@ -9,7 +9,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "PROFESSER")
 public class Professer {
@@ -22,7 +24,7 @@ public class Professer {
 	private String PF_TELNO;
 	
 	@Column(length = 1000)
-	private String PF_SC_PART;
+	private String PF_CS_PART;
 	
 	@Column(length = 4000)
 	private String PF_CS_PART_DETAIL;

@@ -94,16 +94,16 @@ public class StudyController {
 //		    System.out.println(emp.getDepartment2().getName());
 //		}
 		
-		List<Department> department = joinExamRepoService.doFindAllDe();
-		
-		for (Department dep : department) {
-			System.out.println(dep.getId());
-			System.out.println(dep.getName());
-			for (Employee emp : dep.getEmployees()) {
-				System.out.println(emp.getId());
-				System.out.println(emp.getName());
-			}
-		}
+//		List<Department> department = joinExamRepoService.doFindAllDe();
+//		
+//		for (Department dep : department) {
+//			System.out.println(dep.getId());
+//			System.out.println(dep.getName());
+//			for (Employee emp : dep.getEmployees()) {
+//				System.out.println(emp.getId());
+//				System.out.println(emp.getName());
+//			}
+//		}
 		
 //		List<Employee> empList = joinExamRepoService.joinTest();
 //		for (Employee emp : empList) {
@@ -113,7 +113,15 @@ public class StudyController {
 //		    System.out.println(emp.getDepartment().getName());
 //		    System.out.println(emp.getDepartment2().getId());
 //		    System.out.println(emp.getDepartment2().getName());
-//		}		
+//		}	
+		
+		List<Employee> empList = joinExamRepoService.doFindByDepName("외각정보처리학원");
+		for (Employee employee : empList) {
+			System.out.println(employee.getId());
+			System.out.println(employee.getName());
+			System.out.println(employee.getDepartment().getId() );
+			System.out.println(employee.getDepartment().getName() );
+		}
 		
 		return "redirect:index";
 	}
