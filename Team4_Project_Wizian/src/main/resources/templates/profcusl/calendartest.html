@@ -82,12 +82,18 @@ html, body {
 	
 <!-- 모달 구조 -->
 	<div id="event-modal" class="modal">
-	    <button id="modal-close-btn">X</button>
-	    <div class="modal-header modal-title">Event Title//</div>
-	    <div class="modal-body">Event Info+++++</div>
-	    <div class="modal-footer">
-    </div>
-</div>
+	    <div class="modal-header modal-title">상담신청</div>
+		    <div class="modal-body">Event Info+++++<br>
+		     	<p>상담시간: <span id="event-time">11</span></p>
+	        	<p>상담일자: <span id="event-date"></span></p>
+	        	<label for="csl-content">상담내용:</label>
+				<textarea id="csl-content" name="cslContent"></textarea>
+		    </div>
+		    <div class="modal-footer">
+			<button id="modal-close-btn" type="button">취소</button>
+		    <button id="asign-prof-csl">상담 신청</button>
+    		</div>
+		</div>
 
 <script type="text/javascript">
 //시간코드(t0900 기준) -> 시간으로 변환()
@@ -155,6 +161,7 @@ function generateHourlyEvents(formattedDate, convertedTimes) {
 		var formattedDate = formatDate(date);
 		console.log(formattedDate);
 		
+		
 		//스케쥴 테이블 불러오기 ->캘린더 만들기
 		$('#pfData').click(function(){
 			$.ajax({
@@ -165,9 +172,7 @@ function generateHourlyEvents(formattedDate, convertedTimes) {
 					if(data.length > 0) {
 						console.log(data);
 		                var professorScd = data[0]; // 첫 번째 교수 정보를 사용
-		                var time = convertTime(professorScd.pf_SCD_HMCD);
-		                $('.modal-body').html('상담시간 ' + convertTime(professorScd.pf_SCD_HMCD) + '<br>' +
-		                                      '상담일자: ' + formatDate(professorScd.pf_SCD_YMD)); // 모달 내용 업데이트
+		                
 		            } else {
 		                console.log('No data received');
 		            }
@@ -219,27 +224,35 @@ function generateHourlyEvents(formattedDate, convertedTimes) {
 			      right: 'dayGridMonth,timeGridWeek'
 			 },
 			 events:[
-				 {
+				 /* {
 			        title: '14:00',
 			        start: '2024-05-09',
 			        url: 'https://google.com/',
 			        extendedProps: {
 	                    info: 'This is an additional event information.'
 	                }
-			      },
-			      {
+			      }, */
+			     /*  {
 			    	  title: time,
 			    	  start: startdate
-			      },
+			      }, */
 			      ...generateHourlyEvents(formattedDate, convertedTimes)
 			 ],
 			 eventClick: function(info) {
 				info.jsEvent.preventDefault(); // 페이지 이동을 막음(url이동)
-		            
-		         // 이벤트 정보로 모달 업데이트
-		         $('#event-modal .modal-title').text(info.event.title);
-		         $('#event-modal .modal-body').text(info.event.extendedProps.info);
+				
+				// 클릭된 이벤트의 시간과 날짜 가져오기
+			    var eventStart = info.event.start;
+			    var eventTime = eventStart.getHours() + ':' + ('0' + eventStart.getMinutes()).slice(-2);
+			    var eventDate = eventStart.toISOString().split('T')[0];
+			    
+			    //$('.modal-body').html('상담시간: ' + eventTime + '<br>' + '상담일자: ' + eventDate); // 모달 내용 업데이트 
+                
+			    $('#event-time').text(eventTime);
+    			$('#event-date').text(eventDate);
+			    
 
+                     
 		          // 모달 표시
 		         $('#event-modal').show();
 		     }
@@ -253,6 +266,17 @@ function generateHourlyEvents(formattedDate, convertedTimes) {
 	        $('#modal-overlay').hide();
 	    });
 	    
+		//상담신청완료 데이터 넘기기
+		$('#')
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	});
 </script>
 </body>
