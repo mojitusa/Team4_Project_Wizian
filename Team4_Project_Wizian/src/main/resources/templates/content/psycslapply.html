@@ -27,10 +27,11 @@
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
   <link href="assets/css/ec.css" rel="stylesheet">
+  <link rel="stylesheet" href="./css/psycslapply.css" />  
 </head>
 
 <body class="index-page">
-  <header id="header" class="header d-flex align-items-center fixed-top">
+  <header  class="header">
     <div th:replace="../templates/fragments/header"></div>
   </header>
   
@@ -38,11 +39,115 @@
     <section id="ecSection" class="">
       <div class="container">
         <!-- Content here -->
-        
+        <div id="main_container">
+	        <div id="top">
+	        	<p id="top_title">
+	        		기본인적사항
+	        	</p>
+	        	<div id="top_table">
+	        		<div class="table_row">
+	        			<div class="table_row_colored">
+	        				이름
+	        			</div>
+	        			<div class="table_row_uncolored" th:text=${student.name}>
+	        			</div>
+	        			<div class="table_row_colored2">
+	        				학번
+	        			</div>
+	        			<div class="table_row_uncolored" th:text=${student.users.user_no}>
+	        			</div>
+	        		</div>
+	        		<div class="table_row">
+	        			<div class="table_row_colored">
+	        				생년월일
+	        			</div>
+	        			<div class="table_row_uncolored" th:text=${student.birth}>
+	        			</div>
+	        			<div class="table_row_colored2">
+	        				소속
+	        			</div>
+	        			<div class="table_row_uncolored" th:text=${student.cCd}>
+	        			</div>
+	        		</div>
+	        		<div class="table_row">
+	        			<div class="table_row_colored">
+	        				<sapn style="color: red">* </sapn>연락처(H.P)
+	        			</div>
+	        			<div class="table_row_uncolored" >
+					        <form id="phoneNumberForm">
+					            <input type="text" id="phoneNumberInput" th:value="${student.telNo}">
+					        </form>	        				
+	        			</div>
+	        			<div class="table_row_colored2">
+	        				<sapn style="color: red">* </sapn>E-Mail
+	        			</div>
+	        			<div class="table_row_uncolored">
+					        <form id="emailForm">
+					            <input type="text" id="email" th:value="${student.users.email}">
+					        </form>	        				
+	        			</div>
+	        		</div>
+	        		<div class="table_row">
+	        			<div class="table_row_colored">
+	        				재학종류
+	        			</div>
+	        			<div class="table_row_uncolored" th:text=${student.st}>
+	        			</div>
+	        			<div class="table_row_colored2">
+	        				휴학기간
+	        			</div>
+	        			<div class="table_row_uncolored">
+	        				-
+	        			</div>
+	        		</div>
+	        		<div class="table_row">
+	        			<div class="table_row_colored">
+	        				군 복무
+	        			</div>
+	        			<div class="table_row_uncolored" >
+	        				<form id="milForm">
+							  <input type="radio" id="mil1" name="hy" value="현역">
+							  <label for="hy">현역</label>
+							  <input type="radio" id="mil2" name="ki" value="공익">
+							  <label for="ki">공익</label>
+							  <input type="radio" id="mil3" name="mp" value="미필">
+							  <label for="mp">미필</label>	        					
+							  <input type="radio" id="mil4" name="mj" value="면제">
+							  <label for="mp">면제</label>	        					
+							  <input type="radio" id="mil4" name="hd" value="해당없음">
+							  <label for="hd">해당없음</label>	        					
+	        				</form>
+	        			</div>
+	        			<div class="table_row_colored2">
+	        				종교
+	        			</div>
+	        			<div class="table_row_uncolored">
+	        				<form id="relForm">
+							  <input type="radio" id="mil1" name="hy" value="기독교">
+							  <label for="hy">기독교</label>
+							  <input type="radio" id="mil2" name="ki" value="천주교">
+							  <label for="ki">천주교</label>
+							  <input type="radio" id="mil3" name="mp" value="불교">
+							  <label for="mp">불교</label>	        					
+							  <input type="radio" id="mil4" name="mj" value="무교">
+							  <label for="mp">무교</label>	        					
+							  <input type="radio" id="mil4" name="hd" value="기타">
+							  <label for="hd">기타</label>	        					
+	        				</form>
+	        			</div>
+	        		</div>
+	        	</div>
+	        </div>
+	        <div id="main" >
+	        </div>
+	        <div id="bottom1">
+	        </div>
+	        <div id="bottom2">
+	        </div>
+        </div>
       </div>
     </section>
   </main>
-  
 </body>
 
   <footer id="footer">

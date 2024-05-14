@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+#main_container {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+#top_title {
+	font-size: 25px;
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+
+#top_table {
+	border-top: 2px solid black;
+	border-bottom: 1px solid #cccccc;
+}
+
+.table_row {
+	display: grid;
+	grid-template-columns: 175px 425px 175px 425px; /* 각 열의 너비를 자동으로 설정 */
+	border-bottom: 1px solid #E6E6E6;
+}
+
+.table_row_colored {
+	padding: 14px;
+	background-color: #edf2fb;
+	text-align: center;
+	border-right: 1px solid #E6E6E6;
+}
+
+.table_row_colored2 {
+	padding: 14px;
+	background-color: #edf2fb;
+	text-align: center;
+	border-right: 1px solid #E6E6E6;
+	border-left: 1px solid #E6E6E6;
+}
+
+.table_row_uncolored {
+	/* color: darkgray; */
+	padding: 14px;
+}
+
+input[type="radio"] + label {
+    margin-right: 10px; /* 라디오 버튼과 라벨 사이의 우측 여백을 조절합니다. */
+}
