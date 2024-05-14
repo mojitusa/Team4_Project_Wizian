@@ -46,7 +46,7 @@ public class InquiryController {
 	}
    
 	
-	@GetMapping("/inquiry/history")
+	@GetMapping("/inquiryhistory")
 	public ModelAndView InquiryHistory(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("inquiryhistory");

@@ -6,12 +6,7 @@
     <link th:href="@{/css/inquiry.css}" rel="stylesheet" />
 </head>
 <body onload="showInquiryForm()">
-    <div>
-        <button id="inquiryBtn" onclick="showInquiryForm()">문의 등록</button>
-        <a href="/inquiry/history"><button id="historyBtn">문의 내역</button></a>
-    </div>
-    
-    <div id="inquiryForm" style="display: none;">
+    <div id="inquiryForm" >
         <form action="/receptioncomplete" method="post" onsubmit="return validateForm()"> 
             <label for="STUD_NO">학번</label>
             <input type="text" id="STUD_NO" name="STUD_NO"><br>
@@ -38,12 +33,9 @@
             <input type="submit" value="보내기">
         </form>
     </div>
-    
-    <div id="inquiryHistory" style="display: none;">
-        <h2>문의 내역</h2>
-        
+        <div>
+        <button id="inquiryBtn" onclick="showInquiryForm()">문의 등록</button>
     </div>
-
     <script>
         function showInquiryForm() {
             document.getElementById("inquiryForm").style.display = "block";
