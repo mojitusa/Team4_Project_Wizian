@@ -65,7 +65,6 @@ public class InquiryController {
 			modelAndView.addObject("inquiry", inquiry);
 			modelAndView.setViewName("inquirydetail");
 		} else {
-			// 해당 ID의 Inquiry가 없을 경우 에러 처리
 			modelAndView.setViewName("error");
 		}
 		return modelAndView;

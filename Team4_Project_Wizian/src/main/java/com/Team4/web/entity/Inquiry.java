@@ -31,4 +31,9 @@ public class Inquiry {
     private String CSL_EVAL;
     private String CSL_CATEGORY;
     private Date CSL_DATE = new Date();
+    
+    // 접수상태 0: 접수중 , 1: 상담완료
+    private int CSL_STATUS = 0;
+    	
+    
 }
