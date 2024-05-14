@@ -9,10 +9,10 @@
 			<div th:unless="${session.username != null}">
 				<a class="btn-getstarted" href="/login">로그인</a>
 			</div>
-			<div th:if="${session.username != null}" class="d-flex">
-				<h2>반갑습니다. <span th:text="${session.username}"></span>님!&nbsp;</h2>
+			<div th:if="${session.username != null}" id = "session" class="d-flex" >
+				<h3 style="color: black;">반갑습니다. <span th:text="${session.username}"></span>님!&nbsp;</h3>
 					<form action="/logout" method="post">
-						<button type="submit" class="btn">로그아웃</button>
+						<button type="submit" class="btn btn-dark">로그아웃</button>
 					</form>
 			</div>
 		</div>
@@ -30,6 +30,7 @@
 			<li><a href="/psy">심리 상담</a></li>
 			<li><a href="/professor">지도교수 상담</a></li>
 			<li><a href="/group">집단 상담</a></li>
+			<li th:if="${session.username != null}"><a href="/myPage">마이 페이지</a></li>
 		</ul>
 	</nav>
 </div>
