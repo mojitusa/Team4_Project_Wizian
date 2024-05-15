@@ -25,8 +25,8 @@ public class LoginDAO {
 	    return count > 0;
 	}
 
-	public String getName(String id) {
-		return sqlSession.selectOne("getName",id);
+	public Map<String, Object> getName(String userNo) {
+	    return sqlSession.selectOne("getName", userNo);
 	}
 
 

@@ -1,5 +1,7 @@
 package com.Team4.web.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,7 @@ public class LoginService {
 		return loginDAO.checkLogin(userNo,pw);
 	}
 
-	public String getName(String id) {
+	public Map<String, Object> getName(String id) {
 		return loginDAO.getName(id);
 	}
 }

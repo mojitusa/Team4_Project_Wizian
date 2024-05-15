@@ -10,7 +10,10 @@
 				<a class="btn-getstarted" href="/login">로그인</a>
 			</div>
 			<div th:if="${session.username != null}" id = "session" class="d-flex" >
-				<h3 style="color: black;">반갑습니다. <span th:text="${session.username}"></span>님!&nbsp;</h3>
+				<h3 style="color: black;">반갑습니다. <span th:text="${session.username}">
+					<span th:text="${session.user_no}">
+					
+				</span>님!&nbsp;</h3>
 					<form action="/logout" method="post">
 						<button type="submit" class="btn btn-dark">로그아웃</button>
 					</form>
