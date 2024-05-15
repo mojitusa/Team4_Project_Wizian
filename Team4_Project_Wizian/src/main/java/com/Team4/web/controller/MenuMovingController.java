@@ -3,6 +3,8 @@ package com.Team4.web.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.Team4.web.model.FileModel;
+
 @Controller
 public class MenuMovingController {
 
@@ -43,6 +45,6 @@ public class MenuMovingController {
 	
 	@GetMapping("/myPage")
 	public String showMyPage() {
-		return "/myPage";
+		return "content/myPage";
 	}
 }
