@@ -47,9 +47,9 @@
 			<br>
 			<div class="gcgroupApplyBox1">
 			    <div class="nameBox1">이름  </div>
-			    <div class="gcgroupApplyInput2">홍길동</div>
+			    <div class="gcgroupApplyInput2" th:text="${session.username}"></div>
 			    <div class="nameBox2">학번&nbsp;&nbsp;&nbsp;  </div>
-			    <div class="gcgroupApplyInput3">123412312312</div>
+			    <div class="gcgroupApplyInput3" th:text="${session.userNo}"></div>
 			</div>
 			<div class="gcgroupApplyBox1">
 			    <div class="nameBox1">소속  </div>
@@ -81,9 +81,8 @@
 			    <!-- 상담 신청 삭제 버튼 div 영역 끝 -->
 			    
 			    <div style="text-align: right;" th:if="${pd.NOPE > pd.APPLY_CNT}">
-			    	<button id="applyBtn" th:data-proCd="${pd.PRGRM_CD}" style="margin-right: 10px; width: 100px; height: 40px;">신 청</button>
+			    	<button id="applyBtn" th:data-proCd="${pd.PRGRM_CD}" th:data-userNo="${session.userNo}" th:data-userName="${session.username}" style="margin-right: 10px; width: 100px; height: 40px;">신 청</button>
 			    </div>
-
 			    
 		    </div>
 		</div>
@@ -96,10 +95,12 @@
 		    $("#applyBtn").click(function() {
 		        // 서버로 전송할 데이터 설정
 		        var proCd = $(this).attr('data-proCd');
-
+		        var userName = $(this).attr('data-userNo');
+		        var userNo = $(this).attr('data-userName');
+				
 		        var formData = {
-		            name: '홍길동',
-		            stud_no: '1100000001',
+		            stud_no: userNo,
+		            stud_name: userName,
 		            proCd: proCd
 		        };
 
