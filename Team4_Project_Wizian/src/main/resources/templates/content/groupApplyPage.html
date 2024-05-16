@@ -125,7 +125,7 @@
 		                        confirmButtonText: "확인"
 		                    }).then(function() {
 		                        window.location.href = "/group"
-		                    });
+		                    }); 
 		                } else if (response === "already_applied") {
 		                    Swal.fire({
 		                        title: "이미 신청하셨습니다.",
@@ -135,6 +135,23 @@
 		                        window.location.href = "/group"
 		                    });
 
+		                } else if (response === "noLogin") {
+		                    Swal.fire({
+		                        title: "로그인 페이지로 이동합니다.",
+		                        icon: "warning",
+		                        confirmButtonText: "확인"
+		                    }).then(function() {
+		                        window.location.href = "/login"
+		                    });
+
+		                }  else if (response === "dateOver") {
+		                    Swal.fire({
+		                        title: "취소 가능 기간이 아닙니다.",
+		                        icon: "warning",
+		                        confirmButtonText: "확인"
+		                    }).then(function() {
+		                        window.location.href = "/group"
+		                    });
 		                } else {
 		                    // 기타 다른 응답 처리
 		                    Swal.fire({
@@ -160,9 +177,12 @@
 		    $("#applyDeleteBtn").click(function() {
 		        // 서버로 전송할 데이터 설정
 		        var proCd = $(this).attr('data-proCd');
+		        var userName = $(this).attr('data-userNo');
+		        var userNo = $(this).attr('data-userName');
 
 		        var formData = {
-		            stud_no: '1100000001',
+		            stud_no: userNo,
+		            stud_name: userName,
 		            proCd: proCd
 		        };
 
@@ -190,6 +210,22 @@
 		                        confirmButtonText: "확인"
 		                    }).then(function() {
 		                        window.location.href = "/group";
+		                    });
+		                } else if (response === "noLogin") {
+		                    Swal.fire({
+		                        title: "로그인 페이지로 이동합니다.",
+		                        icon: "warning",
+		                        confirmButtonText: "확인"
+		                    }).then(function() {
+		                        window.location.href = "/login"
+		                    });
+		                } else if (response === "dateOver") {
+		                    Swal.fire({
+		                        title: "신청 기간이 아닙니다.",
+		                        icon: "warning",
+		                        confirmButtonText: "확인"
+		                    }).then(function() {
+		                        window.location.href = "/group"
 		                    });
 		                }
 		            },

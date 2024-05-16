@@ -24,6 +24,30 @@
 	        GROUP BY PRGRM_CD
 	    ) APPLY_CNT ON G.PRGRM_CD = APPLY_CNT.PRGRM_CD;
 	</select>
+	
+	<select id="getgcListWithSearch" resultType="Map" parameterType="String">
+	    SELECT 
+	        G.PRGRM_CD, 
+	        G.GC_OG_NM, 
+	        G.USER_NO, 
+	        G.NOPE, 
+	        DATE_FORMAT(G.SCHDL_BGNG_YMD, '%Y-%m-%d %H시') AS SCHDL_BGNG_YMD, 
+	        DATE_FORMAT(G.SCHDL_END_YMD, '%Y-%m-%d %H시') AS SCHDL_END_YMD,  
+	        DATE_FORMAT(G.GC_DT, '%Y-%m-%d %H시') AS GC_DT, 
+	        G.PRGRM_NM, 
+	        G.PRGRM_TYPE, 
+	        G.GC_CONTS_CN,
+	        G.GC_DTL_CN,
+	        COALESCE(APPLY_CNT.COUNT, 0) AS APPLY_CNT
+	    FROM 
+	        GC_PROGRAM G 
+	    LEFT JOIN (
+	        SELECT PRGRM_CD, COUNT(*) AS COUNT
+	        FROM PRGRM_APP
+	        GROUP BY PRGRM_CD
+	    ) APPLY_CNT ON G.PRGRM_CD = APPLY_CNT.PRGRM_CD
+	    WHERE G.PRGRM_NM LIKE CONCAT('%', #{searchWord}, '%');
+	</select>
     
 	<select id="getproDetail" resultType="Map" parameterType="int">
 	    SELECT 
@@ -57,6 +81,11 @@
 	    )
 	</insert>
 	
+	<select id="getProgramDates" parameterType="String" resultType="Map">
+	    SELECT SCHDL_BGNG_YMD, SCHDL_END_YMD FROM GC_PROGRAM 
+	    WHERE PRGRM_CD = #{proCode}
+	</select>
+	
 	<select id="checkDuplicate" resultType="int" parameterType="Map">
 		SELECT COUNT(*) FROM PRGRM_APP 
 		WHERE STUD_NO = #{studNumber} 
@@ -68,4 +97,9 @@
 		WHERE STUD_NO = #{studNumber} 
 		AND PRGRM_CD = #{proCode}
 	</delete>
+	
+	<select id="getProgramCancelDate" parameterType="String" resultType="Map">
+	    SELECT GC_DT FROM GC_PROGRAM
+	    WHERE PRGRM_CD = #{proCode}
+	</select>
 </mapper>

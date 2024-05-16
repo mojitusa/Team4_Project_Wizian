@@ -14,6 +14,8 @@ public interface GroupMapper {
 	List<GroupModel> getCategory();
 
 	List<Map<String, Object>> getgcList();
+	
+	List<Map<String, Object>> getgcListWithSearch(String searchWord);
 
 	List<Map<String, Object>> getproDetail(int procd);
 
@@ -21,6 +23,10 @@ public interface GroupMapper {
 
 	int checkDuplicate(Map<String, Object> applyInfo);
 
+	Map<String, Object> getProgramDates(String proCode);
+	
 	int deleteApply(Map<String, Object> applyInfo);
+
+	Map<String, Object> getProgramCancelDate(String proCode);
 
 }

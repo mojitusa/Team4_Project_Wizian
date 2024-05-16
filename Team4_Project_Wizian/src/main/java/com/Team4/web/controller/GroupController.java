@@ -1,5 +1,7 @@
 package com.Team4.web.controller;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.Team4.web.service.GroupService;
-import com.Team4.web.service.LoginService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -21,18 +22,22 @@ public class GroupController {
 
 	@Autowired
 	private GroupService groupService;
-	private LoginService loginService;
-
+	
 	@GetMapping("/group")
-	public String showGroupPage(Model model) {
-		List<Map<String, Object>> gclist = groupService.gclist();
-		model.addAttribute("gclist", gclist);
-
-		for (Object item : gclist) {
-			System.out.println(item);
+	public String showGroupPage(@RequestParam(value = "searchText", required = false, defaultValue = "") String searchWord, Model model) {
+		
+		System.out.println("검색어 입력 테스트 : " + searchWord);
+		
+		if(searchWord == null || searchWord == "") {
+			List<Map<String, Object>> gclist = groupService.gclist();
+			model.addAttribute("gclist", gclist);
+		} else {
+			List<Map<String, Object>> gclist = groupService.getgcListWithSearch(searchWord);
+			model.addAttribute("gclist", gclist);
+			
+			System.out.println(gclist);
 		}
-		System.out.println();
-
+		
 		return "content/group";
 	}
 
@@ -63,41 +68,75 @@ public class GroupController {
 		String studNumber = (String) session.getAttribute("userNo");
 		String studName = (String) session.getAttribute("username");
         
-		// 중복 검사 체크
-		if(groupService.checkDuplicate(studNumber, proCode)) {
-			System.out.println("중복검사가 정상적으로 작동되었습니다.");
-			return "already_applied";
-		}
-		
-		// 프로그램 신청 TB에 저장
-		int result = groupService.insertApply(studNumber, proCode);
-		System.out.println("결과 확인 : " + result);
-		
-		// 성공 응답 반환
-		return "success";
-		}
-	
-	
-	//그룹 상담 삭제 메소드
-	@PostMapping("/groupapplyDelete")
-	@ResponseBody
-	public String groupapplyDelete(@RequestParam(name = "stud_no", required = false, defaultValue = "") String studNumber,
-		            @RequestParam(name = "proCd", required = false, defaultValue = "") String proCode, HttpSession session) {
-		
-		System.out.println("학번 : " + studNumber);
-		System.out.println("프로그램 코드 : " + proCode);
-		
-		// 중복 검사 체크
-		if(groupService.checkDuplicate(studNumber, proCode) != true) {
-			System.out.println("유효성 검사가 정상적으로 작동하였습니다.");
-			return "no_exist";
-		} else {
+		if(studNumber != null && studName != null) {
+			
+			// 중복 검사 체크
+			if(groupService.checkDuplicate(studNumber, proCode)) {
+				System.out.println("중복검사가 정상적으로 작동되었습니다.");
+				return "already_applied";
+			}
+			
+	        // 프로그램 기한 확인
+	        Map<String, Object> programDates = groupService.getProgramDates(proCode);
+	        if (programDates != null) {
+	            Date schdlBeginDate = (Date) programDates.get("SCHDL_BGNG_YMD");
+	            Date schdlEndDate = (Date) programDates.get("SCHDL_END_YMD");
+
+	            Timestamp schdlBegin = new Timestamp(schdlBeginDate.getTime());
+	            Timestamp schdlEnd = new Timestamp(schdlEndDate.getTime());
+	            Timestamp now = new Timestamp(System.currentTimeMillis());
+	            
+	            if (now.before(schdlBegin) || now.after(schdlEnd)) {
+	                return "dateOver";
+	            }
+	        }
 			// 프로그램 신청 TB에 저장
-			int result = groupService.deleteApply(studNumber, proCode);
+			int result = groupService.insertApply(studNumber, proCode);
 			System.out.println("결과 확인 : " + result);
 			
-			// 성공 응답 반환
 			return "success";
+		} else {
+			return "noLogin";
 		}
+	}
+	
+	@PostMapping("/groupapplyDelete")
+	@ResponseBody
+	public String groupapplyDelete(@RequestParam(name = "proCd", required = false, defaultValue = "") String proCode, HttpSession session) {
+	    
+	    String studNumber = (String) session.getAttribute("userNo");
+	    String studName = (String) session.getAttribute("username");
+	    
+	    System.out.println("학번 : " + studNumber);
+	    System.out.println("프로그램 코드 : " + proCode);
+	    
+	    if (studNumber != null && studName != null) {
+	        
+	        Map<String, Object> programCancelDate = groupService.getProgramCancelDate(proCode);
+	        if (programCancelDate != null) {
+	            Date gcDT = (Date) programCancelDate.get("GC_DT");
+	            Timestamp gcDt = new Timestamp(gcDT.getTime());
+	            Timestamp now = new Timestamp(System.currentTimeMillis());
+	            
+	            if (gcDt != null && now.after(gcDt)) {
+	                return "dateOver";
+	            }
+	        }
+	        
+	        // 중복 검사 체크
+	        if (!groupService.checkDuplicate(studNumber, proCode)) {
+	            System.out.println("유효성 검사가 정상적으로 작동하였습니다.");
+	            return "no_exist";
+	        } else {
+	            // 프로그램 삭제 TB에 저장
+	            int result = groupService.deleteApply(studNumber, proCode);
+	            System.out.println("결과 확인 : " + result);
+	            
+	            // 성공 응답 반환
+	            return "success";
+	        }
+	    } else {
+	        return "noLogin";
+	    }
 	}
 }

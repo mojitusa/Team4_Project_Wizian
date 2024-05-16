@@ -162,6 +162,9 @@
 .applyMember{
 	float: right;
 	font-weight: bold;
+}
+
+.applyNopePossibility{
 	background-color: aqua;
 }
 
@@ -219,6 +222,12 @@
 	padding-left: 10px;
 	padding-right: 5px;
 	width: 56vh;
+}
+
+.applyPossibility{
+	float: right;
+	background-color: none;
+	font-size: 12px !important;
 }
 
 .nameBox1{
