@@ -41,7 +41,7 @@
         <!-- Content here -->
         <div id="main_container">
 	        <div id="top">
-	        	<p id="top_title">
+	        	<p class="title_text">
 	        		기본인적사항
 	        	</p>
 	        	<div id="top_table">
@@ -139,15 +139,343 @@
 	        	</div>
 	        </div>
 	        <div id="main" >
+	        	<div class="main_table_row">
+	        		<div class="main_table_row_colored">
+	        			방문목적
+	        		</div>
+	        		<div class="main_table_row_uncolored">
+	        			<div class="main_table_row_uncolored_q">
+	        				<img src="./image/q.png" alt="Q" width="30">상담을 신청하는 목적은 무엇입니까?
+	        			</div>
+	        			<form class="main_table_row_uncolored_form">
+	        				<div class="checkbox_wrapper">
+		        				<input type="checkbox" id="personal" name="purpose" value="개인상담">
+		        				<label for="personal">개인상담</label>
+		        			</div>
+		        			<div class="checkbox_wrapper">
+		        				<input type="checkbox" id="psy" name="purpose" value="심리검사 & 심리검사 해석상담">
+		        				<label for="psy">심리검사 & 심리검사 해석상담</label>
+		        			</div>
+		        			<div class="checkbox_wrapper">
+		        				<input type="checkbox" id="group" name="purpose" value="집단상담">
+		        				<label for="group">집단상담</label>
+		        			</div>
+		        			<div class="checkbox_wrapper">	
+		        				<input type="checkbox" id="sexual" name="purpose" value="성희롱고충상담">
+		        				<label for="sexual">성희롱고충상담</label>
+		        			</div>
+		        			<div class="checkbox_wrapper">
+		        				<input type="checkbox" id="etc" name="purpose" value="기타">
+		        				<label for="etc">기타</label>
+		        			</div>
+	        			</form>
+	        			<div class="etc_one_row_container">
+	        				<input type="text" class="etc" name="purposeEtc">
+	        			</div>
+	        		</div>
+	        	</div>
+	        	<div class="main_table_row">
+	        		<div class="main_table_row_colored">
+	        			방문경로
+	        		</div>
+	        		<div class="main_table_row_uncolored">
+	        			<div class="main_table_row_uncolored_q">
+	        				<img src="./image/q.png" alt="Q" width="30">상담을 신청하게 된 경로는 무엇입니까?
+	        			</div>
+	        			<form class="main_table_row_uncolored_form">
+	        				<div class="checkbox_wrapper">
+		        				<input type="checkbox" id="self" name="route" value="자진">
+		        				<label for="self">자진</label>
+		        			</div>
+		        			<div class="checkbox_wrapper">
+		        				<input type="checkbox" id="prf" name="route" value="교수님추천">
+		        				<label for="prf">교수님추천</label>
+		        			</div>
+		        			<div class="checkbox_wrapper">
+		        				<input type="checkbox" id="friend" name="route" value="친구,선배 추천">
+		        				<label for="friend">친구,선배 추천</label>
+		        			</div>
+		        			<div class="checkbox_wrapper">	
+		        				<input type="checkbox" id="cslcenter" name="route" value="상담센터 홈페이지">
+		        				<label for="cslcenter">상담센터 홈페이지</label>
+		        			</div>
+		        			<div class="checkbox_wrapper">
+		        				<input type="checkbox" id="etc" name="purpose" value="기타">
+		        				<label for="etc">기타</label>
+		        			</div>
+	        			</form>
+	        			<div class="etc_one_row_container">
+	        				<input type="text" class="etc" name="routeEtc">
+	        			</div>
+	        		</div>
+	        	</div>
+	        	<div class="main_table_row">
+	        		<div class="main_table_row_colored">
+	        			상담경험
+	        		</div>
+	        		<div class="main_table_row_uncolored">
+	        			<div class="main_table_row_uncolored_q">
+	        				<img src="./image/q.png" alt="Q" width="30">전에 심리상담(심리치료) 또는 심리검사를 받은 적이 있습니까?
+	        			</div>
+	        			<form class="main_table_row_uncolored_form">
+	        				<input type="radio" id="expyes" name="exp" value="예">
+	        				<span style="margin-right: 8px;"></span> <!-- 공간 추가 -->
+						  	<label for="hy">예</label>
+						  	<span style="margin-right: 24px;"></span> <!-- 공간 추가 -->
+	        				<input type="radio" id="expno" name="exp" value="아니오">
+	        				<span style="margin-right: 8px;"></span> <!-- 공간 추가 -->
+	        				<label for="prf">아니오</label>
+	        			</form>
+	        			<div class="main_table_row_uncolored_q">
+	        				<img src="./image/q.png" alt="Q" width="30">심리검사를 받아 보신적이 있다면 아래 내용을 입력해 주세요.
+	        			</div>
+	        			<div id="etc_two_rows_container">
+	        				<div class="etc_two_rows_container_each">
+	        					<input type="text" id="etc_half1" name="expdate" placeholder="  상담을 받아보신 날짜를 입력해 주세요.">
+	        				</div>
+	        				<div class="etc_two_rows_container_each">
+	        					<input type="text" id="etc_half2" name="exploc" placeholder="  상담을 받아보신 장소를 입력해 주세요.">
+	        				</div>
+	        			</div>
+	        		</div>
+	        	</div>
+	        	<div class="main_table_row">
+	        		<div class="main_table_row_colored">
+	        			심리검사 종류
+	        		</div>
+	        		<div class="main_table_row_uncolored">
+	        			<div class="main_table_row_uncolored_q">
+	        				<img src="./image/q.png" alt="Q" width="30">심리검사를 위해 방문했다면 받고 싶은 검사는 무엇입니까?
+	        			</div>
+	        			<form class="main_table_row_uncolored_form2">
+	        				<div class="main_table_row_uncolored_form_div">
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="psytest1" name="psytest" value="MMPI-2(다면적인성검사)">
+			        				<label for="psytest1">MMPI-2(다면적인성검사)</label>
+			        			</div>
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="psytest2" name="psytest" value="MMPI-2-RF">
+			        				<label for="psytest2">MMPI-2-RF</label>
+			        			</div>
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="psytest3" name="psytest" value="SCT(문장완성검사)">
+			        				<label for="psytest3">SCT(문장완성검사)</label>
+			        			</div>
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="psytest4" name="psytest" value="TCI(기질 및 성격검사)">
+			        				<label for="psytest4">TCI(기질 및 성격검사)</label>
+			        			</div>
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="psytest5" name="psytest" value="MBTI">
+			        				<label for="psytest5">MBTI</label>
+			        			</div>
+			        		</div>	
+	        				<div class="main_table_row_uncolored_form_div">
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="psytest6" name="psytest" value="CST(강점탐색검사)">
+			        				<label for="psytest6">CST(강점탐색검사)</label>
+			        			</div>
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="psytest7" name="psytest" value="BFI(성격5요인검사)">
+			        				<label for="psytest7">BFI(성격5요인검사)</label>
+			        			</div>
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="psytest8" name="psytest" value="K-BASC-2(정서행동평가)">
+			        				<label for="psytest8">K-BASC-2(정서행동평가)</label>
+			        			</div>
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="psytest9" name="psytest" value="HTP">
+			        				<label for="psytest9">HTP</label>
+			        			</div>
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="psytest10" name="psytest" value="KFD">
+			        				<label for="psytest10">KFD</label>
+			        			</div>
+			        		</div>	
+	        				<div class="main_table_row_uncolored_form_div">
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="psytest11" name="psytest" value="IESS(통합스트레스검사)">
+			        				<label for="psytest11">IESS(통합스트레스검사)</label>
+			        			</div>
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="psytest12" name="psytest" value="K-IIP(대인관계관검사)">
+			        				<label for="psytest12">K-IIP(대인관계관검사)</label>
+			        			</div>
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="psytest13" name="psytest" value="FCPI(유학생심리건강검사)">
+			        				<label for="psytest13">FCPI(유학생심리건강검사)</label>
+			        			</div>
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="psytest14" name="psytest" value="스트레스 측정기">
+			        				<label for="psytest14">스트레스 측정기</label>
+			        			</div>
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="psytest15" name="psytest" value="기타">
+			        				<label for="psytest15">기타</label>
+			        			</div>
+			        		</div>	
+	        			</form>
+	        			<div class="etc_one_row_container">
+	        				<input type="text" class="etc" name="psyTestEtc" placeholder="  기타 사항을 적어 주세요.">
+	        			</div>
+	        		</div>
+	        	</div>	        	
+	        	<div class="main_table_row">
+	        		<div class="main_table_row_colored">
+	        			개인 상담문제
+	        		</div>
+	        		<div class="main_table_row_uncolored">
+	        			<div class="main_table_row_uncolored_q">
+	        				<img src="./image/q.png" alt="Q" width="30">개인 상담을 받는다면 어떤 문제를 상담 받기 원하십니까?
+	        			</div>
+	        			<form class="main_table_row_uncolored_form2">
+	        				<div class="main_table_row_uncolored_form_div">
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="personalSubject1" name="personalSubject" value="학교생활 적응문제">
+			        				<label for="personalSubject1">학교생활 적응문제</label>
+			        			</div>
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="personalSubject2" name="personalSubject" value="대인관계문제">
+			        				<label for="personalSubject2">대인관계문제</label>
+			        			</div>
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="personalSubject3" name="personalSubject" value="정서적문제 (우울,불안,자살충동 등)">
+			        				<label for="personalSubject3">정서적문제 (우울,불안,자살충동 등)</label>
+			        			</div>
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="personalSubject4" name="personalSubject" value="가족문제">
+			        				<label for="personalSubject4">가족문제</label>
+			        			</div>
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="personalSubject5" name="personalSubject" value="이성 및 성문제">
+			        				<label for="personalSubject5">이성 및 성문제</label>
+			        			</div>
+			        		</div>	
+	        				<div class="main_table_row_uncolored_form_div">
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="personalSubject6" name="personalSubject" value="성희롱, 성추행, 성폭력 관련 문제">
+			        				<label for="personalSubject6">성희롱, 성추행, 성폭력 관련 문제</label>
+			        			</div>
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="personalSubject7" name="personalSubject" value="기타">
+			        				<label for="personalSubject7">기타</label>
+			        			</div>
+			        		</div>	
+	        			</form>
+	        			<div class="etc_one_row_container">
+	        				<input type="text" class="etc" name="personalSubjectEtc" placeholder="  기타 사항을 적어 주세요.">
+	        			</div>
+	        		</div>
+	        	</div>	        	
+	        	<div class="main_table_row">
+	        		<div class="main_table_row_colored">
+	        			집단상담
+	        		</div>
+	        		<div class="main_table_row_uncolored">
+	        			<div class="main_table_row_uncolored_q">
+	        				<img src="./image/q.png" alt="Q" width="30">집단상담을 받고 싶다면 참가하고 싶은 집단은 무엇입니까? (접수면접자와 함께 집단상담소 스케줄을 확인하세요)
+	        			</div>
+	        			<form class="main_table_row_uncolored_form2">
+	        				<div class="main_table_row_uncolored_form_div">
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="groupSubject1" name="groupSubject" value="통하였느냐? (대인관계 집단상담)">
+			        				<label for="groupSubject1">통하였느냐? (대인관계 집단상담)</label>
+			        			</div>
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="groupSubject2" name="groupSubject" value="자기이해 강점탐색 집단상담">
+			        				<label for="groupSubject2">자기이해 강점탐색 집단상담</label>
+			        			</div>
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="groupSubject3" name="groupSubject" value="발표불안감소 집단상담">
+			        				<label for="groupSubject3">발표불안감소 집단상담</label>
+			        			</div>
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="groupSubject4" name="groupSubject" value="미술치료 프로그램">
+			        				<label for="groupSubject4">미술치료 프로그램</label>
+			        			</div>
+			        		</div>	
+	        				<div class="main_table_row_uncolored_form_div">
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="groupSubject5" name="groupSubject" value="또래상담자 훈련">
+			        				<label for="groupSubject5">성희롱, 성추행, 성폭력 관련 문제</label>
+			        			</div>
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="groupSubject6" name="groupSubject" value="유학생 미술치료 프로그램">
+			        				<label for="groupSubject6">기타</label>
+			        			</div>
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="groupSubject7" name="groupSubject" value="진로집단상담">
+			        				<label for="groupSubject7">진로집단상담</label>
+			        			</div>
+		        				<div class="checkbox_wrapper">
+			        				<input type="checkbox" id="groupSubject8" name="groupSubject" value="기타">
+			        				<label for="groupSubject8">기타</label>
+			        			</div>
+			        		</div>	
+	        			</form>
+	        			<div class="etc_one_row_container">
+	        				<input type="text" class="etc" name="groupSubjectEtc" placeholder="  기타 사항을 적어 주세요.">
+	        			</div>
+	        		</div>
+	        	</div>	        	
 	        </div>
 	        <div id="bottom1">
+	        	<div id="bottom1_title">
+	        		<p class="title_text">긴급연락처</p>
+	        		<div id="bottom1_title_btn_container">
+	        			<button><img src="./image/plus.png" alt="+" >행추가</button>
+	        		</div>
+	        	</div>
+	        	<div id="bottom1_table">
+	        		<table id="bottom1_table_head">
+	        			<tr>
+	        				<th>번호</th>
+	        				<th>이름</th>
+	        				<th>관계</th>
+	        				<th>전화번호</th>
+	        				<th>비고</th>
+	        				<th>삭제</th>
+	        			</tr>
+	        		</table>
+	        		<div id="bottom1_table_body">
+	        		</div>
+	        	</div>
 	        </div>
 	        <div id="bottom2">
+	        	<div id="bottom2_title_container">
+	        		<p class="title_text">상담가능 시간</p>
+	        		<div id="bottom2_title_right">
+	        			<div id="bottom2_title_right_top">
+	        				(상담이 가능한 시간에 모두 Check해 주세요.)
+	        			</div>
+	        			<div id="bottom2_title_right_bottom">
+	        				※ 상담 대기자가 있을 경우, 기존에 상담을 받지 않은 신청자 우선으로 상담이 배정됩니다.
+	        			</div>
+	        		</div>
+	        	</div>
 	        </div>
         </div>
       </div>
     </section>
   </main>
+  
+ <script>
+    // 데이터 줄 수에 따라 테이블의 행을 생성하는 함수
+    function createTableRows(rowCount) {
+        var tableHtml = "<table>"; // 테이블 시작 태그
+        for (var i = 0; i < rowCount; i++) {
+            tableHtml += "<tr>"; // 행 시작 태그
+            tableHtml += "<td>데이터 " + (i + 1) + "</td>"; // 데이터 셀 생성 (예시)
+            tableHtml += "</tr>"; // 행 종료 태그
+        }
+        tableHtml += "</table>"; // 테이블 종료 태그
+        document.getElementById("bottom1_table_body").innerHTML = tableHtml; // 테이블을 HTML에 삽입
+    }
+
+    // 예시: 행 개수가 5개인 테이블 생성
+    //createTableRows(5);
+</script> 
+  
 </body>
 
   <footer id="footer">
