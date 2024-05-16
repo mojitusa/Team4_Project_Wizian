@@ -36,4 +36,5 @@ public class InquiryService {
 	public int getBoardCount(@RequestParam("stud_no") String studNo ) {
 		return inquiryRepository.countByStud_no(studNo);
 	}
+
 }

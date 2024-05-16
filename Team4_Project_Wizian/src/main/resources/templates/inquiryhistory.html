@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <title>문의 내역</title>
-<link th:href="@{/css/inquiryhistory.css}" rel="stylesheet" />
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<!-- jQuery UI -->
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+<link href="/css/inquiryhistory.css" rel="stylesheet" />
+
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
+<script
+	src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
+<script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 </head>
 <style>
 table {
@@ -56,54 +71,89 @@ tbody tr[th :onclick]:hover {
 	background-color: #d1e7dd;
 }
 </style>
-
 <body>
-	<div class="inquiry-history">
-		<h2>나의 문의 내역</h2>
-		<table>
-			<thead>
-				<tr>
-					<th>제목</th>
-					<th>유형</th>
-					<th>내용</th>
-					<th>작성일</th>
-					<th>상태</th>
-				</tr>
-			</thead>
-			<tbody>
-				<!-- Thymeleaf를 사용하여 문의 내역을 동적으로 표시 -->
-				<tr th:each="inquiry : ${inquiries}"
-					th:if="${inquiry.STUD_NO == session.userNo}"
-					th:onclick="'showDetail(\'' + ${inquiry.CSL_NO} + '\')'">
-					<td th:text="${inquiry.CSL_TITLE}"></td>
-					<td th:text="${ '[' + inquiry.CSL_CATEGORY + ']' }"></td>
-					<td th:text="${inquiry.CSL_CONTENT}"></td>
-					<td th:text="${#dates.format(inquiry.CSL_DATE, 'yyyy-MM-dd')}"></td>
-					<td th:text="${inquiry.CSL_STATUS == 1 ? '상담완료' : '접수중'}"></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<div>
-		Total number of inquiries: <span th:text="${boardCount}"></span>
-	</div>
-	<div class="pagination">
-		<ul>
-			<li th:each="pageNo : ${#numbers.sequence(1, totalPages)}">
-				<button type="button" th:text="${pageNo}"
-					th:class="${pageNo == pageNumber ? 'active' : ''}"
-					th:onclick="'loadPage(' + ${pageNo} + ')'" class="page-link"></button>
-			</li>
-		</ul>
-	</div>
-	<script th:inline="javascript">
-		function showDetail(cslNo) {
-			alert("상세 정보를 표시합니다" + cslNo);
-			var detailUrl = "/inquiry/detail/" + cslNo;
-			window.location.href = detailUrl;
-		}
-	</script>
-
+	<div id="grid"></div>
 </body>
+<script>
+
+/* $(function() {
+    $.ajax({
+        url: "/inquiryhistory/json",
+        type: "get",
+        dataType: "json",
+        success: function(result) {
+            console.log("확인", result);
+            // 그리드 생성 시 데이터 설정
+            var grid = new tui.Grid({
+                el: document.getElementById('grid'),
+                dataSource: {
+                    data: result.inquiries
+                },
+                pageOptions: {
+                    useClient: true,
+                    perPage: 15
+                },
+                scrollX: false,
+                scrollY: false,
+                columns: [{
+                        header: '번호',
+                        name: 'CSL_NO',
+                        width: 50
+                    },
+                    {
+                        header: '제목',
+                        name: 'CSL_TITLE',
+                        width: 350,
+                    },
+                    {
+                        header: '내용',
+                        name: 'CSL_CONTENT',
+                        // width: 400
+                    },
+                    {
+                        header: '학번',
+                        name: 'STUD_NO',
+                        // width: 400
+                    },
+                    {
+                        header: '답변',
+                        name: 'CSL_ANSWER',
+                        // width: 400
+                    },
+                    {
+                        header: '카테고리',
+                        name: 'CSL_CATEGORY',
+                        // width: 400
+                    },
+                    {
+                        header: '답변상태',
+                        name: 'CSL_STATUS',
+                        // width: 400
+                    },
+                    {
+                        header: '날짜',
+                        name: 'CSL_DATE',
+                        // width: 400
+                    },
+                    {
+                        header: '이발',
+                        name: 'CSL_EVAL',
+                        // width: 400
+                    },
+                    {
+                        header: '이메일',
+                        name: 'CSL_EMAIL',
+                        // width: 400
+                    }
+                ]
+            });
+        },
+        error: function(error) {
+            console.log("Error:", error);
+        }
+    });
+}); */
+
+</script>
 
 </html>
