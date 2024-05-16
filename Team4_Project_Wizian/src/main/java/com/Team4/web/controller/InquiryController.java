@@ -18,6 +18,8 @@ import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
 import com.Team4.web.entity.Inquiry;
+import com.Team4.web.model.BoardModel;
+import com.Team4.web.repository.BoardDAO;
 import com.Team4.web.service.InquiryService;
 import com.Team4.web.util.Util;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -38,7 +40,9 @@ public class InquiryController {
 
 	@Autowired
 	private Util util;
-	
+
+	@Autowired
+	private BoardDAO boardDAO;
 	@GetMapping("/inquiry")
 	public ModelAndView InquiryPage(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -58,7 +62,13 @@ public class InquiryController {
 			return "error";
 		}
 	}
-
+	
+//	@GetMapping("/inquiryhistory")
+//	public List<BoardModel> inquiryHistory(){
+//		List<BoardModel> boardList = boardDAO.boardList();
+//		System.out.println(boardList);
+//		return boardList;
+//	}
 //	@GetMapping("/inquiryhistory")
 //    public ModelAndView inquiryHistory() {
 //        ModelAndView modelAndView = new ModelAndView("inquiryhistory");

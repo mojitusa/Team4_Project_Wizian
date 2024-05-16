@@ -13,13 +13,13 @@ public class MenuMovingController {
 		return "/index";
 	}
 	
-	@GetMapping("/ec")
-	public String showEcPage() {
-		return "content/ec";
-	}
 	@GetMapping("/test")
 	public String showTestPage() {
 		return "content/test";
+	}
+	@GetMapping("/ec")
+	public String showEcPage() {
+		return "content/ec";
 	}
 	
 	@GetMapping("/disability")

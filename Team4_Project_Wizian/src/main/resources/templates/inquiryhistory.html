@@ -2,158 +2,25 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="utf-8">
-<title>문의 내역</title>
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<!-- jQuery UI -->
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<meta charset="utf-8">
+	<title>문의 내역</title>
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<!-- jQuery UI -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
-<link href="/css/inquiryhistory.css" rel="stylesheet" />
+	<link href="/css/inquiryhistory.css" rel="stylesheet" />
 
-<link rel="stylesheet"
-	href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
-<link rel="stylesheet"
-	href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
-<script
-	src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
-<script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
+	<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+	<link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
+	<script src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
+	<script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 </head>
-<style>
-table {
-	width: 100%;
-	border-collapse: collapse;
-	margin: 20px 0;
-	font-size: 1em;
-	font-family: Arial, sans-serif;
-	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
 
-thead tr {
-	background-color: #009879;
-	color: #ffffff;
-	text-align: left;
-	font-weight: bold;
-}
-
-th, td {
-	padding: 12px 15px;
-}
-
-tbody tr {
-	border-bottom: 1px solid #dddddd;
-}
-
-tbody tr:nth-of-type(even) {
-	background-color: #f3f3f3;
-}
-
-tbody tr:hover {
-	background-color: #f1f1f1;
-	cursor: pointer;
-}
-
-th, td {
-	text-align: center;
-}
-
-tbody tr:last-of-type {
-	border-bottom: 2px solid #009879;
-}
-
-tbody tr[th :onclick] {
-	transition: background-color 0.3s ease;
-}
-
-tbody tr[th :onclick]:hover {
-	background-color: #d1e7dd;
-}
-</style>
 <body>
 	<div id="grid"></div>
+	
 </body>
-<script>
-
-/* $(function() {
-    $.ajax({
-        url: "/inquiryhistory/json",
-        type: "get",
-        dataType: "json",
-        success: function(result) {
-            console.log("확인", result);
-            // 그리드 생성 시 데이터 설정
-            var grid = new tui.Grid({
-                el: document.getElementById('grid'),
-                dataSource: {
-                    data: result.inquiries
-                },
-                pageOptions: {
-                    useClient: true,
-                    perPage: 15
-                },
-                scrollX: false,
-                scrollY: false,
-                columns: [{
-                        header: '번호',
-                        name: 'CSL_NO',
-                        width: 50
-                    },
-                    {
-                        header: '제목',
-                        name: 'CSL_TITLE',
-                        width: 350,
-                    },
-                    {
-                        header: '내용',
-                        name: 'CSL_CONTENT',
-                        // width: 400
-                    },
-                    {
-                        header: '학번',
-                        name: 'STUD_NO',
-                        // width: 400
-                    },
-                    {
-                        header: '답변',
-                        name: 'CSL_ANSWER',
-                        // width: 400
-                    },
-                    {
-                        header: '카테고리',
-                        name: 'CSL_CATEGORY',
-                        // width: 400
-                    },
-                    {
-                        header: '답변상태',
-                        name: 'CSL_STATUS',
-                        // width: 400
-                    },
-                    {
-                        header: '날짜',
-                        name: 'CSL_DATE',
-                        // width: 400
-                    },
-                    {
-                        header: '이발',
-                        name: 'CSL_EVAL',
-                        // width: 400
-                    },
-                    {
-                        header: '이메일',
-                        name: 'CSL_EMAIL',
-                        // width: 400
-                    }
-                ]
-            });
-        },
-        error: function(error) {
-            console.log("Error:", error);
-        }
-    });
-}); */
-
-</script>
 
 </html>
