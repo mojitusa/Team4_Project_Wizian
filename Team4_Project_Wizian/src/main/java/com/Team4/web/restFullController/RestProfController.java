@@ -1,6 +1,5 @@
 package com.Team4.web.restFullController;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,11 +36,9 @@ public class RestProfController {
 	//ajax로 디비에 데이터 삽입
 	@PostMapping("/insertProfCslData")
 	@ResponseBody
-	public Map<String, Object> insertProfCslData(@RequestBody ProfCslInsertModel cslInsertModel) {
-		System.err.println(cslInsertModel);
-		Map<String, Object> response = new HashMap<>();
-		response.put("redirectUrl", "/profcusl/profComplite"); // 리다이렉션할 URL
-
-	    return response;
-	}
+    public void insertProfCslData(ProfCslInsertModel profCslInsertModel) {
+		System.out.println(profCslInsertModel);
+		
+        
+    }
 }
