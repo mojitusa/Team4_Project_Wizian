@@ -12,7 +12,7 @@
 		SELECT s.stud_nm, s.stud_no, u.email, s.mbr_telno, d.C_NMK
 		FROM STUD_INFO s
 		JOIN USERS u ON s.stud_no = u.user_no
-		JOIN DEPT d ON s.DEPT_CD = d.DEPT_CD
+		JOIN DEPT_CD d ON s.c_cd = d.c_cd
 		WHERE u.user_no = #{userNo}
 	</select>
 

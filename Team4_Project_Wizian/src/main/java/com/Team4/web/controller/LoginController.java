@@ -36,6 +36,11 @@ public class LoginController {
             session.setAttribute("C_NMK", C_NMK);
             System.out.println(name);
             System.out.println(userNo);
+            System.out.println(email);
+            System.out.println(mbr_telno);
+            System.out.println(C_NMK);
+            
+            System.out.println(userNo);
 	        return "redirect:/index";
 	    } else {
 	    	model.addAttribute("errorMessage", "입력한 정보가 올바르지 않습니다. 다시 시도해주세요.");
