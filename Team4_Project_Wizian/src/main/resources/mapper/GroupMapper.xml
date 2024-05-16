@@ -62,4 +62,10 @@
 		WHERE STUD_NO = #{studNumber} 
 		AND PRGRM_CD = #{proCode}
 	</select>
+	
+	<delete id="deleteApply" parameterType="Map">
+		DELETE FROM PRGRM_APP 
+		WHERE STUD_NO = #{studNumber} 
+		AND PRGRM_CD = #{proCode}
+	</delete>
 </mapper>
