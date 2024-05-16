@@ -52,12 +52,19 @@ public class GroupController {
 	}
 	
 	@GetMapping("/groupApplyPage")
-	public String showGroupapplyPage(@RequestParam(value = "no", required = false, defaultValue = "") int procd, Model model) {
+	public String showGroupapplyPage(@RequestParam(value = "no", required = false, defaultValue = "") int procd, Model model, HttpSession session) {
 		
-		List<Map<String, Object>> proDetail = groupService.proDetail(procd);
-		model.addAttribute("proDetail", proDetail);
+		String studNumber = (String) session.getAttribute("userNo");
+		String studName = (String) session.getAttribute("username");
 		
-		return "content/groupApplyPage";
+		if(studNumber != null && studName != null) {
+			List<Map<String, Object>> proDetail = groupService.proDetail(procd);
+			model.addAttribute("proDetail", proDetail);
+			
+			return "content/groupApplyPage";
+		} else {
+			return "/login";
+		}
 	}
 	
 	//그룹 상담 신청 메소드
