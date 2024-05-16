@@ -37,4 +37,11 @@ public class GroupService {
         return count > 0;
 	}
 
+	public int deleteApply(String studNumber, String proCode) {
+	    Map<String, Object> applyInfo = new HashMap<>();
+	    applyInfo.put("studNumber", studNumber);
+	    applyInfo.put("proCode", proCode);
+	    return groupMapper.deleteApply(applyInfo);
+	}
+
 }

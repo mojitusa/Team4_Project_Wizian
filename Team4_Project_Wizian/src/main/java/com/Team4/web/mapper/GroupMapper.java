@@ -21,4 +21,6 @@ public interface GroupMapper {
 
 	int checkDuplicate(Map<String, Object> applyInfo);
 
+	int deleteApply(Map<String, Object> applyInfo);
+
 }
