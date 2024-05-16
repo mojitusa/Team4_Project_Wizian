@@ -17,6 +17,10 @@ public class MenuMovingController {
 	public String showEcPage() {
 		return "content/ec";
 	}
+	@GetMapping("/test")
+	public String showTestPage() {
+		return "content/test";
+	}
 	
 	@GetMapping("/disability")
 	public String showDisabilityPage() {

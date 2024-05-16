@@ -18,7 +18,11 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 	<!-- Bootstrap JS -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
+	<!--  grid -->
+<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+<link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
+<script src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
+<script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 	<!-- Vendor CSS Files -->
 	<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
 	<link href="assets/vendor/aos/aos.css" rel="stylesheet">
@@ -54,8 +58,7 @@
 				</div>
 				<div class="right-content" id="rightContent">
 					<div class="container">
-						<div id="counLog">
-						</div>
+						<div id="counLog"></div>
 					</div>
 				</div>
 			</div>
@@ -78,6 +81,7 @@
 	<!-- Main JS File -->
 	<script src="assets/js/main.js"></script>
 	<script>
+	
 		function toggleDropdown() {
 			var dropdownContent = document.getElementById("dropdownOptions");
 			dropdownContent.classList.toggle("show");
@@ -88,6 +92,7 @@
 	            url: contentFile,
 	            type: 'get',
 	            success: function (response) {
+	                console.log(response);
 	                $('#counLog').html(response);
 	            },
 	            error: function () {
@@ -95,32 +100,7 @@
 	            }
 	        });
 	    }
-
-	    function loadPage(pageNo) {
-	        $.ajax({
-	            url: '/inquiryhistory/page/' + pageNo,
-	            type: 'get',
-	            success: function (response) {
-	                $('#counLog').html(response.inquiriesHtml);
-	                // 페이지 번호 버튼 업데이트
-	                updatePagination(pageNo);
-	            },
-	            error: function () {
-	                $('#counLog').html('<p>페이지를 불러오는 중 오류가 발생했습니다.</p>');
-	            }
-	        });
-	    }
-
-	    function updatePagination(activePage) {
-	        $('.pagination .page-link').each(function () {
-	            var pageNo = $(this).text();
-	            if (parseInt(pageNo) === activePage) {
-	                $(this).addClass('active');
-	            } else {
-	                $(this).removeClass('active');
-	            }
-	        });
-	    }
+	    
 	</script>
 </body>
 

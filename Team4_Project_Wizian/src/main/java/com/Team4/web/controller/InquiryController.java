@@ -19,9 +19,9 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 
 import com.Team4.web.entity.Inquiry;
 import com.Team4.web.service.InquiryService;
-import com.Team4.web.service.PagingService;
-import com.Team4.web.util.Pagination;
 import com.Team4.web.util.Util;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -30,22 +30,20 @@ import jakarta.servlet.http.HttpSession;
 public class InquiryController {
 
 	private final InquiryService inquiryService;
-	private final PagingService<Inquiry> pagingService;
 	
     @Autowired
-    public InquiryController(InquiryService inquiryService, PagingService<Inquiry> pagingService) {
+    public InquiryController(InquiryService inquiryService) {
         this.inquiryService = inquiryService;
-        this.pagingService = pagingService;
     }
-    @Autowired
-    private SpringTemplateEngine thymeleafTemplateEngine;
 
 	@Autowired
 	private Util util;
+	
 	@GetMapping("/inquiry")
 	public ModelAndView InquiryPage(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("inquiry"); // inquiry.html 파일로 매핑
+		System.out.println("통과확인");
 		// 다른 모델 데이터 추가 가능
 		return modelAndView;
 	}
@@ -61,56 +59,35 @@ public class InquiryController {
 		}
 	}
 
-	@GetMapping("/inquiryhistory")
-	public ModelAndView inquiryHistory(HttpServletRequest request, Model model, HttpSession httpSession) {
-	    ModelAndView modelAndView = new ModelAndView();
-	    modelAndView.setViewName("inquiryhistory");
-	    
-	    List<Inquiry> inquiries = inquiryService.getAllInquiries();
-	    modelAndView.addObject("inquiries", inquiries);
-	    
-	    String studNo = (String) httpSession.getAttribute("userNo");
-	    int boardCount = inquiryService.getBoardCount(studNo);
-	    model.addAttribute("studNo", studNo);
-	    model.addAttribute("boardCount", boardCount);
-	    
-	    int pageNumber = 1;
-	    int pageSize = 10;
-	    Pagination<Inquiry> pagination = pagingService.paginate(inquiries, pageNumber, pageSize);
-	    
-	    int totalInquiries = inquiries.size();
-	    int totalPages = (int) Math.ceil((double) totalInquiries / pageSize);
-	    model.addAttribute("totalPages", totalPages);
-	    model.addAttribute("pagination", pagination);
-	    
-	    return modelAndView;
-	}
+//	@GetMapping("/inquiryhistory")
+//    public ModelAndView inquiryHistory() {
+//        ModelAndView modelAndView = new ModelAndView("inquiryhistory");
+//
+//        List<Inquiry> inquiries = inquiryService.getAllInquiries();
+//        modelAndView.addObject("inquiries", inquiries);
+//        System.out.println(inquiries);
+//        return modelAndView;
+//    }
 
-	@GetMapping("/inquiryhistory/page/{pageNo}")
-	@ResponseBody
-	public Map<String, Object> getInquiriesPage(@PathVariable("pageNo") int pageNo, HttpSession httpSession) {
-	    int pageSize = 10;
-	    String studNo = (String) httpSession.getAttribute("userNo");
-	    List<Inquiry> inquiries = inquiryService.getAllInquiries();
-	    Pagination<Inquiry> pagination = pagingService.paginate(inquiries, pageNo, pageSize);
-	    
-	    Map<String, Object> response = new HashMap<>();
-	    response.put("boardCount", inquiryService.getBoardCount(studNo));
-	    response.put("inquiriesHtml", renderInquiriesHtml(pagination.getContent()));
-	    
-	    return response;
-	}
+    @GetMapping("/inquiryhistory/json")
+    @ResponseBody
+    public Map<String, Object> inquiryHistoryJson() {
+        List<Inquiry> inquiries = inquiryService.getAllInquiries();
+System.out.println(inquiries);
+        Map<String, Object> response = new HashMap<>();
+        response.put("inquiries", inquiries);
 
-	private String renderInquiriesHtml(List<Inquiry> inquiries) {
-	    Context context = new Context();
-	    context.setVariable("inquiries", inquiries);
-	    return thymeleafTemplateEngine.process("inquiryhistory :: inquiriesList", context);
-	}
-
-	@GetMapping("/inquiryhistory2")
-	public String getInquiryHistory(Model model, HttpSession httpSession) {
-	    return "inquiryhistory";
-	}
+        return response;
+    }
+	
+//	@GetMapping("/inquiryhistory")
+//	@ResponseBody
+//	public List<Inquiry> inquiryHistory() {
+//	    
+//	    List<Inquiry> inquiries = inquiryService.getAllInquiries();
+//	    System.out.println("동작확인" + inquiries);
+//	    return inquiries;
+//	}
 
 	@GetMapping("/inquiry/detail/{id}")
 	public ModelAndView showInquiryDetail(@PathVariable("id") int id) {
