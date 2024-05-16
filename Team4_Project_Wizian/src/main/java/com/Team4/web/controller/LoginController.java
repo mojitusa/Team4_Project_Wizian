@@ -26,8 +26,14 @@ public class LoginController {
 	    	Map<String, Object> userInfo = loginService.getName(id);
             String name = (String) userInfo.get("stud_nm");
             String userNo = (String) userInfo.get("stud_no");
+            String email = (String) userInfo.get("email");
+            String mbr_telno = (String) userInfo.get("mbr_telno");
+            String C_NMK = (String) userInfo.get("C_NMK");
             session.setAttribute("username", name);
             session.setAttribute("userNo", userNo);
+            session.setAttribute("email", email);
+            session.setAttribute("mbr_telno", mbr_telno);
+            session.setAttribute("C_NMK", C_NMK);
             System.out.println(name);
             System.out.println(userNo);
 	        return "redirect:/index";

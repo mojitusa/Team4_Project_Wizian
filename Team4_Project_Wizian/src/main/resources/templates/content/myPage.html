@@ -84,29 +84,43 @@
 		}
 
 		function loadContent(contentFile) {
-			$.ajax({
-				url: contentFile,
-				type: 'get',
-				success: function (response) {
-					$('#counLog').html(response);
-				},
-				error: function () {
-					$('#counLog').html('<p>콘텐츠를 불러오는 중 오류가 발생했습니다.</p>');
-				}
-			});
-		}
-		function loadCounselingLog(contentFile2) {
-			$.ajax({
-				url: contentFile2,
-				type: 'get',
-				success: function (response) {
-					$('#counLog').html(response);
-				},
-				error: function () {
-					$('#counLog').html('<p>내 상담 내역을 불러오는 중 오류가 발생했습니다.</p>');
-				}
-			});
-		}
+	        $.ajax({
+	            url: contentFile,
+	            type: 'get',
+	            success: function (response) {
+	                $('#counLog').html(response);
+	            },
+	            error: function () {
+	                $('#counLog').html('<p>콘텐츠를 불러오는 중 오류가 발생했습니다.</p>');
+	            }
+	        });
+	    }
+
+	    function loadPage(pageNo) {
+	        $.ajax({
+	            url: '/inquiryhistory/page/' + pageNo,
+	            type: 'get',
+	            success: function (response) {
+	                $('#counLog').html(response.inquiriesHtml);
+	                // 페이지 번호 버튼 업데이트
+	                updatePagination(pageNo);
+	            },
+	            error: function () {
+	                $('#counLog').html('<p>페이지를 불러오는 중 오류가 발생했습니다.</p>');
+	            }
+	        });
+	    }
+
+	    function updatePagination(activePage) {
+	        $('.pagination .page-link').each(function () {
+	            var pageNo = $(this).text();
+	            if (parseInt(pageNo) === activePage) {
+	                $(this).addClass('active');
+	            } else {
+	                $(this).removeClass('active');
+	            }
+	        });
+	    }
 	</script>
 </body>
 

@@ -2,61 +2,59 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="UTF-8">
-	<title>문의 내역</title>
-	<link th:href="@{/css/inquiryhistory.css}" rel="stylesheet" />
+<meta charset="UTF-8">
+<title>문의 내역</title>
+<link th:href="@{/css/inquiryhistory.css}" rel="stylesheet" />
 </head>
 <style>
-	table {
-		width: 100%;
-		border-collapse: collapse;
-		margin: 20px 0;
-		font-size: 1em;
-		font-family: Arial, sans-serif;
-		box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-	}
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 20px 0;
+	font-size: 1em;
+	font-family: Arial, sans-serif;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
 
-	thead tr {
-		background-color: #009879;
-		color: #ffffff;
-		text-align: left;
-		font-weight: bold;
-	}
+thead tr {
+	background-color: #009879;
+	color: #ffffff;
+	text-align: left;
+	font-weight: bold;
+}
 
-	th,
-	td {
-		padding: 12px 15px;
-	}
+th, td {
+	padding: 12px 15px;
+}
 
-	tbody tr {
-		border-bottom: 1px solid #dddddd;
-	}
+tbody tr {
+	border-bottom: 1px solid #dddddd;
+}
 
-	tbody tr:nth-of-type(even) {
-		background-color: #f3f3f3;
-	}
+tbody tr:nth-of-type(even) {
+	background-color: #f3f3f3;
+}
 
-	tbody tr:hover {
-		background-color: #f1f1f1;
-		cursor: pointer;
-	}
+tbody tr:hover {
+	background-color: #f1f1f1;
+	cursor: pointer;
+}
 
-	th,
-	td {
-		text-align: center;
-	}
+th, td {
+	text-align: center;
+}
 
-	tbody tr:last-of-type {
-		border-bottom: 2px solid #009879;
-	}
+tbody tr:last-of-type {
+	border-bottom: 2px solid #009879;
+}
 
-	tbody tr[th:onclick] {
-		transition: background-color 0.3s ease;
-	}
+tbody tr[th :onclick] {
+	transition: background-color 0.3s ease;
+}
 
-	tbody tr[th:onclick]:hover {
-		background-color: #d1e7dd;
-	}
+tbody tr[th :onclick]:hover {
+	background-color: #d1e7dd;
+}
 </style>
 
 <body>
@@ -74,7 +72,8 @@
 			</thead>
 			<tbody>
 				<!-- Thymeleaf를 사용하여 문의 내역을 동적으로 표시 -->
-				<tr th:each="inquiry : ${inquiries}" th:if="${inquiry.STUD_NO == session.userNo}"
+				<tr th:each="inquiry : ${inquiries}"
+					th:if="${inquiry.STUD_NO == session.userNo}"
 					th:onclick="'showDetail(\'' + ${inquiry.CSL_NO} + '\')'">
 					<td th:text="${inquiry.CSL_TITLE}"></td>
 					<td th:text="${ '[' + inquiry.CSL_CATEGORY + ']' }"></td>
@@ -91,8 +90,9 @@
 	<div class="pagination">
 		<ul>
 			<li th:each="pageNo : ${#numbers.sequence(1, totalPages)}">
-				<a th:href="@{'/page/' + ${pageNo}}" th:text="${pageNo}"
-					th:class="${pageNo == pageNumber ? 'active' : ''}"></a>
+				<button type="button" th:text="${pageNo}"
+					th:class="${pageNo == pageNumber ? 'active' : ''}"
+					th:onclick="'loadPage(' + ${pageNo} + ')'" class="page-link"></button>
 			</li>
 		</ul>
 	</div>
