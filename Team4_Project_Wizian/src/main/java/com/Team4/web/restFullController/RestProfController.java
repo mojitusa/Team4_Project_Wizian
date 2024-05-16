@@ -1,15 +1,19 @@
 package com.Team4.web.restFullController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Team4.web.entity.ProfSchedule;
 import com.Team4.web.entity.Professer;
+import com.Team4.web.model.ProfCslInsertModel;
 import com.Team4.web.service.ProfesserService;
 
 @RestController
@@ -30,4 +34,14 @@ public class RestProfController {
 		return professerService.getProfData(pfNo);
 	}
 	
+	//ajax로 디비에 데이터 삽입
+	@PostMapping("/insertProfCslData")
+	@ResponseBody
+	public Map<String, Object> insertProfCslData(@RequestParam ProfCslInsertModel cslInsertModel) {
+		System.err.println(cslInsertModel.getPFCS_TIME());
+		Map<String, Object> response = new HashMap<>();
+		response.put("redirectUrl", "/profcusl/profComplite"); // 리다이렉션할 URL
+
+	    return response;
+	}
 }

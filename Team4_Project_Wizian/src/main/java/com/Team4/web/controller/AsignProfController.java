@@ -1,12 +1,16 @@
 package com.Team4.web.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import com.Team4.web.service.ProfCslInsertService;
 
 @Controller
 public class AsignProfController {
+	
+	@Autowired
+	private ProfCslInsertService cslInsertService;
 	
 	@GetMapping("/profcusl")
 	public String profCusl() {
@@ -18,11 +22,7 @@ public class AsignProfController {
 		return "profcusl/calendartest";
 	}
 	
-	@PostMapping("/insertProfCslData")
-	public String insertProfCslData(@RequestParam("eventTime") String time) {
-		System.out.println(time);
-		return "profcusl/profComplite";
-	}
+	
 	
 	
 }

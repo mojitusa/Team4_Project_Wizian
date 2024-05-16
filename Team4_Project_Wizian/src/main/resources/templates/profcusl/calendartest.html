@@ -96,6 +96,9 @@ html, body {
 		</div>
 
 <script type="text/javascript">
+
+
+
 //시간코드(t0900 기준) -> 시간으로 변환()
 function convertTime(timeString) {
     var hour = parseInt(timeString.substr(1, 2));
@@ -111,7 +114,7 @@ function formatDate(dateString) {
     return year + '-' + month + '-' + day;
 }
 
-//시간코드 있는 시간 제외하고 시간표나타내기
+//시간코드 있는 시간 제외하고 시간표나타내기 
 function generateHourlyEvents(formattedDate, convertedTimes) {
     var events = [];
     var startTime = formattedDate + 'T09:00'; // 시작 시간: 09:00
@@ -142,6 +145,43 @@ function generateHourlyEvents(formattedDate, convertedTimes) {
 
 
 	document.addEventListener('DOMContentLoaded', function() {
+		
+		
+		$('#asign-prof-csl').on('click', function() {
+	        // 상담시간, 상담일자, 상담내용 가져오기
+	        var eventTime = $('#event-time').text();
+	        var eventDate = $('#event-date').text();
+	        var cslContent = $('#csl-content').val();
+	        console.log(eventTime);
+	        console.log(eventDate);
+	        console.log(cslContent);
+
+	        // AJAX 요청을 통해 서버로 데이터 전송
+	        $.ajax({
+	            url: '/insertProfCslData', // 서버의 엔드포인트로 변경
+	            method: 'POST',
+	            contentType: 'application/json',
+	            data: JSON.stringify({
+	            	PFCS_TIME: eventTime,
+	            	PFCS_YMD: eventDate,
+	            	PFCS_CN: cslContent
+	            }),
+	            success: function(response) {
+	                // 서버 응답 처리
+	                alert('상담 신청이 성공적으로 완료되었습니다.');
+	                window.location.href = response.redirectUrl;
+	            },
+	            error: function(error) {
+	                // 오류 처리
+	                alert('상담 신청 중 오류가 발생했습니다.');
+	            }
+	        });
+	    });
+		
+		
+		
+		
+		
 		var pfNo = '2017125001';
 		
 		//시간데이터 변환해서 배열에 넣기(예시데이터)
@@ -159,8 +199,7 @@ function generateHourlyEvents(formattedDate, convertedTimes) {
 		//날짜데이터 예시
 		var date = '20240514';
 		var formattedDate = formatDate(date);
-		console.log(formattedDate);
-		
+ 		
 		
 		//스케쥴 테이블 불러오기 ->캘린더 만들기
 		$('#pfData').click(function(){
@@ -171,7 +210,9 @@ function generateHourlyEvents(formattedDate, convertedTimes) {
 				success: function(data){
 					if(data.length > 0) {
 						console.log(data);
-		                var professorScd = data[0]; // 첫 번째 교수 정보를 사용
+		                var professorScd = data[0].pf_SCD_YMD; // 첫 번째 교수_날짜
+		                var professorScd2 = data[1].pf_SCD_YMD; // 첫 번째 교수_날짜
+		                console.log(professorScd2);
 		                
 		            } else {
 		                console.log('No data received');
