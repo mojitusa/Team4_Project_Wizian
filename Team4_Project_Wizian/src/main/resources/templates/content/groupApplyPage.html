@@ -168,54 +168,44 @@
 		        // JSON 형식으로 데이터 변환
 		        var jsonData = JSON.stringify(formData);
 
-				$("#applyDeleteBtn").click(function() {
-				  // 서버로 전송할 데이터 설정
-				  var proCd = $(this).attr('data-proCd');
-				  
-				  var formData = {
-				      stud_no: '1100000001',
-				      proCd: proCd
-				  };
-				
-				  // AJAX를 사용하여 서버로 데이터 전송
-				  $.ajax({
-				      type: "POST", // 데이터 전송 방식 설정 (POST)
-				      url: "/groupapplyDelete", // 데이터를 전송할 URL 설정
-				      data: formData,
-				      success: function(response) {
-				          if (response === "success") {
-				              Swal.fire({
-				                  title: "삭제가 완료되었습니다.",
-				                  icon: "success",
-				                  confirmButtonText: "확인"
-				              }).then(function() {
-				                  window.location.href = "/group";
-				              });
-				          } else if (response === "no_exist") {
-				              Swal.fire({
-				                  title: "신청 기록이 없습니다.",
-				                  icon: "warning",
-				                  confirmButtonText: "확인"
-				              }).then(function() {
-				                  window.location.href = "/group";
-				              });
-				          }
-				      },
-				      error: function(xhr, status, error) {
-				          Swal.fire({
-				              title: "오류가 발생했습니다.",
-				              text: "다시 시도해 주세요.",
-				              icon: "error",
-				              confirmButtonText: "확인"
-				          });
-				      }
-				  });
-				});
+		        // AJAX를 사용하여 서버로 데이터 전송
+		        $.ajax({
+		            type: "POST", // 데이터 전송 방식 설정 (POST)
+		            url: "/groupapplyDelete", // 데이터를 전송할 URL 설정
+		            data: formData,
+		            success: function(response) {
+		                if (response === "success") {
+		                    Swal.fire({
+		                        title: "삭제가 완료되었습니다.",
+		                        icon: "success",
+		                        confirmButtonText: "확인"
+		                    }).then(function() {
+		                        window.location.href = "/group";
+		                    });
+		                } else if (response === "no_exist") {
+		                    Swal.fire({
+		                        title: "신청 기록이 없습니다.",
+		                        icon: "warning",
+		                        confirmButtonText: "확인"
+		                    }).then(function() {
+		                        window.location.href = "/group";
+		                    });
+		                }
+		            },
+		            error: function(xhr, status, error) {
+		                Swal.fire({
+		                    title: "오류가 발생했습니다.",
+		                    text: "다시 시도해 주세요.",
+		                    icon: "error",
+		                    confirmButtonText: "확인"
+		                });
+		            }
+		        });
+		    });
 		});
 </script>
   <footer id="footer">
     <div th:replace="../templates/fragments/footer"></div>
   </footer>
 </body>
-
 </html>
