@@ -57,18 +57,44 @@ public class InquiryController {
 		return modelAndView;
 	}
 	
-	@GetMapping("/inquiry/detail/{id}")
-	public ModelAndView showInquiryDetail(@PathVariable("id") int id) {
+	@GetMapping("/inquiry/history/detail/{id}") // URL을 "/inquiry/history/detail/{id}"로 설정
+    public ModelAndView showInquiryDetail(@PathVariable("id") int inquiryId) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("inquirydetail"); // inquirydetail.html로 매핑
+
+        // inquiryId를 사용하여 해당 문의의 상세 정보를 조회
+        Inquiry inquiry = inquiryService.getInquiryById(inquiryId);
+        modelAndView.addObject("inquiry", inquiry);
+
+        return modelAndView;
+    }
+	
+	@GetMapping("/inquiry/{id}/detail")
+	public ModelAndView showInquiryDetailForAgent(@PathVariable("id") int inquiryId) {
 		ModelAndView modelAndView = new ModelAndView();
-		Inquiry inquiry = inquiryService.findById(id);
-		if (inquiry != null) {
-			modelAndView.addObject("inquiry", inquiry);
-			modelAndView.setViewName("inquirydetail");
-		} else {
-			modelAndView.setViewName("error");
-		}
+		modelAndView.setViewName("inquiryCsl"); // 상담사가 확인하는 페이지 
+
+		// inquiryId를 사용하여 해당 문의의 상세 정보를 조회
+		Inquiry inquiry = inquiryService.getInquiryById(inquiryId);
+		modelAndView.addObject("inquiry", inquiry);
+
 		return modelAndView;
 	}
+	
+	@PostMapping("/inquiry/response")
+    public String submitResponse(@ModelAttribute Inquiry inquiry) {
+        try {
+            // 상담사가 작성한 답변을 DB에 저장
+            inquiryService.saveResponse(inquiry.getCSL_NO(), inquiry.getCSL_ANSWER());
+
+            // 해당 문의의 상태를 상담완료(1)로 업데이트
+            inquiryService.updateInquiryStatus(inquiry.getCSL_NO(), 1);
+
+            return "redirect:/inquiry/history"; // 답변 작성 성공 시 리다이렉트
+        } catch (Exception e) {
+            return "error"; // 답변 작성 실패 시 에러 페이지로 이동
+        }
+    }
 	
 	
 

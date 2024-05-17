@@ -11,6 +11,7 @@
         <p>유형: <span th:text="${inquiry.CSL_CATEGORY}"></span></p>
         <p>내용: <span th:text="${inquiry.CSL_CONTENT}"></span></p>
         <p>작성일: <span th:text="${#dates.format(inquiry.CSL_DATE, 'yyyy-MM-dd')}"></span></p>
+        <p>답변: <span th:text="${inquiry.CSL_ANSWER}"></span></p> <!-- 상담사가 작성한 답변 내용 추가 -->
     </div>
 </body>
 </html>
