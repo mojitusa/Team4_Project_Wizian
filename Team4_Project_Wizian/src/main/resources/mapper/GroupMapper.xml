@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.Team4.web.mapper.GroupMapper">
 	<select id="getgcList" resultType="Map">
 	    SELECT 
@@ -25,7 +24,7 @@
 	    ) APPLY_CNT ON G.PRGRM_CD = APPLY_CNT.PRGRM_CD;
 	</select>
 	
-	<select id="getgcListWithSearch" resultType="Map" parameterType="String">
+	<select id="getgcListWithSearch" resultType="Map" parameterType="Map">
 	    SELECT 
 	        G.PRGRM_CD, 
 	        G.GC_OG_NM, 
@@ -46,7 +45,37 @@
 	        FROM PRGRM_APP
 	        GROUP BY PRGRM_CD
 	    ) APPLY_CNT ON G.PRGRM_CD = APPLY_CNT.PRGRM_CD
-	    WHERE G.PRGRM_NM LIKE CONCAT('%', #{searchWord}, '%');
+	    WHERE 
+	        G.PRGRM_NM LIKE CONCAT('%', #{searchWord}, '%')
+	        <choose>
+	            <when test="category != null and category != ''">
+	                <if test="category == '001'">
+	                    AND #{nowDate} BETWEEN G.SCHDL_BGNG_YMD AND G.SCHDL_END_YMD
+	                </if>
+	                <if test="category == '002'">
+	                    AND DATE_FORMAT(G.SCHDL_BGNG_YMD, '%d') = #{dayOfMonth}
+	                </if>
+	                <if test="category == '003'">
+	                    AND G.SCHDL_BGNG_YMD BETWEEN #{nowDate} AND #{sevenDaysLater}
+	                </if>
+	                <if test="category == '004'">
+	                    AND DATE_FORMAT(G.SCHDL_END_YMD, '%Y-%m-%d') = #{today}
+	                </if>
+	                <if test="category == '005'">
+	                    AND G.SCHDL_END_YMD BETWEEN #{nowDate} AND #{sevenDaysLater}
+	                </if>
+	                <if test="category == '006'">
+	                    AND G.SCHDL_END_YMD &lt; #{nowDate}
+	                </if>
+	            </when>
+	        </choose>
+	</select>
+    
+    <select id="testlist" resultType="Map">
+	    SELECT 
+	        #{nowDate} AS nowDate,
+	        #{sevenDaysLater} AS sevenDaysLater,
+	        #{dayOfMonth} AS dayOfMonth
 	</select>
     
 	<select id="getproDetail" resultType="Map" parameterType="int">
