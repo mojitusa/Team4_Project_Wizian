@@ -18,12 +18,6 @@
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
   <link href="assets/css/group.css" rel="stylesheet">
@@ -85,32 +79,42 @@
 			
 			<br>
 		    <div class="search-box">
-			    <input type="text" placeholder="프로그램명을 입력해 주세요">
-			    <button type="submit">검색</button>
+			    <form action='./group'>
+				    <input type="text" name="searchText" placeholder="프로그램명을 입력해 주세요">
+				    <button type="submit">검색</button>
+			    </form>
 			</div>
-		    <div>
-		    	프로그램 리스트 나열해주는 곳
-		    </div>
-		    
+			<br>
 			<div class="card" style="display: inline-block;" th:each="gc : ${gclist}">
 			    <div>
 			        <div style="display: inline-block;"><p th:text="${gc.GC_CONTS_CN}"></p></div>
 			        <div class="applyMember">
-					<div>
-					    <!-- 모집 상태 -->
-					    <th:block th:if="${gc.APPLY_CNT} &lt; ${gc.NOPE}">
-					        <span>모집중</span>
-					    </th:block>
-					    <th:block th:if="${gc.APPLY_CNT} == ${gc.NOPE}">
-					        <span>마감</span>
-					    </th:block>
-					    
-					    <!-- 수강신청/정원 -->
-					    <span th:text="${gc.APPLY_CNT}"></span>
-					    <span>/</span>
-					    <span th:text="${gc.NOPE}"></span>
-					</div>
+						<div class="applyNopePossibility">
+						    <!-- 모집 상태 -->
+						    <th:block th:if="${gc.APPLY_CNT} &lt; ${gc.NOPE}">
+						        <span>모집중</span>
+						    </th:block>
+						    <th:block th:if="${gc.APPLY_CNT} == ${gc.NOPE}">
+						        <span>마감</span>
+						        
+						    </th:block>
+						    
+						    <!-- 수강신청/정원 -->
+						    <span th:text="${gc.APPLY_CNT}"></span>
+						    <span>/</span>
+						    <span th:text="${gc.NOPE}"></span>
+						</div>
+						<div class="applyPossibility">
+						    <!-- 모집 상태 -->
+	 					    <th:block th:if="${#dates.format(#dates.createNow(), 'yyyy-MM-dd') >= gc.SCHDL_BGNG_YMD and #dates.format(#dates.createNow(), 'yyyy-MM-dd') <= gc.SCHDL_END_YMD}">
+						        <span>신청 가능</span>
+						    </th:block>
+						    <th:block th:if="${#dates.format(#dates.createNow(), 'yyyy-MM-dd') &lt; gc.SCHDL_BGNG_YMD or #dates.format(#dates.createNow(), 'yyyy-MM-dd') &gt; gc.SCHDL_END_YMD}">
+						        <span>신청 불가</span>
+						    </th:block>
+						</div>
 				    </div>
+				    <div>&nbsp;</div>
 			        <div class="context type">
 						<a th:href="@{./groupDetail(no=${gc.PRGRM_CD}) }" th:text="${gc.PRGRM_NM}" ></a>
 			        </div>
@@ -124,11 +128,11 @@
 		</div>
     </section>
   </main>
-  
-</body>
 
   <footer id="footer">
     <div th:replace="../templates/fragments/footer"></div>
   </footer>
+</body>
+
 
 </html>

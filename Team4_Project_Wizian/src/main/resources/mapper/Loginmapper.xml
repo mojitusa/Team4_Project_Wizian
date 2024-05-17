@@ -3,12 +3,17 @@
 
 <mapper namespace="LoginMapper">
 
-   	<select id="check" resultType="int" parameterType="map">
-    	SELECT COUNT(*) FROM USERS WHERE user_no = #{userNo} AND pw = #{pw}
+	<select id="check" resultType="int" parameterType="map">
+		SELECT
+		COUNT(*) FROM USERS WHERE user_no = #{userNo} AND pw = #{pw}
 	</select>
-	
-	<select id="getName" resultType="String" parameterType="String">
-    	SELECT s.stud_nm FROM STUD_INFO s join USERS u on s.stud_no = u.user_no  WHERE u.user_no = #{userNo}
+
+	<select id="getName" resultType="map" parameterType="String">
+		SELECT s.stud_nm, s.stud_no, u.email, s.mbr_telno, d.C_NMK
+		FROM STUD_INFO s
+		JOIN USERS u ON s.stud_no = u.user_no
+		JOIN DEPT_CD d ON s.c_cd = d.c_cd
+		WHERE u.user_no = #{userNo}
 	</select>
- 
+
 </mapper>
