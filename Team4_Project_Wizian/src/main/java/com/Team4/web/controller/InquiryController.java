@@ -83,7 +83,7 @@ public class InquiryController {
     @ResponseBody
     public Map<String, Object> inquiryHistoryJson() {
         List<Inquiry> inquiries = inquiryService.getAllInquiries();
-System.out.println(inquiries);
+        System.out.println(inquiries);
         Map<String, Object> response = new HashMap<>();
         response.put("inquiries", inquiries);
 

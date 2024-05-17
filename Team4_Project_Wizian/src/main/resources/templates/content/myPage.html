@@ -36,7 +36,7 @@
     <style>
         /* grid를 처음에 숨깁니다. */
         #grid {
-            display: none;
+            display: block;
         }
     </style>
 </head>
@@ -101,7 +101,7 @@
                 success: function (response) {
                     console.log(response);
                     $('#counLog').html(response);
-                    $('#grid').hide(); // 다른 콘텐츠를 로드할 때 grid 숨기기
+                    $('#grid').hide();
                 },
                 error: function () {
                     $('#counLog').html('<p>콘텐츠를 불러오는 중 오류가 발생했습니다.</p>');
@@ -111,14 +111,14 @@
 
         function loadInquiryHistory() {
             $.ajax({
-                url: "/inquiryhistory",
+                url: '/inquiryhistory',
                 type: "get",
                 dataType: "JSON",
                 contentType: "application/json; charset=UTF-8",
                 success: function (result) {
+                    $('#grid').show(); 
                     grid.resetData(result);
-                    $('#grid').show(); // 1:1 문의 내역 확인을 클릭할 때 grid 보이기
-                    $('#counLog').empty(); // 다른 콘텐츠 비우기
+                    $('#counLog').empty();
                 },
                 error: function () {
                     $('#counLog').html('<p>1:1 문의 내역을 불러오는 중 오류가 발생했습니다.</p>');
@@ -148,13 +148,7 @@
             }]
         });
 
-        $(document).ready(function () {
-            $('aside.vertical_menu a').on('click', function () {
-                if (!$(this).closest('li').hasClass('dropdown')) {
-                    $('#grid').hide(); // 다른 메뉴 항목을 클릭할 때 grid 숨기기
-                }
-            });
-        });
+
     </script>
 </body>
 
