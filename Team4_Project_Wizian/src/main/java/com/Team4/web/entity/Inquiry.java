@@ -18,7 +18,7 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "CSL_BOARD") // 테이블 이름. 없으면 클래스 명과 동일
+@Table(name = "Inquiry") // 테이블 이름. 없으면 클래스 명과 동일
 public class Inquiry {
     @Id
     @Column(name = "CSL_NO")
@@ -52,6 +52,8 @@ public class Inquiry {
     @Column(name = "CSL_STATUS")
     // 접수상태 0: 접수중 , 1: 상담완료
     private int CSL_STATUS = 0;
+
+	
     	
     
 }

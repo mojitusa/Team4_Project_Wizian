@@ -102,13 +102,12 @@ System.out.println(inquiries);
 	@GetMapping("/inquiry/detail/{id}")
 	public ModelAndView showInquiryDetail(@PathVariable("id") int id) {
 		ModelAndView modelAndView = new ModelAndView();
-		Inquiry inquiry = inquiryService.findById(id);
-		if (inquiry != null) {
-			modelAndView.addObject("inquiry", inquiry);
-			modelAndView.setViewName("inquirydetail");
-		} else {
-			modelAndView.setViewName("error");
-		}
+		modelAndView.setViewName("inquiryCsl"); // 상담사가 확인하는 페이지 
+
+		// inquiryId를 사용하여 해당 문의의 상세 정보를 조회
+		Inquiry inquiry = inquiryService.getInquiryById(inquiryId);
+		modelAndView.addObject("inquiry", inquiry);
+
 		return modelAndView;
 	}
 
