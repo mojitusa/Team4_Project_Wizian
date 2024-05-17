@@ -1,17 +1,60 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>문의 내역</title>
+<meta charset="UTF-8">
+<title>문의 내역</title>
+<style>
+    /* 부모 요소의 80%로 설정하고 가운데 정렬 */
+    .inquiry-container {
+        width: 1000px;
+        margin: 50px auto; /* 상단 여백과 가운데 정렬 */
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff; /* 배경색 추가 */
+    }
+
+    .inquiry-body {
+        margin-bottom: 20px;
+    }
+
+    .inquiry-body label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .inquiry-body input
+    {
+        width: 100%;
+        min-width: 400px; /* 최소 너비 설정 */
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        background-color: #f9f9f9;
+    }
+
+</style>
 </head>
 <body>
-    <h2>문의 내역</h2>
-    <div>
-        <p>제목: <span th:text="${inquiry.CSL_TITLE}"></span></p>
-        <p>유형: <span th:text="${inquiry.CSL_CATEGORY}"></span></p>
-        <p>내용: <span th:text="${inquiry.CSL_CONTENT}"></span></p>
-        <p>작성일: <span th:text="${#dates.format(inquiry.CSL_DATE, 'yyyy-MM-dd')}"></span></p>
-        <p>답변: <span th:text="${inquiry.CSL_ANSWER}"></span></p> <!-- 상담사가 작성한 답변 내용 추가 -->
+    <div class="inquiry-container">
+        <h2 class="inquiry-header">문의 내역</h2>
+        <div class="inquiry-body">
+            <div class="mb-3">
+                <label for="disabledTextInput" class="form-label">제목</label>
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="제목" th:value="${inquiry.CSL_TITLE}" disabled>
+            </div>
+            <div class="mb-3">
+                <label for="disabledTextInput2" class="form-label">내용</label> <input type="text" id="disabledTextInput2"
+					class="form-control" placeholder="내용"
+					th:value="${inquiry.CSL_CONTENT}" disabled style="min-height: 300px;">
+			</div>
+        </div>
+        <div class="inquiry-footer">
+            <a href="/myPage" class="btn btn-primary">돌아가기</a>
+        </div>
     </div>
 </body>
 </html>

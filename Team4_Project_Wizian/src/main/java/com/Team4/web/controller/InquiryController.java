@@ -99,8 +99,9 @@ public class InquiryController {
 //	    return inquiries;
 //	}
 
-    @GetMapping("/inquiry/history/detail/{id}") // URL을 "/inquiry/history/detail/{id}"로 설정
+    @GetMapping("/inquiryhistory/detail/{id}")
     public ModelAndView showInquiryDetail(@PathVariable("id") int inquiryId) {
+    	System.out.println("동작확인");
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("inquirydetail"); // inquirydetail.html로 매핑
 

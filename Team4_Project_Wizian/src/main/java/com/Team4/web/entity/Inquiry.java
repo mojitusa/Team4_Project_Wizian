@@ -21,11 +21,11 @@ import java.util.Date;
 @Table(name = "CSL_BOARD") // 테이블 이름. 없으면 클래스 명과 동일
 public class Inquiry {
     @Id
-    @Column(name = "CSL_NO")
+    @Column(name = "CSL_NO" ,columnDefinition = "CHARACTER SET UTF8")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int CSL_NO; 
     
-    @Column(name = "STUD_NO")
+    @Column(name = "STUD_NO" ,columnDefinition = "VARCHAR(10) CHARACTER SET UTF8")
     private String STUD_NO;
     
     @Column(name = "CSL_TITLE")

@@ -57,10 +57,39 @@
 <style>
 #grid {
 	display: block;
+	min-height: 500px; /* 그리드 최소 높이 설정 */
+}
+
+.myPage {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.content-wrap {
+	flex: 1;
+}
+
+.right-content {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}
+
+.container {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+footer {
+	width: 100%;
 }
 </style>
-</head>
+<script>
 
+</script>
+</head>
 <body class="index-page">
 	<header class="header">
 		<div th:replace="../templates/fragments/header"></div>
@@ -100,67 +129,136 @@
 		<i class="bi bi-arrow-up-short"></i>
 	</a>
 
-
 	<script>
-		function toggleDropdown() {
-			var dropdownContent = document.getElementById("dropdownOptions");
-			dropdownContent.classList.toggle("show");
-		}
+    var grid; // 전역 범위로 grid 객체 정의
+    $(document).ready(function() {
+        $.ajax({
+           url : "/inquiryhistory",
+           type : "get",
+           dataType : "JSON",
+           contentType : "application/json; charset=UTF-8",
+           success : function(result) {
+        	   console.log(result);
+              grid = new tui.Grid({
+                  el: document.getElementById('grid'),
+                  pageOptions: {
+                      useClient: true,
+                      perPage: 10
+                  },
+                  scrollX: false,
+                  scrollY: false,
+                  columns: [{
+                      header: '번호',
+                      name: 'CSL_NO',
+                      width: 50
+                      
+                  }, {
+                      header: '문의 종류',
+                      name: 'CSL_CATEGORY',
+                      width: 200,
+                  }, {
+                      header: '제목',
+                      name: 'CSL_TITLE',
+                      width: 400,
+                  }, {
+                      header: '날짜',
+                      width: 250,
+                      name: 'CSL_DATE',
+                  }, {
+                	    header: '답변 상태',
+                	    width: 150,
+                	    name: 'CSL_STATUS',
+                	    formatter: function(value) {
+                	        // CSL_STATUS 값을 확인하고 답변 상태를 반환
+                	        if (value === 0) {
+                	            return '답변대기중';
+                	        } else if (value === 1) {
+                	            return '답변완료';
+                	        }
+                	        // CSL_STATUS 값이 0 또는 1이 아닌 경우 기본값 반환
+                	        return '상태없음';
+                	    },
+                  }]
+              });
+              grid.resetData(result);
+              console.log(grid.getData());
+              grid.on('click', ev => {
+            	    const rowKey = ev.rowKey; // 클릭된 행의 고유한 키 값 추출
+            	    const rowData = grid.getRow(rowKey); // 클릭된 행의 데이터 가져오기
+            	    const cslNo = rowData.CSL_NO; // 클릭된 행의 csl_no 값 가져오기
+            	    console.log(cslNo);
+            	    loadNewHTML(cslNo); // 해당 키 값을 함수에 전달하여 실행
+            	});
+              $.ajax({
+                  url: '/myCounLog',
+                  type: 'get',
+                  success: function(response) {
+                      $('#counLog').html(response);
+                  },
+                  error: function() {
+                      $('#counLog').html('<p>콘텐츠를 불러오는 중 오류가 발생했습니다.</p>');
+                  }
+              });
+           }
+        });
+    });
+    function loadNewHTML(rowKey) {
+    	$('#grid').hide(); // counlog 영역 숨기기
+        fetch('/inquiryhistory/detail/' + rowKey)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('네트워크 상태가 좋지 않습니다.');
+                }
+                return response.text(); // 텍스트 형식의 응답을 받음
+            })
+            .then(html => {
+                $('#counLog').html(html); // 새로운 HTML을 특정 요소에 삽입
+            })
+            .catch(error => {
+                console.error('불러오기 오류:', error);
+                $('#counLog').html('<p>콘텐츠를 불러오는 중 오류가 발생했습니다.</p>');
+            });
+    }
+    
+        function toggleDropdown() {
+            var dropdownContent = document.getElementById("dropdownOptions");
+            dropdownContent.classList.toggle("show");
+        }
 
-		function loadContent(contentFile) {
-			$.ajax({
-				url : contentFile,
-				type : 'get',
-				success : function(response) {
-					console.log(response);
-					$('#counLog').html(response);
-					// $('#grid').hide();
-				},
-				error : function() {
-					$('#counLog').html('<p>콘텐츠를 불러오는 중 오류가 발생했습니다.</p>');
-				}
-			});
-		}
+        function loadContent(contentFile) {
+            $.ajax({
+                url: contentFile,
+                type: 'get',
+                success: function (response) {
+                    $('#counLog').html(response);
+                    // $('#grid').hide();
+                },
+                error: function () {
+                    $('#counLog').html('<p>콘텐츠를 불러오는 중 오류가 발생했습니다.</p>');
+                }
+            });
+        }
 
-		function loadInquiryHistory() {
-			$.ajax({
-				url : '/inquiryhistory',
-				type : "get",
-				dataType : "JSON",
-				contentType : "application/json; charset=UTF-8",
-				success : function(result) {
-					$('#grid').show();
-					grid.resetData(result);
-					$('#counLog').empty();
-				},
-				error : function() {
-					$('#counLog').html('<p>1:1 문의 내역을 불러오는 중 오류가 발생했습니다.</p>');
-				}
-			});
-		}
-
-		const grid = new tui.Grid({
-			el : document.getElementById('grid'),
-			pageOptions : {
-				useClient : true,
-				perPage : 15
-			},
-			scrollX : false,
-			scrollY : false,
-			columns : [ {
-				header : '번호',
-				name : 'CSL_NO',
-				width : 50
-			}, {
-				header : '제목',
-				name : 'CSL_TITLE',
-				width : 350,
-			}, {
-				header : '내용',
-				name : 'CSL_CONTENT',
-			} ]
-		});
-	</script>
+        function loadInquiryHistory() {
+            $.ajax({
+                url: '/inquiryhistory',
+                type: "get",
+                dataType: "JSON",
+                contentType: "application/json; charset=UTF-8",
+                success: function (result) {
+                	console.log("확인1");
+                	var imgHtml = '<img src="/image/ono2.jpg" alt="Image" id="onoImage">';
+                    $('#grid').show();
+                    grid.resetData(result);
+                    $('#counLog').empty();
+                    $('#counLog').append(imgHtml);
+                },
+                error: function () {
+                    $('#counLog').html('<p>1:1 문의 내역을 불러오는 중 오류가 발생했습니다.</p>');
+                }
+            });
+        }
+    </script>
 </body>
 
 <footer id="footer">
