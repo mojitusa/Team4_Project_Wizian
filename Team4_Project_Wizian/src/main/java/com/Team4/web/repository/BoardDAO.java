@@ -13,8 +13,8 @@ public class BoardDAO {
 
 	@Autowired SqlSession sqlSession;
 
-	public List<BoardModel> boardList() {
-		return sqlSession.selectList("board.boardList");
+	public List<BoardModel> boardList(Object session) {
+		return sqlSession.selectList("board.boardList", session);
 	}
 	
 	

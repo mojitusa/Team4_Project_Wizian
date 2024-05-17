@@ -13,8 +13,8 @@ public class BoardService {
 
 	@Autowired
 	private BoardDAO boardDAO;
-	public List<BoardModel> boardList() {
-		return boardDAO.boardList();
+	public List<BoardModel> boardList(Object session) {
+		return boardDAO.boardList(session);
 	}
 
 }

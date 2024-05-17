@@ -3,8 +3,8 @@
 
 <mapper namespace="board">
 
-	<select id="boardList" resultType="map">
-		select CSL_NO, CSL_TITLE, CSL_CONTENT FROM CSL_BOARD
+	<select id="boardList" resultType="map" parameterType="object">
+		select * FROM CSL_BOARD where stud_no = #{userNo}
 	</select>
 
 </mapper>

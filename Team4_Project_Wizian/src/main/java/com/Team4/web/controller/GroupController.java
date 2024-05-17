@@ -24,18 +24,22 @@ public class GroupController {
 	private GroupService groupService;
 	
 	@GetMapping("/group")
-	public String showGroupPage(@RequestParam(value = "searchText", required = false, defaultValue = "") String searchWord, Model model) {
+	public String showGroupPage(@RequestParam(value = "searchText", required = false, defaultValue = "") String searchWord, 
+								@RequestParam(value = "category", required = false) String category, Model model) {
 		
 		System.out.println("검색어 입력 테스트 : " + searchWord);
+		System.out.println("카테고리 검색 : " + category);
 		
-		if(searchWord == null || searchWord == "") {
+		if ((searchWord != null && !searchWord.isEmpty()) || (category != null && !category.isEmpty())) {
+		    
+		    List<Map<String, Object>> gclist = groupService.getgcListWithSearch(searchWord, category);
+		    model.addAttribute("gclist", gclist);
+		    System.out.println("파라미터 값이 있는 gclist의 값은 ? " + gclist);
+		    
+		}  else {
 			List<Map<String, Object>> gclist = groupService.gclist();
 			model.addAttribute("gclist", gclist);
-		} else {
-			List<Map<String, Object>> gclist = groupService.getgcListWithSearch(searchWord);
-			model.addAttribute("gclist", gclist);
-			
-			System.out.println(gclist);
+			System.out.println("gclist의 값은 ? " + gclist);
 		}
 		
 		return "content/group";
