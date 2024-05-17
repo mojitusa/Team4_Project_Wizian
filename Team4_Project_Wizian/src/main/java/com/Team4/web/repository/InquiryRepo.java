@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import com.Team4.web.entity.Inquiry;
 
 @Repository
-public interface InquiryRepository extends JpaRepository<Inquiry, Integer> {
+public interface InquiryRepo extends JpaRepository<Inquiry, Integer> {
 	//JPQL 사용
 	@Query("SELECT COUNT(*) FROM Inquiry WHERE STUD_NO = :STUD_NO")
 	int countByStud_no(@Param("STUD_NO") String STUD_NO);

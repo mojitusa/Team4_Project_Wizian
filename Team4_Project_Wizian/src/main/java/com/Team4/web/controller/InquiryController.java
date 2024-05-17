@@ -99,16 +99,16 @@ System.out.println(inquiries);
 //	    return inquiries;
 //	}
 
-	@GetMapping("/inquiry/detail/{id}")
-	public ModelAndView showInquiryDetail(@PathVariable("id") int id) {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("inquiryCsl"); // 상담사가 확인하는 페이지 
+    @GetMapping("/inquiry/history/detail/{id}") // URL을 "/inquiry/history/detail/{id}"로 설정
+    public ModelAndView showInquiryDetail(@PathVariable("id") int inquiryId) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("inquirydetail"); // inquirydetail.html로 매핑
 
-		// inquiryId를 사용하여 해당 문의의 상세 정보를 조회
-		Inquiry inquiry = inquiryService.getInquiryById(inquiryId);
-		modelAndView.addObject("inquiry", inquiry);
+        // inquiryId를 사용하여 해당 문의의 상세 정보를 조회
+        Inquiry inquiry = inquiryService.getInquiryById(inquiryId);
+        modelAndView.addObject("inquiry", inquiry);
 
-		return modelAndView;
-	}
+        return modelAndView;
+    }
 
 }

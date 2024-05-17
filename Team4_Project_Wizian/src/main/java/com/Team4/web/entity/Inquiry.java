@@ -18,7 +18,7 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Inquiry") // 테이블 이름. 없으면 클래스 명과 동일
+@Table(name = "CSL_BOARD") // 테이블 이름. 없으면 클래스 명과 동일
 public class Inquiry {
     @Id
     @Column(name = "CSL_NO")
