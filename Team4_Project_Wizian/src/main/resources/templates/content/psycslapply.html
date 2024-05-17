@@ -106,16 +106,19 @@
 	        			</div>
 	        			<div class="table_row_uncolored" >
 	        				<form id="milForm">
-							  <input type="radio" id="mil1" name="hy" value="현역">
+							  <input type="radio" id="mil1" name="mil" value="현역">
 							  <label for="hy">현역</label>
-							  <input type="radio" id="mil2" name="ki" value="공익">
+							  <input type="radio" id="mil2" name="mil" value="공익">
 							  <label for="ki">공익</label>
-							  <input type="radio" id="mil3" name="mp" value="미필">
+							  <input type="radio" id="mil3" name="mil" value="미필">
 							  <label for="mp">미필</label>	        					
-							  <input type="radio" id="mil4" name="mj" value="면제">
-							  <label for="mp">면제</label>	        					
-							  <input type="radio" id="mil4" name="hd" value="해당없음">
+							  <input type="radio" id="mil4" name="mil" value="면제">
+							  <label for="mp">면제</label><br>
+							  <div style="height:5px"></div>	        					
+							  <input type="radio" id="mil4" name="mil" value="해당없음">
 							  <label for="hd">해당없음</label>	        					
+	        				</form>
+	        				<form id="milForm">
 	        				</form>
 	        			</div>
 	        			<div class="table_row_colored2">
@@ -123,15 +126,16 @@
 	        			</div>
 	        			<div class="table_row_uncolored">
 	        				<form id="relForm">
-							  <input type="radio" id="mil1" name="hy" value="기독교">
+							  <input type="radio" id="mil1" name="rel" value="기독교">
 							  <label for="hy">기독교</label>
-							  <input type="radio" id="mil2" name="ki" value="천주교">
+							  <input type="radio" id="mil2" name="rel" value="천주교">
 							  <label for="ki">천주교</label>
-							  <input type="radio" id="mil3" name="mp" value="불교">
+							  <input type="radio" id="mil3" name="rel" value="불교">
 							  <label for="mp">불교</label>	        					
-							  <input type="radio" id="mil4" name="mj" value="무교">
-							  <label for="mp">무교</label>	        					
-							  <input type="radio" id="mil4" name="hd" value="기타">
+							  <input type="radio" id="mil4" name="rel" value="무교">
+							  <label for="mp">무교</label><br>
+							  <div style="height:5px"></div>	        					
+							  <input type="radio" id="mil4" name="rel" value="기타">
 							  <label for="hd">기타</label>	        					
 	        				</form>
 	        			</div>
@@ -423,19 +427,19 @@
 	        	<div id="bottom1_title">
 	        		<p class="title_text">긴급연락처</p>
 	        		<div id="bottom1_title_btn_container">
-	        			<button><img src="./image/plus.png" alt="+" >행추가</button>
+	        			<button id="bottom1_title_btn"><img src="./image/plus.png" alt="+" >행추가</button>
 	        		</div>
 	        	</div>
 	        	<div id="bottom1_table">
 	        		<table id="bottom1_table_head">
-	        			<tr>
-	        				<th>번호</th>
-	        				<th>이름</th>
-	        				<th>관계</th>
-	        				<th>전화번호</th>
-	        				<th>비고</th>
-	        				<th>삭제</th>
-	        			</tr>
+					<tr>
+					    <th style="width: 10%;">번호</th>
+					    <th style="width: 20%;">이름</th>
+					    <th style="width: 15%;">관계</th>
+					    <th style="width: 20%;">전화번호</th>
+					    <th style="width: 25%;">비고</th>
+					    <th style="width: 10%;">삭제</th>
+					</tr>
 	        		</table>
 	        		<div id="bottom1_table_body">
 	        		</div>
@@ -453,6 +457,168 @@
 	        			</div>
 	        		</div>
 	        	</div>
+	        	<div id="bottom2_table">
+	        		<div id="bottom2_table_row1" class="bottom2_table_row">
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">시간</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">월</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">화</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">수</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">목</div>
+	        			<div class="bottom2_table_row_ele">금</div>
+	        		</div>
+	        		<div class="bottom2_table_row">
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">9:00 ~ 9:50</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+	        				<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+	        			</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+							<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+						</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+	        				<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+        				</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+							<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+						</div>
+	        			<div class="bottom2_table_row_ele">
+							<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+						</div>
+	        		</div>
+	        		<div class="bottom2_table_row">
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">10:00 ~ 10:50</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+	        				<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+	        			</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+							<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+						</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+	        				<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+        				</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+							<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+						</div>
+	        			<div class="bottom2_table_row_ele">
+							<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+						</div>
+	        		</div>
+	        		<div class="bottom2_table_row">
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">11:00 ~ 11:50</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+	        				<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+	        			</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+							<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+						</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+	        				<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+        				</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+							<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+						</div>
+	        			<div class="bottom2_table_row_ele">
+							<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+						</div>
+	        		</div>
+	        		<div class="bottom2_table_row">
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">13:00 ~ 13:50</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+	        				<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+	        			</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+							<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+						</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+	        				<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+        				</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+							<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+						</div>
+	        			<div class="bottom2_table_row_ele">
+							<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+						</div>
+	        		</div>
+	        		<div class="bottom2_table_row">
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">14:00 ~ 14:50</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+	        				<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+	        			</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+							<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+						</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+	        				<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+        				</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+							<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+						</div>
+	        			<div class="bottom2_table_row_ele">
+							<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+						</div>
+	        		</div>
+	        		<div class="bottom2_table_row">
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">15:00 ~ 15:50</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+	        				<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+	        			</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+							<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+						</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+	        				<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+        				</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+							<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+						</div>
+	        			<div class="bottom2_table_row_ele">
+							<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+						</div>
+	        		</div>
+	        		<div class="bottom2_table_row">
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">16:00 ~ 16:50</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+	        				<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+	        			</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+							<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+						</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+	        				<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+        				</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+							<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+						</div>
+	        			<div class="bottom2_table_row_ele">
+							<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+						</div>
+	        		</div>
+	        		<div class="bottom2_table_row">
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">17:00 ~ 17:50</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+	        				<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+	        			</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+							<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+						</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+	        				<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+        				</div>
+	        			<div class="bottom2_table_row_ele" id="bottom2_table_row_right_line">
+							<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+						</div>
+	        			<div class="bottom2_table_row_ele">
+							<img class="check_icon" id="check_icon" src="./image/unchecked.png" alt="unchecked" >
+						</div>
+	        		</div>
+	        	</div>
+	        </div>
+	        <div id="bottom3">
+	        	<div id="cancel_container">
+	        		<button id="cancel" class="bottom3_button">취소</button>
+	        	</div>
+	        	<div id="next-page-button-container">
+	        		<button id="next-page-button" class="bottom3_button">다음 단계로 이동 </button>
+	        	</div>	        	
 	        </div>
         </div>
       </div>
@@ -460,20 +626,131 @@
   </main>
   
  <script>
+ 
+	document.getElementById('bottom1_title_btn').addEventListener('click', function() {
+	    alert("태수트 얼럿");
+	    addTableRow();
+	});
+	
+
+	// 테이블에 새로운 행을 추가하는 함수
+	function addTableRow() {
+	    let tableBody = document.getElementById("bottom1_table_body");
+	    let newRow = document.createElement("div"); // 새로운 div 엘리먼트 생성
+	    newRow.className = "bottom1_table_row"; // 클래스 지정
+	    
+	    let newNo = document.createElement("div");
+	    let newName = document.createElement("div");
+	    let newRel = document.createElement("div");
+	    let newtel = document.createElement("div");
+	    let newNote = document.createElement("div");
+	    let newDel = document.createElement("div");
+	    
+	    // 각 열의 내용 설정
+	    newNo.textContent = "새로운 번호";
+	    newName.textContent = "새로운 이름";
+	    newRel.textContent = "새로운 종교";
+	    newTel.textContent = "새로운 전화번호";
+	    newNote.textContent = "새로운 노트";
+	    newDel.textContent = "새로운 삭제";	    
+	    
+	    /* // 각 열을 새로운 행에 추가
+	    newRow.appendChild(newNo);
+	    newRow.appendChild(newName);
+	    newRow.appendChild(newRel);
+	    newRow.appendChild(newTel);
+	    newRow.appendChild(newNote);
+	    newRow.appendChild(newDel);	  */   
+
+	    // 새로운 행의 내용 설정
+	    newRow.innerHTML = "<div class='bottom1_table_row_ele'>새로운 데이터</div>";
+
+	    // 테이블 바디에 새로운 행 추가
+	    tableBody.appendChild(newRow);
+	}
+ 
     // 데이터 줄 수에 따라 테이블의 행을 생성하는 함수
-    function createTableRows(rowCount) {
-        var tableHtml = "<table>"; // 테이블 시작 태그
-        for (var i = 0; i < rowCount; i++) {
+    function createTableRows(/* rowCount */) {
+        let tableHtml = "<table>"; // 테이블 시작 태그
+        /* for (var i = 0; i < rowCount; i++) { */
             tableHtml += "<tr>"; // 행 시작 태그
             tableHtml += "<td>데이터 " + (i + 1) + "</td>"; // 데이터 셀 생성 (예시)
             tableHtml += "</tr>"; // 행 종료 태그
-        }
+        /* } */
         tableHtml += "</table>"; // 테이블 종료 태그
         document.getElementById("bottom1_table_body").innerHTML = tableHtml; // 테이블을 HTML에 삽입
     }
 
     // 예시: 행 개수가 5개인 테이블 생성
     //createTableRows(5);
+      
+ 	// 이벤트 리스너를 추가할 이미지 클래스 선택
+    let images = document.querySelectorAll('.check_icon');
+
+    // 각 이미지에 클릭 이벤트 리스너 추가
+    images.forEach(function(image) {
+        image.addEventListener('click', changeImage);
+    });
+    
+    let selectedData = []; // 선택한 데이터를 저장할 배열
+
+ 	// 클릭 이벤트가 발생했을 때 실행되는 함수
+	function changeImage(event) {
+	    let image = event.target; // 클릭된 이미지 요소를 가져옴
+	    let dayIndex = Array.from(image.parentNode.parentNode.children).indexOf(image.parentNode) - 1; // 클릭된 이미지의 부모 요소(행)의 인덱스를 가져옴
+	    let day; // 요일을 저장할 변수
+	    
+	    // 인덱스에 따라 요일을 결정
+	    switch (dayIndex) {
+	        case 0:
+	            day = '월';
+	            break;
+	        case 1:
+	            day = '화';
+	            break;
+	        case 2:
+	            day = '수';
+	            break;
+	        case 3:
+	            day = '목';
+	            break;
+	        case 4:
+	            day = '금';
+	            break;
+	        default:
+	            day = ''; // 예외 처리
+	            break;
+	    }
+	    
+	    //let time = image.parentNode.parentNode.firstChild.textContent; // 해당 이미지의 부모의 부모 요소(행)의 첫 번째 자식 요소(시간)를 가져옴
+	    // 시간 요소를 가져오기
+	    let timeElement = image.parentNode.parentNode.querySelector('.bottom2_table_row_ele:first-child');
+	    let time = timeElement.textContent.trim(); // 시간을 가져옴
+
+        // 이미지의 alt 속성을 확인하여 상태를 판별
+        if (image.alt === 'unchecked') {
+            // 체크되지 않은 상태인 경우, 체크된 이미지로 변경
+            image.src = './image/checked.png';
+            image.alt = 'checked';
+            // 선택한 데이터를 배열에 추가
+            selectedData.push({ 'day': day, 'time': time });            
+        } else {
+            // 체크된 상태인 경우, 체크되지 않은 이미지로 변경
+            image.src = './image/unchecked.png';
+            image.alt = 'unchecked';
+            // 선택한 데이터를 배열에서 제거
+            selectedData = selectedData.filter(function(item) {
+                return !(item.day === day && item.time === time);
+            });
+        }
+    }
+    
+	document.getElementById('next-page-button').addEventListener('click', function() {
+	    console.log(selectedData); // 선택한 데이터 테스트 출력
+	});
+
+     
+        
 </script> 
   
 </body>
