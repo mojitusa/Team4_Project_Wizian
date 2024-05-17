@@ -83,7 +83,7 @@ public class InquiryController {
     @ResponseBody
     public Map<String, Object> inquiryHistoryJson() {
         List<Inquiry> inquiries = inquiryService.getAllInquiries();
-System.out.println(inquiries);
+        System.out.println(inquiries);
         Map<String, Object> response = new HashMap<>();
         response.put("inquiries", inquiries);
 
@@ -103,7 +103,13 @@ System.out.println(inquiries);
 	public ModelAndView showInquiryDetail(@PathVariable("id") int id) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("inquiryCsl"); // 상담사가 확인하는 페이지 
-
+//		Inquiry inquiry = inquiryService.findById(id);
+//		if (inquiry != null) {
+//			modelAndView.addObject("inquiry", inquiry);
+//			modelAndView.setViewName("inquirydetail");
+//		} else {
+//			modelAndView.setViewName("error");
+//		}
 		// inquiryId를 사용하여 해당 문의의 상세 정보를 조회
 		Inquiry inquiry = inquiryService.getInquiryById(inquiryId);
 		modelAndView.addObject("inquiry", inquiry);
