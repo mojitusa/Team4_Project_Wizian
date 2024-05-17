@@ -7,6 +7,7 @@
  .gcpage1{
     width: 100vh; /* 예시로 너비를 80%로 설정 */
     margin: 0 auto; /* 좌우 여백을 자동으로 설정하여 수평 가운데 정렬 */
+    padding-left: 130px;
  }
  
  .gcpage2{
@@ -161,6 +162,9 @@
 .applyMember{
 	float: right;
 	font-weight: bold;
+}
+
+.applyNopePossibility{
 	background-color: aqua;
 }
 
@@ -218,6 +222,12 @@
 	padding-left: 10px;
 	padding-right: 5px;
 	width: 56vh;
+}
+
+.applyPossibility{
+	float: right;
+	background-color: none;
+	font-size: 12px !important;
 }
 
 .nameBox1{

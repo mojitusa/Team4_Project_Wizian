@@ -1,93 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>문의 내역</title>
-    <link th:href="@{/css/inquiryhistory.css}" rel="stylesheet" />
+	<meta charset="utf-8">
+	<title>문의 내역</title>
+
+
+
 </head>
-<style>
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 1em;
-    font-family: Arial, sans-serif;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
 
-thead tr {
-    background-color: #009879;
-    color: #ffffff;
-    text-align: left;
-    font-weight: bold;
-}
-
-th, td {
-    padding: 12px 15px;
-}
-
-tbody tr {
-    border-bottom: 1px solid #dddddd;
-}
-
-tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
-
-tbody tr:hover {
-    background-color: #f1f1f1;
-    cursor: pointer;
-}
-
-th, td {
-    text-align: center;
-}
-
-tbody tr:last-of-type {
-    border-bottom: 2px solid #009879;
-}
-
-tbody tr[th:onclick] {
-    transition: background-color 0.3s ease;
-}
-
-tbody tr[th:onclick]:hover {
-    background-color: #d1e7dd;
-}
-</style>
 <body>
-    <div class="inquiry-history">
-        <h2>문의 내역</h2>
-        <table>
-            <thead>
-                <tr>  
-                    <th>제목</th>               
-                    <th>유형</th>                    
-                    <th>내용</th>
-                    <th>작성일</th>
-                    <th>상태</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Thymeleaf를 사용하여 문의 내역을 동적으로 표시 -->
-                <tr th:each="inquiry : ${inquiries}" th:onclick="'showDetail(\'' + ${inquiry.CSL_NO} + '\')'">
-                    <td th:text="${inquiry.CSL_TITLE}"></td>
-                    <td th:text="${ '[' + inquiry.CSL_CATEGORY + ']' }"></td>
-                    <td th:text="${inquiry.CSL_CONTENT}"></td>
-                    <td th:text="${#dates.format(inquiry.CSL_DATE, 'yyyy-MM-dd')}"></td>
-                    <td th:text="${inquiry.CSL_STATUS == 1 ? '상담완료' : '접수중'}"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
-    <script th:inline="javascript">
-        function showDetail(cslNo) {
-            alert("상세 정보를 표시합니다" +  cslNo);
-            var detailUrl = "/inquiry/detail/" +cslNo;
-            window.location.href = detailUrl;
-        }
-    </script>
-
+	
 </body>
+
 </html>

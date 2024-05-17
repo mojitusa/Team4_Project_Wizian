@@ -17,6 +17,8 @@ public class ProfesserService {
 
 	@Autowired
 	private ProfSucheduleRepo profSucheduleRepo;
+	
+	@Autowired
 	private ProfDataRepo profDataRepo;
 	
 	public List<ProfSchedule> getProfSchedules(String pfNo){
