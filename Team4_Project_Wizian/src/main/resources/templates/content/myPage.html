@@ -168,16 +168,6 @@ footer {
                 	    header: '답변 상태',
                 	    width: 150,
                 	    name: 'CSL_STATUS',
-                	    formatter: function(value) {
-                	        // CSL_STATUS 값을 확인하고 답변 상태를 반환
-                	        if (value === 0) {
-                	            return '답변대기중';
-                	        } else if (value === 1) {
-                	            return '답변완료';
-                	        }
-                	        // CSL_STATUS 값이 0 또는 1이 아닌 경우 기본값 반환
-                	        return '상태없음';
-                	    },
                   }]
               });
               grid.resetData(result);
