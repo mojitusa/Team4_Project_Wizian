@@ -628,7 +628,6 @@
  <script>
  
 	document.getElementById('bottom1_title_btn').addEventListener('click', function() {
-	    alert("태수트 얼럿");
 	    addTableRow();
 	});
 	
@@ -638,51 +637,85 @@
 	    let tableBody = document.getElementById("bottom1_table_body");
 	    let newRow = document.createElement("div"); // 새로운 div 엘리먼트 생성
 	    newRow.className = "bottom1_table_row"; // 클래스 지정
-	    
+
 	    let newNo = document.createElement("div");
 	    let newName = document.createElement("div");
 	    let newRel = document.createElement("div");
-	    let newtel = document.createElement("div");
+	    let newTel = document.createElement("div");
 	    let newNote = document.createElement("div");
 	    let newDel = document.createElement("div");
 	    
-	    // 각 열의 내용 설정
-	    newNo.textContent = "새로운 번호";
-	    newName.textContent = "새로운 이름";
-	    newRel.textContent = "새로운 종교";
-	    newTel.textContent = "새로운 전화번호";
-	    newNote.textContent = "새로운 노트";
-	    newDel.textContent = "새로운 삭제";	    
+	    newNo.className = "bottom1_table_row_no line"; // 클래스 추가
+	    newName.className = "bottom1_table_row_ele line"; // 클래스 추가
+	    newRel.className = "bottom1_table_row_ele line"; // 클래스 추가
+	    newTel.className = "bottom1_table_row_ele line"; // 클래스 추가
+	    newNote.className = "bottom1_table_row_ele line"; // 클래스 추가
+	    newDel.className = "bottom1_table_row_ele"; // 클래스 추가
 	    
-	    /* // 각 열을 새로운 행에 추가
+	    // 각 열의 내용 설정
+	    let nameInput = document.createElement("input");
+	    let relInput = document.createElement("input");
+	    let telInput = document.createElement("input");
+	    let noteInput = document.createElement("input");
+	    let delBtn = document.createElement("button");
+	    
+	    nameInput.setAttribute("placeholder", "이름");
+	    relInput.setAttribute("placeholder", " 관계");
+	    telInput.setAttribute("placeholder", " 전화번호");
+	    noteInput.setAttribute("placeholder", " 비고");
+	    delBtn.textContent = "삭제";
+	    
+	    
+	    
+	    nameInput.className = "bottom1_table_row_ele_input";
+	    relInput.className = "bottom1_table_row_ele_input";
+	    telInput.className = "bottom1_table_row_ele_input";
+	    noteInput.className = "bottom1_table_row_ele_input";
+	    delBtn.className = "bottom1_table_row_ele_del";
+	    
+	    newName.appendChild(nameInput);
+	    newRel.appendChild(relInput);
+	    newTel.appendChild(telInput);
+	    newNote.appendChild(noteInput);
+	    newDel.appendChild(delBtn);
+	    
+	    
+	    // 삭제 버튼 클릭 이벤트 추가
+	    delBtn.addEventListener('click', function() {
+	        tableBody.removeChild(newRow);
+	        updateRowNumbers(); // 번호 업데이트
+	    });	     
+	    
+	    // 각 열을 새로운 행에 추가
 	    newRow.appendChild(newNo);
 	    newRow.appendChild(newName);
 	    newRow.appendChild(newRel);
 	    newRow.appendChild(newTel);
 	    newRow.appendChild(newNote);
-	    newRow.appendChild(newDel);	  */   
+	    newRow.appendChild(newDel);	  
 
 	    // 새로운 행의 내용 설정
-	    newRow.innerHTML = "<div class='bottom1_table_row_ele'>새로운 데이터</div>";
-
+	    //newRow.innerHTML = "<div class='bottom1_table_row_ele'>새로운 데이터</div>";
+	    
 	    // 테이블 바디에 새로운 행 추가
 	    tableBody.appendChild(newRow);
+	    
+	    // 번호 업데이트
+	    updateRowNumbers();	    
 	}
- 
-    // 데이터 줄 수에 따라 테이블의 행을 생성하는 함수
-    function createTableRows(/* rowCount */) {
-        let tableHtml = "<table>"; // 테이블 시작 태그
-        /* for (var i = 0; i < rowCount; i++) { */
-            tableHtml += "<tr>"; // 행 시작 태그
-            tableHtml += "<td>데이터 " + (i + 1) + "</td>"; // 데이터 셀 생성 (예시)
-            tableHtml += "</tr>"; // 행 종료 태그
-        /* } */
-        tableHtml += "</table>"; // 테이블 종료 태그
-        document.getElementById("bottom1_table_body").innerHTML = tableHtml; // 테이블을 HTML에 삽입
-    }
-
-    // 예시: 행 개수가 5개인 테이블 생성
-    //createTableRows(5);
+	
+	// 모든 행의 번호를 업데이트하는 함수
+	function updateRowNumbers() {
+	    let tableBody = document.getElementById("bottom1_table_body");
+	    let rows = tableBody.getElementsByClassName("bottom1_table_row");
+	    console.log(rows);
+	    let rowIndex = 1;
+	    for (let i = 0; i < rows.length; i++) { // 헤더를 제외하고 시작
+	        let noCell = rows[i].getElementsByClassName("bottom1_table_row_no")[0];
+	        noCell.textContent = rowIndex;
+	        rowIndex++;
+	    }
+	}	
       
  	// 이벤트 리스너를 추가할 이미지 클래스 선택
     let images = document.querySelectorAll('.check_icon');

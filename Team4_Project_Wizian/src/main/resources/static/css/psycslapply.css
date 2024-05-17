@@ -208,10 +208,39 @@ tr {
 
 .bottom1_table_row {
 	border-bottom: 1px solid #E6E6E6;
+	display: grid;
+	grid-template-columns: 10% 20% 15% 20% 25% 10%; /* 각 열의 비율을 지정 */
+}
+
+.line {
+	border-right: 1px solid #E6E6E6;
+}
+
+.bottom1_table_row_no {
+	padding: 14px 7px;
+	/* text-align: center; */
+    display: flex; /* 요소를 수평 중앙에 배치하기 위해 flexbox 사용 */
+    align-items: center; /* 요소를 수직 중앙에 배치 */
+    justify-content: center; /* 내용을 수평으로 가운데 정렬 */	
 }
 
 .bottom1_table_row_ele {
-	padding: 14px;
+	padding: 14px 10px;
+	text-align: center;
+	display: flex;
+	align-items: center; /* 자식 요소 세로 가운데 정렬 */
+}
+
+input.bottom1_table_row_ele_input {
+	width: 100%;
+}
+
+.bottom1_table_row_ele_del {
+    display: flex; /* 버튼을 Flex Container로 만듭니다. */
+    align-items: center; /* 수직 가운데 정렬 */
+    border: none; /* 경계선 제거 */
+    border-radius: 5px;		
+    padding: 8px 22px;	
 }
 
 #bottom2 {
