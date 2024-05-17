@@ -110,5 +110,7 @@ public class InquiryController {
 
         return modelAndView;
     }
+    
+    
 
 }
