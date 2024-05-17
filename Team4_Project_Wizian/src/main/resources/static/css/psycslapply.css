@@ -1,0 +1,214 @@
+@charset "UTF-8";
+
+#main_container {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+#top {
+	color: #495057;
+}
+
+p.title_text {
+	font-size: 25px;
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+
+#top_table {
+	border-top: 2px solid black;
+	border-bottom: 1px solid #cccccc;
+}
+
+.table_row {
+	display: grid;
+	grid-template-columns: 175px 425px 175px 425px; /* 각 열의 너비를 자동으로 설정 */
+	border-bottom: 1px solid #E6E6E6;
+}
+
+.table_row_colored {
+	padding: 14px;
+	background-color: #edf2fb;
+	text-align: center;
+	border-right: 1px solid #E6E6E6;
+}
+
+.table_row_colored2 {
+	padding: 14px;
+	background-color: #edf2fb;
+	text-align: center;
+	border-right: 1px solid #E6E6E6;
+	border-left: 1px solid #E6E6E6;
+}
+
+.table_row_uncolored {
+	/* color: darkgray; */
+	padding: 14px;
+}
+
+#phoneNumberInput {
+	color: #495057;
+}
+
+input[type="radio"] + label {
+    margin-right: 10px; /* 라디오 버튼과 라벨 사이의 우측 여백을 조절합니다. */
+}
+
+#main {
+	margin-top: 5px;
+	border-top: 1px solid #cccccc;
+	color: #495057;
+	border-bottom: 1px solid #cccccc;
+	margin-bottom: 20px;
+}
+
+.main_table_row {
+	display: grid;
+	grid-template-columns: 175px 1025px;
+	border-bottom: 1px solid #E6E6E6;
+}
+
+.main_table_row_colored {
+    padding: 14px;
+    background-color: #edf2fb;
+    text-align: center; /* 텍스트를 수평으로 가운데 정렬 */
+    border-right: 1px solid #E6E6E6;
+    display: flex; /* 세로 가운데 정렬을 위해 flex 사용 */
+    align-items: center; /* 세로 가운데 정렬 */
+    justify-content: center; /* 가로 가운데 정렬 */
+	
+}
+
+.main_table_row_uncolored {
+	padding: 18px;
+}
+
+.main_table_row_uncolored_q {
+	margin-bottom: 20px;
+}
+
+.ec img {
+    width: 25px;
+    float: left;
+    margin-right: 10px;
+}
+
+.main_table_row_uncolored_form_container {
+	margin: 14px;
+}
+
+.main_table_row_uncolored_form {
+	display: flex;
+	margin: 14px;
+	margin-bottom: 20px;
+}
+
+.checkbox_wrapper {
+	 margin-right: 20px; /* 각 체크박스와 레이블 쌍 사이에 20px 여백 추가 */
+}
+
+.etc_one_row_container {
+	margin-bottom: 10px;
+}
+
+.etc {
+	width: 100%;
+}
+
+#etc_two_rows_container {
+	display: flex;
+	width: 989px;
+	margin: 10px 0;
+}
+
+.etc_two_rows_container_each {
+	width: 50%;
+}
+
+#etc_half1 {
+	width: calc(100% - 4px);
+	padding-right: 4px;
+}
+
+#etc_half2 {
+	width: calc(100% - 4px);
+	padding-left: 2px;
+}
+
+.main_table_row_uncolored_form {
+	margin: 14px;
+	margin-bottom: 20px;
+}
+
+.main_table_row_uncolored_form_div {
+	display: flex;
+	margin: 14px;
+	margin-bottom: 20px;
+}
+
+#bottom1 {
+}
+
+#bottom1_title {
+	display: flex;
+	align-items: center; /* 수직 가운데 정렬 */
+	
+}
+
+#bottom1_title_btn_container {
+	display: flex;
+	align-items: center; /* 수직 가운데 정렬 */
+	margin-left: auto; /* 오른쪽 정렬 */
+}
+
+#bottom1_title_btn_container button {
+    display: flex; /* 버튼을 Flex Container로 만듭니다. */
+    align-items: center; /* 수직 가운데 정렬 */
+}
+
+#bottom1_title_btn_container button img {
+    margin-right: 10px; /* 이미지와 텍스트 사이의 간격을 설정합니다. */
+    width: 20px;
+}
+
+#bottom1_table {
+	border-top: 2px solid black;
+	padding-bottom: 200px;
+	border-bottom: 1px solid #E6E6E6;
+	margin-bottom: 20px;
+}
+
+#bottom1_table_head th {
+    text-align: center;
+    border-bottom: 1px solid #E6E6E6;
+}
+
+/* 테이블 스타일링 */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+th, td {
+    /* border: 1px solid black; */
+    padding: 8px;
+    text-align: left;
+}
+tr {
+    border-bottom: 1px solid #E6E6E6; /* 각 행에 밑줄 추가 */
+}
+
+#bottom2_title_container {
+	display: flex;
+}
+
+#bottom2_title_right {
+	margin-left: auto;
+}
+
+#bottom2_title_right_top {
+	text-align: right;
+}
+
+#bottom2_title_right_bottom {
+	color: #48bfe3;
+}

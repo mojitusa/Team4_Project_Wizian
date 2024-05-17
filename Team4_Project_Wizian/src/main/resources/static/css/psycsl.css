@@ -25,6 +25,13 @@
 	font-weight: bold;
 }
 
+#underline {
+	height: 2px;
+	width: 60px;
+	border: 1px solid orange;
+	margin-top: 15px;
+}
+
 #psy_csl_top_info {
 	margin-top: 50px;
 	margin-left: 40px;
