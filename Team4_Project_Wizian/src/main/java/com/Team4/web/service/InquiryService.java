@@ -39,7 +39,7 @@ public class InquiryService {
     public void completeConsultation(int inquiryId) {
         Inquiry inquiry = inquiryRepository.findById(inquiryId).orElse(null);
         if (inquiry != null) {
-            inquiry.setCSL_STATUS(1); // 상담 완료 상태로 변경
+            inquiry.setCSL_STATUS("답변 완료"); // 상담 완료 상태로 변경
             inquiryRepository.save(inquiry);
         }
     }
@@ -54,7 +54,7 @@ public class InquiryService {
     }
 
  // 문의 상태 업데이트 메서드 추가
-    public void updateInquiryStatus(int inquiryId, int status) {
+    public void updateInquiryStatus(int inquiryId, String status) {
         Inquiry inquiry = inquiryRepository.findById(inquiryId).orElse(null);
         if (inquiry != null) {
             inquiry.setCSL_STATUS(status);
