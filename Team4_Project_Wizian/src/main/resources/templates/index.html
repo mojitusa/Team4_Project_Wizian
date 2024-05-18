@@ -9,40 +9,62 @@
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <!-- jQuery UI -->
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <!-- SweetAlert -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 <!-- Bootstrap CSS -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- Bootstrap JS -->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- Vendor CSS Files -->
-<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
-	rel="stylesheet">
+<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
 <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-<link href="assets/vendor/glightbox/css/glightbox.min.css"
-	rel="stylesheet">
+<link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
 <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
 <!-- Main CSS File -->
 <link href="assets/css/main.css" rel="stylesheet">
 </head>
 <style>
-
 #myPage {
-    position: absolute;
-    right: 5px;
+	position: absolute;
+	right: 5px;
 }
-	
+
+.main {
+	display: flex;
+}
+
+.leftContent {
+	flex: 3;
+}
+
+.rightContent {
+	flex: 1;
+}
+
+.cardWrap {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.card {
+	margin: 10px;
+	flex: 1 1 calc(33.333% - 20px); /* 한 줄에 3개의 카드 */
+}
+
+.card img {
+	width: 100%;
+}
+
+@media (max-width: 768px) {
+	.card {
+		flex: 1 1 calc(50% - 20px); /* 작은 화면에서는 한 줄에 2개의 카드 */
+	}
+}
 </style>
 <body class="index-page">
 	<header class="header">
@@ -50,66 +72,61 @@
 	</header>
 
 	<main class="main">
-		<section id="mainSection" class="">
+		<section id="mainSection">
 			<div class="container">
 				<!-- Content here -->
 				<div class="leftContent">
-					
+					<div class="cardWrap">
+						<div class="card">
+							<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
+							<div class="card-body">
+								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+								<button>상담 바로가기</button>
+							</div>
+						</div>
+						<div class="card">
+							<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
+							<div class="card-body">
+								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+								<button>상담 바로가기</button>
+							</div>
+						</div>
+						<div class="card">
+							<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
+							<div class="card-body">
+								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+								<button>상담 바로가기</button>
+							</div>
+						</div>
+						<div class="card">
+							<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
+							<div class="card-body">
+								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+								<button>상담 바로가기</button>
+							</div>
+						</div>
+						<div class="card">
+							<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
+							<div class="card-body">
+								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+								<button>상담 바로가기</button>
+							</div>
+						</div>
+						<div class="card">
+							<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
+							<div class="card-body">
+								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+								<button>상담 바로가기</button>
+							</div>
+						</div>
+					</div>
 				</div>
-					<div id = "myPage" class="card border-light mb-3" style="max-width: 18rem;">
+				<div class="rightContent">
+					<div id="myPage" class="card border-light mb-3" style="max-width: 18rem;">
 						<div class="card-header">나의 활동</div>
 						<div class="card-body">
 							<p class="card-text">상담 일정</p>
 							<p class="card-text">상담 내역</p>
-						</div>
-					</div>
-				<div class="cardWrap">
-					<div class="card">
-						<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
-						<div class="card-body">
-							<p class="card-text">Some quick example text to build on the
-								card title and make up the bulk of the card's content.</p>
-							<button>상담 바로가기</button>
-						</div>
-					</div>
-					<div class="card">
-						<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
-						<div class="card-body">
-							<p class="card-text">Some quick example text to build on the
-								card title and make up the bulk of the card's content.</p>
-							<button>상담 바로가기</button>
-						</div>
-					</div>
-					<div class="card">
-						<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
-						<div class="card-body">
-							<p class="card-text">Some quick example text to build on the
-								card title and make up the bulk of the card's content.</p>
-							<button>상담 바로가기</button>
-						</div>
-					</div>
-					<div class="card">
-						<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
-						<div class="card-body">
-							<p class="card-text">Some quick example text to build on the
-								card title and make up the bulk of the card's content.</p>
-							<button>상담 바로가기</button>
-						</div>
-					</div>
-					<div class="card">
-						<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
-						<div class="card-body">
-							<p class="card-text">Some quick example text to build on the
-								card title and make up the bulk of the card's content.</p>
-							<button>상담 바로가기</button>
-						</div>
-					</div>
-					<div class="card">
-						<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
-						<div class="card-body">
-							<p class="card-text">Some quick example text to build on the
-								card title and make up the bulk of the card's content.</p>
-							<button>상담 바로가기</button>
 						</div>
 					</div>
 				</div>
@@ -118,8 +135,7 @@
 	</main>
 
 	<!-- Scroll Top -->
-	<a href="#" id="scroll-top"
-		class="scroll-top d-flex align-items-center justify-content-center">
+	<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
 		<i class="bi bi-arrow-up-short"></i>
 	</a>
 

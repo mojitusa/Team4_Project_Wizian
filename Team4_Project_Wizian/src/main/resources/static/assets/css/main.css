@@ -57,25 +57,6 @@ body {
 #session{
 	color : black;
 }
-.cardWrap {
-    position: absolute;
-    left: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    height: auto; /* 높이를 자동으로 조정 */
-    max-width: 1440px;
-    padding: 0 24px;
-}
-
-.card {
-    width: calc(33.333% - 20px); /* 한 줄에 3개의 카드가 나오도록 설정 */
-    padding: 5px;
-    margin: 5px;
-    max-width: 250px; /* 카드의 최대 너비 설정 */
-}
-
 
 a {
   color: var(--accent-color);
@@ -530,6 +511,55 @@ section,
   max-width: 1440px;
   position: relative;
   margin: 0 auto; /* 화면의 정중앙에 배치 */
+  display: flex;
+}
+#myPage {
+	position: absolute;
+	right: 5px;
+}
+.leftContent {
+	flex: 3;
+}
+
+.rightContent {
+	flex: 1;
+}
+
+.cardWrap {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.card {
+	margin: 10px;
+	flex: 1 1 calc(33.333% - 20px); /* 한 줄에 3개의 카드 */
+}
+
+.card img {
+	width: 100%;
+}
+.cardWrap {
+    position: absolute;
+    left: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: auto; /* 높이를 자동으로 조정 */
+    max-width: 1440px;
+    padding: 0 24px;
+}
+
+.card {
+    width: calc(33.333% - 20px); /* 한 줄에 3개의 카드가 나오도록 설정 */
+    padding: 5px;
+    margin: 5px;
+    max-width: 250px; /* 카드의 최대 너비 설정 */
+}
+@media (max-width: 768px) {
+	.card {
+		flex: 1 1 calc(50% - 20px); /* 작은 화면에서는 한 줄에 2개의 카드 */
+	}
 }
 #mainSection {
   min-height: 88.7vh
