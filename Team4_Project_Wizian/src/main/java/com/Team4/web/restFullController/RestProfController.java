@@ -26,7 +26,6 @@ public class RestProfController {
 	
 	@Autowired
 	private ProfCslInsertService cslInsertService;
-	
 
 	@PostMapping("/calendarData")
 	@ResponseBody

@@ -34,12 +34,14 @@ public class LoginController {
             session.setAttribute("email", email);
             session.setAttribute("mbr_telno", mbr_telno);
             session.setAttribute("C_NMK", C_NMK);
+            int secd = Integer.parseInt(userNo.substring(0, 2));
+            System.out.println(secd);
+            session.setAttribute("SE_CD", secd);
             System.out.println(name);
             System.out.println(userNo);
             System.out.println(email);
             System.out.println(mbr_telno);
             System.out.println(C_NMK);
-            
             System.out.println(userNo);
 	        return "redirect:/index";
 	    } else {
@@ -50,7 +52,7 @@ public class LoginController {
 	
 	@PostMapping("/logout")
     public String logout(HttpSession session) {
-        session.removeAttribute("username");
+		session.invalidate();
         return "redirect:/index";
     }
 

@@ -2,70 +2,86 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>중앙 - 상담 시스템</title>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<title>중앙 - 상담 시스템</title>
 
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<!-- jQuery UI -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<!-- SweetAlert -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<!-- jQuery UI -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<!-- SweetAlert -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Vendor CSS Files -->
-<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-<link href="assets/vendor/aos/aos.css" rel="stylesheet">
-<link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-<link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+	<!-- Vendor CSS Files -->
+	<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+	<link href="assets/vendor/aos/aos.css" rel="stylesheet">
+	<link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+	<link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-<!-- Main CSS File -->
-<link href="assets/css/main.css" rel="stylesheet">
+	<!-- Main CSS File -->
+	<link href="assets/css/main.css" rel="stylesheet">
 </head>
 <style>
-#myPage {
-	position: absolute;
-	right: 5px;
-}
-
-.main {
-	display: flex;
-}
-
-.leftContent {
-	flex: 3;
-}
-
-.rightContent {
-	flex: 1;
-}
-
-.cardWrap {
-	display: flex;
-	flex-wrap: wrap;
-}
-
-.card {
-	margin: 10px;
-	flex: 1 1 calc(33.333% - 20px); /* 한 줄에 3개의 카드 */
-}
-
-.card img {
-	width: 100%;
-}
-
-@media (max-width: 768px) {
-	.card {
-		flex: 1 1 calc(50% - 20px); /* 작은 화면에서는 한 줄에 2개의 카드 */
+	#myPage {
+		position: absolute;
+		right: 5px;
 	}
-}
+
+	.main {
+		display: flex;
+	}
+
+	.leftContent {
+		flex: 3;
+	}
+
+	.rightContent {
+		flex: 1;
+	}
+
+	.cardWrap {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.card {
+		margin: 10px;
+		flex: 1 1 calc(33.333% - 20px);
+		/* 한 줄에 3개의 카드 */
+	}
+
+	.card img {
+		width: 100%;
+	}
+
+	@media (max-width: 768px) {
+		.card {
+			flex: 1 1 calc(50% - 20px);
+			/* 작은 화면에서는 한 줄에 2개의 카드 */
+		}
+	}
+
+	#carouselExampleDark {
+		max-width: 1000px;
+		padding: 10px;
+		margin-bottom: 10px;
+		max-height: 500px;
+	}
+
+	.carousel-item img {
+		width: 100%;
+		height: auto;
+		max-height: 500px;
+	}
 </style>
+
 <body class="index-page">
 	<header class="header">
 		<div th:replace="../templates/fragments/header"></div>
@@ -76,62 +92,125 @@
 			<div class="container">
 				<!-- Content here -->
 				<div class="leftContent">
+					<div id="carouselExampleDark" class="carousel carousel-dark slide">
+						<div class="carousel-indicators">
+							<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0"
+								class="active" aria-current="true" aria-label="Slide 1"></button>
+							<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
+								aria-label="Slide 2"></button>
+							<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
+								aria-label="Slide 3"></button>
+						</div>
+						<div class="carousel-inner">
+							<div class="carousel-item active" data-bs-interval="10000">
+								<img src="/image/공지.png" class="d-block w-100" alt="...">
+								<div class="carousel-caption d-none d-md-block">
+									<p>학생,교수,상담센터별로 완성</p>
+								</div>
+							</div>
+							<div class="carousel-item" data-bs-interval="2000">
+								<img src="/image/카리나.jpg" class="d-block w-100" alt="...">
+								<div class="carousel-caption d-none d-md-block">
+									<p>스고이..</p>
+								</div>
+							</div>
+							<div class="carousel-item">
+								<img src="/image/힐링.jpg" class="d-block w-100" alt="...">
+								<div class="carousel-caption d-none d-md-block">
+									<p>강과 산.. 그리고 인생..</p>
+								</div>
+							</div>
+						</div>
+						<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+							data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+							data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Next</span>
+						</button>
+					</div>
+
 					<div class="cardWrap">
 						<div class="card">
 							<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
 							<div class="card-body">
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+								<p class="card-text">Some quick example text to build on the card title and make up the
+									bulk of the card's content.</p>
 								<button>상담 바로가기</button>
 							</div>
 						</div>
 						<div class="card">
 							<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
 							<div class="card-body">
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+								<p class="card-text">Some quick example text to build on the card title and make up the
+									bulk of the card's content.</p>
 								<button>상담 바로가기</button>
 							</div>
 						</div>
 						<div class="card">
 							<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
 							<div class="card-body">
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+								<p class="card-text">Some quick example text to build on the card title and make up the
+									bulk of the card's content.</p>
 								<button>상담 바로가기</button>
 							</div>
 						</div>
 						<div class="card">
 							<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
 							<div class="card-body">
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+								<p class="card-text">Some quick example text to build on the card title and make up the
+									bulk of the card's content.</p>
 								<button>상담 바로가기</button>
 							</div>
 						</div>
 						<div class="card">
 							<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
 							<div class="card-body">
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+								<p class="card-text">Some quick example text to build on the card title and make up the
+									bulk of the card's content.</p>
 								<button>상담 바로가기</button>
 							</div>
 						</div>
 						<div class="card">
 							<img src="/image/취업진로상담.png" class="card-img-top" alt="...">
 							<div class="card-body">
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+								<p class="card-text">Some quick example text to build on the card title and make up the
+									bulk of the card's content.</p>
 								<button>상담 바로가기</button>
 							</div>
-						</div>
-					</div>
-				</div>
-				<div class="rightContent">
-					<div id="myPage" class="card border-light mb-3" style="max-width: 18rem;">
-						<div class="card-header">나의 활동</div>
-						<div class="card-body">
-							<p class="card-text">상담 일정</p>
-							<p class="card-text">상담 내역</p>
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
+		<div class="rightContent" th:if="${session.username != null}">
+			<div id="myPage" class="card border-light mb-3" style="max-width: 18rem;">
+				<div class="card-header">
+					<p class="card-text" th:text="${session.username} + '님 환영합니다 !'"></p>
+				</div>
+				<div class="card-body" th:if="${session.username != null}">
+					<p class="card-text">
+						나의 상담 신청
+						<a href="myPage" class="button-link">
+							<span th:text="${counselCount}"></span>
+						</a>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="rightContent" th:unless="${session.username}">
+			<div id="myPage" class="card border-light mb-3" style="max-width: 18rem;">
+				<div class="card-header">
+					<p class="card-text">로그인이 필요합니다.</p>
+				</div>
+				<div class="card-body">
+					<a href="/login" class="btn btn-primary">로그인</a>
+				</div>
+			</div>
+		</div>
 	</main>
 
 	<!-- Scroll Top -->

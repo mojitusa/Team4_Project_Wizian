@@ -7,11 +7,6 @@ import com.Team4.web.model.FileModel;
 
 @Controller
 public class MenuMovingController {
-
-	@GetMapping("/index")
-	public String showIndexPage() {
-		return "/index";
-	}
 	
 	@GetMapping("/test")
 	public String showTestPage() {

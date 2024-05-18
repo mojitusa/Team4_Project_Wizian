@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Mymapper">
+	<select id="myStud" resultType="int" parameterType="int">
+		SELECT
+		SUM(count) AS total_count
+		FROM (
+		SELECT COUNT(*) AS count
+		FROM CSL_BOARD
+		WHERE SUBSTRING(STUD_NO, 1, 2) = #{secd}
+
+		UNION ALL
+
+		SELECT COUNT(*) AS count
+		FROM PRGRM_APP
+		WHERE SUBSTRING(STUD_NO, 1, 2) = #{secd}
+
+		UNION ALL
+
+		SELECT COUNT(*) AS count
+		FROM PROFESSER_CONSULTATION
+		WHERE SUBSTRING(STUD_NO, 1, 2) = #{secd}
+
+		UNION ALL
+
+		SELECT COUNT(*) AS count
+		FROM CSL_APPLY
+		WHERE SUBSTRING(STUD_NO, 1, 2) = #{secd}
+		) AS cc;
+	</select>
+</mapper>
