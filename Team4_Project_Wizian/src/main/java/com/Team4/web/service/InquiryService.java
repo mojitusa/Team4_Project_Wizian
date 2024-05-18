@@ -38,6 +38,7 @@ public class InquiryService {
  // 상담 완료 메서드 추가
     public void completeConsultation(int inquiryId) {
         Inquiry inquiry = inquiryRepository.findById(inquiryId).orElse(null);
+        System.out.println("ㄷ오작");
         if (inquiry != null) {
             inquiry.setCSL_STATUS("답변 완료"); // 상담 완료 상태로 변경
             inquiryRepository.save(inquiry);
