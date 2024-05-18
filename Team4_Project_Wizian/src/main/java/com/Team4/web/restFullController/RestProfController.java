@@ -1,11 +1,9 @@
 package com.Team4.web.restFullController;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.Team4.web.entity.ProfSchedule;
 import com.Team4.web.entity.Professer;
 import com.Team4.web.model.ProfCslInsertModel;
+import com.Team4.web.service.ProfCslInsertService;
 import com.Team4.web.service.ProfesserService;
 
 @RestController
@@ -20,6 +19,10 @@ public class RestProfController {
 	
 	@Autowired
 	private ProfesserService professerService;
+	
+	@Autowired
+	private ProfCslInsertService cslInsertService;
+	
 
 	@PostMapping("/calendarData")
 	@ResponseBody
@@ -37,8 +40,6 @@ public class RestProfController {
 	@PostMapping("/insertProfCslData")
 	@ResponseBody
     public void insertProfCslData(ProfCslInsertModel profCslInsertModel) {
-		System.out.println(profCslInsertModel);
-		
-        
+		cslInsertService.insertProfCslData(profCslInsertModel);
     }
 }
