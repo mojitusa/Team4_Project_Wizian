@@ -44,48 +44,6 @@
 	<!-- Main JS File -->
 	<script src="assets/js/main.js"></script>
 	<style>
-		#grid {
-			display: block;
-			min-height: 500px;
-			/* 그리드 최소 높이 설정 */
-		}
-
-		.myPage {
-			min-height: 100vh;
-			display: flex;
-			flex-direction: column;
-		}
-
-		.content-wrap {
-			flex: 1;
-		}
-
-		.right-content {
-			display: flex;
-			flex-direction: column;
-			flex: 1;
-		}
-
-		.container {
-			flex: 1;
-			display: flex;
-			flex-direction: column;
-		}
-
-		#counLog {
-			position: relative;
-		}
-
-		#onoImage.right-aligned {
-			position: absolute;
-			right: 0;
-			top: 0;
-			/* Adjust this if you need to align it vertically */
-		}
-
-		footer {
-			width: 100%;
-		}
 
 	</style>
 	<script>
@@ -105,7 +63,8 @@
 					<aside class="vertical_menu">
 						<h3 class="menuTitle">마이 페이지</h3>
 						<ul>
-							<li><a href="#" onclick="loadContent('myCounLog')">내 상담
+							<li><a href="#" onclick="loadContent('updatePrivacy')">나의 정보</a></li>
+							<li><a href="#" onclick="loadContent('myCounLog')">나의 상담
 									내역</a></li>
 							<li class="dropdown"><a href="#" onclick="toggleDropdown()">1:1문의</a>
 								<ul class="dropdown-content" id="dropdownOptions">
@@ -128,13 +87,10 @@
 			</div>
 		</section>
 	</main>
-	<!-- Scroll Top -->
-	<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
-		<i class="bi bi-arrow-up-short"></i>
-	</a>
 
 	<script>
-		var grid; // 전역 범위로 grid 객체 정의
+		var grid;
+		var grid2;
 		$(document).ready(function () {
 			$.ajax({
 				url: "/inquiryhistory",
@@ -197,16 +153,16 @@
 			});
 		});
 		function loadNewHTML(rowKey) {
-			$('#grid').hide(); // counlog 영역 숨기기
+			$('#grid').hide();
 			fetch('/inquiryhistory/detail/' + rowKey)
 				.then(response => {
 					if (!response.ok) {
 						throw new Error('네트워크 상태가 좋지 않습니다.');
 					}
-					return response.text(); // 텍스트 형식의 응답을 받음
+					return response.text(); 
 				})
 				.then(html => {
-					$('#counLog').html(html); // 새로운 HTML을 특정 요소에 삽입
+					$('#counLog').html(html);
 				})
 				.catch(error => {
 					console.error('불러오기 오류:', error);
@@ -225,7 +181,7 @@
 				type: 'get',
 				success: function (response) {
 					$('#counLog').html(response);
-					// $('#grid').hide();
+					$('#grid').hide();
 				},
 				error: function () {
 					$('#counLog').html('<p>콘텐츠를 불러오는 중 오류가 발생했습니다.</p>');

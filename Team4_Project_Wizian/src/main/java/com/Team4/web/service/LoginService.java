@@ -20,4 +20,12 @@ public class LoginService {
 	public Map<String, Object> getName(String id) {
 		return loginDAO.getName(id);
 	}
+
+	public Map<String, Object> getInfoPro(String userNo) {
+		return loginDAO.getInfoPro(userNo);
+	}
+
+	public Map<String, Object> getInfoCounselor(String userNo) {
+		return loginDAO.getInfoCounselor(userNo);
+	}
 }

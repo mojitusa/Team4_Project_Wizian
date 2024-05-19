@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.Team4.web.model.FileModel;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class MenuMovingController {
 	
@@ -41,9 +43,5 @@ public class MenuMovingController {
 	public String showLoginPage() {
 		return "/login";
 	}
-	
-	@GetMapping("/myPage")
-	public String showMyPage() {
-		return "content/myPage";
-	}
+
 }

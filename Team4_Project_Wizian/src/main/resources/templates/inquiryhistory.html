@@ -8,7 +8,105 @@
 </head>
 
 <body>
-	
+	<script>
+	$(document).ready(function () {
+    $.ajax({
+        url: "/inquiryhistory",
+        type: "get",
+        dataType: "JSON",
+        contentType: "application/json; charset=UTF-8",
+        success: function (result) {
+            console.log(result);
+
+            // Grid1 설정
+            var grid = new tui.Grid({
+                el: document.getElementById('grid'),
+                pageOptions: {
+                    useClient: true,
+                    perPage: 10
+                },
+                scrollX: false,
+                scrollY: false,
+                columns: [{
+                    header: '번호',
+                    name: 'CSL_NO',
+                    width: 50
+                }, {
+                    header: '문의 종류',
+                    name: 'CSL_CATEGORY',
+                    width: 200
+                }, {
+                    header: '제목',
+                    name: 'CSL_TITLE',
+                    width: 400
+                }, {
+                    header: '날짜',
+                    name: 'CSL_DATE',
+                    width: 250
+                }, {
+                    header: '답변 상태',
+                    name: 'CSL_STATUS',
+                    width: 150
+                }]
+            });
+            grid.resetData(result);
+            console.log(grid.getData());
+            grid.on('click', function(ev) {
+                const rowKey = ev.rowKey;
+                const rowData = grid.getRow(rowKey);
+                const cslNo = rowData.CSL_NO;
+                console.log(cslNo);
+                loadNewHTML(cslNo);
+            });
+
+            // Grid2 설정
+            var grid2 = new tui.Grid({
+                el: document.getElementById('grid2'),
+                pageOptions: {
+                    useClient: true,
+                    perPage: 10
+                },
+                scrollX: false,
+                scrollY: false,
+                columns: [{
+                    header: '번호',
+                    name: 'CSL_NO',
+                    width: 50
+                }, {
+                    header: '문의 종류',
+                    name: 'CSL_CATEGORY',
+                    width: 200
+                }, {
+                    header: '제목',
+                    name: 'CSL_TITLE',
+                    width: 400
+                }, {
+                    header: '날짜',
+                    name: 'CSL_DATE',
+                    width: 250
+                }, {
+                    header: '답변 상태',
+                    name: 'CSL_STATUS',
+                    width: 150
+                }]
+            });
+            grid2.resetData(result);
+            console.log(grid2.getData());
+            grid2.on('click', function(ev) {
+                const rowKey = ev.rowKey;
+                const rowData = grid2.getRow(rowKey);
+                const cslNo = rowData.CSL_NO;
+                console.log(cslNo);
+                loadNewHTML(cslNo);
+            });
+        }
+    });
+});
+function loadNewHTML(cslNo) {
+    // Your code to load new HTML based on cslNo
+}
+</script>
+
 </body>
 
 </html>
