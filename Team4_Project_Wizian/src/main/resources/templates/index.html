@@ -186,8 +186,8 @@
 				</div>
 			</div>
 		</section>
-		<div class="rightContent" th:if="${session.username != null}">
-			<div id="myPage" class="card border-light mb-3" style="max-width: 18rem;">
+		<div class="rightContent" th:if="${session.userNo != null}">
+			<div id="myPage" th:if="${session.SE_CD.equals('11')}" class="card border-light mb-3" style="max-width: 18rem;">
 				<div class="card-header">
 					<p class="card-text" th:text="${session.username} + '님 환영합니다 !'"></p>
 				</div>
@@ -200,8 +200,34 @@
 					</p>
 				</div>
 			</div>
+			<div id="myPage" th:if="${session.SE_CD.equals('12')}" class="card border-light mb-3" style="max-width: 18rem;">
+				<div class="card-header">
+					<p class="card-text" th:text="${session.userNo} + '님 환영합니다 !'"></p>
+				</div>
+				<div class="card-body" th:if="${session.userNo != null}">
+					<p class="card-text">
+						상담 일정
+						<a href="myPage" class="button-link">
+							<span th:text="${counselCount}"></span>
+						</a>
+					</p>
+				</div>
+			</div>
+			<div id="myPage" th:if="${session.SE_CD.equals('13')}" class="card border-light mb-3" style="max-width: 18rem;">
+				<div class="card-header">
+					<p class="card-text" th:text="${session.userNo} + '님 환영합니다 !'"></p>
+				</div>
+				<div class="card-body" th:if="${session.userNo != null}">
+					<p class="card-text">
+						상담 일정
+						<a href="myPage" class="button-link">
+							<span th:text="${counselCount}"></span>
+						</a>
+					</p>
+				</div>
+			</div>
 		</div>
-		<div class="rightContent" th:unless="${session.username}">
+		<div class="rightContent" th:unless="${session.userNo}">
 			<div id="myPage" class="card border-light mb-3" style="max-width: 18rem;">
 				<div class="card-header">
 					<p class="card-text">로그인이 필요합니다.</p>
