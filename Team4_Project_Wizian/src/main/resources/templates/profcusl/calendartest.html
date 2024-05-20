@@ -97,8 +97,6 @@ html, body {
 
 <script type="text/javascript">
 
-
-
 //시간코드(t0900 기준) -> 시간으로 변환()
 function convertTime(timeString) {
     var hour = parseInt(timeString.substr(1, 2));
@@ -132,7 +130,7 @@ function generateHourlyEvents(formattedDate, convertedTimes) {
         if (!convertedTimes.includes(time)) {
             events.push({
                 title: time,
-                start: new Date(currentTime) 
+                start: new Date(currentTime) //2024-05-20T09:00 
             });
         }
 
@@ -156,9 +154,15 @@ function generateHourlyEvents(formattedDate, convertedTimes) {
 	        console.log(eventDate);
 	        console.log(cslContent);
 	        
+	     	// eventDate 형식을 2024-05-20에서 20240520으로 변환
+	        var eventformattedDate = eventDate.replace(/-/g, '');
+	     	
+	     	// eventTime 형식을 16:00에서 T1600으로 변환
+	        var eventformattedTime = 'T' + eventTime.replace(':', '');
+	        
 	        var dataString = JSON.stringify({
-	            PFCS_TIME: eventTime,
-	            PFCS_YMD: eventDate,
+	            PFCS_TIME: eventformattedTime,
+	            PFCS_YMD: eventformattedDate,
 	            PFCS_CN: cslContent
 	        });
 	        
@@ -169,8 +173,8 @@ function generateHourlyEvents(formattedDate, convertedTimes) {
 	            url: '/insertProfCslData', // 서버의 엔드포인트로 변경
 	            method: 'POST',
 	            data: {
-	            	PFCS_TIME: eventTime,
-		            PFCS_YMD: eventDate,
+	            	PFCS_TIME: eventformattedTime,
+		            PFCS_YMD: eventformattedDate,
 		            PFCS_CN: cslContent
 		        },
 	            success: function(response) {
@@ -195,17 +199,23 @@ function generateHourlyEvents(formattedDate, convertedTimes) {
 		var pf_scd_hmcd = 't0900';
 		var pf_scd_hmcd2 = 't1200';
 		var pf_scd_hmcd3 = 't1500';
+		var pf_scd_hmcd4 = 't1600';
 		var convertedTime = convertTime(pf_scd_hmcd);
 		var convertedTime2 = convertTime(pf_scd_hmcd2);
 		var convertedTime3 = convertTime(pf_scd_hmcd3);
+		var convertedTime4 = convertTime(pf_scd_hmcd4);
 		var convertedTimes = [];
 		convertedTimes.push(convertedTime);
 		convertedTimes.push(convertedTime2);
 		convertedTimes.push(convertedTime3);
+		convertedTimes.push(convertedTime4);
 
 		//날짜데이터 예시
 		var date = '20240514';
+		var date1 = '20240515';
 		var formattedDate = formatDate(date);
+		var formattedDate1 = formatDate(date1);
+		formattedDate.push(formattedDate1);
  		
 		
 		//스케쥴 테이블 불러오기 ->캘린더 만들기
@@ -260,7 +270,7 @@ function generateHourlyEvents(formattedDate, convertedTimes) {
 		
 		//예시 데이터
 		var time = '15:00';
-		var startdate = '2024-05-10T15:00';
+		var startdate = '2024-05-10';
 		
 		//캘린더 그리는 스크립트
 		var calendarEl = document.getElementById('calendar');
@@ -272,7 +282,6 @@ function generateHourlyEvents(formattedDate, convertedTimes) {
 			      right: 'dayGridMonth,timeGridWeek'
 			 },
 			 events:[
-				 
 			      ...generateHourlyEvents(formattedDate, convertedTimes)
 			 ],
 			 eventClick: function(info) {
@@ -283,7 +292,6 @@ function generateHourlyEvents(formattedDate, convertedTimes) {
 			    var eventTime = eventStart.getHours() + ':' + ('0' + eventStart.getMinutes()).slice(-2);
 			    var eventDate = eventStart.toISOString().split('T')[0];
 			    
-			    //$('.modal-body').html('상담시간: ' + eventTime + '<br>' + '상담일자: ' + eventDate); // 모달 내용 업데이트 
                 
 			    $('#event-time').text(eventTime);
     			$('#event-date').text(eventDate);
