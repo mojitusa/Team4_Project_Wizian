@@ -6,8 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.Team4.web.mongodbclass.PsyCslSurvey;
 import com.Team4.web.service.PsyCslService;
 
 @Controller
@@ -23,14 +23,8 @@ public class PsyCslController {
 	}
 	
 	@PostMapping("/psycslapplysubmit")
-	public String psyCslApplySubmit(
-			@RequestBody String jsonData,
-			@RequestParam String phoneNumber
-			
-			
-			) {
-		System.out.println(jsonData);
-		System.out.println(phoneNumber);
+	public String psyCslApplySubmit(@RequestBody PsyCslSurvey formData) {
+		psyCslService.savePsyCslSurvey(formData);
 		
 	    return "redirect:/psy"; // 리다이렉트할 URL을 반환
 	}

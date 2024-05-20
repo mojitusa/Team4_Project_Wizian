@@ -167,7 +167,7 @@
 		        				<label for="sexual">성희롱고충상담</label>
 		        			</div>
 		        			<div class="checkbox_wrapper">
-		        				<input type="checkbox" id="etc" name="purpose" value="방문목적 기타">
+		        				<input type="checkbox" id="purpose_etc_check" name="purpose" value="방문목적 기타">
 		        				<label for="etc">기타</label>
 		        			</div>
 	        			</form>
@@ -202,7 +202,7 @@
 		        				<label for="cslcenter">상담센터 홈페이지</label>
 		        			</div>
 		        			<div class="checkbox_wrapper">
-		        				<input type="checkbox" id="etc" name="route" value="방문경로 기타">
+		        				<input type="checkbox" id="route_etc_check" name="route" value="방문경로 기타">
 		        				<label for="etc">기타</label>
 		        			</div>
 	        			</form>
@@ -420,7 +420,6 @@
 	        			</div>
 	        		</div>
 	        	</div>	        	
-	        </div>
 	        <div id="bottom1">
 	        	<div id="bottom1_title">
 	        		<p class="title_text">긴급연락처</p>
@@ -780,7 +779,6 @@
     }
     
 	document.getElementById('next-page-button').addEventListener('click', function() {
-		console.log("Button clicked");
 	    collectFormData(selectedData);
 	});
 	
@@ -799,17 +797,6 @@
     	let mil = document.querySelector('input[name="mil"]:checked');
     	let rel = document.querySelector('input[name="rel"]:checked');
     	
-    	const purposeEtc = document.getElementById('purposeEtc').value;
-    	const routeEtc = document.getElementById('routeEtc').value;
-    	
-    	const exp = document.querySelector('input[name="exp"]:checked').value;
-    	const expdate = document.getElementById('expdate').value;
-    	const expLoc = document.getElementById('expLoc').value;    	
-    	
-    	const psyTestEtc = document.getElementById('psyTestEtc').value;
-    	const personalSubjectEtc = document.getElementById('personalSubjectEtc').value;    	
-    	const groupSubjectEtc = document.getElementById('groupSubjectEtc').value;    	
-    	
     	if(!mil) {
 			alert("군목부를 선택해 주세요.");
 			return;
@@ -821,25 +808,50 @@
 		mil = mil.value;
 		rel = rel.value;
     	
-    	const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+   		
+    	
     	
         // Create an object to hold form data
         const formData = {
-            studentName: studentName,
-            studentNo: studentNo,
-            studentBirth: studentBirth,
-            studentcCd: studentcCd,
-            student_st: student_st,
-            mil: mil,
-            rel: rel,
-            selectedCheckboxes: [],
-        	reservation : selectedData
-        };    	
-        
-        // Add selected checkboxes to the array
-        checkboxes.forEach(function(checkbox) {
-            formData.selectedCheckboxes.push(checkbox.value);
+            studentName,
+            studentNo,
+            studentBirth,
+            studentcCd,
+            student_st,
+            mil,
+            rel,
+            phoneNumber,
+            email,
+        };	
+    	
+	    // Collect optional fields with fallback to null
+   		if (document.getElementById('purposeEtc')) formData.purposeEtc = document.getElementById('purposeEtc').value;
+   		if (document.getElementById('routeEtc')) formData.routeEtc = document.getElementById('routeEtc').value;
+   		if (document.querySelector('input[name="exp"]:checked')) formData.exp = document.querySelector('input[name="exp"]:checked').value;
+   		if (document.getElementById('expdate')) formData.expdate = document.getElementById('expdate').value;
+   		if (document.getElementById('expLoc')) formData.expLoc = document.getElementById('expLoc').value;
+   		if (document.getElementById('psyTestEtc')) formData.psyTestEtc = document.getElementById('psyTestEtc').value;
+   		if (document.getElementById('personalSubjectEtc')) formData.personalSubjectEtc = document.getElementById('personalSubjectEtc').value;
+   		if (document.getElementById('groupSubjectEtc')) formData.groupSubjectEtc = document.getElementById('groupSubjectEtc').value;
+   		
+     	// Collect selected checkboxes
+    	const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+    	const selectedCheckboxes = Array.from(checkboxes).map(checkbox => checkbox.value);
+    	if (selectedCheckboxes) formData.selectedCheckboxes = selectedCheckboxes;
+   		
+        // Collect emergency contact data
+        const emergencyContactRows = document.querySelectorAll('.bottom1_table_row');
+        const emergencyContacts = Array.from(emergencyContactRows).map(row => {
+            return {
+                emerName: row.querySelector('input[name="emerName"]') ? row.querySelector('input[name="emerName"]').value : null,
+                relation: row.querySelector('input[name="relation"]') ? row.querySelector('input[name="relation"]').value : null,
+                emerTel: row.querySelector('input[name="emerTel"]') ? row.querySelector('input[name="emerTel"]').value : null,
+                emerNote: row.querySelector('input[name="emerNote"]') ? row.querySelector('input[name="emerNote"]').value : null
+            };
         });
+        if (selectedData) formData.reservation = selectedData;
+        
+        if (emergencyContacts) formData.emergencyContacts = emergencyContacts;
         
         // Send the data to the server
         fetch('/psycslapplysubmit', {
