@@ -6,9 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.Team4.web.entity.StudentEntity;
+import com.Team4.web.mongodbclass.PsyCslSurvey;
 import com.Team4.web.service.PsyCslService;
+
+import jakarta.servlet.http.HttpSession;
+
+
 
 @Controller
 public class PsyCslController {
@@ -17,20 +22,26 @@ public class PsyCslController {
 	PsyCslService psyCslService;
 	
 	@GetMapping("/psycslapply")
-	public String psyCslApply(Model model) {
-		model.addAttribute("student", psyCslService.getStudentByUserNo("5010000003"));
+	public String psyCslApply(Model model, HttpSession session) {
+		//model.addAttribute("student", psyCslService.getStudentByUserNo("5010000003"));
+		
+        // 세션에서 로그인한 사용자 정보 가져오기
+		Object userNo = session.getAttribute("userNo");
+		System.out.println("userNo : " + userNo);
+		
+		if (userNo != null) {
+			StudentEntity studentEntity =  psyCslService.getJpaStudentByUserNo((String) userNo);
+			model.addAttribute("student", studentEntity);
+			System.out.println(studentEntity);
+		} else {
+			 
+		}
 		return "content/psycslapply";
 	}
 	
 	@PostMapping("/psycslapplysubmit")
-	public String psyCslApplySubmit(
-			@RequestBody String jsonData,
-			@RequestParam String phoneNumber
-			
-			
-			) {
-		System.out.println(jsonData);
-		System.out.println(phoneNumber);
+	public String psyCslApplySubmit(@RequestBody PsyCslSurvey formData) {
+		psyCslService.savePsyCslSurvey(formData);
 		
 	    return "redirect:/psy"; // 리다이렉트할 URL을 반환
 	}

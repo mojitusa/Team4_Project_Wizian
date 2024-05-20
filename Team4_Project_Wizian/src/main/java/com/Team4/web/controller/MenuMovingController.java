@@ -1,9 +1,10 @@
 package com.Team4.web.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.Team4.web.model.FileModel;
+import jakarta.servlet.http.HttpSession;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -35,7 +36,17 @@ public class MenuMovingController {
 	}
 	
 	@GetMapping("/psy")
-	public String showPsychoPage() {
+	public String showPsychoPage(Model model, HttpSession session) {
+		String userNo = (String) session.getAttribute("userNo");
+
+	    if (userNo == null) {
+	        model.addAttribute("isLoggedIn", false);
+	        model.addAttribute("userNo", "null");
+	    } else {
+	        model.addAttribute("isLoggedIn", true);
+	        model.addAttribute("userNo", userNo);
+	    }
+	    
 		return "content/psycsl";
 	}
 	

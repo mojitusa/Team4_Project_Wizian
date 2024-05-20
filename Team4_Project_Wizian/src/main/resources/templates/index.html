@@ -29,57 +29,7 @@
 	<link href="assets/css/main.css" rel="stylesheet">
 </head>
 <style>
-	#myPage {
-		position: absolute;
-		right: 5px;
-	}
-
-	.main {
-		display: flex;
-	}
-
-	.leftContent {
-		flex: 3;
-	}
-
-	.rightContent {
-		flex: 1;
-	}
-
-	.cardWrap {
-		display: flex;
-		flex-wrap: wrap;
-	}
-
-	.card {
-		margin: 10px;
-		flex: 1 1 calc(33.333% - 20px);
-		/* 한 줄에 3개의 카드 */
-	}
-
-	.card img {
-		width: 100%;
-	}
-
-	@media (max-width: 768px) {
-		.card {
-			flex: 1 1 calc(50% - 20px);
-			/* 작은 화면에서는 한 줄에 2개의 카드 */
-		}
-	}
-
-	#carouselExampleDark {
-		max-width: 1000px;
-		padding: 10px;
-		margin-bottom: 10px;
-		max-height: 500px;
-	}
-
-	.carousel-item img {
-		width: 100%;
-		height: auto;
-		max-height: 500px;
-	}
+	
 </style>
 
 <body class="index-page">
@@ -108,16 +58,16 @@
 									<p>학생,교수,상담센터별로 완성</p>
 								</div>
 							</div>
+							<div class="carousel-item">
+								<img src="/image/시간이없다.png" class="d-block w-100" alt="...">
+								<div class="carousel-caption d-none d-md-block">
+									<p>살려</p>
+								</div>
+							</div>
 							<div class="carousel-item" data-bs-interval="2000">
 								<img src="/image/카리나.jpg" class="d-block w-100" alt="...">
 								<div class="carousel-caption d-none d-md-block">
 									<p>스고이..</p>
-								</div>
-							</div>
-							<div class="carousel-item">
-								<img src="/image/힐링.jpg" class="d-block w-100" alt="...">
-								<div class="carousel-caption d-none d-md-block">
-									<p>강과 산.. 그리고 인생..</p>
 								</div>
 							</div>
 						</div>
