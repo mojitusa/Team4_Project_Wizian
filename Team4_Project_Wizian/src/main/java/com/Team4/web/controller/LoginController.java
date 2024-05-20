@@ -40,7 +40,7 @@ public class LoginController {
             		String C_NMK = (String) userInfo.get("C_NMK");
             		String ST = (String) userInfo.get("ST");
             		session.setAttribute("username", name);
-            		session.setAttribute("stud_no", studNo);
+            		session.setAttribute("userNo", userNo);
             		session.setAttribute("real_stud_no", realStudNo);
             		session.setAttribute("email", email);
             		session.setAttribute("mbr_telno", mbr_telno);
