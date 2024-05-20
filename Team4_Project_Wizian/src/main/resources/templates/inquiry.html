@@ -1,60 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>문의 상담 페이지</title>
-    <link th:href="@{/css/inquiry.css}" rel="stylesheet" />
+<meta charset="UTF-8">
+<title>문의 상담 페이지</title>
+<link href="assets/css/main.css" rel="stylesheet">
+<link href="assets/css/myPage.css" rel="stylesheet">
+<link href="css/inquiry.css" rel="stylesheet">
 </head>
 <body onload="showInquiryForm()">
-    <div id="inquiryForm" >
-        <form action="/receptioncomplete" method="post" onsubmit="return validateForm()"> 
-            <label for="STUD_NO">학번</label>
-            <input type="text" id="STUD_NO" name="STUD_NO"><br>
-          
-            <label for="CSL_EMAIL">답변 수신 메일</label>
-            <input type="email" id="CSL_EMAIL" name="CSL_EMAIL"><br>
-            
-            <label for="counselingCategory">문의</label>
-            <select id="counselingCategory" name="CSL_CATEGORY" onchange="showForm()">
-                <option value="">문의 유형을 선택하세요</option>
-                <option value="가입">가입 문의</option>
-                <option value="탈퇴">탈퇴 문의</option>
-                <option value="아이디 찾기">아이디 찾기 문의</option>
-                <option value="비밀번호 찾기">비밀번호 찾기 문의</option>
-                <option value="상담 이용 문의">상담 이용 문의</option>
-            </select><br>
-            
-            <label for="CSL_TITLE">제목</label><br>
-            <input type="text" id="CSL_TITLE" name="CSL_TITLE"><br>
-            
-            <label for="CSL_CONTENT">문의 내용</label><br>
-            <textarea id="CSL_CONTENT" name="CSL_CONTENT"></textarea><br><br>
-            
-            <input type="submit" value="보내기">
-        </form>
-    </div>
-        <div>
-        <button id="inquiryBtn" onclick="showInquiryForm()">문의 등록</button>
-    </div>
-    <script>
-        function showInquiryForm() {
-            document.getElementById("inquiryForm").style.display = "block";
-            document.getElementById("inquiryHistory").style.display = "none";
-        }
-        
-        function validateForm() {
-            var studNo = document.getElementById("STUD_NO").value;
-            var email = document.getElementById("CSL_EMAIL").value;
-            var category = document.getElementById("counselingCategory").value;
-            var title = document.getElementById("CSL_TITLE").value;
-            var content = document.getElementById("CSL_CONTENT").value;
-            
-            if (studNo == "" || email == "" || category == "" || title == "" || content == "") {
-                alert("필수 입력 필드를 작성하세요");
-                return false;
-            }
-            return true;
-        }
-    </script>
+	<h2>1:1 문의 하기</h2>
+	<img id="myImg" src="/image/ono.jpg">
+	<div class="guide_wrap">
+		<ul>
+			<li class="first">접수가 완료 되면 접수 대기 상태가 되며, 상담 신청 완료시 마이페이지 -> 1:1
+				문의 내역에서 확인 할 수 있습니다.</li>
+		</ul>
+	</div>
+	<div id="inquiryForm">
+		<form action="/receptioncomplete" method="post"
+			onsubmit="return validateForm()">
+			<label for="STUD_NO">학번</label> <input type="text" id="STUD_NO"
+				name="STUD_NO"><br> <label for="CSL_EMAIL">답변
+				수신 메일</label> <input type="email" id="CSL_EMAIL" name="CSL_EMAIL"><br>
+
+			<label for="counselingCategory">문의</label> <select
+				id="counselingCategory" name="CSL_CATEGORY" onchange="showForm()">
+				<option value="">문의 유형을 선택하세요</option>
+				<option value="가입">가입 문의</option>
+				<option value="탈퇴">탈퇴 문의</option>
+				<option value="아이디 찾기">아이디 찾기 문의</option>
+				<option value="비밀번호 찾기">비밀번호 찾기 문의</option>
+				<option value="상담 이용 문의">상담 이용 문의</option>
+			</select><br> <label for="CSL_TITLE">제목</label><br> <input
+				type="text" id="CSL_TITLE" name="CSL_TITLE"><br> <label
+				for="CSL_CONTENT">문의 내용</label><br>
+			<textarea id="CSL_CONTENT" name="CSL_CONTENT"></textarea>
+			<br>
+			<br> <input type="submit" value="보내기">
+		</form>
+	</div>
+	<div>
+		<button id="inquiryBtn" onclick="showInquiryForm()">문의 등록</button>
+	</div>
+	<script>
+		function showInquiryForm() {
+			document.getElementById("inquiryForm").style.display = "block";
+			document.getElementById("inquiryHistory").style.display = "none";
+		}
+
+		function validateForm() {
+			var studNo = document.getElementById("STUD_NO").value;
+			var email = document.getElementById("CSL_EMAIL").value;
+			var category = document.getElementById("counselingCategory").value;
+			var title = document.getElementById("CSL_TITLE").value;
+			var content = document.getElementById("CSL_CONTENT").value;
+
+			if (studNo == "" || email == "" || category == "" || title == ""
+					|| content == "") {
+				alert("필수 입력 필드를 작성하세요");
+				return false;
+			}
+			return true;
+		}
+	</script>
 </body>
 </html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문의 내역 확인</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">문의 내역 확인</h1>
+        <div id="inquiryList" class="mt-4">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">번호</th>
+                        <th scope="col">문의 종류</th>
+                        <th scope="col">제목</th>
+                        <th scope="col">날짜</th>
+                        <th scope="col">답변 상태</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="inquiry : ${inquiries}" class="inquiry-row" data-inquiry-id="${inquiry.id}">
+                        <td th:text="${inquiry.CSL_NO}"></td>
+                        <td th:text="${inquiry.CSL_CATEGORY}"></td>
+                        <td th:text="${inquiry.CSL_TITLE}"></td>
+                        <td th:text="${inquiry.CSL_DATE}"></td>
+                        <td th:text="${inquiry.CSL_STATUS}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 상세 내용 -->
+    <div class="container mt-5">
+        <div th:each="inquiry : ${inquiries}" id="detailView_${inquiry.id}" class="detailView" style="display: none;">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${inquiry.CSL_TITLE}"></h5>
+                    <p class="card-text" th:text="${inquiry.CSL_CONTENT}"></p>
+                    <button class="btn btn-primary" id="replyButton">답글 달기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // 문의 내역 행을 클릭할 때 상세 내용을 보여주는 이벤트 리스너 추가
+            $('.inquiry-row').click(function () {
+                // 기존에 보여지고 있는 상세 내용 숨기기
+                $('.detailView').hide();
+
+                // 클릭한 행의 데이터 가져오기
+                var inquiryId = $(this).data('inquiry-id');
+
+                // 해당 행에 대한 상세 내용 보이기
+                $('#detailView_' + inquiryId).show();
+            });
+
+            // 답글 달기 버튼 클릭 이벤트 처리
+            $('#replyButton').click(function () {
+                // 답글 달기 기능 추가
+                // 추가적인 JavaScript 코드를 작성하여 답글 작성 폼을 처리할 수 있습니다.
+            });
+        });
+    </script>
+
+</body>
+
+</html>

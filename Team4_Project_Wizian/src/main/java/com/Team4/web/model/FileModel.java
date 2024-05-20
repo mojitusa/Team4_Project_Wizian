@@ -2,11 +2,13 @@ package com.Team4.web.model;
 
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 public class FileModel {
 
-	int file_no, file_sn;
-	long file_sz;
-	String actl_file_nm, uuid_file_Nm, file_path_nm, file_extn_nm;
+	private int file_no, file_sn;
+	private long file_sz;
+	private String actl_file_nm, uuid_file_Nm, file_path_nm, file_extn_nm;
 }

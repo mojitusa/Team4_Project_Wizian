@@ -28,8 +28,6 @@ public class Stud_info {
 	
 	private String C_CD;
 	
-	private String USER_NO;
-	
 	private String STUD_NM;
 
 }

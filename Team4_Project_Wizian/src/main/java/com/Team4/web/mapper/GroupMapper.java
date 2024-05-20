@@ -14,11 +14,19 @@ public interface GroupMapper {
 	List<GroupModel> getCategory();
 
 	List<Map<String, Object>> getgcList();
+	
+	List<Map<String, Object>> getgcListWithSearch(Map<String, Object> searchInfo);
 
 	List<Map<String, Object>> getproDetail(int procd);
 
 	int insertApply(Map<String, Object> applyInfo);
 
 	int checkDuplicate(Map<String, Object> applyInfo);
+
+	Map<String, Object> getProgramDates(String proCode);
+	
+	int deleteApply(Map<String, Object> applyInfo);
+
+	Map<String, Object> getProgramCancelDate(String proCode);
 
 }

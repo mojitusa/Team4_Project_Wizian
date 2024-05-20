@@ -30,9 +30,9 @@
 </head>
 
 <body class="index-page">
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div th:replace="../templates/fragments/header"></div>
-  </header>
+	<header class="header">
+		<div th:replace="~{../templates/fragments/header}"></div></div>
+	</header>
   
   <main class="groupBox">
     <section id="groupSection">
@@ -79,7 +79,7 @@
 					    	<button id="listBtn" style="margin-left: 10px; width: 100px; height: 40px;">목 록</button>
 				    	</a>
 				    </div>
-					<div style="text-align: right;" th:if="${pd.NOPE > pd.APPLY_CNT}">
+					<div style="text-align: right;" th:if="${session.username != null && pd.NOPE > pd.APPLY_CNT}">
 					    <a th:href="@{./groupApplyPage(no=${pd.PRGRM_CD})}">
 					        <button id="applyBtn" style="margin-right: 10px; width: 100px; height: 40px;">접 수</button>
 					    </a>
@@ -93,7 +93,7 @@
 </body>
 
   <footer id="footer">
-    <div th:replace="../templates/fragments/footer"></div>
+    <div th:replace="~{../templates/fragments/footer}"></div></div>
   </footer>
 
 </html>

@@ -3,12 +3,28 @@
 
 <mapper namespace="LoginMapper">
 
-   	<select id="check" resultType="int" parameterType="map">
-    	SELECT COUNT(*) FROM USERS WHERE user_no = #{userNo} AND pw = #{pw}
+	<select id="check" resultType="int" parameterType="map">
+		SELECT
+		COUNT(*) FROM USERS WHERE user_no = #{userNo} AND pw = #{pw}
 	</select>
-	
-	<select id="getName" resultType="String" parameterType="String">
-    	SELECT s.stud_nm FROM STUD_INFO s join USERS u on s.stud_no = u.user_no  WHERE u.user_no = #{userNo}
+
+	<select id="getName" resultType="map" parameterType="String">
+		SELECT s.stud_nm, s.stud_no, u.email, s.mbr_telno, d.C_NMK, s.ST
+		FROM STUD_INFO s
+		JOIN USERS u ON s.stud_no = u.user_no
+		JOIN DEPT_CD d ON s.c_cd = d.c_cd
+		WHERE u.user_no = #{userNo}
 	</select>
- 
+	<select id="getInfoPro" resultType="map" parameterType="String">
+		SELECT s.PF_TELNO, s.PF_CS_PART, s.PF_CS_PART_DETAIL, s.PF_PLC_NM, s.C_CD, s.PF_SC_PART,s.PF_NO
+		FROM PROFESSER s
+		JOIN USERS u ON s.PF_NO = u.user_no
+		WHERE u.user_no = #{userNo}
+	</select>
+		<select id="getInfoCounselor" resultType="map" parameterType="String">
+		SELECT s.CSL_DETAIL, s.C_CD, s.USER_NO
+		FROM COUNSELOR s
+		JOIN USERS u ON s.USER_NO = u.user_no
+		WHERE u.user_no = #{userNo}
+	</select>
 </mapper>

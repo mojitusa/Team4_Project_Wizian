@@ -3,14 +3,17 @@ package com.Team4.web.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.Team4.web.model.FileModel;
+
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class MenuMovingController {
-
-	@GetMapping("/index")
-	public String showIndexPage() {
-		return "/index";
-	}
 	
+	@GetMapping("/test")
+	public String showTestPage() {
+		return "content/test";
+	}
 	@GetMapping("/ec")
 	public String showEcPage() {
 		return "content/ec";
@@ -40,9 +43,5 @@ public class MenuMovingController {
 	public String showLoginPage() {
 		return "/login";
 	}
-	
-	@GetMapping("/myPage")
-	public String showMyPage() {
-		return "/myPage";
-	}
+
 }

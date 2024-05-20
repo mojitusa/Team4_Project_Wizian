@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<title>문의 내역</title>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<!-- jQuery UI -->
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+<link href="/css/inquiryhistory.css" rel="stylesheet" />
+
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
+<script
+	src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
+<script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
+</head>
+<body>
+	<div id="grid"></div>
+</body>
+<script>
+
+const grid = new tui.Grid({
+    el : document.getElementById('grid'),
+    // rowHeaders : [ 'rowNum' ],
+    pageOptions : {
+       useClient : true,
+       perPage : 15
+    },
+    scrollX : false,
+    scrollY : false,
+    columns : [ {
+       header : '번호',
+       name : 'CSL_NO',
+       width: 50
+    }, {
+       header : '제목',
+       name : 'CSL_TITLE',
+       width: 350,
+    }, {
+       header : '내용',
+       name : 'CSL_CONTENT',
+       // width: 400
+    }]
+ });
+
+ 
+ $(document).ready(function() {
+    $.ajax({
+       url : "/inquiryhistory",
+       type : "get",
+       dataType : "JSON",
+       contentType : "application/json; charset=UTF-8",
+       success : function(result) {
+          grid.resetData(result);
+       }
+    });
+ });
+
+</script>
+
+</html>

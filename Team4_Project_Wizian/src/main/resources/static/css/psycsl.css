@@ -25,6 +25,13 @@
 	font-weight: bold;
 }
 
+#underline {
+	height: 2px;
+	width: 60px;
+	border: 1px solid orange;
+	margin-top: 15px;
+}
+
 #psy_csl_top_info {
 	margin-top: 50px;
 	margin-left: 40px;
@@ -141,14 +148,29 @@
 
 #next-page-button {
     display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff;
+    padding: 12px 22px;
+    background-color: #4895ef;
     color: #fff;
     text-decoration: none;
+    border: none; /* 경계선 제거 */
     border-radius: 5px;
 }
 
 #next-page-button:hover {
     background-color: #0056b3;
 }
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+label {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px; /* 체크 박스와 레이블 사이의 간격 조절 */
+    margin-bottom: 0 !important;
+}
+
 
