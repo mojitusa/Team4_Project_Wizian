@@ -50,7 +50,7 @@ public class MyPageController {
 		if (httpSession.getAttribute("userNo") == null) {
 			return "/login";
 		}
-		model.addAttribute("student", psyCslService.getStudentByUserNo("1100000001"));
+		//model.addAttribute("student", psyCslService.getStudentByUserNo("1100000001"));
 		return "content/updatePrivacy";
 	}
 	

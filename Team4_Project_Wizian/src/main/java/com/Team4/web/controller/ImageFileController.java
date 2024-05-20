@@ -19,7 +19,7 @@ public class ImageFileController {
     @Autowired
     private ImageFileService imageFileService;
 
-    @GetMapping("/")
+    @GetMapping("/image")
     public String index(Model model) {
         model.addAttribute("files", imageFileService.getAllFiles());
         return "index";
