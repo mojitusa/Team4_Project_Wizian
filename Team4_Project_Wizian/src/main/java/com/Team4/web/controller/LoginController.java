@@ -28,6 +28,8 @@ public class LoginController {
         String userPrefix = id.substring(0, 2);
         switch (userPrefix) {
             case "10":
+            	session.invalidate();
+            	System.out.println("동작확인");
                 return "/admin/admin";
             case "11":
             	if (loggedIn && id.toString().substring(0, 2).equals("11")) {
@@ -45,6 +47,13 @@ public class LoginController {
             		session.setAttribute("C_NMK", C_NMK);
             		session.setAttribute("ST", ST);
             		session.setAttribute("SE_CD", userPrefix);
+            		System.out.println("User Info:" + userInfo);
+                    System.out.println("Name: " + name);
+                    System.out.println("User No: " + userNo);
+                    System.out.println("Email: " + email);
+                    System.out.println("Phone Number: " + mbr_telno);
+                    System.out.println("C_NMK: " + C_NMK);
+                    System.out.println("ST: " + ST);
             		return "redirect:/index";
             	} else {
             		model.addAttribute("errorMessage", "입력한 정보가 올바르지 않습니다. 다시 시도해주세요.");

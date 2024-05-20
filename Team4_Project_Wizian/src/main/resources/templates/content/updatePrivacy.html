@@ -29,80 +29,76 @@
   <link rel="stylesheet" href="./css/psycslapply.css" />  
 </head>
 <style>
-	#update{
+	#updateBtn{
 		float: right;
 		margin-top: 10px;
 	}
 	
 </style>
+  <script>
+  </script>
 <body class="index-page">
-  
   <main class="privacy">
     <section id="privacySection">
       <div class="container">
         <div id="top">
-	        	<p class="title_text">
-	        		나의 정보
-	        	</p>
-	        	<form action="/update" method="post">
-	        	<div id="top_table">
-	        		<div class="table_row">
-	        			<div class="table_row_colored">
-	        				이름
-	        			</div>
-	        			<div class="table_row_uncolored" id="student_name" th:text=${student.name}>
-	        			</div>
-	        			<div class="table_row_colored2">
-	        				학번
-	        			</div>
-	        			<div class="table_row_uncolored" id="student_no" th:text=${student.users.user_no}>
-	        			</div>
-	        		</div>
-	        		<div class="table_row">
-	        			<div class="table_row_colored">
-	        				생년월일
-	        			</div>
-	        			<div class="table_row_uncolored" id="student_birth" th:text=${student.birth}>
-	        			</div>
-	        			<div class="table_row_colored2">
-	        				소속
-	        			</div>
-	        			<div class="table_row_uncolored" id="student_cCd" th:text=${student.cCd}>
-	        			</div>
-	        		</div>
-	        		<div class="table_row">
-	        			<div class="table_row_colored">
-	        				<sapn style="color: red">* </sapn>연락처(H.P)
-	        			</div>
-	        			<div class="table_row_uncolored" >
-					        <form id="phoneNumberForm">
-					            <input type="text" id="phoneNumberInput" name="phoneNumber" th:value="${student.telNo}">
-					        </form>	        				
-	        			</div>
-	        			<div class="table_row_colored2">
-	        				<sapn style="color: red">* </sapn>E-Mail
-	        			</div>
-	        			<div class="table_row_uncolored">
-					        <form id="emailForm">
-					            <input type="text" id="email" name="email" th:value="${student.users.email}">
-					        </form>	        				
-	        			</div>
-	        		</div>
-	        		<div class="table_row">
-	        			<div class="table_row_colored">
-	        				재학종류
-	        			</div>
-	        			<div class="table_row_uncolored" id="student_st" th:text=${student.st}>
-	        			</div>
-	        			<div class="table_row_colored2">
-	        				휴학기간
-	        			</div>
-	        			<div class="table_row_uncolored">
-	        				-
-	        			</div>
-	        		</div>
-	        	</div>
-	        	<button id = "update" class="btn btn-primary" type="submit">수정하기</button>
+	        	<p class="title_text">나의 정보</p>
+	        	<form id="updateForm" action="/updatePrivacy" method="post">
+		        	<div id="top_table">
+		        		<div class="table_row">
+		        			<div class="table_row_colored">
+		        				이름
+		        			</div>
+		        			<div class="table_row_uncolored" id="student_name" th:text=${student.name}>
+		        			</div>
+		        			<div class="table_row_colored2">
+		        				학번
+		        			</div>
+		        			<input type="hidden" name="stud_no" th:value="${student.users.user_no}">
+		        			<div class="table_row_uncolored" id="student_no" th:text=${student.users.user_no}>
+		        			</div>
+		        		</div>
+		        		<div class="table_row">
+		        			<div class="table_row_colored">
+		        				생년월일
+		        			</div>
+		        			<div class="table_row_uncolored" id="student_birth" th:text=${student.birth}>
+		        			</div>
+		        			<div class="table_row_colored2">
+		        				소속
+		        			</div>
+		        			<div class="table_row_uncolored" id="student_cCd" th:text=${student.cCd}>
+		        			</div>
+		        		</div>
+		        		<div class="table_row">
+		        			<div class="table_row_colored">
+		        				<sapn style="color: red">* </sapn>연락처(H.P)
+		        			</div>
+		        			<div class="table_row_uncolored" >
+						            <input type="text" id="phoneNumberInput" name="phoneNumber" th:value="${student.telNo}">
+		        			</div>
+		        			<div class="table_row_colored2">
+		        				<sapn style="color: red">* </sapn>E-Mail
+		        			</div>
+		        			<div class="table_row_uncolored">
+						            <input type="text" id="email" name="email" th:value="${student.users.email}">
+		        			</div>
+		        		</div>
+		        		<div class="table_row">
+		        			<div class="table_row_colored">
+		        				재학종류
+		        			</div>
+		        			<div class="table_row_uncolored" id="student_st" th:text=${student.st}>
+		        			</div>
+		        			<div class="table_row_colored2">
+		        				휴학기간
+		        			</div>
+		        			<div class="table_row_uncolored">
+		        				-
+		        			</div>
+		        		</div>
+		        	</div>
+	        	<button id="updateBtn" class="btn btn-primary" type="submit">수정하기</button>
 	        </form>
 	        </div>
       </div>
@@ -110,5 +106,33 @@
   </main>
   
 </body>
-
+<script>
+    $(document).ready(function () {
+      $('#updateBtn').click(function(event) {
+        event.preventDefault(); // 기본 폼 제출 동작 방지
+        $.ajax({
+          url: '/updatePrivacy',
+          type: 'post',
+          data: $('#updateForm').serialize(),
+          success: function(response) {
+            // 성공 시 SweetAlert2를 사용하여 알림 표시
+            Swal.fire({
+              title: '알림',
+              text: response,
+              icon: 'success'
+            });
+          },
+          error: function(xhr, status, error) {
+            // 오류 발생 시 SweetAlert2를 사용하여 알림 표시
+            Swal.fire({
+              title: '오류',
+              text: '프라이버시 정보 업데이트에 실패했습니다.',
+              icon: 'error'
+            });
+            console.error(xhr.responseText);
+          }
+        });
+      });
+    });
+  </script>
 </html>
