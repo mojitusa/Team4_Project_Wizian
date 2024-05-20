@@ -33,7 +33,7 @@ public class LoginController {
             	if (loggedIn && id.toString().substring(0, 2).equals("11")) {
             		Map<String, Object> userInfo = loginService.getName(id);
             		String name = (String) userInfo.get("stud_nm");
-            		String studNo = (String) userInfo.get("stud_no");
+            		String userNo = (String) userInfo.get("stud_no");
             		String realStudNo = (String) userInfo.get("real_stud_no");
             		String email = (String) userInfo.get("email");
             		String mbr_telno = (String) userInfo.get("mbr_telno");
