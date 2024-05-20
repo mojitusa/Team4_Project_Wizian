@@ -15,11 +15,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "USERS")
-public class Users {
+public class UsersEntity {
 	
 	@Id
 	@Column(name = "user_no")
-	private String userno;
+	private String userNo;
 	
 	private String se_cd;
 	

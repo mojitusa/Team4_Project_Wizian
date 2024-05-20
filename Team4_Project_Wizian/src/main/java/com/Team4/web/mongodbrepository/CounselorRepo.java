@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
 import com.Team4.web.mongodbclass.Counselor;
-import com.Team4.web.mongodbclass.Users;
+import com.Team4.web.mongodbclass.UsersMongo;
 
 public interface CounselorRepo extends MongoRepository<Counselor, String>{
 
@@ -12,6 +12,6 @@ public interface CounselorRepo extends MongoRepository<Counselor, String>{
 	Counselor findByCslLoc(String cslLoc);
     
     // users 필드를 기반으로 Counselor를 검색
-    Counselor findByUsers(Users users);
+    Counselor findByUsers(UsersMongo users);
     
 }

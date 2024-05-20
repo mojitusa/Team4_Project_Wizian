@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.Team4.web.mongodbclass.CslState;
-import com.Team4.web.mongodbclass.Student;
-import com.Team4.web.mongodbclass.Users;
+import com.Team4.web.mongodbclass.StudentMongo;
+import com.Team4.web.mongodbclass.UsersMongo;
 import com.Team4.web.service.MongoDbService;
 
 @Controller
@@ -19,7 +19,7 @@ public class MongoDbTestController {
 	MongoDbService mongoDbService;
 
 	@Autowired
-	Users users;
+	UsersMongo users;
 	
 	@GetMapping("/list2")
 	public String mdbList() {
