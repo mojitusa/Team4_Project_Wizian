@@ -17,10 +17,7 @@
 		<div>
 			<img id="logo" src="/image/logo.jpg">
 		</div>
-		<div class="ml-auto"
-			th:if="${session.userNo == null}">
-			<a class="btn-getstarted" href="/login">로그인</a>
-		</div>
+
 		<div>
 			<div th:if="${session.userNo != null}" id="session" class="d-flex">
 				<form action="/logout" method="post">

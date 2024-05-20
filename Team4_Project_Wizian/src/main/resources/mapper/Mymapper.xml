@@ -11,7 +11,8 @@
 
 		UNION ALL
 
-		SELECT COUNT(*) AS count
+		SELECT COUNT(*) AS
+		count
 		FROM PRGRM_APP
 		WHERE SUBSTRING(STUD_NO, 1, 2) = #{secd}
 
@@ -19,7 +20,8 @@
 
 		SELECT COUNT(*) AS count
 		FROM PROFESSER_CONSULTATION
-		WHERE SUBSTRING(STUD_NO, 1, 2) = #{secd}
+		WHERE
+		SUBSTRING(STUD_NO, 1, 2) = #{secd}
 
 		UNION ALL
 
@@ -28,4 +30,14 @@
 		WHERE SUBSTRING(STUD_NO, 1, 2) = #{secd}
 		) AS cc;
 	</select>
+
+	<update id="updatePrivacy" parameterType="map">
+		UPDATE STUD_INFO AS si
+		INNER JOIN USERS AS u ON si.stud_no = u.user_no
+		SET si.MBR_TELNO = #{phoneNumber},
+		u.email = #{email}
+		WHERE si.stud_no = #{studNo}
+	</update>
+
+
 </mapper>
