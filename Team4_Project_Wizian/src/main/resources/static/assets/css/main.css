@@ -12,7 +12,10 @@
 --------------------------------------------------------------*/
 /* Fonts */
 :root {
-	--default-font: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--default-font: "Open Sans", system-ui, -apple-system, "Segoe UI",
+		Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans",
+		sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+		"Noto Color Emoji";
 	--heading-font: "Montserrat", sans-serif;
 	--nav-font: "Poppins", sans-serif;
 }
@@ -70,12 +73,7 @@ a:hover {
 	text-decoration: none;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
 	color: var(--heading-color);
 	font-family: var(--heading-font);
 }
@@ -97,13 +95,13 @@ h6 {
 }
 
 .header {
-    color: white;
-    background-color: #222;
-    transition: all 0.5s;
-    width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
-    border-radius: 15px; /* 모든 모서리를 둥글게 만듭니다. */
+	color: white;
+	background-color: #222;
+	transition: all 0.5s;
+	width: 100%;
+	max-width: 1440px;
+	margin: 0 auto;
+	border-radius: 15px; /* 모든 모서리를 둥글게 만듭니다. */
 }
 
 #myPage {
@@ -137,8 +135,7 @@ h6 {
 	padding-left: 3px;
 }
 
-.header .btn-getstarted,
-.header .btn-getstarted:focus {
+.header .btn-getstarted, .header .btn-getstarted:focus {
 	color: white;
 	background: var(--accent-color);
 	font-size: 14px;
@@ -148,23 +145,20 @@ h6 {
 	transition: 0.3s;
 }
 
-.header .btn-getstarted:hover,
-.header .btn-getstarted:focus:hover {
+.header .btn-getstarted:hover, .header .btn-getstarted:focus:hover {
 	color: white;
 	background: rgba(var(--accent-color-rgb), 0.85);
 }
 
-@media (max-width: 1200px) {
+@media ( max-width : 1200px) {
 	.header .logo {
 		order: 1;
 	}
-
 	.header .btn-getstarted {
 		order: 2;
 		margin: 0 15px 0 0;
 		padding: 6px 20px;
 	}
-
 	.header .navmenu {
 		order: 3;
 	}
@@ -198,12 +192,10 @@ h6 {
 # Navigation Menu
 --------------------------------------------------------------*/
 /* Navmenu - Desktop */
-@media (min-width: 1200px) {
-
+@media ( min-width : 1200px) {
 	.navmenu {
 		padding: 0;
 	}
-
 	.navmenu ul {
 		margin: 0;
 		padding: 0;
@@ -211,13 +203,10 @@ h6 {
 		list-style: none;
 		align-items: center;
 	}
-
 	.navmenu li {
 		position: relative;
 	}
-
-	.navmenu a,
-	.navmenu a:focus {
+	.navmenu a, .navmenu a:focus {
 		color: white;
 		padding: 18px 15px;
 		font-size: 16px;
@@ -229,25 +218,18 @@ h6 {
 		white-space: nowrap;
 		transition: 0.3s;
 	}
-
-	.navmenu a i,
-	.navmenu a:focus i {
+	.navmenu a i, .navmenu a:focus i {
 		font-size: 12px;
 		line-height: 0;
 		margin-left: 5px;
 		transition: 0.3s;
 	}
-
 	.navmenu li:last-child a {
 		padding-right: 0;
 	}
-
-	.navmenu li:hover>a,
-	.navmenu .active,
-	.navmenu .active:focus {
+	.navmenu li:hover>a, .navmenu .active, .navmenu .active:focus {
 		color: red;
 	}
-
 	.navmenu .dropdown ul {
 		margin: 0;
 		padding: 10px 0;
@@ -263,40 +245,32 @@ h6 {
 		z-index: 99;
 		box-shadow: 0px 0px 30px rgba(var(--default-color-rgb), 0.15);
 	}
-
 	.navmenu .dropdown ul li {
 		min-width: 200px;
 	}
-
 	.navmenu .dropdown ul a {
 		padding: 10px 20px;
 		font-size: 15px;
 		text-transform: none;
 		color: var(--nav-dropdown-color);
 	}
-
 	.navmenu .dropdown ul a i {
 		font-size: 12px;
 	}
-
-	.navmenu .dropdown ul a:hover,
-	.navmenu .dropdown ul .active:hover,
-	.navmenu .dropdown ul li:hover>a {
+	.navmenu .dropdown ul a:hover, .navmenu .dropdown ul .active:hover,
+		.navmenu .dropdown ul li:hover>a {
 		color: var(--nav-dropdown-hover-color);
 	}
-
 	.navmenu .dropdown:hover>ul {
 		opacity: 1;
 		top: 100%;
 		visibility: visible;
 	}
-
 	.navmenu .dropdown .dropdown ul {
 		top: 0;
 		left: -90%;
 		visibility: hidden;
 	}
-
 	.navmenu .dropdown .dropdown:hover>ul {
 		opacity: 1;
 		top: 0;
@@ -360,8 +334,7 @@ h6 {
 	padding: 5px;
 }
 
-.footerContent .menu,
-.footerContent div>div {
+.footerContent .menu, .footerContent div>div {
 	padding: 5px;
 	/* 내부의 각각의 요소들에도 padding을 적용 */
 }
@@ -460,8 +433,7 @@ h6 {
 /*--------------------------------------------------------------
 # Global Sections
 --------------------------------------------------------------*/
-section,
-.section {
+section, .section {
 	color: var(--default-color);
 	background-color: var(--background-color);
 	padding: 30px 0;
@@ -469,10 +441,8 @@ section,
 	overflow: clip;
 }
 
-@media (max-width: 1199px) {
-
-	section,
-	.section {
+@media ( max-width : 1199px) {
+	section, .section {
 		scroll-margin-top: 64px;
 	}
 }
@@ -492,8 +462,7 @@ section,
 	position: relative;
 }
 
-.section-title h2:before,
-.section-title h2:after {
+.section-title h2:before, .section-title h2:after {
 	content: "";
 	width: 50px;
 	height: 2px;
@@ -513,7 +482,6 @@ section,
 	margin-bottom: 0;
 }
 
-
 /*--------------------------------------------------------------
 # Main Section
 --------------------------------------------------------------*/
@@ -526,6 +494,7 @@ section,
 }
 
 #myPage {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
 	position: absolute;
 	right: 5px;
 }
@@ -539,15 +508,12 @@ section,
 	flex: 1;
 }
 
-.cardWrap {
-	display: flex;
-	flex-wrap: wrap;
-}
-
 .card {
+	width: calc(33.333% - 20px);
+	padding: 5px;
+	max-width: 250px;
 	margin: 10px;
 	flex: 1 1 calc(33.333% - 20px);
-	/* 한 줄에 3개의 카드 */
 }
 
 .card img {
@@ -565,30 +531,28 @@ section,
 	padding: 0 24px;
 }
 
-.card {
-	width: calc(33.333% - 20px);
-	/* 한 줄에 3개의 카드가 나오도록 설정 */
-	padding: 5px;
-	margin: 5px;
-	max-width: 250px;
-	/* 카드의 최대 너비 설정 */
-}
-
-@media (max-width: 768px) {
+@media ( max-width : 768px) {
 	.card {
 		flex: 1 1 calc(50% - 20px);
 		/* 작은 화면에서는 한 줄에 2개의 카드 */
 	}
 }
 
-#mainSection {
-	min-height: 88.7vh
+#carouselExampleDark {
+	max-width: 1000px;
+	padding: 10px;
+	margin-bottom: 10px;
+	max-height: 500px;
 }
 
-#myPage {
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
-	position: absolute;
-	right: 5px;
+.carousel-item img {
+	width: 100%;
+	height: auto;
+	max-height: 500px;
+}
+
+#mainSection {
+	min-height: 88.7vh
 }
 
 /* 추가 스타일이 필요할 경우 */
@@ -647,8 +611,8 @@ section,
 	border: none;
 }
 
-.hero .sign-up-form .form-control:active,
-.hero .sign-up-form .form-control:focus {
+.hero .sign-up-form .form-control:active, .hero .sign-up-form .form-control:focus
+	{
 	outline: none;
 	box-shadow: none;
 }
@@ -666,11 +630,10 @@ section,
 	background-color: rgba(var(--accent-color-rgb), 0.9);
 }
 
-@media (max-width: 768px) {
+@media ( max-width : 768px) {
 	.hero h2 {
 		font-size: 32px;
 	}
-
 	.hero p {
 		font-size: 18px;
 	}

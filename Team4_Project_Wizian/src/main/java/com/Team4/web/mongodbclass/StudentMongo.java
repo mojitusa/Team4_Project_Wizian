@@ -14,14 +14,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Component //빈으로 연결
-public class Student{
+public class StudentMongo{
 	
 
     @Id
     private String id; // 몽고DB의 _id와 매핑될 필드
     
     @DBRef
-    private Users users;
+    private UsersMongo users;
 
 	private String st;
     private String cCd;

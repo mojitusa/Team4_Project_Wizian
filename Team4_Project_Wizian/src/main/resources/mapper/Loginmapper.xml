@@ -9,9 +9,9 @@
 	</select>
 
 	<select id="getName" resultType="map" parameterType="String">
-		SELECT s.stud_nm, s.stud_no, u.email, s.mbr_telno, d.C_NMK, s.ST
+		SELECT u.user_no, s.stud_nm, s.stud_no, u.email, s.mbr_telno, d.C_NMK, s.ST
 		FROM STUD_INFO s
-		JOIN USERS u ON s.stud_no = u.user_no
+		JOIN USERS u ON s.user_no = u.user_no
 		JOIN DEPT_CD d ON s.c_cd = d.c_cd
 		WHERE u.user_no = #{userNo}
 	</select>

@@ -27,7 +27,7 @@ public class IndexController {
 	    }
 
 	    int counselCount = indexService.getCoun(secdInt);
-
+	    model.addAttribute("isIndex", true);
 	    model.addAttribute("counselCount", counselCount);
 	    return "/index";
 	}
