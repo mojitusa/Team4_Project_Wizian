@@ -25,12 +25,14 @@ public class LoginController {
 	    if (loggedIn) {
 	    	Map<String, Object> userInfo = loginService.getName(id);
             String name = (String) userInfo.get("stud_nm");
-            String userNo = (String) userInfo.get("stud_no");
+            String userNo = (String) userInfo.get("user_no");
+            String studNo = (String) userInfo.get("stud_no");
             String email = (String) userInfo.get("email");
             String mbr_telno = (String) userInfo.get("mbr_telno");
             String C_NMK = (String) userInfo.get("C_NMK");
             session.setAttribute("username", name);
             session.setAttribute("userNo", userNo);
+            session.setAttribute("studNo", studNo);
             session.setAttribute("email", email);
             session.setAttribute("mbr_telno", mbr_telno);
             session.setAttribute("C_NMK", C_NMK);
