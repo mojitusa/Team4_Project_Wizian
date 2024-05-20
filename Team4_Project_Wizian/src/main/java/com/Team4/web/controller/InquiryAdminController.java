@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Team4.web.entity.Inquiry;
-import com.Team4.web.entity.InquiryAdmin;
 import com.Team4.web.service.InquiryService;
 
 @Controller
@@ -36,6 +35,12 @@ public class InquiryAdminController {
         Inquiry inquiryDetail = inquiryService.getInquiryById(inquiryId);    
         model.addAttribute("inquiry", inquiryDetail);      
         return "admin/inquiriesdetail";
+    }
+    
+    @PostMapping("/admin/inquiries/{id}/respond")
+    public String respondToInquiry(@PathVariable("id") int inquiryId, @RequestParam("response") String response) {
+        inquiryService.saveResponse(inquiryId, response);
+        return "redirect:/admin/inquiries/detail/" + inquiryId;
     }
     
     
