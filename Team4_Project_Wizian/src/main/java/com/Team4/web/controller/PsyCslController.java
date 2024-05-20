@@ -27,10 +27,12 @@ public class PsyCslController {
 		
         // 세션에서 로그인한 사용자 정보 가져오기
 		Object userNo = session.getAttribute("userNo");
+		System.out.println("userNo : " + userNo);
 		
 		if (userNo != null) {
 			StudentEntity studentEntity =  psyCslService.getJpaStudentByUserNo((String) userNo);
-			model.addAttribute(studentEntity);
+			model.addAttribute("student", studentEntity);
+			System.out.println(studentEntity);
 		} else {
 			 
 		}

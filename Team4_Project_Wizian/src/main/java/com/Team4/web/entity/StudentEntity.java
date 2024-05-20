@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -20,19 +21,23 @@ import lombok.NoArgsConstructor;
 public class StudentEntity {
 	
 	@Id
-	@Column(name = "STUD_NO")
-	private String userNo;
+	@Column(name = "USER_NO")
+	private String userNoInStudent;
 	
     @OneToOne
-    @JoinColumn(name = "STUD_NO", referencedColumnName = "USER_NO") // 외래 키 및 참조할 엔티티의 기본 키 지정
+    @JoinColumn(name = "USER_NO") // 외래 키 및 참조할 엔티티의 기본 키 지정
     private UsersEntity users;
 
+    @Column(name = "STUD_NO")
+    private String studNo;
+    
     @Column(name = "ST")
 	private String st;
     
-    @Column(name = "C_CD")
-    private String cCd;
-    
+    @ManyToOne
+    @JoinColumn(name = "C_CD")
+    private DeptEntity department;
+                
     @Column(name = "STUD_NM")
     private String name;
     

@@ -41,6 +41,7 @@ public class MenuMovingController {
 
 	    if (userNo == null) {
 	        model.addAttribute("isLoggedIn", false);
+	        model.addAttribute("userNo", "null");
 	    } else {
 	        model.addAttribute("isLoggedIn", true);
 	        model.addAttribute("userNo", userNo);

@@ -182,16 +182,18 @@
   	    let checkbox2 = document.getElementById("personal_info_agree_checkbox");
   	    let checkbox3 = document.getElementById("del_info_agree_checkbox");
   	    
-  	  	const isLoggedIn = [[${isLoggedIn}]];
-  	  	const userNo = [[${userNo}]];
-  	  	
-  	    
+        // Thymeleaf 표현식을 JavaScript 변수에 할당
+       	const isLoggedIn = [[${isLoggedIn}]];
+       	const userNo = [[${userNo} != 'null' ? ${userNo} : 'null']] ;
+        
   	    if (!isLoggedIn) {
   	    	alert("로그인 해 주세요.")
   	    	window.location.href = "/"; // 메인 페이지로 이동
   	    	return;
-  	    } else if ( userNo.substring(0, 2) != '11' ) {
+  	    } else if ( userNo !== 'null' && userNo.toString().substring(0, 2) != '11' ) {
   	    	alert("학생만 신청가능합니다.");
+  	    	window.location.href = "/"; // 메인 페이지로 이동
+  	    	return;
   	    }
   	    
         // 모든 체크 박스가 체크되었는지 확인
