@@ -35,7 +35,7 @@ public class MyPageController {
 		if (httpSession.getAttribute("userNo") == null) {
 			return "/login";
 		}
-		return "content/myPageProF";
+		return "profcusl/myPageProF";
 	}
 	@GetMapping("/myPageCounS")
 	public String showMyPageCounS(HttpSession httpSession) {

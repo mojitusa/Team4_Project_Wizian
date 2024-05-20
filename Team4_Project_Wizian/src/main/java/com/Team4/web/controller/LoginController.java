@@ -79,7 +79,7 @@ public class LoginController {
             		session.setAttribute("C_CD", C_CD);
             		session.setAttribute("PF_SC_PART", PF_SC_PART);
             		session.setAttribute("SE_CD", userPrefix);
-            		return "redirect:/index";
+            		return "redirect:/myPageProF";
             	} else {
             		model.addAttribute("errorMessage", "입력한 정보가 올바르지 않습니다. 다시 시도해주세요.");
             		return "/login";
