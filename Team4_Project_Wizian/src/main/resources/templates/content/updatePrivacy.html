@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>중앙 - 상담 시스템</title>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <!-- jQuery UI -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <!-- SweetAlert -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <link rel="stylesheet" href="./css/psycslapply.css" />  
+</head>
+<style>
+	#update{
+		float: right;
+		margin-top: 10px;
+	}
+	
+</style>
+<body class="index-page">
+  
+  <main class="privacy">
+    <section id="privacySection">
+      <div class="container">
+        <div id="top">
+	        	<p class="title_text">
+	        		나의 정보
+	        	</p>
+	        	<form action="/update" method="post">
+	        	<div id="top_table">
+	        		<div class="table_row">
+	        			<div class="table_row_colored">
+	        				이름
+	        			</div>
+	        			<div class="table_row_uncolored" id="student_name" th:text=${student.name}>
+	        			</div>
+	        			<div class="table_row_colored2">
+	        				학번
+	        			</div>
+	        			<div class="table_row_uncolored" id="student_no" th:text=${student.users.user_no}>
+	        			</div>
+	        		</div>
+	        		<div class="table_row">
+	        			<div class="table_row_colored">
+	        				생년월일
+	        			</div>
+	        			<div class="table_row_uncolored" id="student_birth" th:text=${student.birth}>
+	        			</div>
+	        			<div class="table_row_colored2">
+	        				소속
+	        			</div>
+	        			<div class="table_row_uncolored" id="student_cCd" th:text=${student.cCd}>
+	        			</div>
+	        		</div>
+	        		<div class="table_row">
+	        			<div class="table_row_colored">
+	        				<sapn style="color: red">* </sapn>연락처(H.P)
+	        			</div>
+	        			<div class="table_row_uncolored" >
+					        <form id="phoneNumberForm">
+					            <input type="text" id="phoneNumberInput" name="phoneNumber" th:value="${student.telNo}">
+					        </form>	        				
+	        			</div>
+	        			<div class="table_row_colored2">
+	        				<sapn style="color: red">* </sapn>E-Mail
+	        			</div>
+	        			<div class="table_row_uncolored">
+					        <form id="emailForm">
+					            <input type="text" id="email" name="email" th:value="${student.users.email}">
+					        </form>	        				
+	        			</div>
+	        		</div>
+	        		<div class="table_row">
+	        			<div class="table_row_colored">
+	        				재학종류
+	        			</div>
+	        			<div class="table_row_uncolored" id="student_st" th:text=${student.st}>
+	        			</div>
+	        			<div class="table_row_colored2">
+	        				휴학기간
+	        			</div>
+	        			<div class="table_row_uncolored">
+	        				-
+	        			</div>
+	        		</div>
+	        	</div>
+	        	<button id = "update" class="btn btn-primary" type="submit">수정하기</button>
+	        </form>
+	        </div>
+      </div>
+    </section>
+  </main>
+  
+</body>
+
+</html>

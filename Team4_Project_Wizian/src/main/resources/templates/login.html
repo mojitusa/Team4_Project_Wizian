@@ -46,15 +46,13 @@ body {
 </style>
 </head>
 <body>
-	<div th:if="${param.error}">Invalid username and password.</div>
-	<div th:if="${param.logout}">You have been logged out.</div>
-	<div class="error-message" th:if="${errorMessage}">
-		<script th:inline="javascript">
-            /*<![CDATA[*/
-            alert([[${errorMessage}]]);
-            /*]]>*/
-        </script>
-	</div>
+<div class="error-message" th:if="${errorMessage}">
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        alert([[${errorMessage}]]);
+        /*]]>*/
+    </script>
+</div>
 	<div class="card d-flex flex-row">
 		<div class="left-section flex-fill">
 			<h1>로그인</h1>

@@ -2,11 +2,10 @@ package com.Team4.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AsignProfController {
+	
 	
 	@GetMapping("/profcusl")
 	public String profCusl() {
@@ -18,10 +17,9 @@ public class AsignProfController {
 		return "profcusl/calendartest";
 	}
 	
-	@PostMapping("/insertProfCslData")
-	public String insertProfCslData(@RequestParam("eventTime") String time) {
-		System.out.println(time);
-		return "profcusl/profComplite";
+	@GetMapping("/profcusl/profComplite")
+	public String profResult() {
+		return "/profcusl/profComplite";
 	}
 	
 	

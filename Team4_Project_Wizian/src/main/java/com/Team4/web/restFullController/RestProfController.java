@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.Team4.web.entity.Inquiry;
 import com.Team4.web.entity.ProfSchedule;
 import com.Team4.web.entity.Professer;
-import com.Team4.web.service.InquiryService;
+import com.Team4.web.model.ProfCslInsertModel;
+import com.Team4.web.service.ProfCslInsertService;
 import com.Team4.web.service.ProfesserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -22,8 +23,9 @@ public class RestProfController {
 	
 	@Autowired
 	private ProfesserService professerService;
-    @Autowired
-    private InquiryService inquiryService;
+	
+	@Autowired
+	private ProfCslInsertService cslInsertService;
 
 	@PostMapping("/calendarData")
 	@ResponseBody
@@ -37,4 +39,10 @@ public class RestProfController {
 		return professerService.getProfData(pfNo);
 	}
 	
+	//ajax로 디비에 데이터 삽입
+	@PostMapping("/insertProfCslData")
+	@ResponseBody
+    public void insertProfCslData(ProfCslInsertModel profCslInsertModel) {
+		cslInsertService.insertProfCslData(profCslInsertModel);
+    }
 }
