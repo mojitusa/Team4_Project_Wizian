@@ -35,27 +35,20 @@ public class LoginController {
             	if (loggedIn && id.toString().substring(0, 2).equals("11")) {
             		Map<String, Object> userInfo = loginService.getName(id);
             		String name = (String) userInfo.get("stud_nm");
-            		String studNo = (String) userInfo.get("stud_no");
+            		String userNo = (String) userInfo.get("stud_no");
             		String realStudNo = (String) userInfo.get("real_stud_no");
             		String email = (String) userInfo.get("email");
             		String mbr_telno = (String) userInfo.get("mbr_telno");
             		String C_NMK = (String) userInfo.get("C_NMK");
             		String ST = (String) userInfo.get("ST");
             		session.setAttribute("username", name);
-            		session.setAttribute("stud_no", studNo);
+            		session.setAttribute("userNo", userNo);
             		session.setAttribute("real_stud_no", realStudNo);
             		session.setAttribute("email", email);
             		session.setAttribute("mbr_telno", mbr_telno);
             		session.setAttribute("C_NMK", C_NMK);
             		session.setAttribute("ST", ST);
             		session.setAttribute("SE_CD", userPrefix);
-            		System.out.println("User Info:" + userInfo);
-                    System.out.println("Name: " + name);
-                    System.out.println("User No: " + userNo);
-                    System.out.println("Email: " + email);
-                    System.out.println("Phone Number: " + mbr_telno);
-                    System.out.println("C_NMK: " + C_NMK);
-                    System.out.println("ST: " + ST);
             		return "redirect:/index";
             	} else {
             		model.addAttribute("errorMessage", "입력한 정보가 올바르지 않습니다. 다시 시도해주세요.");
@@ -79,7 +72,7 @@ public class LoginController {
             		session.setAttribute("C_CD", C_CD);
             		session.setAttribute("PF_SC_PART", PF_SC_PART);
             		session.setAttribute("SE_CD", userPrefix);
-            		return "redirect:/index";
+            		return "redirect:/myPageProF";
             	} else {
             		model.addAttribute("errorMessage", "입력한 정보가 올바르지 않습니다. 다시 시도해주세요.");
             		return "/login";
