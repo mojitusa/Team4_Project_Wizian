@@ -76,6 +76,7 @@
 						<div id="counLog"></div>
 						<div id="info"></div>
 						<div id="grid"></div>
+						<div id="grid2"></div>
 					</div>
 				</div>
 			</div>
@@ -92,7 +93,6 @@
 				dataType: "JSON",
 				contentType: "application/json; charset=UTF-8",
 				success: function (result) {
-					console.log(result);
 					grid = new tui.Grid({
 						el: document.getElementById('grid'),
 						pageOptions: {
@@ -125,7 +125,6 @@
 						}]
 					});
 					grid.resetData(result);
-					console.log(grid.getData());
 					grid.on('click', ev => {
 						const rowKey = ev.rowKey; // 클릭된 행의 고유한 키 값 추출
 						const rowData = grid.getRow(rowKey); // 클릭된 행의 데이터 가져오기
@@ -168,20 +167,32 @@
 			var dropdownContent = document.getElementById("dropdownOptions");
 			dropdownContent.classList.toggle("show");
 		}
-
 		function loadContent(contentFile) {
-			$.ajax({
-				url: contentFile,
-				type: 'get',
-				success: function (response) {
-					$('#counLog').html(response);
-					$('#grid').hide();
-				},
-				error: function () {
-					$('#counLog').html('<p>콘텐츠를 불러오는 중 오류가 발생했습니다.</p>');
-				}
-			});
+		    fetch(contentFile)
+		        .then(response => {
+		            if (!response.ok) {
+		                throw new Error('Network response was not ok');
+		            }
+		            return response.text();
+		        })
+		        .then(html => {
+		            // 외부 HTML 파일의 내용을 특정 요소에 삽입
+		            document.getElementById("counLog").innerHTML = html;
+
+		            // HTML 파일 안에 포함된 스크립트 실행
+		            const scripts = document.getElementById("counLog").getElementsByTagName("script");
+		            for (let i = 0; i < scripts.length; i++) {
+		                eval(scripts[i].innerText); // 스크립트 실행
+		            }
+
+		            // 그리드 초기화 등의 작업 수행
+		            initializeGrid();
+		        })
+		        .catch(error => {
+		            console.error('There was a problem with the fetch operation:', error);
+		        });
 		}
+		
 
 		function loadInquiryHistory() {
 			$.ajax({

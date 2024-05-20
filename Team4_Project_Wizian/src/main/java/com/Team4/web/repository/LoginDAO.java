@@ -34,7 +34,6 @@ public class LoginDAO {
 	}
 
 	public Map<String, Object> getInfoCounselor(String userNo) {
-		System.out.println("dao동작확인");
 		return sqlSession.selectOne("getInfoCounselor", userNo);
 	}
 

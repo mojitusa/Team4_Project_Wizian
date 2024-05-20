@@ -50,12 +50,9 @@ public class InquiryController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("inquiry"); // inquiry.html 파일로 매핑
 		
-		// 세션에서 STUD_NO 값을 가져옴
         String studNo = (String) session.getAttribute("userNo");
         modelAndView.addObject("studNo", studNo);
         
-		System.out.println("통과확인");
-		// 다른 모델 데이터 추가 가능
 		return modelAndView;
 	}
 
@@ -92,7 +89,7 @@ public class InquiryController {
     @ResponseBody
     public Map<String, Object> inquiryHistoryJson() {
         List<Inquiry> inquiries = inquiryService.getAllInquiries();
-        System.out.println(inquiries);
+        System.out.println("json동작확인" + inquiries);
         Map<String, Object> response = new HashMap<>();
         response.put("inquiries", inquiries);
 
@@ -110,7 +107,6 @@ public class InquiryController {
 
     @GetMapping("/inquiryhistory/detail/{id}")
     public ModelAndView showInquiryDetail(@PathVariable("id") int inquiryId) {
-    	System.out.println("동작확인");
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("inquirydetail"); // inquirydetail.html로 매핑
 
