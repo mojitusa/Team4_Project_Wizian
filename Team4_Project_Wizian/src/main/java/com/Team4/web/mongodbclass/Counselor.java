@@ -20,7 +20,7 @@ public class Counselor{
 	private String id;
 	
 	@DBRef
-	private Users users;
+	private UsersMongo users;
 	
 	private String name;
 	private String c_cd;

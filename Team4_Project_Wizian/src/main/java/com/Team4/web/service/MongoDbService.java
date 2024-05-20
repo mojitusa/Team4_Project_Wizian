@@ -10,16 +10,16 @@ import com.Team4.web.mongodbclass.Academy;
 import com.Team4.web.mongodbclass.AcademyStudent;
 import com.Team4.web.mongodbclass.Counselor;
 import com.Team4.web.mongodbclass.CslSch;
-import com.Team4.web.mongodbclass.Student;
+import com.Team4.web.mongodbclass.StudentMongo;
 import com.Team4.web.mongodbclass.TestClass;
-import com.Team4.web.mongodbclass.Users;
+import com.Team4.web.mongodbclass.UsersMongo;
 import com.Team4.web.mongodbrepository.AcademyRepo;
 import com.Team4.web.mongodbrepository.AcademyStudentRepo;
 import com.Team4.web.mongodbrepository.CounselorCustomRepository;
 import com.Team4.web.mongodbrepository.CounselorRepo;
 import com.Team4.web.mongodbrepository.CslSchRepo;
 import com.Team4.web.mongodbrepository.MongoDbRepo;
-import com.Team4.web.mongodbrepository.StudentRepo;
+import com.Team4.web.mongodbrepository.StudentRepoMongo;
 import com.Team4.web.mongodbrepository.UsersRepo;
 
 import lombok.RequiredArgsConstructor;
@@ -50,17 +50,17 @@ public class MongoDbService {
 	CslSchRepo cslSchRepo;
 	
 	@Autowired
-	StudentRepo studentRepo;
+	StudentRepoMongo studentRepo;
 	
     public List<TestClass> getMdbClassByName(String name) {
         return mRepo.findByName(name);
     }
     
-    public void setUsersClass(Users users) {
+    public void setUsersClass(UsersMongo users) {
     	 usersRepo.save(users);
     }
     
-    public List<Users> getUsersClass() {
+    public List<UsersMongo> getUsersClass() {
     	return usersRepo.findAll();
     }
     
@@ -73,7 +73,7 @@ public class MongoDbService {
 		
 	}
 
-	public Users getMdbClassByUserNo(String userNo) {
+	public UsersMongo getMdbClassByUserNo(String userNo) {
 		return usersRepo.findByUserNo("1110000001");
 	}
 
@@ -94,7 +94,7 @@ public class MongoDbService {
 	}
 
 	public Counselor getCounselorByUserNo(String userNo) {
-		Users users = usersRepo.findByUserNo(userNo);
+		UsersMongo users = usersRepo.findByUserNo(userNo);
 			//System.out.println(users.getUser_no());
 			//System.out.println(couselorCustomRepo.findByUsersUserNo(userNo).getCsl_detail());
 
@@ -114,17 +114,17 @@ public class MongoDbService {
 	}
 
 	public void setStudent() {
-		Users users = new Users();
+		UsersMongo users = new UsersMongo();
 		users.setNo("10000003");
 		users.setSe_cd("50");
 		users.setUser_no("5010000003");
 		
-		Users users2 = new Users();
+		UsersMongo users2 = new UsersMongo();
 		users2.setNo("10000004");
 		users2.setSe_cd("60");
 		users2.setUser_no("6010000004");
 		
-		Student student = new Student();
+		StudentMongo student = new StudentMongo();
 		student.setSt("재학");
 		student.setCCd("888");
 		student.setName("학생1");
@@ -132,7 +132,7 @@ public class MongoDbService {
 		student.setTelNo("12345678");
 		student.setUsers(users);
 		
-		Student student2 = new Student();
+		StudentMongo student2 = new StudentMongo();
 		student2.setSt("재학");
 		student2.setCCd("889");
 		student2.setName("학생2");
@@ -140,12 +140,12 @@ public class MongoDbService {
 		student2.setTelNo("01234567");
 		student2.setUsers(users2);
 		
-		List<Users> usersList = new ArrayList<>();
+		List<UsersMongo> usersList = new ArrayList<>();
 		usersList.add(users);
 		usersList.add(users2);
 		usersRepo.saveAll(usersList);
 		
-		List<Student> studentList = new ArrayList<>();
+		List<StudentMongo> studentList = new ArrayList<>();
 		studentList.add(student);
 		studentList.add(student2);
 		studentRepo.saveAll(studentList);
