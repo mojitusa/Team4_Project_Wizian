@@ -29,7 +29,6 @@ public class LoginController {
         switch (userPrefix) {
             case "10":
             	session.invalidate();
-            	System.out.println("동작확인");
                 return "/admin/admin";
             case "11":
             	if (loggedIn && id.toString().substring(0, 2).equals("11")) {
