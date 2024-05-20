@@ -1,0 +1,218 @@
+@charset "UTF-8";
+
+#main_contaner {
+	/* border: 1px solid green; */	
+	margin: 0 auto;
+}
+
+#top_title {
+	color: #e63946;
+	font-size: 14px;
+	margin-bottom: 40px;
+}
+
+#main_table {
+	border-top: 2px solid black;
+}
+
+div.table {
+    display: table;
+    border-collapse: collapse;
+    margin-bottom: 50px;
+}
+
+.table-header {
+    display: table-header-group;
+    background-color: #f5f5f5;
+}
+
+.table-body {
+    display: table-row-group;
+}
+
+.table-row {
+    display: table-row;
+}
+
+.table-cell {
+    display: table-cell;
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: center;
+    vertical-align: middle; /* 세로 가운데 정렬 */
+}
+
+.cell-left {
+	border-left: none;
+}
+
+.cell-right {
+	border-right: none;
+}
+
+/* Adjust the width of each column */
+.cell-name {
+    width: 15%; /* 15% of the total width */
+}
+
+.cell-field {
+    width: 30%; /* 30% of the total width */
+}
+
+.cell-profile {
+    width: 15%; /* 15% of the total width */
+}
+
+.cell-apply {
+    width: 20%; /* 20% of the total width */
+}
+
+.cell-online {
+    width: 20%; /* 20% of the total width */
+}
+
+/* Pagination styles */
+.pagination {
+    display: flex;
+    justify-content: center; /* 페이지네이션을 가로로 가운데 정렬 */
+    padding-left: 0;
+    list-style: none;
+    border-radius: 0.25rem;
+}
+
+.page-item {
+    margin: 0 3px; /* 페이지 아이템 간의 간격을 추가 */
+}
+
+.page-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}
+
+.page-link:hover {
+    color: #4895ef;
+    text-decoration: none;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.page-item.disabled .page-link {
+    color: #4895ef;
+    pointer-events: none;
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+
+
+/* Optional: Make the table responsive */
+@media screen and (max-width: 768px) {
+    .table-cell {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .table-row {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .table-header {
+        display: none;
+    }
+}
+
+.csl_btn {
+    display: inline-block;
+    padding: 10px 24px;
+    text-decoration: none;
+    border: 1px solid  #4895ef;
+    color:  #4895ef;
+    border-radius: 5px;		
+    background-color: white;
+}
+
+.csl_btn:hover {
+    background-color: #4895ef;
+    color: white;
+}
+
+#pageNav {
+}
+
+
+/* 모달 전체 영역 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 배경 투명도 조절 */
+    overflow: auto;
+}
+
+/* 모달 내용 */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+}
+
+/* 닫기 버튼 */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content {
+	padding: 40px 35px;
+}
+
+#modal_top {
+	margin-bottom: 40px;
+}
+
+#modal_top_title {
+	font-size: 30px;
+	font-weight: bold;
+	
+}
+
+#modal_mid_title {
+	font-weight: bold;
+	font-size: 18px;
+	margin-bottom: 20px;
+}
+
+#modal_mid_table1 {
+	border-top: 2px solid black;
+}
+
