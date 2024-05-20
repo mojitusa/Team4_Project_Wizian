@@ -50,6 +50,7 @@ public class InquiryService {
         Inquiry inquiry = inquiryRepository.findById(inquiryId).orElse(null);
         if (inquiry != null) {
             inquiry.setCSL_ANSWER(response);
+            inquiry.setCSL_STATUS("상담 완료");
             inquiryRepository.save(inquiry);
         }
     }

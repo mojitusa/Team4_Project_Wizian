@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>문의 내역</title>
 <style>
-    /* 부모 요소의 80%로 설정하고 가운데 정렬 */
     .inquiry-container {
         width: 1000px;
         margin: 50px auto; /* 상단 여백과 가운데 정렬 */
@@ -25,8 +24,8 @@
         margin-bottom: 5px;
     }
 
-    .inquiry-body input
-    {
+    .inquiry-body input,
+    .inquiry-body textarea {
         width: 100%;
         min-width: 400px; /* 최소 너비 설정 */
         padding: 10px;
@@ -36,25 +35,63 @@
         background-color: #f9f9f9;
     }
 
+    .inquiry-body textarea {
+        resize: none;
+    }
+
+    .answer-container {
+        display: none; /* 초기에는 숨김 */
+        margin-top: 20px;
+    }
+
 </style>
 </head>
 <body>
     <div class="inquiry-container">
-        <h2 class="inquiry-header">문의 내역</h2>
-        <div class="inquiry-body">
-            <div class="mb-3">
-                <label for="disabledTextInput" class="form-label">제목</label>
-                <input type="text" id="disabledTextInput" class="form-control" placeholder="제목" th:value="${inquiry.CSL_TITLE}" disabled>
-            </div>
-            <div class="mb-3">
-                <label for="disabledTextInput2" class="form-label">내용</label> <input type="text" id="disabledTextInput2"
-					class="form-control" placeholder="내용"
-					th:value="${inquiry.CSL_CONTENT}" disabled style="min-height: 300px;">
-			</div>
+    <h2 class="inquiry-header">문의 내역</h2>
+    <div class="inquiry-body">
+        <div class="mb-3">
+            <label for="disabledTextInput" class="form-label">제목</label>
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="제목" th:value="${inquiry.CSL_TITLE}" disabled>
         </div>
-        <div class="inquiry-footer">
-            <a href="/myPage" class="btn btn-primary">돌아가기</a>
+        <div class="mb-3">
+            <label for="disabledTextInput2" class="form-label">내용</label>
+            <textarea id="disabledTextInput2" class="form-control" placeholder="내용" th:text="${inquiry.CSL_CONTENT}" disabled style="min-height: 300px;"></textarea>
+        </div>
+        <button id="showAnswerBtn" class="btn btn-secondary" th:disabled="${inquiry.CSL_STATUS == '답변대기중'}">답변 보기</button>
+        <button id="editInquiryBtn" class="btn btn-primary" th:if="${inquiry.CSL_STATUS == '답변대기중'}">문의 수정</button>
+        <button id="submitEditedInquiryBtn" class="btn btn-success" style="display: none;">수정 내용 전송</button>
+        <div id="answerContainer" class="answer-container">
+            <div class="mb-3">
+                <label for="disabledTextInput3" class="form-label">답변</label>
+                <textarea id="disabledTextInput3" class="form-control" placeholder="관리자 답변" th:text="${inquiry.CSL_ANSWER}" disabled style="min-height: 150px;"></textarea>
+            </div>
         </div>
     </div>
+    <div class="inquiry-footer">
+        <a href="/myPage" class="btn btn-primary">돌아가기</a>
+    </div>
+    </div>
+
+    <script>
+    document.getElementById('showAnswerBtn').addEventListener('click', function() {
+        var answerContainer = document.getElementById('answerContainer');
+        if (answerContainer.style.display === 'none' || answerContainer.style.display === '') {
+            answerContainer.style.display = 'block';
+            this.textContent = '답변 숨기기';
+        } else {
+            answerContainer.style.display = 'none';
+            this.textContent = '답변 보기';
+        }
+    });
+
+    document.getElementById('editInquiryBtn').addEventListener('click', function() {
+        var titleInput = document.getElementById('disabledTextInput');
+        var contentTextarea = document.getElementById('disabledTextInput2');
+        titleInput.disabled = false; // 제목 입력란 활성화
+        contentTextarea.disabled = false; // 내용 입력란 활성화
+        titleInput.focus(); // 제목 입력란에 포커스 설정
+    });
+    </script>
 </body>
 </html>
