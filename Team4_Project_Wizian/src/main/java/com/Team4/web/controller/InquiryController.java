@@ -1,6 +1,7 @@
 package com.Team4.web.controller;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +29,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+
 @Controller
 public class InquiryController {
 
@@ -44,17 +46,24 @@ public class InquiryController {
 	@Autowired
 	private BoardDAO boardDAO;
 	@GetMapping("/inquiry")
-	public ModelAndView InquiryPage(HttpServletRequest request) {
+	public ModelAndView InquiryPage(HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("inquiry"); // inquiry.html 파일로 매핑
+		
+		// 세션에서 STUD_NO 값을 가져옴
+        String studNo = (String) session.getAttribute("userNo");
+        modelAndView.addObject("studNo", studNo);
+        
 		System.out.println("통과확인");
 		// 다른 모델 데이터 추가 가능
 		return modelAndView;
 	}
 
 	@PostMapping("/inquiry")
-	public String submitInquiry(@ModelAttribute Inquiry inquiry, RedirectAttributes redirectAttributes) {
+	public String submitInquiry(@ModelAttribute Inquiry inquiry, HttpSession session, RedirectAttributes redirectAttributes) {
 		try {
+			String studNo = (String) session.getAttribute("userNo");
+            inquiry.setSTUD_NO(studNo);
 			inquiryService.saveInquiry(inquiry);
 			redirectAttributes.addFlashAttribute("성공");
 			return "redirect:/receptioncomplete";

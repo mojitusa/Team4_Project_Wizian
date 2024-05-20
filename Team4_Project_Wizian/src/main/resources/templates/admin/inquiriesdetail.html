@@ -9,16 +9,16 @@
         <h1>문의 내역 상세 보기</h1>
         <p>제목: <span th:text="${inquiry.CSL_TITLE}"></span></p>
         <p>내용: <span th:text="${inquiry.CSL_CONTENT}"></span></p>
+        <p>상태: <span th:text="${inquiry.CSL_STATUS}"></span></p>
         
         <!-- 답글 작성 폼 -->
-        <form action="/admin/inquiries/{id}/respond" method="post">
+        <form th:action="@{/admin/inquiries/{id}/respond(id=${inquiry.CSL_NO})}" method="post">
             <textarea name="response" rows="4" cols="50" placeholder="답글을 입력하세요"></textarea><br>
             <input type="submit" value="답글 작성">
         </form>
         
         <br>
-        <!-- 여기에 필요한 정보를 추가로 표시할 수 있습니다. -->
-        <a href="/admin/inquiries" th:href="@{/admin/inquiries}">목록으로 돌아가기</a>
+        <a th:href="@{/admin/inquiries}">목록으로 돌아가기</a>
     </div>
 </body>
 </html>
