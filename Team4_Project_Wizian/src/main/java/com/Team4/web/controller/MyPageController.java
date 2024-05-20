@@ -92,17 +92,27 @@ public class MyPageController {
 		return ResponseEntity.ok(message);
 	}
 
+//	@GetMapping("/counselHistory")
+//	@ResponseBody
+//	public ModelAndView inquiryHistoryJson() {
+//		List<Inquiry> inquiries = inquiryService.getAllInquiries();
+//		System.out.println("counselHistory"+inquiries);
+//		ModelAndView modelAndView = new ModelAndView();
+//		modelAndView.setViewName("myCounLog");
+//		Map<String, Object> response = new HashMap<>();
+//		response.put("inquiries", inquiries);
+//		modelAndView.addObject("data", response); // JSON 데이터를 모델에 추가
+//
+//		return modelAndView;
+//	}
 	@GetMapping("/counselHistory")
 	@ResponseBody
-	public ModelAndView inquiryHistoryJson() {
-		List<Inquiry> inquiries = inquiryService.getAllInquiries();
-		System.out.println("counselHistory"+inquiries);
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("myCounLog");
-		Map<String, Object> response = new HashMap<>();
-		response.put("inquiries", inquiries);
-		modelAndView.addObject("data", response); // JSON 데이터를 모델에 추가
-
-		return modelAndView;
+	public Map<String, Object> inquiryHistoryJson(HttpSession httpSession) {
+		String userNo = (String)httpSession.getAttribute("userNo");
+	    List<Inquiry> inquiries = myPageService.getAllBoard(userNo);
+	    System.out.println("counselHistory: " + inquiries);
+	    Map<String, Object> response = new HashMap<>();
+	    response.put("inquiries", inquiries);
+	    return response; // JSON 데이터를 직접 반환
 	}
 }
