@@ -142,6 +142,55 @@ function generateHourlyEvents(formattedDate, convertedTimes) {
 }
 
 
+function generateEvents(scheduleInfo) {
+    var events = [];
+
+    // 날짜별로 예약된 시간을 저장
+    var scheduleMap = {};
+
+    scheduleInfo.forEach(function(schedule) {
+        var formattedDate = formatDate(schedule.date);
+        var formattedTime = convertTime(schedule.time);
+
+        if (!scheduleMap[formattedDate]) {
+            scheduleMap[formattedDate] = [];
+        }
+        scheduleMap[formattedDate].push(formattedTime);
+    });
+
+    // 모든 날짜에 대해 이벤트 생성
+    for (var day = 0; day < 365; day++) {
+        var currentDate = new Date();
+        currentDate.setDate(currentDate.getDate() + day);
+        var formattedDate = currentDate.toISOString().split('T')[0];
+
+        var convertedTimes = scheduleMap[formattedDate] || [];
+        var startTime = new Date(formattedDate + 'T09:00');
+        var endTime = new Date(formattedDate + 'T18:00');
+
+        var currentTime = new Date(startTime);
+
+        while (currentTime < endTime) {
+            var hour = ('0' + currentTime.getHours()).slice(-2);
+            var minutes = '00';
+            var time = hour + ':' + minutes;
+
+            if (!convertedTimes.includes(time)) {
+                events.push({
+                    start: new Date(currentTime)
+                });
+            }
+
+            currentTime.setHours(currentTime.getHours() + 1);
+        }
+    }
+
+    return events;
+}
+
+
+
+
 	document.addEventListener('DOMContentLoaded', function() {
 		
 		
@@ -215,7 +264,6 @@ function generateHourlyEvents(formattedDate, convertedTimes) {
 		var date1 = '20240515';
 		var formattedDate = formatDate(date);
 		var formattedDate1 = formatDate(date1);
-		formattedDate.push(formattedDate1);
  		
 		
 		//스케쥴 테이블 불러오기 ->캘린더 만들기
@@ -226,11 +274,30 @@ function generateHourlyEvents(formattedDate, convertedTimes) {
 				data: {pfNo: pfNo},
 				success: function(data){
 					if(data.length > 0) {
-						console.log(data);
-		                var professorScd = data[0].pf_SCD_YMD; // 첫 번째 교수_날짜
-		                var professorScd2 = data[1].pf_SCD_YMD; // 첫 번째 교수_날짜
-		                console.log(professorScd2);
+						var scheduleInfo = []; // 스케쥴의 모든 날짜와 시간을 담을 배열
 		                
+		                // 모든 스케쥴 데이터를 반복하여 날짜와 시간을 추출하여 배열에 추가
+		                data.forEach(function(schedule) {
+		                    var scheduleDate = schedule.pf_SCD_YMD; // 날짜
+		                    var scheduleTime = schedule.pf_SCD_HMCD; // 시간
+		                    scheduleInfo.push({date: scheduleDate, time: scheduleTime}); // 날짜와 시간을 객체로 만들어 배열에 추가
+		                });
+
+		                console.log(scheduleInfo); // 스케쥴의 모든 날짜와 시간 출력
+		                
+		                // 시간 변환
+		                var convertedTimes = [];
+		                scheduleInfo.forEach(function(schedule) {
+		                    var convertedTime = convertTime(schedule.time);
+		                    convertedTimes.push(convertedTime);
+		                });
+
+		                // 이벤트 생성
+		                var events = generateEvents(scheduleInfo, convertedTimes);
+
+		                // 캘린더에 이벤트 추가
+		                calendar.addEventSource(events);
+
 		            } else {
 		                console.log('No data received');
 		            }
@@ -275,12 +342,22 @@ function generateHourlyEvents(formattedDate, convertedTimes) {
 		//캘린더 그리는 스크립트
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
-			initialView : 'dayGridMonth',
+			initialView : 'timeGridWeek',
+			locale: 'ko', // 한국어 설정
 			headerToolbar: {
 			      left: 'prev,next today',
 			      center: 'title',
 			      right: 'dayGridMonth,timeGridWeek'
 			 },
+			 buttonText: {
+                 today: '오늘',
+                 month: '월간보기',
+                 week: '주간보기'
+             },
+			 weekends: false,
+			 slotMinTime: '09:00:00',  // 9시부터 시작
+			 slotMaxTime: '18:00:00',  // 18시까지 표시
+			 allDaySlot: false,  // all-day 섹션 제거
 			 events:[
 			      ...generateHourlyEvents(formattedDate, convertedTimes)
 			 ],
@@ -305,20 +382,22 @@ function generateHourlyEvents(formattedDate, convertedTimes) {
 		
 		calendar.render();
 		
+		
+		function setClickableStatus(clickable) {
+	        calendar.getEvents().forEach(function(event) {
+	            event.setProp('startEditable', clickable); // 모든 이벤트를 클릭 가능 여부에 따라 설정
+	        });
+	    }
+
+	    // 모든 시간대를 클릭 가능하도록 활성화
+	    setClickableStatus(true);
+		
+		
 		//모달 끄기 버튼
 		$('#modal-close-btn').click(function() {
 	        $('#event-modal').hide();
 	        $('#modal-overlay').hide();
 	    });
-	    
-		//상담신청완료 데이터 넘기기
-		
-		
-		
-		
-		
-		
-		
 		
 	});
 </script>
