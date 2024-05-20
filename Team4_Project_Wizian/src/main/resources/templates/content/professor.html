@@ -92,7 +92,34 @@
 			</div>
 		</section>
 	</main>
+	
+	<script th:inline="javascript">
+        // Ajax 요청을 보내는 함수
+        function searchDepartment() {
+            var department = $("#department_search").val();
 
+            // Ajax 요청 보내기
+            $.ajax({
+                url: "/searchProfDepartment",
+                method: "POST",
+                data: { department: department },
+                success: function(response) {
+                    console.log("검색 결과:", response);
+                    // 여기서 검색 결과를 처리하여 원하는 동작 수행
+                },
+                error: function(xhr, status, error) {
+                    console.error("검색 요청 실패:", error);
+                }
+            });
+        }
+
+        // 검색 버튼 클릭 시 검색 함수 호출
+        $(function() {
+            $("#department_search_button").click(function() {
+                searchDepartment();
+            });
+        });
+    </script>
 </body>
 
 <footer id="footer">
