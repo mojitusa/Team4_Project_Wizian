@@ -29,4 +29,6 @@ public interface GroupMapper {
 
 	Map<String, Object> getProgramCancelDate(String proCode);
 
+	int insertRegister(Map<String, Object> registerInfo);
+
 }
