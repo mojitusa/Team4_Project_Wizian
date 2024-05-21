@@ -77,42 +77,52 @@
 			<br>
 			<div class="card" style="display: inline-block;" th:each="gc : ${gclist}">
 			    <div>
-			        <div style="display: inline-block;"><p th:text="${gc.GC_CONTS_CN}"></p></div>
-			        <div class="applyMember">
-						<div class="applyNopePossibility">
-						    <!-- 모집 상태 -->
-						    <th:block th:if="${gc.APPLY_CNT} &lt; ${gc.NOPE}">
-						        <span>모집중</span>
-						    </th:block>
-						    <th:block th:if="${gc.APPLY_CNT} == ${gc.NOPE}">
-						        <span>마감</span>
-						        
-						    </th:block>
-						    
-						    <!-- 수강신청/정원 -->
-						    <span th:text="${gc.APPLY_CNT}"></span>
-						    <span>/</span>
-						    <span th:text="${gc.NOPE}"></span>
-						</div>
-						<div class="applyPossibility">
-						    <!-- 모집 상태 -->
-	 					    <th:block th:if="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH') >= gc.SCHDL_BGNG_YMD and #dates.format(#dates.createNow(), 'yyyy-MM-dd HH') <= gc.SCHDL_END_YMD}">
-						        <span>신청 가능</span>
-						    </th:block>
-						    <th:block th:if="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH') &lt; gc.SCHDL_BGNG_YMD or #dates.format(#dates.createNow(), 'yyyy-MM-dd HH') &gt; gc.SCHDL_END_YMD}">
-						        <span>신청 불가</span>
-						    </th:block>
-						</div>
+			    	<div style="display: flex; align-items: center;">
+				        <img src="/image/teamlogo.png" alt="로그인 이미지" style="width: 40%; height: auto;">
+				        <div class="applyMember">
+							<div class="applyNopePossibility" style="width: 100%;">
+							    <!-- 모집 상태 -->
+							    <th:block th:if="${gc.APPLY_CNT} &lt; ${gc.NOPE}">
+							        <span>모집중</span>
+							    </th:block>
+							    <th:block th:if="${gc.APPLY_CNT} == ${gc.NOPE}">
+							        <span>마감</span>
+							        
+							    </th:block>
+							    
+							    <!-- 수강신청/정원 -->
+							    <span th:text="${gc.APPLY_CNT}"></span>
+							    <span>/</span>
+							    <span th:text="${gc.NOPE}"></span>
+							</div>
+							<div class="applyPossibility">
+							    <!-- 모집 상태 -->
+		 					    <th:block th:if="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH') >= gc.SCHDL_BGNG_YMD and #dates.format(#dates.createNow(), 'yyyy-MM-dd HH') <= gc.SCHDL_END_YMD}">
+							        <span>신청 가능</span>
+							    </th:block>
+							    <th:block th:if="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH') &lt; gc.SCHDL_BGNG_YMD or #dates.format(#dates.createNow(), 'yyyy-MM-dd HH') &gt; gc.SCHDL_END_YMD}">
+							        <span>신청 불가</span>
+							    </th:block>
+							</div>
+					    </div>
 				    </div>
 				    <div>&nbsp;</div>
 			        <div class="context type">
 						<a th:href="@{./groupDetail(no=${gc.PRGRM_CD}) }" th:text="${gc.PRGRM_NM}" ></a>
 			        </div>
 			        <br>
-			        <div>
-			            <b>신청기간</b><p th:text="${gc.SCHDL_BGNG_YMD}"></p>~<p th:text="${gc.SCHDL_END_YMD}"></p><br>
-			            <b>교육일시</b><p th:text="${gc.GC_DT}"></p><br>
-			        </div>
+					<div>
+					    <div class="applyDueDate" style="display: inline-block;">
+					        <b style="font-size: 20px;">신청기간</b><br>
+							<span th:text="${gc.SCHDL_BGNG_YMD}"></span>~<span th:text="${gc.SCHDL_END_YMD}"></span>
+					    </div>
+					</div>
+					<br>
+					<div>
+					    <div class="gcDate" style="display: inline-block;">
+					        <b style="font-size: 20px;">교육일시</b><p th:text="${gc.GC_DT}"></p>
+					    </div>
+					</div>
 			    </div>
 			</div>
 		</div>
