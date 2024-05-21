@@ -33,7 +33,17 @@ public class CslorEntity {
     @ManyToOne
     @JoinColumn(name = "C_CD")
     private DeptEntity department;
+    
+    @OneToOne
+    @JoinColumn(name = "USER_NO")
+    private UsersEntity users;
                 
+    @Column(name = "TEL_NO")
+    private String telNo;
+    
+    @Column(name = "CSL_LOC")
+    private String cslLoc;
+    
     @Column(name = "NON_FACE")
     private String nonFace;
     
