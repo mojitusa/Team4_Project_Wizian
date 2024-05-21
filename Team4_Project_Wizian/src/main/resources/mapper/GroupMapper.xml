@@ -131,4 +131,9 @@
 	    SELECT GC_DT FROM GC_PROGRAM
 	    WHERE PRGRM_CD = #{proCode}
 	</select>
+	
+	<insert id="insertRegister" parameterType="Map">
+	    INSERT INTO GC_PROGRAM (GC_OG_NM, NOPE, SCHDL_BGNG_YMD, SCHDL_END_YMD, GC_DT, PRGRM_NM, PRGRM_TYPE, GC_CONTS_CN, GC_DTL_CN, USER_NO) 
+	    VALUES (#{gC_OG_NM}, #{nOPE}, #{sCHDL_BGNG_YMD}, #{sCHDL_END_YMD}, #{gC_DT}, #{pRGRM_NM}, #{pRGRM_TYPE}, #{posterContent}, #{counselingContent}, #{userNumber})
+	</insert>
 </mapper>
