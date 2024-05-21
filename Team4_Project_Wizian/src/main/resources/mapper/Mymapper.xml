@@ -40,12 +40,33 @@
 		WHERE si.stud_no = #{studNo}
 	</update>
 
-
 	<select id="getAllBoard" parameterType="map" resultType="String">
 		SELECT *
-FROM PRGRM_APP pa
-JOIN PROFESSER_CONSULTATION pc ON pa.stud_no = pc.stud_no
-JOIN CSL_APPLY ca ON pa.stud_no = ca.stud_no
-WHERE pa.stud_no = #{userNo};
+		FROM PRGRM_APP pa
+		JOIN PROFESSER_CONSULTATION pc ON pa.stud_no =
+		pc.stud_no
+		JOIN CSL_APPLY ca ON pa.stud_no = ca.stud_no
+		WHERE pa.stud_no
+		= #{userNo};
 	</select>
+	<select id="getStudInfo" parameterType="String" resultType="map">
+		SELECT s.STUD_NO, s.REAL_STUD_NO, s.C_CD, s.GEN_CD, s.STUD_NM,
+		s.BIRTHDAY, s.ST, s.MBR_TELNO, u.USER_NO, u.email
+		FROM STUD_INFO s
+		JOIN
+		USERS u ON u.USER_NO = s.STUD_NO
+		WHERE s.STUD_NO = #{userNo}
+	</select>
+	<select id="checkPw" parameterType="String" resultType="Boolean">
+		SELECT
+		COUNT(*) > 0
+		FROM USERS s
+		WHERE s.USER_NO = #{userNo} AND s.pw =
+		#{password}
+	</select>
+	<update id="updatePw" parameterType="map">
+		UPDATE USERS SET pw =
+		#{password} WHERE user_no = #{userNo}
+	</update>
+
 </mapper>
