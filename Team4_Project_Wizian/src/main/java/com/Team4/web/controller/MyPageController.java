@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,8 +31,8 @@ public class MyPageController {
 
 	@Autowired
 	private MyPageService myPageService;
-	
-	@Autowired 
+
+	@Autowired
 	private InquiryService inquiryService;
 
 	@GetMapping("/myPage")
@@ -62,25 +64,17 @@ public class MyPageController {
 		if (httpSession.getAttribute("userNo") == null) {
 			return "/login";
 		}
-		// model.addAttribute("student",
-		// psyCslService.getStudentByUserNo("1100000001"));
+		String userNo = (String) httpSession.getAttribute("userNo");
+		Map<String, Object> getStudInfo = myPageService.getStudInfo(userNo);
+		model.addAttribute("studInfo", getStudInfo);
 		return "content/updatePrivacy";
 	}
 
-//	@PostMapping("/updatePrivacy")
-//	public String updatePrivacy(@RequestParam("phoneNumber") String phoneNumber, 
-//			@RequestParam("email") String email, 
-//			@RequestParam("stud_no") String stud_no,
-//			RedirectAttributes redirectAttributes) {
-//		
-//		return "redirect:/updatePrivacy";
-//	}
 	@PostMapping("/updatePrivacy")
 	public ResponseEntity<String> updatePrivacy(@RequestParam("stud_no") String studNo,
-			@RequestParam("phoneNumber") String phoneNumber, @RequestParam("email") String email) {
-		System.out.println("업데이트 동작 확인");
+			@RequestParam("phoneNumber") String phoneNumber, @RequestParam("email") String email,
+			HttpSession httpSession, Model model) {
 		int updated = myPageService.updatePrivacy(phoneNumber, email, studNo);
-		System.out.println(updated);
 		String message;
 		if (updated >= 1) {
 			message = "개인 정보가 성공적으로 업데이트되었습니다.";
@@ -92,27 +86,45 @@ public class MyPageController {
 		return ResponseEntity.ok(message);
 	}
 
-//	@GetMapping("/counselHistory")
-//	@ResponseBody
-//	public ModelAndView inquiryHistoryJson() {
-//		List<Inquiry> inquiries = inquiryService.getAllInquiries();
-//		System.out.println("counselHistory"+inquiries);
-//		ModelAndView modelAndView = new ModelAndView();
-//		modelAndView.setViewName("myCounLog");
-//		Map<String, Object> response = new HashMap<>();
-//		response.put("inquiries", inquiries);
-//		modelAndView.addObject("data", response); // JSON 데이터를 모델에 추가
-//
-//		return modelAndView;
-//	}
+	@PostMapping("/updatePwCheck")
+	public ResponseEntity<Map<String, Boolean>> updatePwCheck(HttpSession httpSession,
+			@RequestBody Map<String, String> requestBody) {
+		String originalPassword = requestBody.get("originalPassword");
+		String userNo = (String) httpSession.getAttribute("userNo");
+		// 비밀번호 검증 로직 수행
+		boolean isValid = myPageService.checkPassword(originalPassword, userNo);
+		// 검증 결과를 Map에 담아 JSON 형식으로 반환
+		Map<String, Boolean> response = new HashMap<>();
+		response.put("valid", isValid);
+
+		return ResponseEntity.ok(response);
+	}
+
+	@PostMapping("/updatePw")
+	@ResponseBody
+	public ResponseEntity<String> updatePassword(@RequestBody Map<String, String> requestBody,
+			HttpSession httpSession) {
+		String userNo = (String) httpSession.getAttribute("userNo");
+		String newPassword = requestBody.get("newPassword");
+		int result = myPageService.updatePw(newPassword, userNo);
+		System.out.println(result);
+		if (result == 1) {
+			// 비밀번호 변경 성공
+			return ResponseEntity.ok("비밀번호가 성공적으로 변경되었습니다.");
+		} else {
+			// 원래 비밀번호가 일치하지 않음
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("현재 비밀번호가 일치하지 않습니다.");
+		}
+	}
+
 	@GetMapping("/counselHistory")
 	@ResponseBody
 	public Map<String, Object> inquiryHistoryJson(HttpSession httpSession) {
-		String userNo = (String)httpSession.getAttribute("userNo");
-	    List<Inquiry> inquiries = myPageService.getAllBoard(userNo);
-	    System.out.println("counselHistory: " + inquiries);
-	    Map<String, Object> response = new HashMap<>();
-	    response.put("inquiries", inquiries);
-	    return response; // JSON 데이터를 직접 반환
+		String userNo = (String) httpSession.getAttribute("userNo");
+		List<Inquiry> inquiries = myPageService.getAllBoard(userNo);
+		System.out.println("counselHistory: " + inquiries);
+		Map<String, Object> response = new HashMap<>();
+		response.put("inquiries", inquiries);
+		return response; // JSON 데이터를 직접 반환
 	}
 }

@@ -24,5 +24,9 @@ public class ProfCslInsertService {
 		return profCslInsertMapper.searchProfDepartment(department);
 	}
 
+	public List<Map<String, Object>> profData(String userNo) {
+		return profCslInsertMapper.profSearchById(userNo);
+	}
+
 	
 }
