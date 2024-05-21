@@ -155,7 +155,7 @@ div.table {
 
 
 /* 모달 전체 영역 */
-.modal {
+div.modal {
     display: none;
     position: fixed;
     z-index: 999;
@@ -167,6 +167,7 @@ div.table {
     overflow: auto;
 }
 
+
 /* 모달 내용 */
 .modal-content {
     background-color: #fefefe;
@@ -174,7 +175,7 @@ div.table {
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-    max-width: 600px;
+    max-width: 900px;
 }
 
 /* 닫기 버튼 */
@@ -192,7 +193,14 @@ div.table {
     cursor: pointer;
 }
 
-.modal-content {
+div.modal-content {
+	margin-top: 100px;
+	padding: 0;
+	border-radius: 2%; /* 버튼을 원형으로 만듭니다. */
+	overflow: hidden; /* 자식 요소가 부모 div를 넘어가지 않도록 합니다. */
+}
+
+.modal-content_top {
 	padding: 40px 35px;
 }
 
@@ -213,6 +221,68 @@ div.table {
 }
 
 #modal_mid_table1 {
+	margin-bottom: 40px;
+}
+
+#modal_mid_table2 {
+	margin-bottom: 20px;
+}
+
+.modal_mid_table1_row_top {
 	border-top: 2px solid black;
 }
 
+.modal_mid_table1_row1 {
+	display: grid;
+	grid-template-columns: 150px 300px 150px 300px; /* 각 열의 너비를 자동으로 설정 */
+	border-bottom: 1px solid #E6E6E6;
+}
+
+.modal_mid_table1_row2 {
+	display: grid;
+	grid-template-columns: 150px 750px; /* 각 열의 너비를 자동으로 설정 */
+	border-bottom: 1px solid #E6E6E6;
+}
+
+.colered {
+	padding: 14px;
+	background-color: #edf2fb;
+	text-align: center;
+}
+
+.uncolered {
+	padding: 14px;
+	align-items: center; /* 수직 가운데 정렬 */
+	
+}
+
+span.close {
+	width: 50px;
+	height: 50px;
+	background-color: #1b263b;
+	text-align: center;
+	display: flex;
+	justify-content: center; /* 수평 가운데 정렬 */
+	align-items: center; /* 수직 가운데 정렬 */
+	padding-bottom: 7px;
+    color: white; /* 닫기 버튼의 텍스트 색상 */
+    font-size: 28px; /* 닫기 버튼의 텍스트 크기 */
+    font-weight: bold; /* 닫기 버튼의 텍스트 굵기 */
+    cursor: pointer; /* 커서 모양 변경 */
+	border-radius: 5%; /* 버튼을 원형으로 만듭니다. */	
+}
+
+
+#modal_bottom {
+	font-size: 26px;
+	font-weight: bold;
+	text-align: center;
+	padding: 18px 0 ;
+	background-color: #1b263b;
+	color: white;
+	cursor: pointer; /* 손가락 모양의 커서로 설정 */
+}
+
+.hidden_div {
+	display: none;
+}
