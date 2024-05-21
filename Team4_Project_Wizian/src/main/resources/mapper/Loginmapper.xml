@@ -22,7 +22,8 @@
 		WHERE u.user_no = #{userNo}
 	</select>
 		<select id="getInfoCounselor" resultType="map" parameterType="String">
-		SELECT s.CSL_DETAIL, s.C_CD, s.USER_NO
+		SELECT s.CSL_DETAIL, s.C_CD, s.USER_NO, s.CAREER, s.CSLOR_NM, s.TEL_NO, s.CSL_LOC,
+		s.NON_FACE, s.ONLINE, s.CHAT, s.ISRT_TIME, s.ISRT_IP, s.UPT_TIME, s.UDP_IP, s.DEL, s.DEL_IP
 		FROM COUNSELOR s
 		JOIN USERS u ON s.USER_NO = u.user_no
 		WHERE u.user_no = #{userNo}
