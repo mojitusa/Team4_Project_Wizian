@@ -158,19 +158,48 @@
     margin-right: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
+    border-radius: 5% !important;
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05); 
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2), 8px 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 #gcdFont{
 	font-size: 20px;
 }
 
+.applyDueDate{
+	font-size: 15px;
+}
+
+.gcDate{
+	font-size: 15px;
+}
 .applyMember{
 	float: right;
 	font-weight: bold;
+	background-color: #98FB98;
+	border-radius: 8% !important;
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    width: 60%;
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
 }
 
 .applyNopePossibility{
-	background-color: aqua;
+	background-color: #7fffd4;
+	border-radius: 8% !important;
+	display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
 }
 
 .gcgroupApplyBox1{
