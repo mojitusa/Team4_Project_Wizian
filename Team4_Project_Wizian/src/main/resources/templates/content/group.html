@@ -34,6 +34,7 @@
 	    	<div class="gcpa">
 		      	집단 상담 프로그램 신청
 	    	</div>
+	    	<p>User Code: <span th:text="${userCode}"></span></p>
 	    	<br>
 		    <div>
 		    	<div class="programType">
@@ -70,7 +71,7 @@
 			        </form>
 			    </div>
 			    <div class="write-box">
-			        <button class="write-button" th:onclick="|location.href='@{/groupWrite}'|">글쓰기</button>
+			        <button id="write-button" class="write-button" th:if="${userCode == '10' or userCode == '13'}">등록</button>
 			    </div>
 			</div>
 			<br>
@@ -133,7 +134,45 @@
             // 페이지를 이동하면서 쿼리 스트링을 포함한 URL로 이동
             window.location.href = './group?' + formData;
         });
-    });
+        
+        $('#write-button').click(function() {
+	        $.ajax({
+	            type: 'POST', // GET 또는 POST 요청
+	            url: '/groupWritePath', // 이동할 페이지의 URL
+		            success: function(response) {
+		                if (response === "success") {
+		                    Swal.fire({
+		                        title: "등록 페이지로 이동합니다.",
+		                        icon: "success",
+		                        confirmButtonText: "확인"
+		                    }).then(function() {
+		                        window.location.href = "/groupWrite"
+		                    }); 
+		                } else if (response === "login") {
+		                    Swal.fire({
+		                        title: "로그인이 필요한 서비스입니다.",
+		                        icon: "warning",
+		                        confirmButtonText: "확인"
+		                    }).then(function() {
+		                        window.location.href = "/login"
+		                    });
+
+		                } else {
+		                    Swal.fire({
+		                        title: "권한이 없습니다.",
+		                        icon: "warning",
+		                        confirmButtonText: "확인"
+		                    }).then(function() {
+		                        window.location.href = "/group"
+		                    });
+		                }   
+		            },
+	            error: function(xhr, status, error) {
+					
+	            }
+	        });
+	    });
+ 	});
 </script>
   <footer id="footer">
     <div th:replace="~{../templates/fragments/footer}"></div>

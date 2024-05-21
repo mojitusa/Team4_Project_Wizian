@@ -9,11 +9,12 @@ public class GroupModel {
     private String PRGRM_TYPE;
     private String GC_OG_NM;
     private String counselingContent;
+    private String posterContent;
 
     public GroupModel() {
     }
 
-    public GroupModel(String PRGRM_NM, String SCHDL_BGNG_YMD, String SCHDL_END_YMD, String GC_DT, int NOPE, String PRGRM_TYPE, String GC_OG_NM, String counselingContent) {
+    public GroupModel(String PRGRM_NM, String SCHDL_BGNG_YMD, String SCHDL_END_YMD, String GC_DT, int NOPE, String PRGRM_TYPE, String GC_OG_NM, String counselingContent, String posterContent) {
         this.PRGRM_NM = PRGRM_NM;
         this.SCHDL_BGNG_YMD = SCHDL_BGNG_YMD;
         this.SCHDL_END_YMD = SCHDL_END_YMD;
@@ -22,6 +23,7 @@ public class GroupModel {
         this.PRGRM_TYPE = PRGRM_TYPE;
         this.GC_OG_NM = GC_OG_NM;
         this.counselingContent = counselingContent;
+        this.posterContent = posterContent;
     }
 
     public String getPRGRM_NM() {
@@ -87,4 +89,12 @@ public class GroupModel {
     public void setCounselingContent(String counselingContent) {
         this.counselingContent = counselingContent;
     }
+
+	public String getPosterContent() {
+		return posterContent;
+	}
+
+	public void setPosterContent(String posterContent) {
+		this.posterContent = posterContent;
+	}
 }
