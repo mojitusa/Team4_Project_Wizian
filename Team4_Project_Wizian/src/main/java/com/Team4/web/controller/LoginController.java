@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Team4.web.service.LoginService;
+import com.Team4.web.util.Util;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -18,9 +19,12 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
+    @Autowired
+    private Util util;
     @PostMapping("/login")
     public String logIn(@RequestParam("user_no") String id, @RequestParam("pw") String pw, HttpSession session, Model model) {
-        boolean loggedIn = loginService.checkLogin(id, pw);
+    	String pw2 = util.encryptSHA256(pw);
+        boolean loggedIn = loginService.checkLogin(id, pw2);
         if (loggedIn == false) {
         	model.addAttribute("errorMessage", "입력한 정보가 올바르지 않습니다. 다시 시도해주세요.");
         	return "/login";
@@ -40,7 +44,9 @@ public class LoginController {
             		String mbr_telno = (String) userInfo.get("mbr_telno");
             		String C_NMK = (String) userInfo.get("C_NMK");
             		String ST = (String) userInfo.get("ST");
+            		String REAL_STUD_NO = (String) userInfo.get("REAL_STUD_NO");
             		session.setAttribute("username", name);
+            		session.setAttribute("REAL_STUD_NO", REAL_STUD_NO);
             		session.setAttribute("userNo", userNo);
             		session.setAttribute("real_stud_no", realStudNo);
             		session.setAttribute("email", email);
