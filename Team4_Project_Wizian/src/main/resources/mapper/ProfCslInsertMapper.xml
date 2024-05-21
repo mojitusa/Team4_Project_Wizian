@@ -8,6 +8,12 @@
 	</insert>
 	
 	<select id="searchProfDepartment" parameterType="String" resultType="map">
-		SELECT C_NMK FROM DEPT_CD WHERE C_NMK LIKE CONCAT('%', #{department}, '%')
+		SELECT PF_NM, PF_TELNO, PF_CS_PART, PF_CS_PART_DETAIL, PF_PLC_NM, USER_NO FROM PROFESSER
+		WHERE C_CD = (SELECT C_CD FROM DEPT_CD WHERE C_NMK LIKE CONCAT('%', #{department}, '%'))
 	</select>    
+	
+	<select id="profSearchById" parameterType="String" resultType="map">
+		SELECT PF_NM, PF_TELNO, PF_CS_PART, PF_CS_PART_DETAIL, PF_PLC_NM FROM PROFESSER 
+		WHERE USER_NO = #{userNo}
+	</select>
 </mapper>

@@ -36,16 +36,6 @@
 <link href="assets/css/main.css" rel="stylesheet">
 <link href="assets/css/professor.css" rel="stylesheet">
 <style type="text/css">
-.container{
-	display: grid;
-	grid-template-columns: repeat(3, 1fr); /* 3개의 동일한 너비의 열 */
-	grid-gap: 10px; /* 그리드 아이템 간격 */
-}
-.column{
-	background-color: lightgray;
-	padding: 20px;
-	text-align: center;
-}
 </style>
 </head>
 
@@ -58,68 +48,159 @@
 		<section id="professorSection">
 			<div class="container">
 				<!-- Content here -->
+
 				<div class="row">
-					<span>
-						<label for="map_professor">지도교수여부</label> 
-						<select id="map_professor">
+					<span> <label for="map_professor">지도교수여부</label> <select
+						id="map_professor">
 							<option value="yes">Y</option>
 							<option value="no">N</option>
-						</select>
-					</span>
-					<span> 
-						<label for="department">학과</label>
-						<input type="text" id="department_search" placeholder="학과를 입력하세요">
+					</select>
+					</span> <span> <label for="department">학과</label> <input
+						type="text" id="department_search" placeholder="학과를 입력하세요">
 						<button id="department_search_button">검색</button>
 					</span>
 				</div>
 
 				<!-- 두 번째 줄: 검색창과 검색 버튼 -->
-				<div >
-					<label for="search">검색</label>
-					<input type="text" id="search" placeholder="검색어를 입력하세요">
+				<div>
+					<label for="search">검색</label> <input type="text" id="search"
+						placeholder="검색어를 입력하세요">
 					<button id="search_button">검색하기</button>
 				</div>
 
 				<!-- 세 번째 줄: 그리드 시스템으로 리스트 표시 -->
-				<div class="container">
-					<div class="column">번호</div>
-					<div class="column">이름</div>
-					<div class="column">상담분야</div>
-					<div class="column">프로필</div>
-					<div class="column">상담신청</div>
-					<div class="column">온라인상담</div>
+				<div th:if="${profData}">
+					<table border="2">
+						<thead>
+							<tr>
+								<th>번호</th>
+								<th>이름</th>
+								<th>상담분야</th>
+								<th>프로필</th>
+								<th>상담신청</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="prof, iterStat : ${profData}">
+								<td th:text="${iterStat.count}">No</td>
+								<td th:text="${prof.PF_NM}">ID</td>
+								<td th:text="${prof.PF_CS_PART}">Name</td>
+								<td><button class="view-button" data-id="${prof.PF_NO}">조회버튼</button></td>
+								<td>캘린더</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div th:if="${#lists.isEmpty(profData)}">
+					<p>No professor data found.</p>
 				</div>
 			</div>
+
+
+			<!-- 모달 HTML -->
+			<div class="modal fade" id="professorModal" tabindex="-1"
+				aria-labelledby="professorModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="professorModalLabel">교수 상세 정보</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<p>
+								<strong>이름:</strong> <span id="profName"></span>
+							</p>
+							<p>
+								<strong>연락처:</strong> <span id="profContact"></span>
+							</p>
+							<p>
+								<strong>소속:</strong> <span id="profDepartment"></span>
+							</p>
+							<p>
+								<strong>이메일:</strong> <span id="profEmail"></span>
+							</p>
+							<p>
+								<strong>상담장소:</strong> <span id="profLocation"></span>
+							</p>
+							<p>
+								<strong>상담분야:</strong> <span id="profField"></span>
+							</p>
+							<p>
+								<strong>담당 학부:</strong> <span id="profCollege"></span>
+							</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-bs-dismiss="modal">닫기</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
 		</section>
 	</main>
-	
+
 	<script th:inline="javascript">
-        // Ajax 요청을 보내는 함수
-        function searchDepartment() {
-            var department = $("#department_search").val();
+		// Ajax 요청을 보내는 함수
+		function searchDepartment() {
+			var department = $("#department_search").val();
 
-            // Ajax 요청 보내기
-            $.ajax({
-                url: "/searchProfDepartment",
-                method: "POST",
-                data: { department: department },
-                success: function(response) {
-                    console.log("검색 결과:", response);
-                    // 여기서 검색 결과를 처리하여 원하는 동작 수행
-                },
-                error: function(xhr, status, error) {
-                    console.error("검색 요청 실패:", error);
-                }
-            });
-        }
+			// Ajax 요청 보내기
+			$.ajax({
+				url : "/searchProfDepartment",
+				method : "POST",
+				data : {
+					department : department
+				},
+				success : function(response) {
+					console.log("검색 결과:", response);
+					// 여기서 검색 결과를 처리하여 원하는 동작 수행
+				},
+				error : function(xhr, status, error) {
+					console.error("검색 요청 실패:", error);
+				}
+			});
+		}
 
-        // 검색 버튼 클릭 시 검색 함수 호출
-        $(function() {
-            $("#department_search_button").click(function() {
-                searchDepartment();
-            });
+		// 검색 버튼 클릭 시 검색 함수 호출
+		$(function() {
+			$("#department_search_button").click(function() {
+				searchDepartment();
+			});
+		});
+		
+		//get에서 가져온 데이터 모달에 채우기
+		$(document).on('click', '.view-button', function() {
+			
+			var profId = $(this).data;
+			
+			console.log(profId);
+			
+			var name = professorData.PF_NM;
+		    var contact = professorData.PF_TELNO;
+		    var department = professorData.PF_CS_PART;
+		    var email = "";
+		    var location = professorData.PF_PLC_NM;
+		    var field = professorData.PF_CS_PART_DETAIL;
+		    var college = ""; // 해당하는 데이터가 없는 경우를 고려하여 빈 문자열로 초기화
+
+            // 모달에 데이터 채우기
+            $('#profName').text(name);
+            $('#profContact').text(contact);
+            $('#profDepartment').text(department);
+            $('#profEmail').text(email);
+            $('#profLocation').text(location);
+            $('#profField').text(field);
+            $('#profCollege').text(college);
+
+            // 모달 표시
+            $('#professorModal').modal('show');
         });
-    </script>
+	</script>
 </body>
 
 <footer id="footer">
