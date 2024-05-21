@@ -16,4 +16,6 @@ public interface ProfCslInsertMapper {
 
 	List<Map<String, Object>> searchProfDepartment(String department);
 
+	List<Map<String, Object>> profSearchById(String userNo);
+
 }
