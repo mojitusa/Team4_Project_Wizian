@@ -31,23 +31,24 @@
   <main class="groupBox">
     <section id="groupSection">
 	    <div class="gcpage1">
-	    	<div class="gcpa">
+	    <div class="upBox">
+	    	<div class="gcpaGroup">
 		      	집단 상담 프로그램 신청
 	    	</div>
-	    	<p>User Code: <span th:text="${userCode}"></span></p>
 	    	<br>
-		    <div>
-		    	<div class="programType">
-		    		프로그램 유형
-		    	</div>
-		    </div>
-			<div class="category-selector">
-			    <label><input type="checkbox" name="category" value="group-counseling"> 특강형</label>
-			    <label><input type="checkbox" name="category" value="group-counseling"> 참여형</label>
-			    <label><input type="checkbox" name="category" value="group-counseling"> 봉사형</label>
-			    <label><input type="checkbox" name="category" value="group-counseling"> 실습형</label>
-			    <label><input type="checkbox" name="category" value="group-counseling"> 자격형</label>
+	    	<div class="programType">
+	    		프로그램 유형
+	    	</div>
+	    	<div class="container">
+				<div class="category-selector">
+				    <label><input type="checkbox" name="category" value="group-counseling"> 특강형</label>&nbsp;&nbsp;
+				    <label><input type="checkbox" name="category" value="group-counseling"> 참여형</label>&nbsp;&nbsp;
+				    <label><input type="checkbox" name="category" value="group-counseling"> 봉사형</label>&nbsp;&nbsp;
+				    <label><input type="checkbox" name="category" value="group-counseling"> 실습형</label>&nbsp;&nbsp;
+				    <label><input type="checkbox" name="category" value="group-counseling"> 자격형</label>
+				</div>
 			</div>
+			<br>
 			<br>
 			<div>
 		    	<div class="programType">
@@ -58,11 +59,11 @@
 			    <div class="search-box">
 			        <form id="searchForm" action="./group" method="get">
 			            <div class="category-selector">
-			                <label><input type="checkbox" name="category" value="001"> 모집중</label>
-			                <label><input type="checkbox" name="category" value="002"> 금일등록</label>
-			                <label><input type="checkbox" name="category" value="003"> 1주일 내 등록</label>
-			                <label><input type="checkbox" name="category" value="004"> 당일 마감</label>
-			                <label><input type="checkbox" name="category" value="005"> 1주일 내 마감</label>
+			                <label><input type="checkbox" name="category" value="001"> 모집중</label>&nbsp;&nbsp;
+			                <label><input type="checkbox" name="category" value="002"> 금일등록</label>&nbsp;&nbsp;
+			                <label><input type="checkbox" name="category" value="003"> 1주일 내 등록</label>&nbsp;&nbsp;
+			                <label><input type="checkbox" name="category" value="004"> 당일 마감</label>&nbsp;&nbsp;
+			                <label><input type="checkbox" name="category" value="005"> 1주일 내 마감</label>&nbsp;&nbsp;
 			                <label><input type="checkbox" name="category" value="006"> 모집마감</label>
 			            </div>
 			            <br>
@@ -75,6 +76,7 @@
 			    </div>
 			</div>
 			<br>
+	    </div>
 			<div class="card" style="display: inline-block;" th:each="gc : ${gclist}">
 			    <div>
 			    	<div style="display: flex; align-items: center;">
