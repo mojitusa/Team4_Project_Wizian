@@ -80,7 +80,8 @@
 				            <div class="table-cell cell-apply" >
 				            	<button class="csl_btn schedule">일정조회</button>
 				            </div>
-				            	<button th:if="${counselor.isOnlineAvailable}" class="csl_btn">온라인상담 신청</button>
+				            <div class="table-cell cell-online cell-right" >
+				            	<button th:if="${counselor.isOnlineAvailable}" class="csl_btn online">온라인상담 신청</button>
 				            	<span th:unless="${counselor.isOnlineAvailable}">불가능</span>
 				            </div>
 				            <div class="hidden_div">
