@@ -51,7 +51,7 @@ public class Inquiry {
     
     @Column(name = "CSL_STATUS")
     // 접수상태 0: 접수중 , 1: 상담완료
-    private int CSL_STATUS = 0;
+    private String CSL_STATUS;
 
 	
     	

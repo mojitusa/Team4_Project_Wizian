@@ -2,6 +2,7 @@ package com.Team4.web.entity;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,24 +21,43 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "InquiryCsl") // 테이블 이름. 없으면 클래스 명과 동일
-public class InquiryCsl {
+public class InquiryAdmin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int CSL_NO;         
+    @Column(name = "CSL_NO")
+    private int CSL_NO;
+    
+    @Column(name = "IN_REPLY")
     private String IN_REPLY;
+    
+    @Column(name = "IN_STATUS")
     private String IN_STATUS;
     
-    private String STUD_NO; // STUD_NO 속성 추가
+    @Column(name = "STUD_NO")
+    private String STUD_NO;
+    
+    @Column(name = "CSL_EMAIL")
     private String CSL_EMAIL;
+    
+    @Column(name = "CSL_CONTENT")
     private String CSL_CONTENT;
+    
+    @Column(name = "CSL_ANSWER")
     private String CSL_ANSWER;
+    
+    @Column(name = "CSL_EVAL")
     private String CSL_EVAL;
+    
+    @Column(name = "CSL_CATEGORY")
     private String CSL_CATEGORY;
+    
+    @Column(name = "CSL_TITLE")
     private String CSL_TITLE;
+    
+    @Column(name = "CSL_DATE")
     private Date CSL_DATE = new Date();
     
-    @OneToOne // Inquiry 테이블과 일대일 관계 설정
-    @JoinColumn(name = "CSL_NO") // 외래 키로 조인할 열 지정
-    private Inquiry inquiry; // Inquiry 엔터티와 연결
-    
+    @OneToOne
+    @JoinColumn(name = "CSL_NO")
+    private Inquiry inquiry;
 }

@@ -1,5 +1,6 @@
 package com.Team4.web.service;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,8 +19,15 @@ public class GroupService {
 		return groupMapper.getgcList();
 	}
 	
-	public List<Map<String, Object>> getgcListWithSearch(String searchWord) {
-		return groupMapper.getgcListWithSearch(searchWord);
+	public List<Map<String, Object>> getgcListWithSearch(String searchWord, String category) {
+		Map<String, Object> searchInfo = new HashMap<>();
+		searchInfo.put("searchWord", searchWord);
+		searchInfo.put("category", category);
+		searchInfo.put("nowDate", LocalDateTime.now());
+		searchInfo.put("sevenDaysLater", LocalDateTime.now().plusDays(7));
+		searchInfo.put("dayOfMonth", LocalDateTime.now().getDayOfMonth());
+		
+		return groupMapper.getgcListWithSearch(searchInfo);
 	}
 
 	public List<Map<String, Object>> proDetail(int procd) {

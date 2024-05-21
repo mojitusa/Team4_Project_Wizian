@@ -15,7 +15,7 @@ public interface GroupMapper {
 
 	List<Map<String, Object>> getgcList();
 	
-	List<Map<String, Object>> getgcListWithSearch(String searchWord);
+	List<Map<String, Object>> getgcListWithSearch(Map<String, Object> searchInfo);
 
 	List<Map<String, Object>> getproDetail(int procd);
 
