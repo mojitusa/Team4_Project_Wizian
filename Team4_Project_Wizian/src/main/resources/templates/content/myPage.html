@@ -43,12 +43,6 @@
 
 	<!-- Main JS File -->
 	<script src="assets/js/main.js"></script>
-	<style>
-
-	</style>
-	<script>
-
-	</script>
 </head>
 
 <body class="index-page">
@@ -98,7 +92,6 @@
 				dataType: "JSON",
 				contentType: "application/json; charset=UTF-8",
 				success: function (result) {
-					console.log(result);
 					grid = new tui.Grid({
 						el: document.getElementById('grid'),
 						pageOptions: {
@@ -130,8 +123,6 @@
 							name: 'CSL_STATUS',
 						}]
 					});
-					grid.resetData(result);
-					console.log(grid.getData());
 					grid.on('click', ev => {
 						const rowKey = ev.rowKey; // 클릭된 행의 고유한 키 값 추출
 						const rowData = grid.getRow(rowKey); // 클릭된 행의 데이터 가져오기
@@ -159,7 +150,7 @@
 					if (!response.ok) {
 						throw new Error('네트워크 상태가 좋지 않습니다.');
 					}
-					return response.text(); 
+					return response.text();
 				})
 				.then(html => {
 					$('#counLog').html(html);
@@ -174,19 +165,47 @@
 			var dropdownContent = document.getElementById("dropdownOptions");
 			dropdownContent.classList.toggle("show");
 		}
-
 		function loadContent(contentFile) {
-			$.ajax({
-				url: contentFile,
-				type: 'get',
-				success: function (response) {
-					$('#counLog').html(response);
+			fetch(contentFile)
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Network response was not ok: ' + response.statusText);
+					}
+					return response.text();
+				})
+				.then(html => {
+					if (!html) {
+						throw new Error('Empty response received from server');
+					}
+					// 외부 HTML 파일의 내용을 특정 요소에 삽입
+					document.getElementById("counLog").innerHTML = html;
+
+					// HTML 파일 안에 포함된 스크립트 실행
+					const scripts = document.getElementById("counLog").getElementsByTagName("script");
+					for (let i = 0; i < scripts.length; i++) {
+						eval(scripts[i].innerText); // 스크립트 실행
+					}
+
+					// 그리드 영역에 있던 기존 그리드는 숨김 처리
 					$('#grid').hide();
-				},
-				error: function () {
-					$('#counLog').html('<p>콘텐츠를 불러오는 중 오류가 발생했습니다.</p>');
-				}
-			});
+					grid2.resetData(inquiries);
+					// 새로운 그리드를 보여주는 함수 호출
+					showGrid('grid2');
+				})
+				.catch(error => {
+					console.error('There was a problem with the fetch operation:', error);
+				});
+		}
+		function showGrid(gridId) {
+			if (gridId === 'grid') {
+				document.getElementById('grid').style.display = 'block';
+				document.getElementById('grid2').style.display = 'none';
+				initializeGrid1();
+			} else if (gridId === 'grid2') {
+				document.getElementById('grid2').style.display = 'block';
+				document.getElementById('grid').style.display = 'none';
+				initializeCounLog();
+			}
 		}
 
 		function loadInquiryHistory() {
@@ -196,6 +215,7 @@
 				dataType: "JSON",
 				contentType: "application/json; charset=UTF-8",
 				success: function (result) {
+					grid.resetData(result);
 					var h2 = '<h2>1:1 문의 내역</h2>'
 					var imgHtml = '<img src="/image/ono2.jpg" alt="Image" id="onoImage" class="right-aligned">';
 					grid.resetData(result);

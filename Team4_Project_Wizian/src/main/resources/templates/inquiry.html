@@ -17,36 +17,42 @@
 		</ul>
 	</div>
 	<div id="inquiryForm">
-		<form action="/receptioncomplete" method="post"
-			onsubmit="return validateForm()">
-			<label for="STUD_NO">학번</label> <input type="text" id="STUD_NO"
-				name="STUD_NO"><br> <label for="CSL_EMAIL">답변
-				수신 메일</label> <input type="email" id="CSL_EMAIL" name="CSL_EMAIL"><br>
+    <form action="/receptioncomplete" method="post" onsubmit="return validateForm()">
+        <input type="hidden" id="STUD_NO" name="STUD_NO" th:value="${studNo}"><br>
+        <label for="studNoSpan"><strong>학번:</strong></label> 
+        <span th:text="${studNo}" id="studNoSpan" style="font-size: 16px; font-weight: bold;"></span><br>
 
-			<label for="counselingCategory">문의</label> <select
-				id="counselingCategory" name="CSL_CATEGORY" onchange="showForm()">
-				<option value="">문의 유형을 선택하세요</option>
-				<option value="가입">가입 문의</option>
-				<option value="탈퇴">탈퇴 문의</option>
-				<option value="아이디 찾기">아이디 찾기 문의</option>
-				<option value="비밀번호 찾기">비밀번호 찾기 문의</option>
-				<option value="상담 이용 문의">상담 이용 문의</option>
-			</select><br> <label for="CSL_TITLE">제목</label><br> <input
-				type="text" id="CSL_TITLE" name="CSL_TITLE"><br> <label
-				for="CSL_CONTENT">문의 내용</label><br>
-			<textarea id="CSL_CONTENT" name="CSL_CONTENT"></textarea>
-			<br>
-			<br> <input type="submit" value="보내기">
-		</form>
-	</div>
+        <label for="counselingCategory"><strong>문의</strong></label> 
+        <select id="counselingCategory" name="CSL_CATEGORY" onchange="showForm()">
+            <option value="">문의 유형을 선택하세요</option>
+            <option value="가입">가입 문의</option>
+            <option value="탈퇴">탈퇴 문의</option>
+            <option value="비밀번호 변경">비밀번호 변경 문의</option>
+            <option value="홈페이지 오류">홈페이지 오류 문의</option>
+            <option value="건의 사항">건의 사항 문의</option>
+            <option value="상담 이용">상담 이용 문의</option>
+            <option value="기타">기타</option>
+        </select><br>
+        <label for="CSL_TITLE"><strong>제목</strong></label><br>
+        <input type="text" id="CSL_TITLE" name="CSL_TITLE" style="font-size: 18px;"><br>
+        <label for="CSL_CONTENT"><strong>문의 내용</strong></label><br>
+        <textarea id="CSL_CONTENT" name="CSL_CONTENT" rows="5" style="font-size: 18px;"></textarea>
+        <br>
+        <br>
+        <input type="submit" value="보내기">
+    </form>
+    </div>
 	<div>
 		<button id="inquiryBtn" onclick="showInquiryForm()">문의 등록</button>
 	</div>
 	<script>
-		function showInquiryForm() {
-			document.getElementById("inquiryForm").style.display = "block";
-			document.getElementById("inquiryHistory").style.display = "none";
-		}
+	function showInquiryForm() {
+        // 학번 표시
+        var studNo = document.getElementById("STUD_NO").value;
+        document.getElementById("studNoSpan").textContent = studNo;
+        // 폼 표시
+        document.getElementById("inquiryForm").style.display = "block";
+    }
 
 		function validateForm() {
 			var studNo = document.getElementById("STUD_NO").value;

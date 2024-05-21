@@ -11,7 +11,8 @@
 
 		UNION ALL
 
-		SELECT COUNT(*) AS count
+		SELECT COUNT(*) AS
+		count
 		FROM PRGRM_APP
 		WHERE SUBSTRING(STUD_NO, 1, 2) = #{secd}
 
@@ -19,7 +20,8 @@
 
 		SELECT COUNT(*) AS count
 		FROM PROFESSER_CONSULTATION
-		WHERE SUBSTRING(STUD_NO, 1, 2) = #{secd}
+		WHERE
+		SUBSTRING(STUD_NO, 1, 2) = #{secd}
 
 		UNION ALL
 
@@ -27,5 +29,23 @@
 		FROM CSL_APPLY
 		WHERE SUBSTRING(STUD_NO, 1, 2) = #{secd}
 		) AS cc;
+	</select>
+
+	<update id="updatePrivacy" parameterType="map">
+		UPDATE STUD_INFO AS si
+		INNER JOIN USERS AS u ON si.stud_no = u.user_no
+		SET si.MBR_TELNO =
+		#{phoneNumber},
+		u.email = #{email}
+		WHERE si.stud_no = #{studNo}
+	</update>
+
+
+	<select id="getAllBoard" parameterType="map" resultType="String">
+		SELECT *
+FROM PRGRM_APP pa
+JOIN PROFESSER_CONSULTATION pc ON pa.stud_no = pc.stud_no
+JOIN CSL_APPLY ca ON pa.stud_no = ca.stud_no
+WHERE pa.stud_no = #{userNo};
 	</select>
 </mapper>

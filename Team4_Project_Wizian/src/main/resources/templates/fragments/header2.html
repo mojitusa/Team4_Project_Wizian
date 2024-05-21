@@ -17,10 +17,7 @@
 		<div>
 			<img id="logo" src="/image/logo.jpg">
 		</div>
-		<div class="ml-auto"
-			th:if="${session.userNo == null}">
-			<a class="btn-getstarted" href="/login">로그인</a>
-		</div>
+
 		<div>
 			<div th:if="${session.userNo != null}" id="session" class="d-flex">
 				<form action="/logout" method="post">
@@ -38,9 +35,9 @@
 		</a>
 		<nav id="navmenu" class="navmenu">
 			<ul>
-				<li><a href="/career">취업/진로상담</a></li>
+				<li><a href="/ec">취업/진로상담</a></li>
 				<li><a href="/disability">장애상담</a></li>
-				<li><a href="/gender">성평등상담</a></li>
+				<li><a href="/sex">성 상담</a></li>
 				<li><a href="/psy">심리 상담</a></li>
 				<li><a href="/professor">지도교수 상담</a></li>
 				<li><a href="/group">집단 상담</a></li>

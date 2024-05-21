@@ -10,9 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.Team4.web.model.GroupModel;
 import com.Team4.web.service.GroupService;
 
 import jakarta.servlet.http.HttpSession;
@@ -150,4 +152,15 @@ public class GroupController {
 	        return "noLogin";
 	    }
 	}
+	
+    @GetMapping("/groupWrite")
+    public String groupWrite() {
+        return "content/groupWrite";
+    }
+    
+    public String groupWriteDetail(@RequestBody GroupModel groupModel) {
+        System.out.println(groupModel.getPRGRM_NM());
+
+        return "response";
+    }
 }

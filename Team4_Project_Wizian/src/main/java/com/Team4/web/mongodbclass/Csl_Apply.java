@@ -22,7 +22,7 @@ public class Csl_Apply {
 	private String id;
 	
 	@DBRef
-	private Student student;
+	private StudentMongo student;
 	
 	@DBRef
 	private CslSch cslSch;

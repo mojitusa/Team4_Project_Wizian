@@ -35,6 +35,7 @@ public class ReceptionController {
         inquiry.setCSL_CATEGORY(cslCategory);
         inquiry.setCSL_TITLE(cslTitle);
         inquiry.setCSL_CONTENT(cslContent);
+        inquiry.setCSL_STATUS("답변대기중");
         
         inquiryService.saveInquiry(inquiry);
         

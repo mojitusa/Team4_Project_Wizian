@@ -504,7 +504,7 @@ section, .section {
 }
 
 .rightContent {
-	padding: 30px 0;
+	padding: 30px ;
 	flex: 1;
 }
 

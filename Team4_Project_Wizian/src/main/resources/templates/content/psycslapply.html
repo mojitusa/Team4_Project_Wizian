@@ -54,7 +54,7 @@
 	        			<div class="table_row_colored2">
 	        				학번
 	        			</div>
-	        			<div class="table_row_uncolored" id="student_no" th:text=${student.users.user_no}>
+	        			<div class="table_row_uncolored" id="student_no" th:text=${student.studNo}>
 	        			</div>
 	        		</div>
 	        		<div class="table_row">
@@ -66,7 +66,7 @@
 	        			<div class="table_row_colored2">
 	        				소속
 	        			</div>
-	        			<div class="table_row_uncolored" id="student_cCd" th:text=${student.cCd}>
+	        			<div class="table_row_uncolored" id="student_cCd" th:text=${student.department.cNmk}>
 	        			</div>
 	        		</div>
 	        		<div class="table_row">
@@ -868,6 +868,7 @@
             // 서버 응답이 성공적일 때 수행할 동작을 여기에 작성합니다.
             // 서버에서 리다이렉트할 URL을 응답으로 보내면 그 URL을 사용하여 페이지 이동을 수행합니다.
             if (response.redirected) {
+            	alert("신청이 완료되었습니다.");
                 window.location.href = response.url; // 리다이렉트할 URL로 페이지 이동
             }
         })

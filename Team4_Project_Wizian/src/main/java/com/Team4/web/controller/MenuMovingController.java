@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.Team4.web.service.ProfCslInsertService;
-
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -22,19 +23,19 @@ public class MenuMovingController {
 	public String showTestPage() {
 		return "content/test";
 	}
-	@GetMapping("/ec")
-	public String showEcPage() {
-		return "content/ec";
-	}
 	
 	@GetMapping("/disability")
 	public String showDisabilityPage() {
 		return "content/disability";
 	}
-	
-	@GetMapping("/sex")
+	@GetMapping("/")
+	public String root(HttpSession httpSession, Model model) {
+	    HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+	    return "index";
+	}
+	@GetMapping("/gender")
 	public String showSexPage() {
-		return "content/sex";
+		return "content/gender";
 	}
 	
 	@GetMapping("/professor")
@@ -52,7 +53,17 @@ public class MenuMovingController {
 	}
 	
 	@GetMapping("/psy")
-	public String showPsychoPage() {
+	public String showPsychoPage(Model model, HttpSession session) {
+		String userNo = (String) session.getAttribute("userNo");
+
+	    if (userNo == null) {
+	        model.addAttribute("isLoggedIn", false);
+	        model.addAttribute("userNo", "null");
+	    } else {
+	        model.addAttribute("isLoggedIn", true);
+	        model.addAttribute("userNo", userNo);
+	    }
+	    
 		return "content/psycsl";
 	}
 	

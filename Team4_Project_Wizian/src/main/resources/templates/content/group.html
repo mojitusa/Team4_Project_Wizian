@@ -25,7 +25,7 @@
 
 <body class="index-page">
 	<header class="header">
-		<div th:replace="~{../templates/fragments/header}"></div></div>
+		<div th:replace="~{../templates/fragments/header}"></div>
 	</header>
   
   <main class="groupBox">
@@ -53,20 +53,25 @@
 		    		기간
 		    	</div>
 		    </div>		
-			<div class="search-box">
-			    <form id="searchForm" action="./group" method="get">
-			        <div class="category-selector">
-			            <label><input type="checkbox" name="category" value="001"> 모집중</label>
-			            <label><input type="checkbox" name="category" value="002"> 금일등록</label>
-			            <label><input type="checkbox" name="category" value="003"> 1주일 내 등록</label>
-			            <label><input type="checkbox" name="category" value="004"> 당일 마감</label>
-			            <label><input type="checkbox" name="category" value="005"> 1주일 내 마감</label>
-			            <label><input type="checkbox" name="category" value="006"> 모집마감</label>
-			        </div>
-			        <br>
-			        <input type="text" name="searchText" placeholder="프로그램명을 입력해 주세요">
-			        <button type="submit">검색</button>
-			    </form>
+			<div class="container">
+			    <div class="search-box">
+			        <form id="searchForm" action="./group" method="get">
+			            <div class="category-selector">
+			                <label><input type="checkbox" name="category" value="001"> 모집중</label>
+			                <label><input type="checkbox" name="category" value="002"> 금일등록</label>
+			                <label><input type="checkbox" name="category" value="003"> 1주일 내 등록</label>
+			                <label><input type="checkbox" name="category" value="004"> 당일 마감</label>
+			                <label><input type="checkbox" name="category" value="005"> 1주일 내 마감</label>
+			                <label><input type="checkbox" name="category" value="006"> 모집마감</label>
+			            </div>
+			            <br>
+			            <input type="text" name="searchText" placeholder="프로그램명을 입력해 주세요">
+			            <button type="submit">검색</button>
+			        </form>
+			    </div>
+			    <div class="write-box">
+			        <button class="write-button" th:onclick="|location.href='@{/groupWrite}'|">글쓰기</button>
+			    </div>
 			</div>
 			<br>
 			<div class="card" style="display: inline-block;" th:each="gc : ${gclist}">
@@ -131,7 +136,7 @@
     });
 </script>
   <footer id="footer">
-    <div th:replace="~{../templates/fragments/footer}"></div></div>
+    <div th:replace="~{../templates/fragments/footer}"></div>
   </footer>
 </body>
 
