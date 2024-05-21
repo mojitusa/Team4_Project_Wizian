@@ -1,138 +1,185 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>중앙 - 상담 시스템</title>
-
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <!-- jQuery UI -->
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-  <!-- SweetAlert -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
-  <link rel="stylesheet" href="./css/psycslapply.css" />  
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>중앙 - 상담 시스템</title>
+    <!-- Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/psycslapply.css" />
 </head>
 <style>
-	#updateBtn{
-		float: right;
-		margin-top: 10px;
-	}
-	
+    #updateBtn {
+        float: right;
+        margin-top: 10px;
+    }
+
+    #updateBtn2 {
+        float: left;
+        margin-top: 10px;
+    }
 </style>
-  <script>
-  </script>
+</head>
 <body class="index-page">
-  <main class="privacy">
-    <section id="privacySection">
-      <div class="container">
-        <div id="top">
-	        	<p class="title_text">나의 정보</p>
-	        	<form id="updateForm" action="/updatePrivacy" method="post">
-		        	<div id="top_table">
-		        		<div class="table_row">
-		        			<div class="table_row_colored">
-		        				이름
-		        			</div>
-		        			<div class="table_row_uncolored" id="student_name" th:text=${student.name}>
-		        			</div>
-		        			<div class="table_row_colored2">
-		        				학번
-		        			</div>
-		        			<input type="hidden" name="stud_no" th:value="${student.users.user_no}">
-		        			<div class="table_row_uncolored" id="student_no" th:text=${student.users.user_no}>
-		        			</div>
-		        		</div>
-		        		<div class="table_row">
-		        			<div class="table_row_colored">
-		        				생년월일
-		        			</div>
-		        			<div class="table_row_uncolored" id="student_birth" th:text=${student.birth}>
-		        			</div>
-		        			<div class="table_row_colored2">
-		        				소속
-		        			</div>
-		        			<div class="table_row_uncolored" id="student_cCd" th:text=${student.cCd}>
-		        			</div>
-		        		</div>
-		        		<div class="table_row">
-		        			<div class="table_row_colored">
-		        				<sapn style="color: red">* </sapn>연락처(H.P)
-		        			</div>
-		        			<div class="table_row_uncolored" >
-						            <input type="text" id="phoneNumberInput" name="phoneNumber" th:value="${student.telNo}">
-		        			</div>
-		        			<div class="table_row_colored2">
-		        				<sapn style="color: red">* </sapn>E-Mail
-		        			</div>
-		        			<div class="table_row_uncolored">
-						            <input type="text" id="email" name="email" th:value="${student.users.email}">
-		        			</div>
-		        		</div>
-		        		<div class="table_row">
-		        			<div class="table_row_colored">
-		        				재학종류
-		        			</div>
-		        			<div class="table_row_uncolored" id="student_st" th:text=${student.st}>
-		        			</div>
-		        			<div class="table_row_colored2">
-		        				휴학기간
-		        			</div>
-		        			<div class="table_row_uncolored">
-		        				-
-		        			</div>
-		        		</div>
-		        	</div>
-	        	<button id="updateBtn" class="btn btn-primary" type="submit">수정하기</button>
-	        </form>
-	        </div>
-      </div>
-    </section>
-  </main>
-  
-</body>
-<script>
-    $(document).ready(function () {
-      $('#updateBtn').click(function(event) {
-        event.preventDefault(); // 기본 폼 제출 동작 방지
-        $.ajax({
-          url: '/updatePrivacy',
-          type: 'post',
-          data: $('#updateForm').serialize(),
-          success: function(response) {
-            // 성공 시 SweetAlert2를 사용하여 알림 표시
-            Swal.fire({
-              title: '알림',
-              text: response,
-              icon: 'success'
+    <main class="privacy">
+        <section id="privacySection">
+            <div class="container">
+                <div id="top">
+                    <form id="updateForm" action="/updatePrivacy" method="post">
+                        <p class="title_text">나의 정보</p>
+                        <div id="top_table">
+                            <div class="table_row">
+                                <div class="table_row_colored">이름</div>
+                                <div class="table_row_uncolored" id="student_name" th:text="${studInfo['STUD_NM']}"></div>
+                                <div class="table_row_colored2">학번</div>
+                                <input type="hidden" name="stud_no" th:value="${studInfo['user_no']}">
+                                <div class="table_row_uncolored" id="student_no">
+                                    <div th:text="${studInfo['STUD_NO']}"></div>
+                                </div>
+                            </div>
+                            <div class="table_row">
+                                <div class="table_row_colored">생년월일</div>
+                                <div class="table_row_uncolored" id="student_birth" th:text="${studInfo['BIRTHDAY']}"></div>
+                                <div class="table_row_colored2">소속</div>
+                                <div class="table_row_uncolored" id="student_cCd" th:text="${studInfo['C_CD']}"></div>
+                            </div>
+                            <div class="table_row">
+                                <div class="table_row_colored">
+                                    <span style="color: red">* </span>
+                                    연락처(H.P)
+                                </div>
+                                <div class="table_row_uncolored">
+                                    <input type="text" id="phoneNumberInput" name="phoneNumber" th:value="${studInfo['MBR_TELNO']}">
+                                </div>
+                                <div class="table_row_colored2">
+                                    <span style="color: red">* </span>
+                                    E-Mail
+                                </div>
+                                <div class="table_row_uncolored">
+                                    <input type="text" id="email" name="email" th:value="${studInfo['email']}">
+                                </div>
+                            </div>
+                            <div class="table_row">
+                                <div class="table_row_colored">재학종류</div>
+                                <div class="table_row_uncolored" id="student_st" th:text="${studInfo['ST']}"></div>
+                                <div class="table_row_colored2">휴학기간</div>
+                                <div class="table_row_uncolored">-</div>
+                            </div>
+                        </div>
+                        <button id="updateBtn" class="btn btn-primary" type="submit">수정하기</button>
+                        <button id="updateBtn2" class="btn btn-primary" type="button" data-toggle="modal" data-target="#passwordModal">비밀번호 변경하기</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 기존 비밀번호 확인 모달 -->
+    <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="passwordModalLabel">비밀번호 확인</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="password" class="form-control" id="originalPassword" placeholder="기존의 비밀번호를 입력하세요">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-primary" id="submitOriginalPassword">확인</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 비밀번호 변경 모달 -->
+    <div class="modal fade" id="updatePasswordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="passwordModalLabel">새로운 비밀번호 설정</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="password" class="form-control" id="newPassword" placeholder="새로운 비밀번호를 입력하세요">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-primary" id="submitNewPassword">확인</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#submitOriginalPassword").click(function() {
+                var originalPassword = $("#originalPassword").val();
+                // AJAX를 통해 비밀번호 확인
+                fetch('/updatePwCheck', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ originalPassword: originalPassword }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.valid) {
+                        // 비밀번호 확인이 성공하면 비밀번호 확인 모달 닫기
+                        $('#passwordModal').modal('hide');
+                        // 비밀번호 변경 모달 열기
+                        $('#updatePasswordModal').modal('show');
+                    } else {
+                        // 올바르지 않은 비밀번호인 경우 알림
+                        alert("올바른 비밀번호를 입력하세요.");
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert("비밀번호가 올바르지 않습니다");
+                });
             });
-          },
-          error: function(xhr, status, error) {
-            // 오류 발생 시 SweetAlert2를 사용하여 알림 표시
-            Swal.fire({
-              title: '오류',
-              text: '프라이버시 정보 업데이트에 실패했습니다.',
-              icon: 'error'
+
+            // 새로운 비밀번호 설정 버튼 클릭 이벤트
+            $("#submitNewPassword").click(function() {
+                var newPassword = $("#newPassword").val();
+                // AJAX를 통해 새 비밀번호 업데이트
+                $.ajax({
+                    url: '/updatePw',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ newPassword: newPassword }),
+                    success: function(response) {
+                        // 비밀번호 변경 성공 시 SweetAlert로 알림 표시
+                        Swal.fire({
+                            title: '알림',
+                            text: response,
+                            icon: 'success'
+                        }).then((result) => {
+                            // 확인 버튼 클릭 시 비밀번호 변경 모달 닫기
+                            $('#updatePasswordModal').modal('hide');
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        // 비밀번호 변경 실패 시 SweetAlert로 알림 표시
+                        Swal.fire({
+                            title: '오류',
+                            text: '비밀번호 변경에 실패했습니다.',
+                            icon: 'error'
+                        });
+                        console.error(xhr.responseText);
+                    }
+                });
             });
-            console.error(xhr.responseText);
-          }
         });
-      });
-    });
-  </script>
+    </script>
+</body>
 </html>
+                        

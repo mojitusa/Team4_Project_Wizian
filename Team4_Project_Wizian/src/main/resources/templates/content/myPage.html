@@ -178,24 +178,38 @@
 						throw new Error('Empty response received from server');
 					}
 					// 외부 HTML 파일의 내용을 특정 요소에 삽입
-					document.getElementById("counLog").innerHTML = html;
+					const container = document.getElementById("counLog");
+					container.innerHTML = html;
 
 					// HTML 파일 안에 포함된 스크립트 실행
-					const scripts = document.getElementById("counLog").getElementsByTagName("script");
-					for (let i = 0; i < scripts.length; i++) {
-						eval(scripts[i].innerText); // 스크립트 실행
+					const scripts = container.getElementsByTagName("script");
+					for (let script of scripts) {
+						const newScript = document.createElement("script");
+						if (script.src) {
+							newScript.src = script.src;
+						} else {
+							newScript.textContent = script.textContent;
+						}
+						document.head.appendChild(newScript).parentNode.removeChild(newScript); // 스크립트를 동적으로 추가하고 제거하여 실행
 					}
 
 					// 그리드 영역에 있던 기존 그리드는 숨김 처리
 					$('#grid').hide();
 					grid2.resetData(inquiries);
+
 					// 새로운 그리드를 보여주는 함수 호출
 					showGrid('grid2');
+					grid2.refreshLayout();
 				})
 				.catch(error => {
 					console.error('There was a problem with the fetch operation:', error);
 				});
 		}
+
+		// DOMContentLoaded 이벤트 리스너 추가
+		document.addEventListener('DOMContentLoaded', () => {
+			loadContent('myCounLog');
+		});
 		function showGrid(gridId) {
 			if (gridId === 'grid') {
 				document.getElementById('grid').style.display = 'block';
@@ -223,6 +237,7 @@
 					$('#counLog').append(h2);
 					$('#counLog').append(imgHtml);
 					$('#grid').show();
+					grid.refreshLayout();
 				},
 				error: function () {
 					$('#counLog').html('<p>1:1 문의 내역을 불러오는 중 오류가 발생했습니다.</p>');
