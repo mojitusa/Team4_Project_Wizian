@@ -49,24 +49,24 @@
 	        			<div class="table_row_colored">
 	        				이름
 	        			</div>
-	        			<div class="table_row_uncolored" th:text=${student.name}>
+	        			<div class="table_row_uncolored" id="student_name" th:text=${student.name}>
 	        			</div>
 	        			<div class="table_row_colored2">
 	        				학번
 	        			</div>
-	        			<div class="table_row_uncolored" th:text=${student.users.user_no}>
+	        			<div class="table_row_uncolored" id="student_no" th:text=${student.studNo}>
 	        			</div>
 	        		</div>
 	        		<div class="table_row">
 	        			<div class="table_row_colored">
 	        				생년월일
 	        			</div>
-	        			<div class="table_row_uncolored" th:text=${student.birth}>
+	        			<div class="table_row_uncolored" id="student_birth" th:text=${student.birth}>
 	        			</div>
 	        			<div class="table_row_colored2">
 	        				소속
 	        			</div>
-	        			<div class="table_row_uncolored" th:text=${student.cCd}>
+	        			<div class="table_row_uncolored" id="student_cCd" th:text=${student.department.cNmk}>
 	        			</div>
 	        		</div>
 	        		<div class="table_row">
@@ -75,7 +75,7 @@
 	        			</div>
 	        			<div class="table_row_uncolored" >
 					        <form id="phoneNumberForm">
-					            <input type="text" id="phoneNumberInput" th:value="${student.telNo}">
+					            <input type="text" id="phoneNumberInput" name="phoneNumber" th:value="${student.telNo}">
 					        </form>	        				
 	        			</div>
 	        			<div class="table_row_colored2">
@@ -83,7 +83,7 @@
 	        			</div>
 	        			<div class="table_row_uncolored">
 					        <form id="emailForm">
-					            <input type="text" id="email" th:value="${student.users.email}">
+					            <input type="text" id="email" name="email" th:value="${student.users.email}">
 					        </form>	        				
 	        			</div>
 	        		</div>
@@ -91,7 +91,7 @@
 	        			<div class="table_row_colored">
 	        				재학종류
 	        			</div>
-	        			<div class="table_row_uncolored" th:text=${student.st}>
+	        			<div class="table_row_uncolored" id="student_st" th:text=${student.st}>
 	        			</div>
 	        			<div class="table_row_colored2">
 	        				휴학기간
@@ -118,8 +118,6 @@
 							  <input type="radio" id="mil4" name="mil" value="해당없음">
 							  <label for="hd">해당없음</label>	        					
 	        				</form>
-	        				<form id="milForm">
-	        				</form>
 	        			</div>
 	        			<div class="table_row_colored2">
 	        				종교
@@ -135,7 +133,7 @@
 							  <input type="radio" id="mil4" name="rel" value="무교">
 							  <label for="mp">무교</label><br>
 							  <div style="height:5px"></div>	        					
-							  <input type="radio" id="mil4" name="rel" value="기타">
+							  <input type="radio" id="mil4" name="rel" value="종교 기타">
 							  <label for="hd">기타</label>	        					
 	        				</form>
 	        			</div>
@@ -169,12 +167,12 @@
 		        				<label for="sexual">성희롱고충상담</label>
 		        			</div>
 		        			<div class="checkbox_wrapper">
-		        				<input type="checkbox" id="etc" name="purpose" value="기타">
+		        				<input type="checkbox" id="purpose_etc_check" name="purpose" value="방문목적 기타">
 		        				<label for="etc">기타</label>
 		        			</div>
 	        			</form>
 	        			<div class="etc_one_row_container">
-	        				<input type="text" class="etc" name="purposeEtc">
+	        				<input type="text" class="etc" id="purposeEtc" name="purposeEtc" placeholder="  기타 사항을 적어 주세요.">
 	        			</div>
 	        		</div>
 	        	</div>
@@ -204,12 +202,12 @@
 		        				<label for="cslcenter">상담센터 홈페이지</label>
 		        			</div>
 		        			<div class="checkbox_wrapper">
-		        				<input type="checkbox" id="etc" name="purpose" value="기타">
+		        				<input type="checkbox" id="route_etc_check" name="route" value="방문경로 기타">
 		        				<label for="etc">기타</label>
 		        			</div>
 	        			</form>
 	        			<div class="etc_one_row_container">
-	        				<input type="text" class="etc" name="routeEtc">
+	        				<input type="text" class="etc" id="routeEtc" name="routeEtc" placeholder="  기타 사항을 적어 주세요.">
 	        			</div>
 	        		</div>
 	        	</div>
@@ -235,10 +233,10 @@
 	        			</div>
 	        			<div id="etc_two_rows_container">
 	        				<div class="etc_two_rows_container_each">
-	        					<input type="text" id="etc_half1" name="expdate" placeholder="  상담을 받아보신 날짜를 입력해 주세요.">
+	        					<input type="text" id="expDate" name="expDate" placeholder="  상담을 받아보신 날짜를 입력해 주세요.">
 	        				</div>
 	        				<div class="etc_two_rows_container_each">
-	        					<input type="text" id="etc_half2" name="exploc" placeholder="  상담을 받아보신 장소를 입력해 주세요.">
+	        					<input type="text" id="expLoc" name="expLoc" placeholder="  상담을 받아보신 장소를 입력해 주세요.">
 	        				</div>
 	        			</div>
 	        		</div>
@@ -314,13 +312,13 @@
 			        				<label for="psytest14">스트레스 측정기</label>
 			        			</div>
 		        				<div class="checkbox_wrapper">
-			        				<input type="checkbox" id="psytest15" name="psytest" value="기타">
+			        				<input type="checkbox" id="psytest15" name="psytest" value="심리검사 종류 기타">
 			        				<label for="psytest15">기타</label>
 			        			</div>
 			        		</div>	
 	        			</form>
 	        			<div class="etc_one_row_container">
-	        				<input type="text" class="etc" name="psyTestEtc" placeholder="  기타 사항을 적어 주세요.">
+	        				<input type="text" class="etc" id="psyTestEtc" name="psyTestEtc" placeholder="  기타 사항을 적어 주세요.">
 	        			</div>
 	        		</div>
 	        	</div>	        	
@@ -361,13 +359,13 @@
 			        				<label for="personalSubject6">성희롱, 성추행, 성폭력 관련 문제</label>
 			        			</div>
 		        				<div class="checkbox_wrapper">
-			        				<input type="checkbox" id="personalSubject7" name="personalSubject" value="기타">
+			        				<input type="checkbox" id="personalSubject7" name="personalSubject" value="개인 상담문제 기타">
 			        				<label for="personalSubject7">기타</label>
 			        			</div>
 			        		</div>	
 	        			</form>
 	        			<div class="etc_one_row_container">
-	        				<input type="text" class="etc" name="personalSubjectEtc" placeholder="  기타 사항을 적어 주세요.">
+	        				<input type="text" class="etc" id="personalSubjectEtc" name="personalSubjectEtc" placeholder="  기타 사항을 적어 주세요.">
 	        			</div>
 	        		</div>
 	        	</div>	        	
@@ -401,28 +399,27 @@
 	        				<div class="main_table_row_uncolored_form_div">
 		        				<div class="checkbox_wrapper">
 			        				<input type="checkbox" id="groupSubject5" name="groupSubject" value="또래상담자 훈련">
-			        				<label for="groupSubject5">성희롱, 성추행, 성폭력 관련 문제</label>
+			        				<label for="groupSubject5">또래상담자 훈련</label>
 			        			</div>
 		        				<div class="checkbox_wrapper">
 			        				<input type="checkbox" id="groupSubject6" name="groupSubject" value="유학생 미술치료 프로그램">
-			        				<label for="groupSubject6">기타</label>
+			        				<label for="groupSubject6">유학생 미술치료 프로그램</label>
 			        			</div>
 		        				<div class="checkbox_wrapper">
 			        				<input type="checkbox" id="groupSubject7" name="groupSubject" value="진로집단상담">
 			        				<label for="groupSubject7">진로집단상담</label>
 			        			</div>
 		        				<div class="checkbox_wrapper">
-			        				<input type="checkbox" id="groupSubject8" name="groupSubject" value="기타">
+			        				<input type="checkbox" id="groupSubject8" name="groupSubject" value="집단상담 기타">
 			        				<label for="groupSubject8">기타</label>
 			        			</div>
 			        		</div>	
 	        			</form>
 	        			<div class="etc_one_row_container">
-	        				<input type="text" class="etc" name="groupSubjectEtc" placeholder="  기타 사항을 적어 주세요.">
+	        				<input type="text" class="etc" id="groupSubjectEtc" name="groupSubjectEtc" placeholder="  기타 사항을 적어 주세요.">
 	        			</div>
 	        		</div>
 	        	</div>	        	
-	        </div>
 	        <div id="bottom1">
 	        	<div id="bottom1_title">
 	        		<p class="title_text">긴급연락처</p>
@@ -665,7 +662,10 @@
 	    noteInput.setAttribute("placeholder", " 비고");
 	    delBtn.textContent = "삭제";
 	    
-	    
+	    nameInput.setAttribute("name", "emerName");
+	    relInput.setAttribute("name", "relation");
+	    telInput.setAttribute("name", "emerTel");
+	    noteInput.setAttribute("name", "emerNote");
 	    
 	    nameInput.className = "bottom1_table_row_ele_input";
 	    relInput.className = "bottom1_table_row_ele_input";
@@ -779,10 +779,104 @@
     }
     
 	document.getElementById('next-page-button').addEventListener('click', function() {
-	    console.log(selectedData); // 선택한 데이터 테스트 출력
+	    collectFormData(selectedData);
 	});
+	
+	
 
-     
+    // Function to collect form data
+    function collectFormData(selectedData) {
+    	const studentName = document.getElementById('student_name').textContent;
+    	const studentNo = document.getElementById('student_no').textContent;
+    	const studentBirth = document.getElementById('student_birth').textContent;
+    	const studentcCd = document.getElementById('student_cCd').textContent;
+    	const phoneNumber = document.getElementById('phoneNumberInput').value;
+    	const email = document.getElementById('email').value;
+    	const student_st = document.getElementById('student_st').textContent;
+    	
+    	let mil = document.querySelector('input[name="mil"]:checked');
+    	let rel = document.querySelector('input[name="rel"]:checked');
+    	
+    	if(!mil) {
+			alert("군목부를 선택해 주세요.");
+			return;
+    	} else if (!rel) {
+			alert("종교를 입력해 주세요.");
+			return;
+    	}
+    	
+		mil = mil.value;
+		rel = rel.value;
+    	
+   		
+    	
+    	
+        // Create an object to hold form data
+        const formData = {
+            studentName,
+            studentNo,
+            studentBirth,
+            studentcCd,
+            student_st,
+            mil,
+            rel,
+            phoneNumber,
+            email,
+        };	
+    	
+	    // Collect optional fields with fallback to null
+   		if (document.getElementById('purposeEtc')) formData.purposeEtc = document.getElementById('purposeEtc').value;
+   		if (document.getElementById('routeEtc')) formData.routeEtc = document.getElementById('routeEtc').value;
+   		if (document.querySelector('input[name="exp"]:checked')) formData.exp = document.querySelector('input[name="exp"]:checked').value;
+   		if (document.getElementById('expdate')) formData.expdate = document.getElementById('expdate').value;
+   		if (document.getElementById('expLoc')) formData.expLoc = document.getElementById('expLoc').value;
+   		if (document.getElementById('psyTestEtc')) formData.psyTestEtc = document.getElementById('psyTestEtc').value;
+   		if (document.getElementById('personalSubjectEtc')) formData.personalSubjectEtc = document.getElementById('personalSubjectEtc').value;
+   		if (document.getElementById('groupSubjectEtc')) formData.groupSubjectEtc = document.getElementById('groupSubjectEtc').value;
+   		
+     	// Collect selected checkboxes
+    	const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+    	const selectedCheckboxes = Array.from(checkboxes).map(checkbox => checkbox.value);
+    	if (selectedCheckboxes) formData.selectedCheckboxes = selectedCheckboxes;
+   		
+        // Collect emergency contact data
+        const emergencyContactRows = document.querySelectorAll('.bottom1_table_row');
+        const emergencyContacts = Array.from(emergencyContactRows).map(row => {
+            return {
+                emerName: row.querySelector('input[name="emerName"]') ? row.querySelector('input[name="emerName"]').value : null,
+                relation: row.querySelector('input[name="relation"]') ? row.querySelector('input[name="relation"]').value : null,
+                emerTel: row.querySelector('input[name="emerTel"]') ? row.querySelector('input[name="emerTel"]').value : null,
+                emerNote: row.querySelector('input[name="emerNote"]') ? row.querySelector('input[name="emerNote"]').value : null
+            };
+        });
+        if (selectedData) formData.reservation = selectedData;
+        
+        if (emergencyContacts) formData.emergencyContacts = emergencyContacts;
+        
+        // Send the data to the server
+        fetch('/psycslapplysubmit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            // 서버 응답이 성공적일 때 수행할 동작을 여기에 작성합니다.
+            // 서버에서 리다이렉트할 URL을 응답으로 보내면 그 URL을 사용하여 페이지 이동을 수행합니다.
+            if (response.redirected) {
+            	alert("신청이 완료되었습니다.");
+                window.location.href = response.url; // 리다이렉트할 URL로 페이지 이동
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // 오류 처리
+        });
+        
+    }
         
 </script> 
   

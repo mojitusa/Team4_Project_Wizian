@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org">
+<head>
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<header id="top"
+		class="d-flex justify-content-between align-items-center">
+		<div>
+			<img id="logo" src="/image/logo.jpg">
+		</div>
+
+		<div>
+			<div th:if="${session.userNo != null}" id="session" class="d-flex">
+				<form action="/logout" method="post">
+					<button type="submit" class="btn btn-dark">로그아웃</button>
+				</form>
+			</div>
+		</div>
+	</header>
+
+	<div
+		class="container-fluid d-flex align-items-center justify-content-between">
+		<a href="/index"
+			class="logo d-flex align-items-center me-auto me-xl-0">
+			<h1 class="sitename">중앙 상담 센터</h1>
+		</a>
+		<nav id="navmenu" class="navmenu">
+			<ul>
+				<li><a href="/ec">취업/진로 상담</a></li>
+				<li><a href="/disability">장애 상담</a></li>
+				<li><a href="/gender">성평등 상담</a></li>
+				<li><a href="/psy">심리 상담</a></li>
+				<li><a href="/professor">지도교수 상담</a></li>
+				<li><a href="/group">집단 상담</a></li>
+				<li th:if="${session.userNo != null}"><a
+					th:if="${#strings.startsWith(session.userNo, '11')}" href="/myPage">마이
+						페이지</a> <a th:if="${#strings.startsWith(session.userNo, '12')}"
+					href="/myProf">마이 페이지</a> <a
+					th:if="${#strings.startsWith(session.userNo, '13')}"
+					href="/counselor">마이 페이지</a></li>
+
+			</ul>
+		</nav>
+	</div>
+</body>
+</html>

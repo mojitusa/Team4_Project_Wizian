@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>중앙 - 상담 시스템</title>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <!-- jQuery UI -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <!-- SweetAlert -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- moment.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <!-- Tempus Dominus Bootstrap 4 datetimepicker CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet">
+  <!-- Tempus Dominus Bootstrap 4 datetimepicker JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.3.5/jquery.timepicker.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.3.5/jquery.timepicker.min.js"></script>
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/group.css" rel="stylesheet">
+</head>
+
+<body class="index-page">
+  <header class="header">
+    <div th:replace="~{../templates/fragments/header}"></div>
+  </header>
+
+  <main class="groupBox">
+    <section id="groupWriteSection">
+      <div class="gcpage3">
+        <div class="gcpa">상담 등록</div>
+        <br>
+        <form>
+          <div class="gcgroupRegisterBox1">
+            <div class="nameBox1">프로그램 이름</div>
+            <div class="gcgroupRegisterInput1">
+              <input type="text" name="PRGRM_NM" required placeholder="프로그램 이름을 입력하세요.">
+            </div>
+            <div class="nameBox2">정원</div>
+            <div class="gcgroupRegisterInput3">
+              <input type="number" name="NOPE" required placeholder="정원을 입력하세요.">
+            </div>
+          </div>
+          <br>
+          <div class="gcgroupRegisterBox1">
+            <div class="nameBox1">모집시작일정</div>
+            <div class="gcgroupRegisterInput2">
+              <input type="text" id="SCHDL_BGNG_YMD" name="SCHDL_BGNG_YMD" required placeholder="모집시작 날짜를 입력하세요.">
+            </div>
+            <div class="nameBox2">모집끝일정</div>
+            <div class="gcgroupRegisterInput3">
+              <input type="text" id="SCHDL_END_YMD" name="SCHDL_END_YMD" required placeholder="모집끝 날짜를 입력하세요.">
+            </div>
+          </div>
+          <div class="gcgroupRegisterBox1">
+            <div class="nameBox1">집단상담 날짜</div>
+            <div class="gcgroupRegisterInput2">
+              <input type="text" id="GC_DT_DATE" name="GC_DT_DATE" required placeholder="상담 날짜를 입력하세요.">
+            </div>
+			<div class="nameBox1">집단상담 시간</div>
+            <div class="gcgroupRegisterInput2">
+              <input type="text" id="GC_DT_TIME" name="GC_DT_TIME" required placeholder="상담 시간을 입력하세요.">
+            </div>
+          </div>
+          <div class="gcgroupRegisterBox1">
+            <div class="nameBox1">집단상담 유형</div>
+            <div class="gcgroupRegisterInput2">
+              <input type="text" name="PRGRM_TYPE" required placeholder="프로그램 유형을 입력하세요.">
+            </div>
+            <div class="nameBox2">주최기관명</div>
+            <div class="gcgroupRegisterInput3">
+              <input type="text" name="GC_OG_NM" required placeholder="주최기관 이름을 입력하세요.">
+            </div>
+          </div>
+          <br>
+          <div class="gcgroupRegisterBox1">
+            <div class="nameBox1">집단상담 개요</div>
+            <div class="gcgroupRegisterInput4">
+              <textarea name="counselingContent" required placeholder="프로그램에 대한 설명을 입력하세요."></textarea>
+            </div>
+          </div>
+          <div class="gcgroupRegisterBox1">
+            <div class="nameBox1">집단상담 포스터</div>
+            <div class="gcgroupRegisterInput4">
+              <textarea name="posterContent" required></textarea>
+            </div>
+          </div>
+          <div class="submit-button">
+            <button id="validate-button" type="button" style="margin-left: 10px; width: 100px; height: 40px;">양식검사</button>
+            <button id="submit-button" type="submit" style="margin-left: 10px; width: 100px; height: 40px; display:none;" disabled>등록하기</button>
+          </div>
+        </form>
+        <br><br>
+        <div style="display: flex; justify-content: space-between;">
+          <div>
+            <a th:href="@{./group }">
+              <button id="cancelBtn" style="margin-left: 10px; width: 100px; height: 40px;">취 소</button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<script>
+$(document).ready(function() {
+    // Datepicker 설정
+    $("#SCHDL_BGNG_YMD, #SCHDL_END_YMD, #GC_DT_DATE").datepicker({
+        dateFormat: "yy_mm_dd" // 날짜 형식 설정
+    });
+
+    $('#GC_DT_TIME').timepicker({
+        format: 'HH:mm', // 시간 형식 설정
+        showMeridian: false // am/pm 표기 숨기기
+    });
+
+    $('#validate-button').click(function() {
+        // 유효성 검사 플래그
+        var isValid = true;
+
+        // 입력값 가져오기
+        var GC_DT_DATE = $('#GC_DT_DATE').val(); // GC_DT_DATE 입력 필드에서 날짜 값을 가져옴
+        var GC_DT_TIME = $('#GC_DT_TIME').val(); // GC_DT_TIME 입력 필드에서 시간 값을 가져옴
+        // 날짜와 시간을 연결하여 GC_DT 생성
+        var GC_DT = GC_DT_DATE + ' ' + GC_DT_TIME;
+        
+        var PRGRM_NM = $('input[name="PRGRM_NM"]').val();
+        var SCHDL_BGNG_YMD = $('input[name="SCHDL_BGNG_YMD"]').val();
+        var SCHDL_END_YMD = $('input[name="SCHDL_END_YMD"]').val();
+        var NOPE = $('input[name="NOPE"]').val();
+        var PRGRM_TYPE = $('input[name="PRGRM_TYPE"]').val();
+        var GC_OG_NM = $('input[name="GC_OG_NM"]').val();
+        var counselingContent = $('textarea[name="counselingContent"]').val();
+        var posterContent = $('textarea[name="posterContent"]').val();
+		
+        // 유효성 검사 함수 정의
+        function validateDate(dateString) {
+            var regex = /^\d{4}_\d{2}_\d{2}$/; // YYYY_MM_DD 형식 검사
+            return regex.test(dateString);
+        }
+
+        // 유효성 검사
+        if (!PRGRM_NM || !SCHDL_BGNG_YMD || !SCHDL_END_YMD || !GC_DT || !NOPE || !PRGRM_TYPE || !GC_OG_NM || !counselingContent || !posterContent) {
+            isValid = false;
+            Swal.fire({
+                title: "입력되지 않은 항목이 있습니다.",
+                icon: "error",
+                confirmButtonText: "확인"
+            });
+            return; // 유효성 검사 실패 시 나머지 검사 생략
+        }
+
+        if (!validateDate(SCHDL_BGNG_YMD) || !validateDate(SCHDL_END_YMD)) {
+            isValid = false;
+            Swal.fire({
+                title: "잘못된 형식의 날짜 또는 시간이 있습니다.",
+                icon: "error",
+                confirmButtonText: "확인"
+            });
+            return; // 유효성 검사 실패 시 나머지 검사 생략
+        }
+		
+		// SCHDL_END_YMD가 SCHDL_BGNG_YMD보다 이후인지 확인
+		var startDate = new Date(SCHDL_BGNG_YMD.replace(/_/g, '-'));
+		var endDate = new Date(SCHDL_END_YMD.replace(/_/g, '-'));
+		if (endDate <= startDate) {
+		    isValid = false;
+		    Swal.fire({
+		        title: "종료일은 시작일보다 뒤에 있어야 합니다.",
+		        icon: "error",
+		        confirmButtonText: "확인"
+		    });
+		    return; // 유효성 검사 실패 시 나머지 검사 생략
+		}
+		
+		// GC_DT_DATE가 SCHDL_END_YMD보다 이후인지 확인
+		var gcDate = new Date(GC_DT_DATE.replace(/_/g, '-'));
+		if (gcDate <= endDate) {
+		    isValid = false;
+		    Swal.fire({
+		        title: "일정 날짜는 종료일보다 뒤에 있어야 합니다.",
+		        icon: "error",
+		        confirmButtonText: "확인"
+		    });
+		    return; // 유효성 검사 실패 시 나머지 검사 생략
+		}
+		
+        // 유효성 검사 통과시 등록 버튼 활성화 및 유효성 검사 버튼 숨기기
+        if (isValid) {
+            Swal.fire({
+                title: "유효성 검사를 통과했습니다.",
+                icon: "success",
+                confirmButtonText: "확인"
+            });
+            $('#validate-button').hide();
+            $('#submit-button').prop('disabled', false).show();
+        } else {
+            Swal.fire({
+                title: "입력한 정보의 양식이 잘못되었습니다!",
+                icon: "error",
+                confirmButtonText: "확인"
+            });
+        }
+    });
+
+	$('#submit-button').click(function(event) {
+	    event.preventDefault(); // 기본 이벤트 동작을 막음
+	
+	    // 입력값 가져오기
+	    var GC_DT_DATE = $('#GC_DT_DATE').val(); // GC_DT_DATE 입력 필드에서 날짜 값을 가져옴
+	    var GC_DT_TIME = $('#GC_DT_TIME').val(); // GC_DT_TIME 입력 필드에서 시간 값을 가져옴
+	    // 날짜와 시간을 연결하여 GC_DT 생성
+	    var GC_DT = GC_DT_DATE + ' ' + GC_DT_TIME;
+	
+	    var PRGRM_NM = $('input[name="PRGRM_NM"]').val();
+	    var SCHDL_BGNG_YMD = $('input[name="SCHDL_BGNG_YMD"]').val();
+	    var SCHDL_END_YMD = $('input[name="SCHDL_END_YMD"]').val();
+	    var NOPE = $('input[name="NOPE"]').val();
+	    var PRGRM_TYPE = $('input[name="PRGRM_TYPE"]').val();
+	    var GC_OG_NM = $('input[name="GC_OG_NM"]').val();
+	    var counselingContent = $('textarea[name="counselingContent"]').val();
+	    var posterContent = $('textarea[name="posterContent"]').val();
+	
+	    // 유효성 검사 함수 정의
+	    function validateDate(dateString) {
+	        var regex = /^\d{4}_\d{2}_\d{2}$/; // YYYY_MM_DD 형식 검사
+	        return regex.test(dateString);
+	    }
+	
+	    // 유효성 검사
+	    if (!PRGRM_NM || !SCHDL_BGNG_YMD || !SCHDL_END_YMD || !GC_DT || !NOPE || !PRGRM_TYPE || !GC_OG_NM || !counselingContent || !posterContent) {
+	        Swal.fire({
+	            title: "입력되지 않은 항목이 있습니다.",
+	            icon: "error",
+	            confirmButtonText: "확인"
+	        });
+	        return; // 유효성 검사 실패 시 등록 중단
+	    }
+	
+	    if (!validateDate(SCHDL_BGNG_YMD) || !validateDate(SCHDL_END_YMD)) {
+	        Swal.fire({
+	            title: "잘못된 형식의 날짜 또는 시간이 있습니다.",
+	            icon: "error",
+	            confirmButtonText: "확인"
+	        });
+	        return; // 유효성 검사 실패 시 등록 중단
+	    }
+	
+	    // SCHDL_END_YMD가 SCHDL_BGNG_YMD보다 이후인지 확인
+	    var startDate = new Date(SCHDL_BGNG_YMD.replace(/_/g, '-'));
+	    var endDate = new Date(SCHDL_END_YMD.replace(/_/g, '-'));
+	    if (endDate <= startDate) {
+	        Swal.fire({
+	            title: "종료일은 시작일보다 뒤에 있어야 합니다.",
+	            icon: "error",
+	            confirmButtonText: "확인"
+	        });
+	        return; // 유효성 검사 실패 시 등록 중단
+	    }
+	
+	    // GC_DT_DATE가 SCHDL_END_YMD보다 이후인지 확인
+	    var gcDate = new Date(GC_DT_DATE.replace(/_/g, '-'));
+	    if (gcDate <= endDate) {
+	        Swal.fire({
+	            title: "일정 날짜는 종료일보다 뒤에 있어야 합니다.",
+	            icon: "error",
+	            confirmButtonText: "확인"
+	        });
+	        return; // 유효성 검사 실패 시 등록 중단
+	    }
+	
+	    // 모든 유효성 검사를 통과한 경우, 등록 요청 보내기
+	    $.ajax({
+	        type: 'POST',
+	        url: '/groupWrite',
+	        data: {
+	            PRGRM_NM: PRGRM_NM,
+	            SCHDL_BGNG_YMD: SCHDL_BGNG_YMD,
+	            SCHDL_END_YMD: SCHDL_END_YMD,
+	            GC_DT: GC_DT,
+	            NOPE: NOPE,
+	            PRGRM_TYPE: PRGRM_TYPE,
+	            GC_OG_NM: GC_OG_NM,
+	            counselingContent: counselingContent,
+	            posterContent: posterContent
+	        },
+	        success: function(response) {
+	            if (response === "success") {
+	                Swal.fire({
+	                    title: "프로그램 등록이 완료되었습니다.",
+	                    icon: "success",
+	                    confirmButtonText: "확인"
+	                }).then(function() {
+	                    window.location.href = "/group";
+	                });
+	            } else {
+	                Swal.fire({
+	                    title: "프로그램 등록이 실패하였습니다.",
+	                    icon: "warning",
+	                    confirmButtonText: "확인"
+	                });
+	            }
+	        },
+	        error: function(xhr, status, error) {
+	            Swal.fire({
+	                title: "프로그램 등록이 실패하였습니다.",
+	                icon: "warning",
+	                confirmButtonText: "확인"
+	            });
+	        }
+	    });
+	});
+});
+</script>
+  <footer id="footer">
+    <div th:replace="~{../templates/fragments/footer}"></div>
+  </footer>
+</body>
+</html>

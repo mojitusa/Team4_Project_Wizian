@@ -22,7 +22,7 @@ public class Csl_Apply {
 	private String id;
 	
 	@DBRef
-	private Student student;
+	private StudentMongo student;
 	
 	@DBRef
 	private CslSch cslSch;
@@ -37,7 +37,7 @@ public class Csl_Apply {
     //이하는 심리상담에만 해당하는 요소
     private Date SecretAgree;
     private Date personalInfoAgree;
-    private Date delicateInfoAgree;
+    private Date delicaFormDatateInfoAgree;
     
 
 }

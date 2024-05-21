@@ -130,12 +130,12 @@ input[type="radio"] + label {
 	width: 50%;
 }
 
-#etc_half1 {
+#expDate {
 	width: calc(100% - 4px);
 	padding-right: 4px;
 }
 
-#etc_half2 {
+#expLoc {
 	width: calc(100% - 4px);
 	padding-left: 2px;
 }

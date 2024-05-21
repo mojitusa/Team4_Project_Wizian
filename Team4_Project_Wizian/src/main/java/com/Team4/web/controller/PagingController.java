@@ -18,16 +18,10 @@ public class PagingController {
  
     private final PagingService pagingService;
  
-    // @PageableDefault(page = 1) : page는 기본으로 1페이지를 보여준다.
     @GetMapping("/posts/paging")
     public String paging(@PageableDefault(page = 0) Pageable pageable, Model model) {
         Page<Inquiry> postsPages = pagingService.paging(pageable);
  
-        /**
-         * blockLimit : page 개수 설정
-         * 현재 사용자가 선택한 페이지 앞 뒤로 3페이지씩만 보여준다.
-         * ex : 현재 사용자가 4페이지라면 2, 3, (4), 5, 6
-         */
         int blockLimit = 3;
         int startPage = Math.max(0, ((pageable.getPageNumber() / blockLimit) - 1) * blockLimit + 1);
         int endPage = Math.min((startPage + blockLimit - 1), postsPages.getTotalPages());

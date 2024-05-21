@@ -1,5 +1,6 @@
 package com.Team4.web.controller;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.Team4.web.service.GroupService;
 
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -25,22 +27,21 @@ public class GroupController {
 	
 	@GetMapping("/group")
 	public String showGroupPage(@RequestParam(value = "searchText", required = false, defaultValue = "") String searchWord, 
-								@RequestParam(value = "category", required = false) String category, Model model) {
+								@RequestParam(value = "category", required = false) String category, Model model, HttpSession session) {
 		
-		System.out.println("검색어 입력 테스트 : " + searchWord);
-		System.out.println("카테고리 검색 : " + category);
-		
-		if ((searchWord != null && !searchWord.isEmpty()) || (category != null && !category.isEmpty())) {
-		    
-		    List<Map<String, Object>> gclist = groupService.getgcListWithSearch(searchWord, category);
-		    model.addAttribute("gclist", gclist);
-		    System.out.println("파라미터 값이 있는 gclist의 값은 ? " + gclist);
-		    
-		}  else {
-			List<Map<String, Object>> gclist = groupService.gclist();
-			model.addAttribute("gclist", gclist);
-			System.out.println("gclist의 값은 ? " + gclist);
+		if((session.getAttribute("userNo")) != null) {
+			String userNumber = (String) session.getAttribute("userNo");
+			String userCode = userNumber.substring(0, 2);
+			model.addAttribute("userCode", userCode);
 		}
+		
+		List<Map<String, Object>> gclist = null;
+		if ((searchWord != null && !searchWord.isEmpty()) || (category != null && !category.isEmpty())) {
+		    gclist = groupService.getgcListWithSearch(searchWord, category);
+		} else {
+		    gclist = groupService.gclist();
+		}
+		model.addAttribute("gclist", gclist);
 		
 		return "content/group";
 	}
@@ -118,9 +119,6 @@ public class GroupController {
 	    String studNumber = (String) session.getAttribute("userNo");
 	    String studName = (String) session.getAttribute("username");
 	    
-	    System.out.println("학번 : " + studNumber);
-	    System.out.println("프로그램 코드 : " + proCode);
-	    
 	    if (studNumber != null && studName != null) {
 	        
 	        Map<String, Object> programCancelDate = groupService.getProgramCancelDate(proCode);
@@ -133,7 +131,6 @@ public class GroupController {
 	                return "dateOver";
 	            }
 	        }
-	        
 	        // 중복 검사 체크
 	        if (!groupService.checkDuplicate(studNumber, proCode)) {
 	            System.out.println("유효성 검사가 정상적으로 작동하였습니다.");
@@ -150,4 +147,86 @@ public class GroupController {
 	        return "noLogin";
 	    }
 	}
+	
+    @PostMapping("/groupWritePath")
+    @ResponseBody
+    public String groupWritePost(HttpSession session) {
+    	String userNumber = (String) session.getAttribute("userNo");
+    	if (userNumber == null || userNumber.length() < 2) {
+    	    return "login";
+    	}
+
+    	String userNumberPrefix = userNumber.substring(0, 2);
+
+    	if (!userNumberPrefix.equals("10") && !userNumberPrefix.equals("13")) {
+    	    return "wrongAccess";
+    	}
+        return "success";
+    }
+	
+    @GetMapping("/groupWrite")
+    public String groupWrite(HttpSession session) {
+    	String userCode = (String) session.getAttribute("SE_CD");
+    	if(userCode.equals("13")) {
+    		return "content/groupWrite";
+    	} else {
+    		return "/login";
+    	}
+    }
+    
+    @PostMapping("/groupWrite")
+    public void groupWrite(
+        @RequestParam(name = "PRGRM_NM", required = false, defaultValue = "") String PRGRM_NM,
+        @RequestParam(name = "SCHDL_BGNG_YMD", required = false, defaultValue = "") String SCHDL_BGNG_YMD,
+        @RequestParam(name = "SCHDL_END_YMD", required = false, defaultValue = "") String SCHDL_END_YMD,
+        @RequestParam(name = "GC_DT", required = false, defaultValue = "") String GC_DATE,
+        @RequestParam(name = "NOPE", required = false, defaultValue = "") int NOPE,
+        @RequestParam(name = "PRGRM_TYPE", required = false, defaultValue = "") String PRGRM_TYPE,
+        @RequestParam(name = "GC_OG_NM", required = false, defaultValue = "") String GC_OG_NM,
+        @RequestParam(name = "counselingContent", required = false, defaultValue = "") String counselingContent,
+        @RequestParam(name = "posterContent", required = false, defaultValue = "") String posterContent,
+        HttpServletResponse response, HttpSession session) {
+    	
+    	String userNumber = (String) session.getAttribute("userNo");
+        String GC_DT = convertDateFormat(GC_DATE);
+        
+        // 원하는 로직 수행
+        int result = groupService.insertRegister(PRGRM_NM, SCHDL_BGNG_YMD, SCHDL_END_YMD, GC_DT, NOPE, PRGRM_TYPE, GC_OG_NM, counselingContent, posterContent, userNumber);
+        
+        if (result == 1) {
+            try {
+                response.getWriter().write("success"); // 성공을 나타내는 문자열을 반환
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                response.getWriter().write("false"); // 실패를 나타내는 문자열을 반환
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    private static String convertDateFormat(String inputDate) {
+        // am 또는 pm 제거
+        String cleanDate = inputDate.replaceAll("(am|pm)", "").trim();
+
+        // 띄어쓰기를 통해 날짜와 시간 분리
+        String[] parts = cleanDate.split(" ");
+        String datePart = parts[0]; // 날짜 부분
+        String timePart = parts[1]; // 시간 부분
+
+        // 24시 형식으로 변환
+        String[] timeParts = timePart.split(":");
+        int hour = Integer.parseInt(timeParts[0]);
+        if (timePart.toLowerCase().endsWith("pm")) {
+            hour += 12; // 오후일 경우 12시간 추가
+        }
+        String convertedTimePart = String.format("%02d:%s", hour, timeParts[1]);
+        
+        return datePart + " " + convertedTimePart + ":00";
+    }
+
 }

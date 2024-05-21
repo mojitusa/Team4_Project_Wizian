@@ -64,4 +64,21 @@ public class GroupService {
         return groupMapper.getProgramCancelDate(proCode);
     }
 
+	public int insertRegister(String pRGRM_NM, String sCHDL_BGNG_YMD, String sCHDL_END_YMD, String gC_DT, int nOPE,
+			String pRGRM_TYPE, String gC_OG_NM, String counselingContent, String posterContent, String userNumber) {
+		Map<String, Object> registerInfo = new HashMap<>();
+		registerInfo.put("pRGRM_NM", pRGRM_NM);
+		registerInfo.put("sCHDL_BGNG_YMD", sCHDL_BGNG_YMD);
+		registerInfo.put("sCHDL_END_YMD", sCHDL_END_YMD);
+		registerInfo.put("gC_DT", gC_DT);
+		registerInfo.put("nOPE", nOPE);
+		registerInfo.put("pRGRM_TYPE", pRGRM_TYPE);
+		registerInfo.put("gC_OG_NM", gC_OG_NM);
+		registerInfo.put("counselingContent", counselingContent);
+		registerInfo.put("posterContent", posterContent);
+		registerInfo.put("userNumber", userNumber);
+		
+		return groupMapper.insertRegister(registerInfo);
+	}
+
 }

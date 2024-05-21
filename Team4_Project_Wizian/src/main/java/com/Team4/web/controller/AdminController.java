@@ -5,8 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Team4.web.service.AdminService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class AdminController {
@@ -15,8 +18,41 @@ public class AdminController {
 	private AdminService adminService;
 	
 	@GetMapping("/admin")
-	public String admin(){
-		return "/admin/admin";
+	public String admin(HttpSession httpSession){
+		Object userNoObj = httpSession.getAttribute("user_no");
+        if (userNoObj == null) {
+            return "redirect:/login";
+        }
+        
+        String userNo = userNoObj.toString();
+        String userNoPrefix = userNo.length() >= 2 ? userNo.substring(0, 2) : "";
+
+        switch (userNoPrefix) {
+            case "10":
+                return "redirect:/admin/admin";
+            case "11":
+                return "redirect:/index";
+            case "12":
+                return "redirect:/index";
+            default:
+                return "redirect:/login";
+        }
+	}
+	@GetMapping("/myProf")
+	public String conselor(HttpSession httpSession, RedirectAttributes redirectAttributes){
+		Object userNoObj = httpSession.getAttribute("userNo");
+        if (userNoObj == null) {
+            return "/login";
+        }
+        
+        String userNo = userNoObj.toString();
+        String userNoPrefix = userNo.length() >= 2 ? userNo.substring(0, 2) : "";
+
+        if (userNoPrefix.equals("12")) {
+			return "/profcusl/myProf";
+		} else {
+	        return "/index";
+		}
 	}
 	
 	@PostMapping("/studSignUp")

@@ -50,8 +50,7 @@ public class Inquiry {
     private Date CSL_DATE = new Date();
     
     @Column(name = "CSL_STATUS")
-    // 접수상태 0: 접수중 , 1: 상담완료
-    private String CSL_STATUS;
+    private String CSL_STATUS = "답변대기중";
 
 	
     	

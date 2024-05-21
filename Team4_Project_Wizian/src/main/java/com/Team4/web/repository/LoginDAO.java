@@ -29,5 +29,13 @@ public class LoginDAO {
 	    return sqlSession.selectOne("getName", userNo);
 	}
 
+	public Map<String, Object> getInfoPro(String userNo) {
+		return sqlSession.selectOne("getInfoPro",userNo);
+	}
+
+	public Map<String, Object> getInfoCounselor(String userNo) {
+		return sqlSession.selectOne("getInfoCounselor", userNo);
+	}
+
 
 }
