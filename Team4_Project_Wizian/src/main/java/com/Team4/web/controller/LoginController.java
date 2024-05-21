@@ -89,7 +89,7 @@ public class LoginController {
             		String TEL_NO = (String) userInfoCoun.get("TEL_NO");
             		String CSL_LOC = (String) userInfoCoun.get("CSL_LOC");
             		String NON_FACE = (String) userInfoCoun.get("NON_FACE");
-            		String ONLINE = (String) userInfoCoun.get("ONLINE");
+            		int ONLINE = (int) userInfoCoun.get("ONLINE");
             		String CHAT = (String) userInfoCoun.get("CHAT");
             		String ISRT_TIME = (String) userInfoCoun.get("ISRT_TIME");
             		String ISRT_IP = (String) userInfoCoun.get("ISRT_IP");
@@ -97,6 +97,7 @@ public class LoginController {
             		String UDP_IP = (String) userInfoCoun.get("UDP_IP");
             		String DEL = (String) userInfoCoun.get("DEL");
             		String DEL_IP = (String) userInfoCoun.get("DEL_IP");
+            		session.setAttribute("SE_CD", userPrefix);
             		session.setAttribute("userNo", USER_NO);
             		session.setAttribute("C_CD", C_CD);
             		session.setAttribute("CSL_DETAIL", CSL_DETAIL);

@@ -3,6 +3,94 @@
 /*--------------------------------------------------------------
 # group Section
 --------------------------------------------------------------*/
+.upBox {
+    background-color: #ffe5b4; /* 살구색 배경색 */
+    padding: 20px; /* 내부 여백 */
+    border-radius: 10px; /* 둥근 모서리 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    margin-bottom: 20px; /* 아래 여백 */
+}
+
+.upBox .gcpa {
+    font-size: 24px; /* 큰 글자 크기 */
+    font-weight: bold; /* 굵은 글자 */
+    margin-bottom: 10px; /* 아래 여백 */
+}
+
+.upBox p {
+    font-size: 16px; /* 일반 텍스트 크기 */
+    margin: 5px 0; /* 상하 여백 */
+}
+
+.upBox .programType {
+    font-size: 22px; /* 중간 크기 텍스트 */
+    font-weight: bold; /* 굵은 글자 */
+    margin-bottom: 5px; /* 아래 여백 */
+}
+
+.upBox .category-selector label {
+    display: block; /* 블록 요소로 표시 */
+    margin: 5px 0; /* 상하 여백 */
+}
+
+.upBox .container {
+    display: flex; /* Flexbox 레이아웃 사용 */
+    justify-content: space-between; /* 공간을 균등하게 분배 */
+    align-items: center; /* 수직 가운데 정렬 */
+}
+
+.upBox .search-box {
+    flex: 1; /* 가변 크기 */
+}
+
+.upBox .search-box form {
+    display: flex; /* Flexbox 레이아웃 사용 */
+    flex-wrap: wrap; /* 줄바꿈 허용 */
+    gap: 10px; /* 요소 간 간격 */
+}
+
+.upBox .search-box input[type="text"] {
+    flex: 1; /* 가변 크기 */
+    padding: 8px; /* 내부 여백 */
+    border: 1px solid #ccc; /* 테두리 */
+    border-radius: 5px; /* 둥근 모서리 */
+}
+
+.upBox .search-box button {
+    padding: 8px 16px; /* 내부 여백 */
+    border: none; /* 테두리 제거 */
+    background-color: #007bff; /* 파란색 배경 */
+    color: white; /* 흰색 글자 */
+    border-radius: 5px; /* 둥근 모서리 */
+    cursor: pointer; /* 마우스 포인터 변경 */
+}
+
+.upBox .search-box button:hover {
+    background-color: #0056b3; /* 어두운 파란색 배경 (호버 시) */
+}
+
+.upBox .write-box {
+    margin-left: 20px; /* 왼쪽 여백 */
+}
+
+.upBox .write-box .write-button {
+    padding: 8px 16px; /* 내부 여백 */
+    border: none; /* 테두리 제거 */
+    background-color: #28a745; /* 녹색 배경 */
+    color: white; /* 흰색 글자 */
+    border-radius: 5px; /* 둥근 모서리 */
+    cursor: pointer; /* 마우스 포인터 변경 */
+}
+
+.upBox .write-box .write-button:hover {
+    background-color: #218838; /* 어두운 녹색 배경 (호버 시) */
+}
+
+.gcpaGroup{
+	text-align: center;
+	font-weight: bolder;
+ 	font-size: 30px;
+}
 
  .gcpage1{
     width: 100vh; /* 예시로 너비를 80%로 설정 */
@@ -148,6 +236,7 @@
 .programType{
 	font-size: 20px;
 	font-weight: bold;
+	margin-left: 10px;
 }
 
 .card {
@@ -158,19 +247,48 @@
     margin-right: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
+    border-radius: 5% !important;
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05); 
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2), 8px 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 #gcdFont{
 	font-size: 20px;
 }
 
+.applyDueDate{
+	font-size: 15px;
+}
+
+.gcDate{
+	font-size: 15px;
+}
 .applyMember{
 	float: right;
 	font-weight: bold;
+	background-color: #98FB98;
+	border-radius: 8% !important;
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    width: 60%;
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
 }
 
 .applyNopePossibility{
-	background-color: aqua;
+	background-color: #7fffd4;
+	border-radius: 8% !important;
+	display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
 }
 
 .gcgroupApplyBox1{
@@ -269,6 +387,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: 18px;
 }
 
 .search-box {
