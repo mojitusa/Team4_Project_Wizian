@@ -5,5 +5,9 @@
 	<insert id="insertProfCslData" parameterType="com.Team4.web.model.ProfCslInsertModel" >
 		INSERT INTO PROFESSER_CONSULTATION (PFCS_YMD, PFCS_TIME, PFCS_CN, STUD_NO, PFCS_STATUS, PF_SCD_NO, PF_NO)
 		VALUES (#{PFCS_YMD}, #{PFCS_TIME}, #{PFCS_CN}, 1100000001, 1, 3, 2017125001)
-	</insert>    
+	</insert>
+	
+	<select id="searchProfDepartment" parameterType="String" resultType="map">
+		SELECT C_NMK FROM DEPT_CD WHERE C_NMK LIKE CONCAT('%', #{department}, '%')
+	</select>    
 </mapper>

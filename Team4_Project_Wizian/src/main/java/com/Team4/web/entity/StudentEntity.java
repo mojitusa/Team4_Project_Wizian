@@ -21,14 +21,14 @@ import lombok.NoArgsConstructor;
 public class StudentEntity {
 	
 	@Id
-	@Column(name = "USER_NO")
+	@Column(name = "STUD_NO")
 	private String userNoInStudent;
 	
     @OneToOne
-    @JoinColumn(name = "USER_NO") // 외래 키 및 참조할 엔티티의 기본 키 지정
+    @JoinColumn(name = "STUD_NO") // 외래 키 및 참조할 엔티티의 기본 키 지정
     private UsersEntity users;
 
-    @Column(name = "STUD_NO")
+    @Column(name = "REAL_STUD_NO")
     private String studNo;
     
     @Column(name = "ST")

@@ -47,7 +47,6 @@ public class AdminController {
         
         String userNo = userNoObj.toString();
         String userNoPrefix = userNo.length() >= 2 ? userNo.substring(0, 2) : "";
-        System.out.println("동작확인2"+userNoPrefix);
 
         if (userNoPrefix.equals("12")) {
 			return "/profcusl/myProf";

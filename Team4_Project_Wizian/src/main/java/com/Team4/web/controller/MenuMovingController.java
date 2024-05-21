@@ -16,10 +16,6 @@ public class MenuMovingController {
 	public String showTestPage() {
 		return "content/test";
 	}
-	@GetMapping("/ec")
-	public String showEcPage() {
-		return "content/ec";
-	}
 	
 	@GetMapping("/disability")
 	public String showDisabilityPage() {
@@ -30,9 +26,9 @@ public class MenuMovingController {
 	    HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
 	    return "index";
 	}
-	@GetMapping("/sex")
+	@GetMapping("/gender")
 	public String showSexPage() {
-		return "content/sex";
+		return "content/gender";
 	}
 	
 	@GetMapping("/professor")
