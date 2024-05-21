@@ -13,7 +13,7 @@
 	</select>    
 	
 	<select id="profSearchById" parameterType="String" resultType="map">
-		SELECT PF_NM, PF_TELNO, PF_CS_PART, PF_CS_PART_DETAIL, PF_PLC_NM FROM PROFESSER 
+		SELECT PF_NM, PF_TELNO, PF_CS_PART, PF_CS_PART_DETAIL, PF_PLC_NM, PF_NO FROM PROFESSER 
 		WHERE USER_NO = #{userNo}
 	</select>
 </mapper>
