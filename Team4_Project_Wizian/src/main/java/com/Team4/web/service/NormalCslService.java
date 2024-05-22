@@ -1,18 +1,19 @@
 package com.Team4.web.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.Team4.web.entity.CslApplyEntity;
 import com.Team4.web.entity.CslScheduleEntity;
 import com.Team4.web.entity.CslorEntity;
 import com.Team4.web.entity.StudentEntity;
 import com.Team4.web.mongodbclass.CslApplyMongo;
 import com.Team4.web.mongodbrepository.CslApplyRepoMongo;
+import com.Team4.web.repository.CounselApplyRepoJpa;
 import com.Team4.web.repository.CounselorRepoJpa;
 import com.Team4.web.repository.CslScheduleRepoJpa;
 import com.Team4.web.repository.StudentRepoJpa;
@@ -31,6 +32,9 @@ public class NormalCslService {
 	
 	@Autowired
 	CslApplyRepoMongo cslApplyRepoMongo;
+	
+	@Autowired
+	CounselApplyRepoJpa cslApplyRepoJpa;
 
 	public List<CslorEntity> getJpaCounselorByCareer() {
 		
@@ -51,6 +55,17 @@ public class NormalCslService {
 	}
 
 	public void saveCslApply(CslApplyMongo cslApply) {
+		StudentEntity student = studentRepoJpa.findByStudNo(cslApply.getStudNo());
+		CslorEntity couselor = counselorRepoJpa.findById(cslApply.getCslorNo()).orElse(null);
+		CslApplyEntity cslApp = new CslApplyEntity();
+		cslApp.setCate(cslApply.getCate());
+		cslApp.setStudent(student);
+		cslApp.setCounselor(couselor);
+		cslApp.setDate(cslApply.getDate());
+		cslApp.setTime(cslApply.getTime());
+		cslApp.setCslDetail(cslApply.getCslApplyText());
+		cslApplyRepoJpa.save(cslApp);
+		
 		cslApplyRepoMongo.save(cslApply);
 		CslScheduleEntity schedule = cslScheduleRepo.findById(Integer.parseInt(cslApply.getSchNo())).orElse(null);
 		schedule.setIsbook("5");
