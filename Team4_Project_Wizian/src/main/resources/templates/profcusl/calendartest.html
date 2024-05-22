@@ -44,13 +44,6 @@
 <!-- Main CSS File -->
 <link href="assets/css/main.css" rel="stylesheet">
 <style type="text/css">
-html, body {
-	margin: 0;
-	padding: 0;
-	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-	font-size: 14px;
-}
-
 #calendar {
 	max-width: 800px;
 	margin: 40px auto;
@@ -68,7 +61,7 @@ html, body {
 	background-color: #0056b3;
 }
 
-.modal-overlay {
+div.modal-overlay {
 	display: none;
 	position: fixed;
 	top: 0;
@@ -79,29 +72,32 @@ html, body {
 	z-index: 10; /* 모달보다 아래 */
 }
 
-.modal {
-	display: none;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background: white;
-	padding: 20px;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	z-index: 20; /* 오버레이보다 위 */
+div.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    z-index: 20; /* 오버레이보다 위 */
+    max-width: 60%; /* 모달의 최대 너비를 화면 너비의 80%로 설정 */
+    max-height: 60%; /* 모달의 최대 높이를 화면 높이의 80%로 설정 */
+    overflow: auto; /* 모달 내용이 넘칠 경우 스크롤바를 추가 */
 }
 
-.modal-header {
+div.modal-header {
 	font-size: 18px;
 	font-weight: bold;
 }
 
-.modal-body {
+div.modal-body {
 	margin-top: 10px;
 }
 
-.modal-footer {
+div.modal-footer {
 	text-align: right;
 }
 </style>
@@ -127,7 +123,29 @@ html, body {
 				<div id="event-modal" class="modal">
 					<div class="modal-header modal-title">상담신청</div>
 					<div class="modal-body">
-						Event Info+++++<br>
+						<p>
+				            상담시간: <span id="event-time"></span>
+				        </p>
+				        <p>
+				            상담일자: <span id="event-date"></span>
+				        </p>
+				        <label for="csl-content">상담내용:</label>
+				        <textarea id="csl-content" name="cslContent"></textarea>
+				        <p>
+				            교수님 번호: <span id="prof-no"></span>
+				        </p>
+				        <p>
+				            상담 장소: <span id="prof-plc-nm"></span>
+				        </p>
+				        <p>
+				            전화번호: <span id="prof-telno"></span>
+				        </p>
+				        <p>
+				            상담 세부 사항: <span id="pf-cs-part-detail"></span>
+				        </p>
+				        <p>
+				            상담 부서: <span id="pf-cs-part"></span>
+				        </p>
 						<p>
 							상담시간: <span id="event-time">11</span>
 						</p>
@@ -366,11 +384,8 @@ function generateEventsForAllTimes() {
 				success: function(data){
 					if(data.length > 0) {
 						console.log(data);
-		                var professor = data[0]; // 첫 번째 교수 정보를 사용
-		                
-		                $('.modal-title').append('<br>'+professor.pf_NO); // 모달 타이틀에 추가
-		                $('.modal-body').append('<br>상담장소: ' + professor.pf_PLC_NM + '<br>' +
-		                                        '전화번호: ' + professor.pf_TELNO); // 모달 내용에 추가
+	                    $('#event-modal').show();
+	                    $('#modal-overlay').show();
 		            } else {
 		                console.log('No data received');
 		            }
@@ -422,8 +437,8 @@ function generateEventsForAllTimes() {
 			    
 
                      
-		          // 모달 표시
-		         $('#event-modal').show();
+    			$('#event-modal').css('display', 'block');
+    		    $('#modal-overlay').css('display', 'block');
 		     }
 		});
 		
