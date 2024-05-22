@@ -1,12 +1,14 @@
 package com.Team4.web.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Team4.web.entity.Inquiry;
+import com.Team4.web.mongodbrepository.InquiryDAO;
 import com.Team4.web.repository.InquiryRepository;
 
 @Service
@@ -14,6 +16,8 @@ public class InquiryService {
 
     private final InquiryRepository inquiryRepository;
 
+    @Autowired
+    private InquiryDAO inquiryDAO;
     @Autowired
     public InquiryService(InquiryRepository inquiryRepository) {
         this.inquiryRepository = inquiryRepository;
@@ -63,5 +67,9 @@ public class InquiryService {
             inquiryRepository.save(inquiry);
         }
     }
+
+	public List<Map<String, Object>> getCounselBoard(String category, String userNo) {
+		return inquiryDAO.getCounselBoard(category, userNo);
+	}
 
 }

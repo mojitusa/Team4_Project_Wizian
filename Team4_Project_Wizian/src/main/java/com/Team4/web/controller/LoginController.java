@@ -23,7 +23,9 @@ public class LoginController {
     private Util util;
     @PostMapping("/login")
     public String logIn(@RequestParam("user_no") String id, @RequestParam("pw") String pw, HttpSession session, Model model) {
+    	System.out.println(pw);
     	String pw2 = util.encryptSHA256(pw);
+    	System.out.println(pw2);
         boolean loggedIn = loginService.checkLogin(id, pw2);
         if (loggedIn == false) {
         	model.addAttribute("errorMessage", "입력한 정보가 올바르지 않습니다. 다시 시도해주세요.");
@@ -86,7 +88,6 @@ public class LoginController {
             	if (loggedIn && id.toString().substring(0, 2).equals("13")) {
             		System.out.println("13동작홗인");
             		Map<String, Object> userInfoCoun = loginService.getInfoCounselor(id);
-            		System.out.println(userInfoCoun);
             		String USER_NO = (String) userInfoCoun.get("USER_NO");
             		String C_CD = (String) userInfoCoun.get("C_CD");
             		String CSL_DETAIL = (String) userInfoCoun.get("CSL_DETAIL");
