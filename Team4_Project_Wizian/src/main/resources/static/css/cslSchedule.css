@@ -1,0 +1,214 @@
+@charset "UTF-8";
+
+#calendar {
+  margin: 20px 0;
+}
+#calendar table {
+  width: 100%;
+  border-collapse: collapse;
+}
+#calendar th, #calendar td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+#calendar th {
+  background-color: #f2f2f2;
+}
+.week-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.calendar-button {
+  padding: 5px 10px;
+  margin: 2px;
+}
+
+.div_hidden {
+	display: none;
+}
+
+    table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    width: 130px;
+    height: 60px;
+    border: 1px solid #ddd;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.calendar-button {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    border-radius: 6px; /* 둥근 가장자리 */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.available-button {
+    background-color: #3a86ff;
+    color: white;
+    font-weight: bold;
+}
+
+.completed-button {
+    background-color: #caf0f8;
+    color: #00b4d8;
+    font-weight: bold;
+}
+
+/* 모달 전체 영역 */
+div.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5); /* 배경 투명도 조절 */
+    overflow: auto;
+}
+
+
+/* 모달 내용 */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 900px;
+}
+
+/* 닫기 버튼 */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+div.modal-content {
+	margin-top: 100px;
+	padding: 0;
+	border-radius: 2%; /* 버튼을 원형으로 만듭니다. */
+overflow: hidden; /* 자식 요소가 부모 div를 넘어가지 않도록 합니다. */
+}
+
+.modal-content_top {
+	padding: 40px 35px;
+}
+
+#modal_top {
+	margin-bottom: 40px;
+}
+
+#modal_top_title {
+	font-size: 30px;
+	font-weight: bold;
+	
+}
+
+#modal_mid_title {
+	font-weight: bold;
+	font-size: 18px;
+	margin-bottom: 20px;
+}
+
+#modal_mid_table1 {
+	margin-bottom: 40px;
+}
+
+#modal_mid_table2 {
+	margin-bottom: 20px;
+}
+
+.modal_mid_table1_row_top {
+	border-top: 2px solid black;
+}
+
+.modal_mid_table1_row1 {
+	display: grid;
+	grid-template-columns: 150px 300px 150px 300px; /* 각 열의 너비를 자동으로 설정 */
+	border-bottom: 1px solid #E6E6E6;
+}
+
+.modal_mid_table1_row2 {
+	display: grid;
+	grid-template-columns: 150px 750px; /* 각 열의 너비를 자동으로 설정 */
+	border-bottom: 1px solid #E6E6E6;
+}
+
+.colered {
+	padding: 14px;
+	background-color: #edf2fb;
+	text-align: center;
+}
+
+.uncolered {
+	padding: 14px;
+	align-items: center; /* 수직 가운데 정렬 */
+	
+}
+
+span.close {
+	width: 50px;
+	height: 50px;
+	background-color: #1b263b;
+	text-align: center;
+	display: flex;
+	justify-content: center; /* 수평 가운데 정렬 */
+	align-items: center; /* 수직 가운데 정렬 */
+	padding-bottom: 7px;
+    color: white; /* 닫기 버튼의 텍스트 색상 */
+	font-size: 28px; /* 닫기 버튼의 텍스트 크기 */
+	font-weight: bold; /* 닫기 버튼의 텍스트 굵기 */
+	cursor: pointer; /* 커서 모양 변경 */
+	border-radius: 5%; /* 버튼을 원형으로 만듭니다. */	
+}    
+
+#modal_bottom {
+	font-size: 26px;
+	font-weight: bold;
+	text-align: center;
+	align-items: center;
+	padding: 0;
+	height: 70px;
+	background-color: #1b263b;
+	color: white;
+	cursor: pointer; /* 손가락 모양의 커서로 설정 */
+ 	display: grid;
+	grid-template-columns: 1fr 1fr;
+
+}
+
+.modal_submit {
+    background-color: #023e8a;
+    height: 100%;
+    display: flex;
+    justify-content: center; /* 가로 정렬 */
+    align-items: center; /* 세로 정렬 */
+    text-align: center;
+}	
+
+#modalText {
+	width: 90%;
+}

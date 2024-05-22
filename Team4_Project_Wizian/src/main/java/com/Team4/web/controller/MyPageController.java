@@ -1,7 +1,6 @@
 package com.Team4.web.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.Team4.web.entity.Inquiry;
 import com.Team4.web.service.InquiryService;
 import com.Team4.web.service.MyPageService;
 import com.Team4.web.service.PsyCslService;
@@ -124,14 +121,14 @@ public class MyPageController {
 		}
 	}
 
-	@GetMapping("/counselHistory")
-	@ResponseBody
-	public Map<String, Object> inquiryHistoryJson(HttpSession httpSession) {
-		String userNo = (String) httpSession.getAttribute("userNo");
-		List<Inquiry> inquiries = myPageService.getAllBoard(userNo);
-		System.out.println("counselHistory: " + inquiries);
-		Map<String, Object> response = new HashMap<>();
-		response.put("inquiries", inquiries);
-		return response; // JSON 데이터를 직접 반환
-	}
+//	@GetMapping("/counselHistory")
+//	@ResponseBody
+//	public Map<String, Object> inquiryHistoryJson(HttpSession httpSession) {
+//		String userNo = (String) httpSession.getAttribute("userNo");
+//		List<Inquiry> inquiries = myPageService.getAllBoard(userNo);
+//		System.out.println("counselHistory: " + inquiries);
+//		Map<String, Object> response = new HashMap<>();
+//		response.put("inquiries", inquiries);
+//		return response; // JSON 데이터를 직접 반환
+//	}
 }

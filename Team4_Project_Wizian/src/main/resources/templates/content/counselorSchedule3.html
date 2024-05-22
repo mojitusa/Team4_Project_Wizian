@@ -26,39 +26,13 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
-  <link href="assets/css/sex.css" rel="stylesheet">
+  <link href="css/cslSchedule.css" rel="stylesheet">
   
   
   <!-- Main CSS File -->
-  <style>
-    #calendar {
-      margin: 20px 0;
-    }
-    #calendar table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    #calendar th, #calendar td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: center;
-    }
-    #calendar th {
-      background-color: #f2f2f2;
-    }
-    .week-nav {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-    
-    .calendar-button {
-      padding: 5px 10px;
-      margin: 2px;
-    }
+	    
         
   </style>  
-  
   
 </head>
 
@@ -74,14 +48,140 @@
         <!-- Content here -->
         <div class="week-nav">
           <button id="prevWeek">이전 주</button>
-          <span id="calTitle"></span>
+          <span id="calTitle">
+          </span>
           <button id="nextWeek">다음 주</button>
         </div>
         <div id="calendar"></div>
+        <div class="div_hidden">
+        	<div th:text="${student.name}" id="studentName"></div>
+        	<div th:text="${student.studNo}" id="studNo"></div>
+        	<div th:text="${student.department.cNmk}" id="deptName"></div>
+        	<div th:text="${student.telNo}" id="studentTelNo"></div>
+        	<div th:text="${student.users.email}" id="studentEmail"></div>
+        	<div th:text="${cate}" id="cate"></div>
+        	<div th:text="${name}" id="cslorName"></div>
+        	<div th:text="${cslLoc}" id="cslLoc"></div>
+        	
+        </div>        
         
       </div>
     </section>
   </main>
+
+	<!-- 모달 창 -->
+	<div id="myModal" class="modal">
+	    <!-- 모달 내용 -->
+	    <div class="modal-content">
+	    	<div class="modal-content_top">
+		    	<div id="modal_top">
+		    		<span id=modal_top_title>상담신청</span>
+			        <span id="closeButton" class="close">&times;</span>
+		    	</div>
+		    	<div id="modal_mid">
+		    		<div id="modal_mid_title">
+		    		</div>
+		    		<div id="modal_mid_table1">
+		    			<div class="modal_mid_table1_row2 modal_mid_table1_row_top">
+		    				<div class="colored_cell modal_cell colered">
+		    					상담구분
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id="modalCate">
+		    				</div>
+		    			</div>
+		    				
+		    		</div>
+		    		<div id="modal_mid_table2">
+		    			<div class="modal_mid_table1_row1 modal_mid_table1_row_top">
+		    				<div class="colored_cell modal_cell colered">
+		    					이름
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id="modalStudentName">
+		    				</div>							    			
+		    				<div class="colored_cell modal_cell colered">
+		    					학번
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id="modalStudNo">
+		    				</div>							    			
+		    			</div>
+		    			<div class="modal_mid_table1_row2">
+		    				<div class="colored_cell modal_cell colered">
+		    					소속
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id="modalDeptName">
+		    				</div>							    			
+		    			</div>
+		    			<div class="modal_mid_table1_row1">
+		    				<div class="colored_cell modal_cell colered">
+		    					연락처
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id="modalStudentTelNo">
+		    				</div>							    			
+		    			</div>
+		    			<div class="modal_mid_table1_row2">
+		    				<div class="colored_cell modal_cell colered">
+		    					이메일
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id="modalStudentEmail">
+		    				</div>							    			
+		    			</div>
+		    		</div>
+		    		<div id="modal_mid_table3">
+		    			<div class="modal_mid_table1_row1 modal_mid_table1_row_top">
+		    				<div class="colored_cell modal_cell colered">
+		    					상담일자
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id=modalDate>
+		    				</div>							    			
+		    				<div class="colored_cell modal_cell colered">
+		    					상담시간
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id="modalTime">
+		    				</div>							    			
+		    			</div>
+		    			<div class="modal_mid_table1_row2">
+		    				<div class="colored_cell modal_cell colered">
+		    					상담상태
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id="modalIsBook">
+		    				</div>							    			
+		    			</div>
+		    			<div class="modal_mid_table1_row1">
+		    				<div class="colored_cell modal_cell colered">
+		    					상담자
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id="modalCslorName">
+		    				</div>							    			
+		    				<div class="colored_cell modal_cell colered">
+		    					상담장소
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id="modalCslLoc">
+		    				</div>							    			
+		    			</div>
+		    			<div class="modal_mid_table1_row2">
+		    				<div class="colored_cell modal_cell colered">
+		    					신청 내용
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id="modalTime">
+		    					<textarea id="modalText" rows="5" cols="50"></textarea>
+		    				</div>						    			
+		    			</div>
+		    		</div>
+		    	</div>
+		    </div>
+	    	<div id="modal_bottom" >
+	    		<div class="modal_close">
+	    			닫기
+	    		</div>
+	    		<div class="modal_submit">
+	    			등록
+	    		</div>
+	    	</div>
+	        
+	    </div>
+	</div>
+  
+  
   
   <!-- Thymeleaf에서 스케줄 데이터를 JSON으로 전달 -->
   <script th:inline="javascript">
@@ -90,81 +190,177 @@
       /*]]>*/
   </script>  
   
-    <script type="text/javascript">
-        console.log(schedules);
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // 요일 배열
-            const days = ['일', '월', '화', '수', '목', '금', '토'];
 
-            // 초기 날짜 (오늘)
-            let currentDate = new Date();
+<script type="text/javascript">
 
-            // 주간 달력 생성 함수
-            function generateCalendar(date) {
-                // 월요일부터 일요일까지의 날짜 가져오기
-                const dates = [];
-                const startOfWeek = new Date(date);
-                startOfWeek.setDate(date.getDate() - date.getDay() + 1); // 월요일로 설정
-                for (let i = 0; i < 7; i++) {
-                    const current = new Date(startOfWeek);
-                    current.setDate(startOfWeek.getDate() + i);
-                    dates.push(current);
-                }
+    document.addEventListener('DOMContentLoaded', () => {
+        // 요일 배열
+        const days = ['일', '월', '화', '수', '목', '금', '토'];
 
-                // 달력 HTML 생성
-                let calendarHTML = '<table>';
-                calendarHTML += '<tr><th>시간</th>' + dates.map(d => `<th>${d.getMonth() + 1}.${d.getDate()}(${days[d.getDay()]})</th>`).join('') + '</tr>';
+        // 초기 날짜 (오늘)
+        let currentDate = new Date();
 
-                // 시간대 추가
-                const hours = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
-                hours.forEach(hour => {
-                    calendarHTML += '<tr><td>' + hour + '</td>' + dates.map((d, i) => `<td id="${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}-${hour}"></td>`).join('') + '</tr>';
-                });
-
-                calendarHTML += '</table>';
-
-                // 달력을 페이지에 삽입
-                document.getElementById('calendar').innerHTML = calendarHTML;
-
-                // 스케줄 데이터를 달력에 추가
-                schedules.forEach(schedule => {
-                    const date = new Date(schedule.date);
-                    console.log(date);
-                    const time = new Date(schedule.time);
-                    console.log(time);
-                    const timeString = `${time.getHours()}:${time.getMinutes() < 10 ? '0' : ''}${time.getMinutes()}`;
-                    addDataToCalendar(date, timeString, '예약', 'appointment-button');
-                });
+        // 주간 달력 생성 함수
+        function generateCalendar(date) {
+            // 월요일부터 일요일까지의 날짜 가져오기
+            const dates = [];
+            const startOfWeek = new Date(date);
+            startOfWeek.setDate(date.getDate() - date.getDay() + 1); // 월요일로 설정
+            for (let i = 0; i < 7; i++) {
+                const current = new Date(startOfWeek);
+                current.setDate(startOfWeek.getDate() + i);
+                dates.push(current);
             }
 
-            // 데이터를 달력에 추가하는 함수
-            function addDataToCalendar(date, time, content, buttonClass) {
-                const cell = document.getElementById(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}-${time}`);
-                if (cell) {
-                    const button = document.createElement('button');
-                    button.textContent = content;
-                    button.classList.add('calendar-button', buttonClass);
-                    cell.appendChild(button);
-                }
-            }
+            // 달력 HTML 생성
+            let calendarHTML = '<table>';
+            calendarHTML += '<tr><th>시간</th>' + dates.map(d => `<th>${d.getMonth() + 1}.${d.getDate()}(${days[d.getDay()]})</th>`).join('') + '</tr>';
 
-            // 초기 달력 생성
+            // 시간대 추가
+            const hours = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
+            hours.forEach(hour => {
+                calendarHTML += '<tr><td>' + hour + '</td>' + dates.map((d, i) => `<td id="${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}-${hour}"></td>`).join('') + '</tr>';
+            });
+
+            calendarHTML += '</table>';
+
+            // 달력을 페이지에 삽입
+            document.getElementById('calendar').innerHTML = calendarHTML;
+
+         	// 스케줄 데이터를 달력에 추가
+            schedules.forEach(schedule => {
+                const dateString = schedule.date;
+                const timeString = schedule.time;
+                const isbook = schedule.isbook;
+
+                // date와 time을 결합하여 Date 객체 생성
+                const date = new Date(`${dateString}T${timeString}`);
+                if (!isNaN(date)) {
+                    const time = `${date.getHours()}:${date.getMinutes() < 10 ? '0' : ''}${date.getMinutes()}`;
+                    let content = '예약 가능';
+                    let buttonClass = 'available-button';
+
+                    if (isbook === '5') {
+                        content = '예약 완료';
+                        buttonClass = 'completed-button';
+                    }
+
+                    addDataToCalendar(date, time, content, buttonClass, isbook);
+                } else {
+                    console.error('Invalid date:', `${dateString}T${timeString}`);
+                }
+            });
+        }
+
+     	// 데이터를 달력에 추가하는 함수
+        function addDataToCalendar(date, time, content, buttonClass, isbook) {
+            const cell = document.getElementById(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}-${time}`);
+            if (cell) {
+                const button = document.createElement('button');
+                button.textContent = content;
+                button.classList.add('calendar-button', buttonClass);
+                
+                // 예약 가능 버튼 클릭 이벤트
+                if (isbook == '0') { // isbook이 '5'가 아닐 때만 모달을 열도록 함
+                    button.addEventListener('click', () => {
+                        openModal(date, time, isbook);
+                    });
+                }
+
+                cell.appendChild(button);
+            }
+        }
+
+
+        // 초기 달력 생성
+        generateCalendar(currentDate);
+
+        // 이전 주 버튼 클릭 이벤트
+        document.getElementById('prevWeek').addEventListener('click', () => {
+            currentDate.setDate(currentDate.getDate() - 7);
             generateCalendar(currentDate);
-
-            // 이전 주 버튼 클릭 이벤트
-            document.getElementById('prevWeek').addEventListener('click', () => {
-                currentDate.setDate(currentDate.getDate() - 7);
-                generateCalendar(currentDate);
-            });
-
-            // 다음 주 버튼 클릭 이벤트
-            document.getElementById('nextWeek').addEventListener('click', () => {
-                currentDate.setDate(currentDate.getDate() + 7);
-                generateCalendar(currentDate);
-            });
         });
-    </script>
+
+        // 다음 주 버튼 클릭 이벤트
+        document.getElementById('nextWeek').addEventListener('click', () => {
+            currentDate.setDate(currentDate.getDate() + 7);
+            generateCalendar(currentDate);
+        });
+        
+        // 모달 영역 외의 부분을 클릭하면 모달 닫기
+        window.onclick = function(event) {
+            var modal = document.getElementById('myModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+        
+        // 닫기 버튼과 모달 하단 영역 요소들을 정의
+        let closeButton = document.getElementById('closeButton');
+        let modalBottom = document.getElementById('modal_bottom');
+        
+        // 닫기 버튼 클릭 시 모달 닫기
+        closeButton.addEventListener('click', closeModal);
+        
+        // 모달 하단 영역 클릭 시 모달 닫기
+        modalBottom.addEventListener('click', closeModal);	  
+        
+        
+    });
+    
+    // 모달 열기 함수
+    function openModal(date, time, isbook) {
+        // 모달이 이미 열려 있는지 확인
+        if (document.getElementById('myModal').style.display === 'block') return;
+
+        // 모달에 전달할 정보 가져오기
+        const studentName = document.getElementById('studentName').innerText;
+        const studNo = document.getElementById('studNo').innerText;
+        const deptName = document.getElementById('deptName').innerText;
+        const studentTelNo = document.getElementById('studentTelNo').innerText;
+        const studentEmail = document.getElementById('studentEmail').innerText;
+        const cate = document.getElementById('cate').innerText;
+        const cslorName = document.getElementById('cslorName').innerText;
+        const cslLoc = document.getElementById('cslLoc').innerText;
+
+        // 모달에 정보 전달
+        if (cate == '1') {
+	        document.getElementById('modalCate').innerText = '진로·취업 상담';
+        }
+        document.getElementById('modalStudentName').innerText = studentName;
+        document.getElementById('modalStudNo').innerText = studNo;
+        document.getElementById('modalDeptName').innerText = deptName;
+        document.getElementById('modalStudentTelNo').innerText = studentTelNo;
+        document.getElementById('modalStudentEmail').innerText = studentEmail;
+        document.getElementById('modalCslorName').innerText = cslorName;
+        document.getElementById('modalCslLoc').innerText = cslLoc;
+        document.getElementById('modalDate').innerText = formatDate(date);
+        document.getElementById('modalTime').innerText = time;
+        document.getElementById('modalIsBook').innerText = (isbook === '0') ? '예약 가능' : '';
+
+        // 모달 열기
+        document.getElementById('myModal').style.display = 'block';
+    }
+
+    // 모달 닫기 함수
+    function closeModal() {
+        // 모달 닫기
+        document.getElementById('myModal').style.display = 'none';
+    }
+    
+	// 날짜 형식을 변경하는 함수
+    function formatDate(date) {
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+        return `${year}.${month}.${day}`;
+    }
+   
+    
+    
+</script>
+
 
   
 </body>

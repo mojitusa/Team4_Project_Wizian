@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -45,6 +46,7 @@ public class InquiryController {
 
 	@Autowired
 	private BoardDAO boardDAO;
+	
 	@GetMapping("/inquiry")
 	public ModelAndView InquiryPage(HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -55,7 +57,6 @@ public class InquiryController {
         
 		return modelAndView;
 	}
-
 	@PostMapping("/inquiry")
 	public String submitInquiry(@ModelAttribute Inquiry inquiry, HttpSession session, RedirectAttributes redirectAttributes) {
 		try {
@@ -68,42 +69,35 @@ public class InquiryController {
 			return "error";
 		}
 	}
-	
-//	@GetMapping("/inquiryhistory")
-//	public List<BoardModel> inquiryHistory(){
-//		List<BoardModel> boardList = boardDAO.boardList();
-//		System.out.println(boardList);
-//		return boardList;
-//	}
-//	@GetMapping("/inquiryhistory")
-//    public ModelAndView inquiryHistory() {
-//        ModelAndView modelAndView = new ModelAndView("inquiryhistory");
-//
-//        List<Inquiry> inquiries = inquiryService.getAllInquiries();
-//        modelAndView.addObject("inquiries", inquiries);
-//        System.out.println(inquiries);
-//        return modelAndView;
-//    }
 
     @GetMapping("/inquiryhistory/json")
     @ResponseBody
     public Map<String, Object> inquiryHistoryJson() {
         List<Inquiry> inquiries = inquiryService.getAllInquiries();
-        System.out.println("json동작확인" + inquiries);
+        System.out.println("json동작확인1" + inquiries);
         Map<String, Object> response = new HashMap<>();
         response.put("inquiries", inquiries);
 
         return response;
     }
-	
-//	@GetMapping("/inquiryhistory")
-//	@ResponseBody
-//	public List<Inquiry> inquiryHistory() {
-//	    
-//	    List<Inquiry> inquiries = inquiryService.getAllInquiries();
-//	    System.out.println("동작확인" + inquiries);
-//	    return inquiries;
-//	}
+    
+//    @GetMapping("/counselHistory/json")
+//    @ResponseBody
+//    public Map<String, Object> counselHistoryJson(@RequestParam(value = "category", required = false) String category,
+//                                                  @RequestParam(value = "userNo", required = false) String userNo) {
+//        List<Map<String, Object>> counselHistory;
+//        System.out.println(category);
+//        System.out.println(userNo);
+//        if (category != null && !category.isEmpty() && userNo != null && !userNo.isEmpty()) {
+//            counselHistory = inquiryService.getCounselBoard(category, userNo);
+//        } else {
+//            counselHistory = inquiryService.getCounselBoard("", userNo);  // 전체 데이터 가져오기
+//        }
+//        System.out.println("json동작확인" + counselHistory);
+//        Map<String, Object> response = new HashMap<>();
+//        response.put("counselHistory", counselHistory);
+//        return response;
+//    }
 
     @GetMapping("/inquiryhistory/detail/{id}")
     public ModelAndView showInquiryDetail(@PathVariable("id") int inquiryId) {

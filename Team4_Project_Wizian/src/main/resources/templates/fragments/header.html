@@ -32,8 +32,7 @@
 
 	<div
 		class="container-fluid d-flex align-items-center justify-content-between">
-		<a href="/index"
-			class="logo d-flex align-items-center me-auto me-xl-0">
+		<a href="/index" class="logo d-flex align-items-center me-auto me-xl-0">
 			<h1 class="sitename">중앙 상담 센터</h1>
 		</a>
 		<nav id="navmenu" class="navmenu">
@@ -44,12 +43,11 @@
 				<li><a href="/psy">심리 상담</a></li>
 				<li><a href="/professor">지도교수 상담</a></li>
 				<li><a href="/group">집단 상담</a></li>
-				<li th:if="${session.userNo != null}"><a
-					th:if="${#strings.startsWith(session.userNo, '11')}" href="/myPage">마이
-						페이지</a> <a th:if="${#strings.startsWith(session.userNo, '12')}"
-					href="/myProf">마이 페이지</a> <a
-					th:if="${#strings.startsWith(session.userNo, '13')}"
-					href="/counselor">마이 페이지</a></li>
+				<li th:if="${session.userNo != null}">
+				<a th:if="${#strings.startsWith(session.userNo, '11')}" href="/myPage">마이 페이지</a> 
+				<a th:if="${#strings.startsWith(session.userNo, '12')}" href="/myProf">마이 페이지</a> 
+				<a th:if="${#strings.startsWith(session.userNo, '13')}" href="/counselor">상담 관리</a>
+				</li>
 
 			</ul>
 		</nav>

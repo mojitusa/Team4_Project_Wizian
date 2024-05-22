@@ -1,49 +1,20 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>중앙 - 상담 시스템</title>
-
+<meta charset="UTF-8">
+<title>Insert title here</title>
 <script
 	src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-	integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<!-- jQuery UI -->
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<!-- SweetAlert -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
-<!-- Bootstrap CSS -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<!-- Bootstrap JS -->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- Vendor CSS Files -->
-<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
-	rel="stylesheet">
-<link href="assets/vendor/aos/aos.css" rel="stylesheet">
-<link href="assets/vendor/glightbox/css/glightbox.min.css"
-	rel="stylesheet">
-<link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-
-<!-- Main CSS File -->
-<link href="assets/css/main.css" rel="stylesheet">
 <style type="text/css">
+html, body {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+	font-size: 14px;
+}
+
 #calendar {
 	max-width: 800px;
 	margin: 40px auto;
@@ -61,94 +32,68 @@
 	background-color: #0056b3;
 }
 
-div.modal-overlay {
-	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.5); /* 반투명 검정 */
-	z-index: 10; /* 모달보다 아래 */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* 반투명 검정 */
+  z-index: 10; /* 모달보다 아래 */
 }
 
-div.modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    z-index: 20; /* 오버레이보다 위 */
-    max-width: 60%; /* 모달의 최대 너비를 화면 너비의 80%로 설정 */
-    max-height: 60%; /* 모달의 최대 높이를 화면 높이의 80%로 설정 */
-    overflow: auto; /* 모달 내용이 넘칠 경우 스크롤바를 추가 */
+.modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  z-index: 20; /* 오버레이보다 위 */
 }
 
-div.modal-header {
+.modal-header {
 	font-size: 18px;
 	font-weight: bold;
 }
 
-div.modal-body {
+.modal-body {
 	margin-top: 10px;
 }
 
-div.modal-footer {
+.modal-footer {
 	text-align: right;
 }
+
 </style>
 </head>
+<body>
 
-<body class="index-page">
-	<header class="header">
-		<div th:replace="../templates/fragments/header"></div>
-	</header>
-
-	<main>
-		<section>
-			<div class="container">
-				<!-- Content here -->
-				<div id='calendar'></div>
-				<button id="pfData">교수님 데이터 적용</button>
-				<button id="pfInformation">교수님 정보</button>
-				<div id="modal-overlay" class="modal-overlay"></div>
-				<!-- 모달 구조 -->
-				<div id="event-modal" class="modal">
-					<div class="modal-header modal-title">상담신청</div>
-					<div class="modal-body">
-						<table class="table t_view">
-							    <tbody>
-							        <tr>
-							            <th>이름</th>
-							            <td th:text="${session.username}"></td>
-							            <th>학번</th>
-							            <td th:text="${session.REAL_STUD_NO}"></td>
-							        </tr>
-							        <tr>
-							            <th>소속</th>
-							            <td colspan="3" th:text="${session.C_NMK}"></td>
-							        </tr>
-							        <tr>
-							            <th>연락처</th>
-							            <td th:text="${session.mbr_telno}"></td>
-							            <th>이메일</th>
-							            <td th:text="${session.email}"></td>
-							        </tr>
-							    </tbody>
-						</table>
-					</div>
-					<div class="modal-footer">
-						<button id="modal-close-btn" type="button">취소</button>
-						<button id="asign-prof-csl">상담 신청</button>
-					</div>
-				</div>
-			</div>
-		</section>
-	</main>
+	<div id='calendar'></div>
+	
+	<button id="pfData">교수님 데이터 적용</button>
+	<button id="pfInformation">교수님 정보</button>
+	
+<div id="modal-overlay" class="modal-overlay"></div>
+	
+<!-- 모달 구조 -->
+	<div id="event-modal" class="modal">
+	    <div class="modal-header modal-title">상담신청</div>
+		    <div class="modal-body">Event Info+++++<br>
+		     	<p>상담시간: <span id="event-time">11</span></p>
+	        	<p>상담일자: <span id="event-date"></span></p>
+	        	<label for="csl-content">상담내용:</label>
+				<textarea id="csl-content" name="cslContent"></textarea>
+		    </div>
+		    <div class="modal-footer">
+			<button id="modal-close-btn" type="button">취소</button>
+		    <button id="asign-prof-csl">상담 신청</button>
+    		</div>
+		</div>
 
 <script type="text/javascript">
 
@@ -167,7 +112,36 @@ function formatDate(dateString) {
     return year + '-' + month + '-' + day;
 }
 
-//제외할 스케쥴이 있는경우
+//시간코드 있는 시간 제외하고 시간표나타내기 
+function generateHourlyEvents(formattedDate, convertedTimes) {
+    var events = [];
+    var startTime = formattedDate + 'T09:00'; // 시작 시간: 09:00
+    var endTime = formattedDate + 'T18:00'; // 종료 시간: 18:00
+
+    var currentTime = new Date(startTime);
+    var endTimeObj = new Date(endTime);
+
+    while (currentTime < endTimeObj) {
+        var hour = ('0' + currentTime.getHours()).slice(-2); // 시간을 2자리로 포맷팅
+        var minutes = '00'; // 분은 항상 00으로 설정
+        var time = hour + ':' + minutes; // 시간과 분을 합침
+
+        // 제외할 시간인지 확인
+        if (!convertedTimes.includes(time)) {
+            events.push({
+                title: time,
+                start: new Date(currentTime) //2024-05-20T09:00 
+            });
+        }
+
+        // 다음 시간으로 이동
+        currentTime.setHours(currentTime.getHours() + 1);
+    }
+
+    return events;
+}
+
+
 function generateEvents(scheduleInfo) {
     var events = [];
 
@@ -214,29 +188,6 @@ function generateEvents(scheduleInfo) {
     return events;
 }
 
-//제외할 스케쥴이 없는경우(전체 상담가능)
-function generateEventsForAllTimes() {
-    var events = [];
-
-    // 1년 동안의 모든 날짜에 대해 반복
-    for (var day = 0; day < 365; day++) {
-        var currentDate = new Date();
-        currentDate.setDate(currentDate.getDate() + day);
-
-        // 해당 날짜의 상담 가능한 모든 시간대에 대해 반복
-        for (var hour = 9; hour <= 18; hour++) {
-            var startTime = new Date(currentDate);
-            startTime.setHours(hour, 0, 0);
-
-            // 생성된 이벤트를 배열에 추가
-            events.push({
-                start: startTime
-            });
-        }
-    }
-
-    return events;
-}
 
 
 
@@ -289,19 +240,38 @@ function generateEventsForAllTimes() {
 		
 		
 		
-		// URLSearchParams 객체를 사용하여 URL에서 쿼리 매개변수를 추출
-        var urlParams = new URLSearchParams(window.location.search);
-        
-        // URLSearchParams의 get() 메서드를 사용하여 profNo 값을 가져옴
-        var profNo = urlParams.get('profNo');		
-        
+		
+		
+		var pfNo = '2017125001';
+		
+		//시간데이터 변환해서 배열에 넣기(예시데이터)
+		var pf_scd_hmcd = 't0900';
+		var pf_scd_hmcd2 = 't1200';
+		var pf_scd_hmcd3 = 't1500';
+		var pf_scd_hmcd4 = 't1600';
+		var convertedTime = convertTime(pf_scd_hmcd);
+		var convertedTime2 = convertTime(pf_scd_hmcd2);
+		var convertedTime3 = convertTime(pf_scd_hmcd3);
+		var convertedTime4 = convertTime(pf_scd_hmcd4);
+		var convertedTimes = [];
+		convertedTimes.push(convertedTime);
+		convertedTimes.push(convertedTime2);
+		convertedTimes.push(convertedTime3);
+		convertedTimes.push(convertedTime4);
+
+		//날짜데이터 예시
+		var date = '20240514';
+		var date1 = '20240515';
+		var formattedDate = formatDate(date);
+		var formattedDate1 = formatDate(date1);
+ 		
 		
 		//스케쥴 테이블 불러오기 ->캘린더 만들기
 		$('#pfData').click(function(){
 			$.ajax({
 				url: '/calendarData',
 				method: 'Post',
-				data: {pfNo: profNo},
+				data: {pfNo: pfNo},
 				success: function(data){
 					if(data.length > 0) {
 						var scheduleInfo = []; // 스케쥴의 모든 날짜와 시간을 담을 배열
@@ -329,9 +299,7 @@ function generateEventsForAllTimes() {
 		                calendar.addEventSource(events);
 
 		            } else {
-		            	//스케쥴이 없을때의 캘린더
-		            	var events = generateEventsForAllTimes();
-		            	calendar.addEventSource(events);
+		                console.log('No data received');
 		            }
 				},
 				error: function(error){
@@ -345,18 +313,15 @@ function generateEventsForAllTimes() {
 			$.ajax({
 				url: '/pfInfoData',
 				method: 'Post',
-				data: {pfNo: profNo},
+				data: {pfNo: pfNo},
 				success: function(data){
 					if(data.length > 0) {
 						console.log(data);
-						console.log(data.PF_NM);
-						document.getElementById('profName').innerText = data.PF_NM;
-			            document.getElementById('profContact').innerText = data.PF_TELNO;
-			           	//document.getElementById('profDepartment').innerText = data.C_NMK;  
-			           	//document.getElementById('profEmail').innerText = data.email;	
-			            document.getElementById('profLocation').innerText = data.PF_PLC_NM;
-			            document.getElementById('profField').innerText = data.PF_CS_PART;
-			            
+		                var professor = data[0]; // 첫 번째 교수 정보를 사용
+		                
+		                $('.modal-title').append('<br>'+professor.pf_NO); // 모달 타이틀에 추가
+		                $('.modal-body').append('<br>상담장소: ' + professor.pf_PLC_NM + '<br>' +
+		                                        '전화번호: ' + professor.pf_TELNO); // 모달 내용에 추가
 		            } else {
 		                console.log('No data received');
 		            }
@@ -368,6 +333,11 @@ function generateEventsForAllTimes() {
 		});
 		
 		
+		
+		
+		//예시 데이터
+		var time = '15:00';
+		var startdate = '2024-05-10';
 		
 		//캘린더 그리는 스크립트
 		var calendarEl = document.getElementById('calendar');
@@ -388,7 +358,9 @@ function generateEventsForAllTimes() {
 			 slotMinTime: '09:00:00',  // 9시부터 시작
 			 slotMaxTime: '18:00:00',  // 18시까지 표시
 			 allDaySlot: false,  // all-day 섹션 제거
-			 events:[],
+			 events:[
+			      ...generateHourlyEvents(formattedDate, convertedTimes)
+			 ],
 			 eventClick: function(info) {
 				info.jsEvent.preventDefault(); // 페이지 이동을 막음(url이동)
 				
@@ -403,8 +375,8 @@ function generateEventsForAllTimes() {
 			    
 
                      
-    			$('#event-modal').css('display', 'block');
-    		    $('#modal-overlay').css('display', 'block');
+		          // 모달 표시
+		         $('#event-modal').show();
 		     }
 		});
 		
@@ -429,11 +401,5 @@ function generateEventsForAllTimes() {
 		
 	});
 </script>
-
 </body>
-
-<footer id="footer">
-	<div th:replace="../templates/fragments/footer"></div>
-</footer>
-
 </html>

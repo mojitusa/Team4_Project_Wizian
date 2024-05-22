@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,6 +28,8 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 
+	@Autowired
+	private InquiryService inquiryService;
 	@Autowired Util util;
 	
 	@GetMapping("/inquiryhistory")
@@ -46,8 +49,47 @@ public class BoardController {
 	        // JSON 변환 중 예외가 발생한 경우 빈 문자열 반환
 	    }
 
-	    System.out.println("확인" + jsonBoardList);
+	    System.out.println("보컨확인" + jsonBoardList);
 	    return jsonBoardList;
 	}
-
+	
+	@GetMapping("/counselHistory")
+	public String counselHistoryPage(HttpSession session, @RequestParam(value = "category", required = false) String category,
+            @RequestParam(value = "userNo", required = false) String userNo) throws JsonProcessingException {
+		 List<Map<String, Object>> counselHistory;
+	        System.out.println(category);
+	        System.out.println(userNo);
+	        if (category != null && !category.isEmpty() && userNo != null && !userNo.isEmpty()) {
+	            counselHistory = inquiryService.getCounselBoard(category, userNo);
+	        } else {
+	            counselHistory = inquiryService.getCounselBoard("", userNo);  // 전체 데이터 가져오기
+	        }
+		    ObjectMapper objectMapper = new ObjectMapper();
+		    String counselHistory2 = "";
+	        System.out.println("json동작확인" + counselHistory);
+	        Map<String, Object> response = new HashMap<>();
+	        response.put("counselHistory", counselHistory);
+	        
+	        counselHistory2 = objectMapper.writeValueAsString(counselHistory);
+	        return counselHistory2;
+	}
+	
+	@GetMapping("/counselHistory/json")
+    @ResponseBody
+    public Map<String, Object> counselHistoryJson(@RequestParam(value = "category", required = false) String category,
+                                                  @RequestParam(value = "userNo", required = false) String userNo) {
+        List<Map<String, Object>> counselHistory;
+        System.out.println(category);
+        System.out.println(userNo);
+        if (category != null && !category.isEmpty() && userNo != null && !userNo.isEmpty()) {
+            counselHistory = inquiryService.getCounselBoard(category, userNo);
+        } else {
+            counselHistory = inquiryService.getCounselBoard("", userNo);  // 전체 데이터 가져오기
+        }
+        System.out.println("json동작확인" + counselHistory);
+        Map<String, Object> response = new HashMap<>();
+        response.put("counselHistory", counselHistory);
+        return response;
+    }
+	
 }

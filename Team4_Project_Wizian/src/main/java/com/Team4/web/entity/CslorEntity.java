@@ -24,11 +24,8 @@ public class CslorEntity {
 	@Column(name = "USER_NO")
 	private String userNo;
 
-	@Column(name = "CAREER")
-	private String career;
-	
-	@Column(name = "GENDER")
-	private String gender;
+	@Column(name = "CATE")
+	private String cate;
 	
     @Column(name = "CSLOR_NM")
     private String cslorNm;

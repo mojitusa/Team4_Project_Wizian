@@ -40,22 +40,73 @@
 		WHERE si.stud_no = #{studNo}
 	</update>
 
-	<select id="getAllBoard" parameterType="map" resultType="String">
-		SELECT *
-		FROM PRGRM_APP pa
-		JOIN PROFESSER_CONSULTATION pc ON pa.stud_no =
-		pc.stud_no
-		JOIN CSL_APPLY ca ON pa.stud_no = ca.stud_no
-		WHERE pa.stud_no
-		= #{userNo};
+	<select id="getCounselBoard" parameterType="map"
+		resultType="map">
+		<choose>
+			<when test="category == 1">
+				SELECT s.CSL_CATE_NM AS CSL_CATEGORY, c.STUD_NO, q.CS_ST_NM AS CSL_STATUS, c.CSL_DATE AS CSL_DATE
+				FROM CSL_APPLY c 
+				JOIN CSL_CATE s ON c.CSL_CATE_CD2 = s.CSl_CATE_CD
+				JOIN CON_ST_CD q ON q.CS_STATUS = c.CSL_STAT_CD
+				WHERE c.stud_no = #{userNo} AND c.CSL_CATE_CD2 = #{category}
+			</when>
+			<when test="category == 2">
+				SELECT s.CSL_CATE_NM AS CSL_CATEGORY, c.STUD_NO, q.CS_ST_NM AS CSL_STATUS, c.CSL_DATE AS CSL_DATE
+				FROM CSL_APPLY c 
+				JOIN CSL_CATE s ON c.CSL_CATE_CD2 = s.CSl_CATE_CD
+				JOIN CON_ST_CD q ON q.CS_STATUS = c.CSL_STAT_CD
+				WHERE c.stud_no = #{userNo} AND c.CSL_CATE_CD2 = #{category}
+			</when>
+			<when test="category == 3">
+				SELECT s.CSL_CATE_NM AS CSL_CATEGORY, c.STUD_NO, q.CS_ST_NM AS CSL_STATUS, c.CSL_DATE AS CSL_DATE
+				FROM CSL_APPLY c 
+				JOIN CSL_CATE s ON c.CSL_CATE_CD2 = s.CSl_CATE_CD
+				JOIN CON_ST_CD q ON q.CS_STATUS = c.CSL_STAT_CD
+				WHERE c.stud_no = #{userNo} AND c.CSL_CATE_CD2 = #{category}
+			</when>
+			<when test="category == 4">
+				SELECT s.CSL_CATE_NM AS CSL_CATEGORY, c.STUD_NO, q.CS_ST_NM AS CSL_STATUS, c.CSL_DATE AS CSL_DATE
+				FROM CSL_APPLY c 
+				JOIN CSL_CATE s ON c.CSL_CATE_CD2 = s.CSl_CATE_CD
+				JOIN CON_ST_CD q ON q.CS_STATUS = c.CSL_STAT_CD
+				WHERE c.stud_no = #{userNo} AND c.CSL_CATE_CD2 = #{category}
+			</when>
+			<when test="category == 5">
+				SELECT DATE_FORMAT(p.PFCS_RV_DATE, '%Y-%m-%d') AS CSL_DATE, q.CS_ST_NM AS CSL_STATUS , p.STUD_NO, s.CSL_CATE_NM AS CSL_CATEGORY  
+				FROM PROFESSER_CONSULTATION p 
+				JOIN 
+				CSL_CATE s ON p.CSL_CATE_CD = s.CSl_CATE_CD
+				JOIN
+				CON_ST_CD q ON q.CS_STATUS = p.PFCS_STATUS
+				WHERE stud_no = #{userNo}
+			</when>
+			<otherwise>
+				SELECT
+				DATE_FORMAT(p.RSVT_YMD, '%Y-%m-%d') AS CSL_DATE,
+				p.STUD_NO,
+				q.CS_ST_NM AS CSL_STATUS,
+				g.GC_OG_NM AS CSL_CATEGORY
+				FROM
+				PRGRM_APP p
+				JOIN
+				GC_PROGRAM g ON p.PRGRM_CD = g.PRGRM_CD
+				JOIN
+				CON_ST_CD q ON q.CS_STATUS = p.ATND_YN
+				WHERE
+				p.stud_no = #{userNo};
+			</otherwise>
+		</choose>
 	</select>
 	<select id="getStudInfo" parameterType="String" resultType="map">
-		SELECT s.STUD_NO, s.REAL_STUD_NO, s.C_CD, s.GEN_CD, s.STUD_NM, s.REAL_STUD_NO,
+		SELECT s.STUD_NO, s.REAL_STUD_NO, s.C_CD, s.GEN_CD, s.STUD_NM,
+		s.REAL_STUD_NO,
 		s.BIRTHDAY, s.ST, s.MBR_TELNO, u.USER_NO, u.email
-		FROM STUD_INFO s
+		FROM
+		STUD_INFO s
 		JOIN
 		USERS u ON u.USER_NO = s.STUD_NO
-		WHERE s.STUD_NO = #{userNo}
+		WHERE s.STUD_NO =
+		#{userNo}
 	</select>
 	<select id="checkPw" parameterType="String" resultType="Boolean">
 		SELECT
@@ -64,8 +115,9 @@
 		WHERE s.USER_NO = #{userNo} AND s.pw =
 		#{password}
 	</select>
-	<update id="updatePw" parameterType="map"> 
-		UPDATE USERS SET pw = SHA2(#{password}, 256) WHERE user_no = #{userNo}
+	<update id="updatePw" parameterType="map">
+		UPDATE USERS SET pw =
+		SHA2(#{password}, 256) WHERE user_no = #{userNo}
 	</update>
 
 </mapper>
