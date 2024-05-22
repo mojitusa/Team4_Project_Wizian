@@ -24,49 +24,43 @@
 <link href="assets2/admin/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
-	document
-			.addEventListener(
-					'DOMContentLoaded',
-					function() {
-						// ChoiceUsers 셀렉트 박스 요소 가져오기
-						var choiceUsersSelect = document
-								.getElementById("ChoiceUsers");
+    document.addEventListener('DOMContentLoaded', function() {
+        // ChoiceUsers 셀렉트 박스 요소 가져오기
+        var choiceUsersSelect = document.getElementById("ChoiceUsers");
 
-						// ChoiceUsers 셀렉트 박스 값 변경 이벤트 리스너 추가
-						choiceUsersSelect
-								.addEventListener(
-										'change',
-										function() {
-											// 사용자 선택값 가져오기
-											var selectedOption = this.value;
+        // ChoiceUsers 셀렉트 박스 값 변경 이벤트 리스너 추가
+        choiceUsersSelect.addEventListener('change', function() {
+            // 사용자 선택값 가져오기
+            var selectedOption = this.value;
 
-											// 모달 제목 변경
-											document
-													.getElementById("modalTitle").innerText = selectedOption
-													+ " 등록";
+            // 모달 제목 변경
+            document.getElementById("modalTitle").innerText = selectedOption + " 등록";
 
-											// 해당하는 폼 요소 숨기기
-											document
-													.getElementById("studentForm").style.display = "none";
-											document
-													.getElementById("professorForm").style.display = "none";
-											document
-													.getElementById("counselingCenterForm").style.display = "none";
+            // 해당하는 폼 요소 숨기기
+            document.getElementById("studentForm").style.display = "none";
+            document.getElementById("professorForm").style.display = "none";
+            document.getElementById("counselingCenterForm").style.display = "none";
 
-											// 선택한 사용자에 맞는 폼 요소 표시
-											if (selectedOption === "student") {
-												document
-														.getElementById("studentForm").style.display = "block";
-											} else if (selectedOption === "professor") {
-												document
-														.getElementById("professorForm").style.display = "block";
-											} else if (selectedOption === "counselingCenter") {
-												document
-														.getElementById("counselingCenterForm").style.display = "block";
-											}
-										});
-					});
+            // 선택한 사용자에 맞는 폼 요소 표시
+            if (selectedOption === "student") {
+                document.getElementById("studentForm").style.display = "block";
+            } else if (selectedOption === "professor") {
+                document.getElementById("professorForm").style.display = "block";
+            } else if (selectedOption === "counselingCenter") {
+                document.getElementById("counselingCenterForm").style.display = "block";
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $('#viewInquiries').click(function (e) {
+            e.preventDefault();
+            $('#content').load('/admin/inquiries');
+        });
+    });
 </script>
 
 <body id="page-top">
@@ -303,7 +297,8 @@
                 </a>
                 <div id="collapseInquiry" class="collapse" aria-labelledby="headingInquiry" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/admin/inquiries">학생 문의 사항</a>
+                        <a class="collapse-item" href="#" id="viewInquiries">학생 문의 사항</a>
+                        
                     </div>
                 </div>
             </li>

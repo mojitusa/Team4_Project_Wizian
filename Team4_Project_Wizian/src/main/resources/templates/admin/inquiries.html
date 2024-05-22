@@ -16,6 +16,30 @@
 <body>
     <div class="container mt-5">
         <h1 class="text-center mb-4">문의 내역 확인</h1>
+
+        <!-- 검색창 -->
+        <div class="input-group mb-3">
+            <select class="form-select" id="categorySelect">
+                <option value="">전체 보기</option>
+                <option value="가입">가입</option>
+                <option value="탈퇴">탈퇴</option>
+                <option value="비밀번호 변경">비밀번호 변경</option>
+                <option value="홈페이지 오류">홈페이지 오류</option>
+                <option value="건의사항">건의사항</option>
+                <option value="상담이용">상담이용</option>
+                <option value="기타">기타</option>
+            </select>
+            
+            <!-- 상담 상태 선택 -->
+            <select class="form-select" id="statusSelect">
+                <option value="">상담 상태</option>
+                <option value="상담완료">상담완료</option>
+                <option value="답변대기중">답변대기중</option>
+            </select>
+            
+            <button class="btn btn-outline-secondary" type="button" id="searchButton">검색</button>
+        </div>
+
         <div id="inquiryList" class="mt-4">
             <table class="table">
                 <thead>
@@ -41,14 +65,41 @@
     </div>
 
     <script>
-        $(document).ready(function () {
-            // 각 행 클릭 시 상세보기 페이지로 이동
-            $('.inquiry-row').click(function () {
-                var inquiryId = $(this).data('inquiry-id');
-                window.location.href = '/admin/inquiries/detail/' + inquiryId; // 상세보기 페이지 URL로 이동
-            });
+    $(document).ready(function () {
+        $('#searchButton').click(function () {
+            var category = $('#categorySelect').val();
+            var status = $('#statusSelect').val(); 
+            
+            if (category === '' && status === '') { 
+                $('.inquiry-row').show();
+            } else if (category !== '' && status !== '') { 
+                $('.inquiry-row').hide().filter(function () {
+                    return $(this).find('td:nth-child(2)').text() === category && 
+                           $(this).find('td:nth-child(5)').text().trim() === status; // trim() 함수를 사용하여 상태값에서 공백을 제거합니다.
+                }).show();
+            } else if (category !== '') { 
+                $('.inquiry-row').hide().filter(function () {
+                    return $(this).find('td:nth-child(2)').text() === category;
+                }).show();
+            } else if (status !== '') { 
+                if (status === '상담완료') { 
+                    $('.inquiry-row').hide().filter(function () {
+                        return $(this).find('td:nth-child(5)').text().trim() === status;
+                    }).show();
+                } else if (status === '답변대기중') { 
+                    $('.inquiry-row').hide().filter(function () {
+                        return $(this).find('td:nth-child(5)').text().trim() === status;
+                    }).show();
+                }
+            }
         });
-    </script>
+
+    $('.inquiry-row').click(function () {
+        var inquiryId = $(this).data('inquiry-id');
+        window.location.href = '/admin/inquiries/detail/' + inquiryId; 
+    });
+});
+</script>
 </body>
 
 </html>
