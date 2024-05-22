@@ -58,7 +58,7 @@
 						<h3 class="menuTitle">마이 페이지</h3>
 						<ul>
 							<li><a href="#" onclick="loadContent('updatePrivacy')">나의 정보</a></li>
-							<li><a href="#" onclick="loadContent('myCounLog')">나의 상담
+							<li><a href="#" onclick="loadMyCounLog()">나의 상담
 									내역</a></li>
 							<li class="dropdown"><a href="#" onclick="toggleDropdown()">1:1문의</a>
 								<ul class="dropdown-content" id="dropdownOptions">
@@ -76,6 +76,7 @@
 						<div id="counLog"></div>
 						<div id="info"></div>
 						<div id="grid"></div>
+						<div id="grid2"></div>
 					</div>
 				</div>
 			</div>
@@ -84,14 +85,7 @@
 
 	<script>
 		var grid;
-		var grid2;
 		$(document).ready(function () {
-			$.ajax({
-				url: "/inquiryhistory",
-				type: "get",
-				dataType: "JSON",
-				contentType: "application/json; charset=UTF-8",
-				success: function (result) {
 					grid = new tui.Grid({
 						el: document.getElementById('grid'),
 						pageOptions: {
@@ -123,6 +117,12 @@
 							name: 'CSL_STATUS',
 						}]
 					});
+			$.ajax({
+				url: "/inquiryhistory",
+				type: "get",
+				dataType: "JSON",
+				contentType: "application/json; charset=UTF-8",
+				success: function (result) {
 					grid.on('click', ev => {
 						const rowKey = ev.rowKey; // 클릭된 행의 고유한 키 값 추출
 						const rowData = grid.getRow(rowKey); // 클릭된 행의 데이터 가져오기
@@ -130,18 +130,10 @@
 						console.log(cslNo);
 						loadNewHTML(cslNo); // 해당 키 값을 함수에 전달하여 실행
 					});
-					$.ajax({
-						url: '/myCounLog',
-						type: 'get',
-						success: function (response) {
-							$('#counLog').html(response);
-						},
-						error: function () {
-							$('#counLog').html('<p>콘텐츠를 불러오는 중 오류가 발생했습니다.</p>');
-						}
-					});
 				}
 			});
+			//grid.refreshLayout();
+			//grid2.refreshLayout();
 		});
 		function loadNewHTML(rowKey) {
 			$('#grid').hide();
@@ -192,14 +184,8 @@
 						}
 						document.head.appendChild(newScript).parentNode.removeChild(newScript); // 스크립트를 동적으로 추가하고 제거하여 실행
 					}
-
-					// 그리드 영역에 있던 기존 그리드는 숨김 처리
 					$('#grid').hide();
-					grid2.resetData(inquiries);
-
-					// 새로운 그리드를 보여주는 함수 호출
-					showGrid('grid2');
-					grid2.refreshLayout();
+					$('#grid2').hide();
 				})
 				.catch(error => {
 					console.error('There was a problem with the fetch operation:', error);
@@ -210,18 +196,23 @@
 		document.addEventListener('DOMContentLoaded', () => {
 			loadContent('myCounLog');
 		});
-		function showGrid(gridId) {
-			if (gridId === 'grid') {
-				document.getElementById('grid').style.display = 'block';
-				document.getElementById('grid2').style.display = 'none';
-				initializeGrid1();
-			} else if (gridId === 'grid2') {
-				document.getElementById('grid2').style.display = 'block';
-				document.getElementById('grid').style.display = 'none';
-				initializeCounLog();
-			}
+		function loadMyCounLog() {
+			$.ajax({
+				url: '/myCounLog',
+				type: "get",
+				dataType: "html",
+				contentType: "application/json; charset=UTF-8",
+				success: function (result) {
+					$('#counLog').empty();
+					$('#counLog').html(result);
+					$('#grid').hide();
+					grid2.refreshLayout();
+				},
+				error: function () {
+					$('#counLog').html('<p>나의 상담 내역을 불러오는 중 오류가 발생했습니다.</p>');
+				}
+			});
 		}
-
 		function loadInquiryHistory() {
 			$.ajax({
 				url: '/inquiryhistory',
@@ -229,7 +220,6 @@
 				dataType: "JSON",
 				contentType: "application/json; charset=UTF-8",
 				success: function (result) {
-					grid.resetData(result);
 					var h2 = '<h2>1:1 문의 내역</h2>'
 					var imgHtml = '<img src="/image/ono2.jpg" alt="Image" id="onoImage" class="right-aligned">';
 					grid.resetData(result);
@@ -238,6 +228,7 @@
 					$('#counLog').append(imgHtml);
 					$('#grid').show();
 					grid.refreshLayout();
+					$('#grid2').hide();
 				},
 				error: function () {
 					$('#counLog').html('<p>1:1 문의 내역을 불러오는 중 오류가 발생했습니다.</p>');
