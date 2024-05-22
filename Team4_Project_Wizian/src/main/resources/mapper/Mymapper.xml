@@ -154,13 +154,15 @@
 		</choose>
 	</select>
 	<select id="getStudInfo" parameterType="String" resultType="map">
-		SELECT s.STUD_NO, s.REAL_STUD_NO, s.C_CD, s.GEN_CD, s.STUD_NM,
+		SELECT s.STUD_NO, s.REAL_STUD_NO, d.C_NMK AS C_CD, s.GEN_CD, s.STUD_NM,
 		s.REAL_STUD_NO,
 		s.BIRTHDAY, s.ST, s.MBR_TELNO, u.USER_NO, u.email
 		FROM
 		STUD_INFO s
 		JOIN
 		USERS u ON u.USER_NO = s.STUD_NO
+		JOIN
+		DEPT_CD d ON u.C_CD = d.C_CD
 		WHERE s.STUD_NO =
 		#{userNo}
 	</select>
