@@ -44,38 +44,56 @@
 		resultType="map">
 		<choose>
 			<when test="category == 1">
-					SELECT DATE_FORMAT(p.RSVT_YMD, '%Y-%m-%d') AS CSL_DATE, p.STUD_NO, p.ATND_YN AS CSL_STATUS,
-				g.GC_OG_NM AS CSL_CATEGORY
-				FROM PRGRM_APP p
-				JOIN GC_PROGRAM g ON p.PRGRM_CD = g.PRGRM_CD
-				WHERE stud_no = #{userNo}
+				SELECT s.CSL_CATE_NM AS CSL_CATEGORY, c.STUD_NO, q.CS_ST_NM AS CSL_STATUS, c.CSL_DATE AS CSL_DATE
+				FROM CSL_APPLY c 
+				JOIN CSL_CATE s ON c.CSL_CATE_CD2 = s.CSl_CATE_CD
+				JOIN CON_ST_CD q ON q.CS_STATUS = c.CSL_STAT_CD
+				WHERE c.stud_no = #{userNo} AND c.CSL_CATE_CD2 = #{category}
 			</when>
 			<when test="category == 2">
-				SELECT *
-				FROM CSL_APPLY
-				WHERE stud_no = #{userNo}
+				SELECT s.CSL_CATE_NM AS CSL_CATEGORY, c.STUD_NO, q.CS_ST_NM AS CSL_STATUS, c.CSL_DATE AS CSL_DATE
+				FROM CSL_APPLY c 
+				JOIN CSL_CATE s ON c.CSL_CATE_CD2 = s.CSl_CATE_CD
+				JOIN CON_ST_CD q ON q.CS_STATUS = c.CSL_STAT_CD
+				WHERE c.stud_no = #{userNo} AND c.CSL_CATE_CD2 = #{category}
 			</when>
 			<when test="category == 3">
-				SELECT *
-				FROM CSL_APPLY
-				WHERE stud_no = #{userNo}
+				SELECT s.CSL_CATE_NM AS CSL_CATEGORY, c.STUD_NO, q.CS_ST_NM AS CSL_STATUS, c.CSL_DATE AS CSL_DATE
+				FROM CSL_APPLY c 
+				JOIN CSL_CATE s ON c.CSL_CATE_CD2 = s.CSl_CATE_CD
+				JOIN CON_ST_CD q ON q.CS_STATUS = c.CSL_STAT_CD
+				WHERE c.stud_no = #{userNo} AND c.CSL_CATE_CD2 = #{category}
 			</when>
 			<when test="category == 4">
-				SELECT *
-				FROM CSL_APPLY
-				WHERE stud_no = #{userNo}
+				SELECT s.CSL_CATE_NM AS CSL_CATEGORY, c.STUD_NO, q.CS_ST_NM AS CSL_STATUS, c.CSL_DATE AS CSL_DATE
+				FROM CSL_APPLY c 
+				JOIN CSL_CATE s ON c.CSL_CATE_CD2 = s.CSl_CATE_CD
+				JOIN CON_ST_CD q ON q.CS_STATUS = c.CSL_STAT_CD
+				WHERE c.stud_no = #{userNo} AND c.CSL_CATE_CD2 = #{category}
 			</when>
 			<when test="category == 5">
-				SELECT *
-				FROM PROFESSER_CONSULTATION
+				SELECT DATE_FORMAT(p.PFCS_RV_DATE, '%Y-%m-%d') AS CSL_DATE, q.CS_ST_NM AS CSL_STATUS , p.STUD_NO, s.CSL_CATE_NM AS CSL_CATEGORY  
+				FROM PROFESSER_CONSULTATION p 
+				JOIN 
+				CSL_CATE s ON p.CSL_CATE_CD = s.CSl_CATE_CD
+				JOIN
+				CON_ST_CD q ON q.CS_STATUS = p.PFCS_STATUS
 				WHERE stud_no = #{userNo}
 			</when>
 			<otherwise>
-				SELECT p.RSVT_YMD AS CSL_DATE, p.STUD_NO, p.ATND_YN AS CSL_STATUS,
+				SELECT
+				DATE_FORMAT(p.RSVT_YMD, '%Y-%m-%d') AS CSL_DATE,
+				p.STUD_NO,
+				q.CS_ST_NM AS CSL_STATUS,
 				g.GC_OG_NM AS CSL_CATEGORY
-				FROM PRGRM_APP p
-				JOIN GC_PROGRAM g ON p.PRGRM_CD = g.PRGRM_CD
-				WHERE stud_no = #{userNo}
+				FROM
+				PRGRM_APP p
+				JOIN
+				GC_PROGRAM g ON p.PRGRM_CD = g.PRGRM_CD
+				JOIN
+				CON_ST_CD q ON q.CS_STATUS = p.ATND_YN
+				WHERE
+				p.stud_no = #{userNo};
 			</otherwise>
 		</choose>
 	</select>
