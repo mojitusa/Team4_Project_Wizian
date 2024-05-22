@@ -153,7 +153,9 @@ body {
 								<td>
 									<button type="button" class="btn btn-info" th:attr="onclick='showProfModal(' + ${prof.PF_NO} + ')'">조회</button>
 								</td>
-								<td>일정조회</td>
+								<td>
+									<a th:href="@{'/calendar?profNo=' + ${prof.PF_NO}}" class="btn btn-primary">일정조회</a>
+								</td>
 							</tr>
 						</tbody>
 					</table>
