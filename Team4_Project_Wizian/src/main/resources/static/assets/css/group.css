@@ -7,13 +7,15 @@
     background-color: #ffe5b4; /* 살구색 배경색 */
     padding: 20px; /* 내부 여백 */
     border-radius: 10px; /* 둥근 모서리 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
     margin-bottom: 20px; /* 아래 여백 */
+}
+
+.upBox .gcpa {
     font-size: 24px; /* 큰 글자 크기 */
     font-weight: bold; /* 굵은 글자 */
     margin-bottom: 10px; /* 아래 여백 */
 }
-
 
 .upBox p {
     font-size: 16px; /* 일반 텍스트 크기 */
@@ -54,7 +56,7 @@
     border-radius: 5px; /* 둥근 모서리 */
 }
 
-.upBox {
+.upBox .search-box button {
     padding: 8px 16px; /* 내부 여백 */
     border: none; /* 테두리 제거 */
     background-color: #007bff; /* 파란색 배경 */
@@ -63,45 +65,74 @@
     cursor: pointer; /* 마우스 포인터 변경 */
 }
 
+.upBox .search-box button:hover {
+    background-color: #0056b3; /* 어두운 파란색 배경 (호버 시) */
+}
+
 .upBox .write-box {
     margin-left: 20px; /* 왼쪽 여백 */
 }
 
+.upBox .write-box .write-button {
+    padding: 8px 16px; /* 내부 여백 */
+    border: none; /* 테두리 제거 */
+    background-color: #28a745; /* 녹색 배경 */
+    color: white; /* 흰색 글자 */
+    border-radius: 5px; /* 둥근 모서리 */
+    cursor: pointer; /* 마우스 포인터 변경 */
+}
+
+.upBox .write-box .write-button:hover {
+    background-color: #218838; /* 어두운 녹색 배경 (호버 시) */
+}
+
 .gcpaGroup{
-	text-align: center;
-	font-weight: bolder;
- 	font-size: 30px;
+   text-align: center;
+   font-weight: bolder;
+    font-size: 30px;
 }
 
  .gcpage1{
     width: 100vh; /* 예시로 너비를 80%로 설정 */
     margin: 0 auto; /* 좌우 여백을 자동으로 설정하여 수평 가운데 정렬 */
-    padding-left: 130px;
  }
  
  .gcpage2{
- 	width: 100vh;
- 	margin: 0 auto;
+    width: 100vh;
+    margin: 0 auto;
  }
  
  .gcpage3{
- 	width: 100vh;
- 	margin: 0 auto;
- 	
+    width: 100vh;
+    margin: 0 auto;
+    
  }
+ 
+ .groupCenter{
+ 	text-align: center;
+ }
+ 
  .proDetailPage{
- 	width: 100vh;
- 	background-color: silver;
+    width: 100vh;
+    background-color: silver;
  }
  
  .gcpa{
- 	font-weight: bolder;
- 	font-size: 24px;
+    font-weight: bolder;
+    font-size: 24px;
  }
 
 #groupSection {
   padding-top: 50px;
   width: 100%;
+  min-height: 88.7vh;
+  margin: auto;
+}
+
+#DetailSection{
+  padding-top: 50px;
+  margin: auto;
+  width: 50%;
   min-height: 88.7vh
 }
 
@@ -215,9 +246,9 @@
 }
 
 .programType{
-	font-size: 20px;
-	font-weight: bold;
-	margin-left: 10px;
+   font-size: 20px;
+   font-weight: bold;
+   margin-left: 10px;
 }
 
 .card {
@@ -239,22 +270,22 @@
 }
 
 #gcdFont{
-	font-size: 20px;
+   font-size: 20px;
 }
 
 .applyDueDate{
-	font-size: 15px;
+   font-size: 15px;
 }
 
 .gcDate{
-	font-size: 15px;
+   font-size: 15px;
 }
 .applyMember{
-	float: right;
-	font-weight: bold;
-	background-color: #98FB98;
-	border-radius: 8% !important;
-	display: flex;
+   float: right;
+   font-weight: bold;
+   background-color: #98FB98;
+   border-radius: 8% !important;
+   display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
@@ -264,82 +295,96 @@
     align-items: center; /* 수직 가운데 정렬 */
 }
 
+.applyMemberDetail{
+    flex-direction: column;
+   float: right;
+   font-weight: bold;
+   background-color: #98FB98;
+   border-radius: 8% !important;
+   display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    padding: 5px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
 .applyNopePossibility{
-	background-color: #7fffd4;
-	border-radius: 8% !important;
-	display: flex;
+   background-color: #7fffd4;
+   border-radius: 8% !important;
+   display: flex;
     justify-content: center; /* 수평 가운데 정렬 */
     align-items: center; /* 수직 가운데 정렬 */
 }
 
 .gcgroupApplyBox1{
-	font-size: 18px;
-	background-color: silver;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	display: flex;
-	align-items: center;
+   font-size: 18px;
+   background-color: silver;
+   padding-top: 10px;
+   padding-bottom: 10px;
+   display: flex;
+   align-items: center;
 }
 
 .gcgroupApplyBox2{
-	font-size: 18px;
-	background-color: silver;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	display: flex;
+   font-size: 18px;
+   background-color: silver;
+   padding-top: 10px;
+   padding-bottom: 10px;
+   display: flex;
 }
 
 .gcgroupApplyInput1{
-	font-size: 24px;
-	background-color: white;
-	margin-left: 20px;
-	padding-left: 10px;
-	padding-right: 5px;
-	width: 55vh;
-	font-weight: bold;
+   font-size: 24px;
+   background-color: white;
+   margin-left: 20px;
+   padding-left: 10px;
+   padding-right: 5px;
+   width: 55vh;
+   font-weight: bold;
 }
 
 .gcgroupApplyInput2{
-	font-size: 24px;
-	background-color: white;
-	margin-left: 20px;
-	padding-left: 10px;
-	padding-right: 5px;
-	width: 25vh;
-	font-weight: bold;
+   font-size: 24px;
+   background-color: white;
+   margin-left: 20px;
+   padding-left: 10px;
+   padding-right: 5px;
+   width: 25vh;
+   font-weight: bold;
 }
 
 .gcgroupApplyInput3{
-	font-size: 24px;
-	background-color: white;
-	margin-left: 20px;
-	padding-left: 10px;
-	padding-right: 5px;
-	width: 30vh;
-	font-weight: bold;
+   font-size: 24px;
+   background-color: white;
+   margin-left: 20px;
+   padding-left: 10px;
+   padding-right: 5px;
+   width: 30vh;
+   font-weight: bold;
 }
 
 .gcgroupApplyInput4{
-	font-size: 20px;
-	background-color: white;
-	margin-left: 20px;
-	padding-left: 10px;
-	padding-right: 5px;
-	width: 56vh;
+   font-size: 20px;
+   background-color: white;
+   margin-left: 20px;
+   padding-left: 10px;
+   padding-right: 5px;
+   width: 56vh;
 }
 
 .applyPossibility{
-	float: right;
-	background-color: none;
-	font-size: 12px !important;
+   float: right;
+   background-color: none;
+   font-size: 12px !important;
 }
 
 .nameBox1{
-	margin-left: 20px;
+   margin-left: 20px;
 }
 
 .nameBox2{
-	margin-left: 20px;
+   margin-left: 20px;
 }
 
 .nameBox3 {
@@ -350,18 +395,22 @@
     padding-bottom: 10px;
 }
 
-#listBtn{
-	background-color: white;
+#listBtn {
+    font-weight: bold;
+    background-color: white;
 }
 
-#applyBtn{
-	background-color: #87CEFA;
-	font-weight: bold;
+#listBtn:hover {
+    background-color: silver; 
 }
 
-#applyCancelBtn{
-	background-color: orange;
-	font-weight: bold;
+#applyBtn {
+    background-color: #87CEFA;
+    font-weight: bold;
+}
+
+#applyBtn:hover {
+    background-color: #7bbce5;
 }
 
 .container {
@@ -382,12 +431,13 @@
 
 .write-button {
     padding: 10px 15px;
-    margin-top: 55px;
+    margin-top: 50px;
     background-color: #007BFF;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    height: 45px;
 }
 
 .write-button:hover {
@@ -421,13 +471,190 @@
     font-weight: bold;
 }
 #validate-button{
-	margin-top: 50px;
+   margin-top: 50px;
     float: right;
     background-color: red;
     font-weight: bold;
 }
+
+/* 전체 레이아웃을 중앙에 배치 */
+.groupContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #f9f9f9; /* 아이보리색 배경 */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* gcpa 제목 중앙 정렬 */
+.groupTitle {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* 상세 정보 스타일 */
+.programDetail {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.programDetail div {
+    margin-bottom: 10px;
+}
+
+/* 프로그램 상세 정보 항목 */
+.programDetail b {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.programDetail block {
+    display: inline;
+}
+
+/* 포스터 및 강좌 정보 스타일 */
+.posterSection, .courseInfo {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+/* 버튼 스타일 */
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#listButton,#applyButton {
+    width: 100px;
+    height: 40px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#listButton:hover, #applyButton:hover {
+    background-color: #0056b3;
+}
+
+/* 헤더 스타일 */
+.detailHeader {
+  margin-bottom: 20px;
+}
+
+.detailHeader h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+/* 정보 상자 스타일 */
+.detailInfoBox {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.detailItem {
+  margin-bottom: 10px;
+}
+
+.detailLabel {
+  font-weight: bold;
+}
+
+/* 컨트롤 버튼 스타일 */
+.detailControls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cancelButton,
+.deleteButton,
+.applyButton {
+  width: 100px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cancelButton {
+  background-color: #ccc;
+  color: #fff;
+}
+
+.deleteButton {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.applyButton {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.cancelButton:hover {
+  background-color: #aaa;
+}
+
+.deleteButton:hover {
+  background-color: #d32f2f;
+}
+
+.applyButton:hover {
+  background-color: #388e3c;
+}
+
+.detailTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.detailTable td {
+  border-bottom: 1px solid lightgray;
+  padding: 15px;
+}
+
+.detailLabel {
+  font-weight: bold;
+  width: 18vh;
+  text-align: center;
+  font-size: 20px;
+}
+
+.detailValue {
+  font-size: 18px;
+}
+
+.detailValueText {
+  font-size: 22px;
+  font-weight: bold;
+  font-style: italic;
+}
+
 a:link {
   color : blue;
+}
+
+.vvv{
+	border-right: 1px solid lightgray;
 }
 
 @media (max-width: 768px) {
