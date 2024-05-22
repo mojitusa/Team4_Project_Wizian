@@ -113,47 +113,33 @@ div.modal-footer {
 			<div class="container">
 				<!-- Content here -->
 				<div id='calendar'></div>
-
 				<button id="pfData">교수님 데이터 적용</button>
 				<button id="pfInformation">교수님 정보</button>
-
 				<div id="modal-overlay" class="modal-overlay"></div>
-
 				<!-- 모달 구조 -->
 				<div id="event-modal" class="modal">
 					<div class="modal-header modal-title">상담신청</div>
 					<div class="modal-body">
-						<p>
-				            상담시간: <span id="event-time"></span>
-				        </p>
-				        <p>
-				            상담일자: <span id="event-date"></span>
-				        </p>
-				        <label for="csl-content">상담내용:</label>
-				        <textarea id="csl-content" name="cslContent"></textarea>
-				        <p>
-				            교수님 번호: <span id="prof-no"></span>
-				        </p>
-				        <p>
-				            상담 장소: <span id="prof-plc-nm"></span>
-				        </p>
-				        <p>
-				            전화번호: <span id="prof-telno"></span>
-				        </p>
-				        <p>
-				            상담 세부 사항: <span id="pf-cs-part-detail"></span>
-				        </p>
-				        <p>
-				            상담 부서: <span id="pf-cs-part"></span>
-				        </p>
-						<p>
-							상담시간: <span id="event-time">11</span>
-						</p>
-						<p>
-							상담일자: <span id="event-date"></span>
-						</p>
-						<label for="csl-content">상담내용:</label>
-						<textarea id="csl-content" name="cslContent"></textarea>
+						<table class="table t_view">
+							    <tbody>
+							        <tr>
+							            <th>이름</th>
+							            <td th:text="${session.username}"></td>
+							            <th>학번</th>
+							            <td th:text="${session.REAL_STUD_NO}"></td>
+							        </tr>
+							        <tr>
+							            <th>소속</th>
+							            <td colspan="3" th:text="${session.C_NMK}"></td>
+							        </tr>
+							        <tr>
+							            <th>연락처</th>
+							            <td th:text="${session.mbr_telno}"></td>
+							            <th>이메일</th>
+							            <td th:text="${session.email}"></td>
+							        </tr>
+							    </tbody>
+						</table>
 					</div>
 					<div class="modal-footer">
 						<button id="modal-close-btn" type="button">취소</button>
@@ -308,28 +294,7 @@ function generateEventsForAllTimes() {
         
         // URLSearchParams의 get() 메서드를 사용하여 profNo 값을 가져옴
         var profNo = urlParams.get('profNo');		
-		
         
-        
-		//시간데이터 변환해서 배열에 넣기(예시데이터)
-		var pf_scd_hmcd = 't0900';
-		var pf_scd_hmcd2 = 't1200';
-		var pf_scd_hmcd3 = 't1500';
-		var pf_scd_hmcd4 = 't1600';
-		var convertedTime = convertTime(pf_scd_hmcd);
-		var convertedTime2 = convertTime(pf_scd_hmcd2);
-		var convertedTime3 = convertTime(pf_scd_hmcd3);
-		var convertedTime4 = convertTime(pf_scd_hmcd4);
-		var convertedTimes = [];
-		convertedTimes.push(convertedTime);
-		convertedTimes.push(convertedTime2);
-		convertedTimes.push(convertedTime3);
-		convertedTimes.push(convertedTime4);
-
-		//날짜데이터 예시
-		var date = '20240514';
-		var formattedDate = formatDate(date);
- 		
 		
 		//스케쥴 테이블 불러오기 ->캘린더 만들기
 		$('#pfData').click(function(){
@@ -384,8 +349,14 @@ function generateEventsForAllTimes() {
 				success: function(data){
 					if(data.length > 0) {
 						console.log(data);
-	                    $('#event-modal').show();
-	                    $('#modal-overlay').show();
+						console.log(data.PF_NM);
+						document.getElementById('profName').innerText = data.PF_NM;
+			            document.getElementById('profContact').innerText = data.PF_TELNO;
+			           	//document.getElementById('profDepartment').innerText = data.C_NMK;  
+			           	//document.getElementById('profEmail').innerText = data.email;	
+			            document.getElementById('profLocation').innerText = data.PF_PLC_NM;
+			            document.getElementById('profField').innerText = data.PF_CS_PART;
+			            
 		            } else {
 		                console.log('No data received');
 		            }
@@ -397,11 +368,6 @@ function generateEventsForAllTimes() {
 		});
 		
 		
-		
-		
-		//예시 데이터
-		var time = '15:00';
-		var startdate = '2024-05-10';
 		
 		//캘린더 그리는 스크립트
 		var calendarEl = document.getElementById('calendar');

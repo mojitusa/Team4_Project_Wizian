@@ -3,6 +3,8 @@ package com.Team4.web.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class AsignProfController {
 	
@@ -13,7 +15,7 @@ public class AsignProfController {
 	}
 	
 	@GetMapping("/calendar")
-	public String calendar() {
+	public String calendar(HttpSession session) {
 		return "profcusl/calendartest";
 	}
 	

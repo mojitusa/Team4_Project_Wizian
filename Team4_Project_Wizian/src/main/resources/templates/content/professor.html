@@ -18,7 +18,7 @@
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-	
+
 <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
 	rel="stylesheet">
 <link href="assets/vendor/aos/aos.css" rel="stylesheet">
@@ -29,70 +29,81 @@
 <link href="assets/css/main.css" rel="stylesheet">
 <link href="assets/css/professor.css" rel="stylesheet">
 <style type="text/css">
-/* Global styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    color: #333;
-}
 
 /* Main */
 .professor {
-    padding: 20px 0;
+	padding: 20px 0;
 }
 
 /* First row: 지도교수 여부, 학과 검색 */
 #professorSection .row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
 }
 
 #professorSection .row span {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 #professorSection .row label {
-    margin-right: 10px;
+	margin-right: 10px;
 }
 
 /* Second row: 검색창과 검색 버튼 */
 #professorSection .search-container {
-    margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 #professorSection .search-container label {
-    margin-right: 10px;
+	margin-right: 10px;
 }
 
 /* Third row: 그리드 시스템으로 리스트 표시 */
 #professorSection table {
-    width: 100%;
-    border-collapse: collapse;
+	width: 100%;
+	border-collapse: collapse;
 }
 
 #professorSection table, #professorSection th, #professorSection td {
-    border: 1px solid #ddd;
-    padding: 8px;
+	border: 1px solid #ddd;
+	padding: 8px;
 }
 
 #professorSection th {
-    background-color: #f2f2f2;
+	background-color: #f2f2f2;
 }
 
 .modal-header, .modal-footer {
-    background-color: #f2f2f2;
+	background-color: #f2f2f2;
 }
 
 .modal-title {
-    color: #333;
+	color: #333;
 }
 
 .modal-body p {
-    margin: 10px 0;
+	margin: 10px 0;
 }
 
+.table-custom {
+	width: 100%;
+	border: none;
+}
+
+.table-custom td {
+	padding: 8px 0;
+}
+
+.table-custom th, .table-custom td {
+	border-bottom: 1px solid #ddd;
+}
+
+.table-custom th {
+	background-color: #f2f2f2;
+	font-weight: bold;
+}
 </style>
 </head>
 
@@ -104,7 +115,6 @@ body {
 	<main class="professor">
 		<section id="professorSection">
 			<div class="container">
-
 				<div class="row">
 					<span> <label for="map_professor">지도교수여부</label> <select
 						id="map_professor">
@@ -122,7 +132,7 @@ body {
 						placeholder="검색어를 입력하세요">
 					<button id="search_button">검색하기</button>
 				</div>
-				
+
 				<div th:if="${profData}">
 					<table border="1">
 						<thead>
@@ -140,11 +150,11 @@ body {
 								<td th:text="${prof.PF_NM}">ID</td>
 								<td th:text="${prof.PF_CS_PART}">Name</td>
 								<td>
-									<button type="button" class="btn btn-info" th:attr="onclick='showProfModal(' + ${prof.PF_NO} + ')'">조회</button>
+									<button type="button" class="btn btn-info"
+										th:attr="onclick='showProfModal(' + ${prof.PF_NO} + ')'">조회</button>
 								</td>
-								<td>
-									<a th:href="@{'/calendar?profNo=' + ${prof.PF_NO}}" class="btn btn-primary">일정조회</a>
-								</td>
+								<td><a th:href="@{'/calendar?profNo=' + ${prof.PF_NO}}"
+									class="btn btn-primary">일정조회</a></td>
 							</tr>
 						</tbody>
 					</table>
@@ -165,27 +175,40 @@ body {
 								aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
-							<p>
-								<strong>이름:</strong> <span id="profName"></span>
-							</p>
-							<p>
-								<strong>연락처:</strong> <span id="profContact"></span>
-							</p>
-							<p>
-								<strong>소속:</strong> <span id="profDepartment"></span>
-							</p>
-							<p>
-								<strong>이메일:</strong> <span id="profEmail"></span>
-							</p>
-							<p>
-								<strong>상담장소:</strong> <span id="profLocation"></span>
-							</p>
-							<p>
-								<strong>상담분야:</strong> <span id="profField"></span>
-							</p>
-							<p>
-								<strong>담당 학부:</strong> <span id="profCollege"></span>
-							</p>
+							<table class="table table-custom">
+								<tr>
+									<th>이름:</th>
+									<td id="profName"></td>
+									<th>소속:</th>
+									<td id="profDepartment"></td>
+								</tr>
+								<tr>
+									<th>연락처:</th>
+									<td id="profContact"></td>
+									<th>E-mail:</th>
+									<td id="profEmail"></td>
+								</tr>
+								<tr>
+									<th>최종수정일:</th>
+									<td id="profLastUpdated"></td>
+								</tr>
+								<tr>
+									<th>비대면상담여부:</th>
+									<td id="profNonFaceConsult"></td>
+								</tr>
+								<tr>
+									<th>상담장소:</th>
+									<td id="profLocation"></td>
+								</tr>
+								<tr>
+									<th>담당 학부(전공):</th>
+									<td id="profCollege"></td>
+								</tr>
+								<tr>
+									<th>상담분야:</th>
+									<td id="profField"></td>
+								</tr>
+							</table>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
@@ -196,39 +219,40 @@ body {
 			</div>
 
 
-
-
 		</section>
 	</main>
 
 	<script th:inline="javascript">
 		//교수 프로필 보기
-		function showProfModal(pfNo){
-		    console.log(pfNo);
-			var profData  = /*[[${profData}]]*/[];
-			console.log(profData );
-			
-			// pfNo와 profData 배열의 PF_NO 값을 비교하여 일치하는 객체를 찾기
-	        var selectedProf = profData.find(function(prof) {
-	        	return prof.PF_NO.toString() === pfNo.toString();
-	        });
-			
-	        if (selectedProf) {
-	            // 모달에 교수 정보를 표시하는 코드를 여기에 추가합니다.
-	            document.getElementById('profName').innerText = selectedProf.PF_NM;
-	            document.getElementById('profContact').innerText = selectedProf.PF_TELNO;
-	           	document.getElementById('profDepartment').innerText = selectedProf.C_NMK;  
-	           	document.getElementById('profEmail').innerText = selectedProf.email;	
-	            document.getElementById('profLocation').innerText = selectedProf.PF_PLC_NM;
-	            document.getElementById('profField').innerText = selectedProf.PF_CS_PART;
+		function showProfModal(pfNo) {
+			console.log(pfNo);
+			var profData = /*[[${profData}]]*/[];
+			console.log(profData);
 
-	            // 모달을 표시합니다.
-	            $('#professorModal').modal('show');
-	        } else {
-	            console.log("교수 정보를 찾을 수 없습니다.");
-	        }
+			// pfNo와 profData 배열의 PF_NO 값을 비교하여 일치하는 객체를 찾기
+			var selectedProf = profData.find(function(prof) {
+				return prof.PF_NO.toString() === pfNo.toString();
+			});
+
+			if (selectedProf) {
+				// 모달에 교수 정보를 표시하는 코드를 여기에 추가합니다.
+				document.getElementById('profName').innerText = selectedProf.PF_NM;
+				document.getElementById('profContact').innerText = selectedProf.PF_TELNO;
+				document.getElementById('profDepartment').innerText = selectedProf.C_NMK;
+				document.getElementById('profEmail').innerText = selectedProf.email;
+				document.getElementById('profLocation').innerText = selectedProf.PF_PLC_NM;
+				document.getElementById('profField').innerText = selectedProf.PF_CS_PART;
+				// document.getElementById('profLastUpdated').innerText = selectedProf.lastUpdated; 최종수정일
+        		// document.getElementById('profNonFaceConsult').innerText = selectedProf.nonFaceConsult;	비대면상담여부
+        		// document.getElementById('profCollege').innerText = selectedProf.PF_CLG;	담당학부(전공)
+
+				// 모달을 표시합니다.
+				$('#professorModal').modal('show');
+			} else {
+				console.log("교수 정보를 찾을 수 없습니다.");
+			}
 		}
-	
+
 		// Ajax 요청을 보내는 함수
 		function searchDepartment() {
 			var department = $("#department_search").val();
@@ -256,7 +280,6 @@ body {
 				searchDepartment();
 			});
 		});
-		
 	</script>
 </body>
 
