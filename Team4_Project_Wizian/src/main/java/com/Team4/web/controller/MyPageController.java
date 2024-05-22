@@ -121,14 +121,5 @@ public class MyPageController {
 		}
 	}
 
-//	@GetMapping("/counselHistory")
-//	@ResponseBody
-//	public Map<String, Object> inquiryHistoryJson(HttpSession httpSession) {
-//		String userNo = (String) httpSession.getAttribute("userNo");
-//		List<Inquiry> inquiries = myPageService.getAllBoard(userNo);
-//		System.out.println("counselHistory: " + inquiries);
-//		Map<String, Object> response = new HashMap<>();
-//		response.put("inquiries", inquiries);
-//		return response; // JSON 데이터를 직접 반환
-//	}
+	
 }

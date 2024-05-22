@@ -148,6 +148,7 @@ margin-top:10px;
 				success: function (result) {
 					grid.on('click', ev => {
 						const rowKey = ev.rowKey; // 클릭된 행의 고유한 키 값 추출
+						console.log(rowKey);
 						const rowData = grid.getRow(rowKey); // 클릭된 행의 데이터 가져오기
 						const cslNo = rowData.CSL_NO; // 클릭된 행의 csl_no 값 가져오기
 						console.log(cslNo);
@@ -155,8 +156,6 @@ margin-top:10px;
 					});
 				}
 			});
-			//grid.refreshLayout();
-			//grid2.refreshLayout();
 		});
 		function loadNewHTML(rowKey) {
 			$('#grid').hide();
