@@ -13,7 +13,10 @@
 	</select>    
 	
 	<select id="profSearchById" parameterType="String" resultType="map">
-		SELECT PF_NM, PF_TELNO, PF_CS_PART, PF_CS_PART_DETAIL, PF_PLC_NM, PF_NO FROM PROFESSER 
-		WHERE USER_NO = #{userNo}
+		SELECT P.PF_NM, P.PF_TELNO, P.PF_CS_PART, P.PF_CS_PART_DETAIL, P.PF_PLC_NM, P.PF_NO, D.C_NMK, U.email
+		FROM PROFESSER P
+		JOIN DEPT_CD D ON P.C_CD = D.C_CD
+		JOIN USERS U ON P.USER_NO = U.USER_NO
+		WHERE P.USER_NO = #{userNo};
 	</select>
 </mapper>
