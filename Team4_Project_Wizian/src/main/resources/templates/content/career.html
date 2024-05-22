@@ -28,7 +28,7 @@
   <link href="assets/css/main.css" rel="stylesheet">
   <link href="css/career.css" rel="stylesheet">
   
-	<script type="text/javascript">
+   <script type="text/javascript">
     // Thymeleaf 표현식을 JavaScript 변수에 할당
     const isLoggedIn = /*[[${isLoggedIn}]]*/ ;
     const userNo = /*[[${userNo != null ? userNo : 'null'}]]*/ 'null';
@@ -39,17 +39,17 @@
     } else if (userNo !== 'null' && userNo.toString().substring(0, 2) !== '11') {
         alert("학생만 신청가능합니다.");
         window.location.href = "/"; // 메인 페이지로 이동
-    }	
-	
-	</script>  
+    }   
+   
+   </script>  
   
   
 </head>
 
 <body class="index-page">
-	<header class="header">
-		<div th:replace="../templates/fragments/header"></div>
-	</header>
+   <header class="header">
+      <div th:replace="../templates/fragments/header"></div>
+   </header>
   
   <main class="ec">
     <section id="ecSection" class="">
@@ -105,113 +105,113 @@
 				    </div>
 				</div>
 
-				<nav id="pageNav">
-				    <ul class="pagination">
-				        <li class="page-item" th:classappend="${page.first} ? 'disabled'">
-				            <a class="page-link" th:href="@{/career(page=${page.number - 1})}">Previous</a>
-				        </li>
-				        <li class="page-item" th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}" th:classappend="${page.number == i} ? 'active'">
-				            <a class="page-link" th:href="@{/career(page=${i})}" th:text="${i + 1}">1</a>
-				        </li>
-				        <li class="page-item" th:classappend="${page.last} ? 'disabled'">
-				            <a class="page-link" th:href="@{/career(page=${page.number + 1})}">Next</a>
-				        </li>
-				    </ul>
-				</nav>
-	                    		
-        	</div>
+            <nav id="pageNav">
+                <ul class="pagination">
+                    <li class="page-item" th:classappend="${page.first} ? 'disabled'">
+                        <a class="page-link" th:href="@{/career(page=${page.number - 1})}">Previous</a>
+                    </li>
+                    <li class="page-item" th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}" th:classappend="${page.number == i} ? 'active'">
+                        <a class="page-link" th:href="@{/career(page=${i})}" th:text="${i + 1}">1</a>
+                    </li>
+                    <li class="page-item" th:classappend="${page.last} ? 'disabled'">
+                        <a class="page-link" th:href="@{/career(page=${page.number + 1})}">Next</a>
+                    </li>
+                </ul>
+            </nav>
+                             
+           </div>
         </div>
       </div>
     </section>
   </main>
   
-		<!-- 모달 창 -->
-		<div id="myModal" class="modal">
-		    <!-- 모달 내용 -->
-		    <div class="modal-content">
-		    	<div class="modal-content_top">
-			    	<div id="modal_top">
-			    		<span id=modal_top_title>프로필 관리</span>
-				        <span id="closeButton" class="close">&times;</span>
-			    	</div>
-			    	<div id="modal_mid">
-			    		<div id="modal_mid_title">
-			    			프로필 관리
-			    		</div>
-			    		<div id="modal_mid_table1">
-			    			<div class="modal_mid_table1_row1 modal_mid_table1_row_top">
-			    				<div class="colored_cell modal_cell colered">
-			    					이름
-			    				</div>
-			    				<div class="uncolored_cell modal_cell uncolered" id="cslorNm">
-			    				</div>
-			    				<div class="colored_cell modal_cell colered">
-			    					소속
-			    				</div>
-			    				<div class="uncolored_cell modal_cell uncolered" id="counselor_Cd">
-			    				</div>
-			    			</div>
-			    			<div class="modal_mid_table1_row1">
-			    				<div class="colored_cell modal_cell colered">
-			    					연락처
-			    				</div>
-			    				<div class="uncolored_cell modal_cell uncolered" id="telNo">
-			    				</div>
-			    				<div class="colored_cell modal_cell colered">
-			    					E-mail
-			    				</div>
-			    				<div class="uncolored_cell modal_cell uncolered" id="email">
-			    				</div>							    				
-			    			</div>
-			    				
-			    		</div>
-			    		<div id="modal_mid_table2">
-			    			<div class="modal_mid_table1_row2 modal_mid_table1_row_top">
-			    				<div class="colored_cell modal_cell colered">
-			    					비대면상담여부
-			    				</div>
-			    				<div class="uncolored_cell modal_cell uncolered" id="nonFace">
-			    				</div>							    			
-			    			</div>
-			    			<div class="modal_mid_table1_row2">
-			    				<div class="colored_cell modal_cell colered">
-			    					상담장소
-			    				</div>
-			    				<div class="uncolored_cell modal_cell uncolered" id="cslLoc">
-			    				</div>							    			
-			    			</div>
-			    			<div class="modal_mid_table1_row2">
-			    				<div class="colored_cell modal_cell colered">
-			    					담당 학부(전공)
-			    				</div>
-			    				<div class="uncolored_cell modal_cell uncolered" id="deptName">
-			    				</div>							    			
-			    			</div>
-			    			<div class="modal_mid_table1_row2">
-			    				<div class="colored_cell modal_cell colered">
-			    					상담분야
-			    				</div>
-			    				<div class="uncolored_cell modal_cell uncolered" id="cslDetail">
-			    				</div>							    			
-			    			</div>
-			    		</div>
-			    	</div>
-			    </div>
-		    	<div id="modal_bottom">
-		    		닫기
-		    	</div>
-		        
-		    </div>
-		</div>
+      <!-- 모달 창 -->
+      <div id="myModal" class="modal">
+          <!-- 모달 내용 -->
+          <div class="modal-content">
+             <div class="modal-content_top">
+                <div id="modal_top">
+                   <span id=modal_top_title>프로필 관리</span>
+                    <span id="closeButton" class="close">&times;</span>
+                </div>
+                <div id="modal_mid">
+                   <div id="modal_mid_title">
+                      프로필 관리
+                   </div>
+                   <div id="modal_mid_table1">
+                      <div class="modal_mid_table1_row1 modal_mid_table1_row_top">
+                         <div class="colored_cell modal_cell colered">
+                            이름
+                         </div>
+                         <div class="uncolored_cell modal_cell uncolered" id="cslorNm">
+                         </div>
+                         <div class="colored_cell modal_cell colered">
+                            소속
+                         </div>
+                         <div class="uncolored_cell modal_cell uncolered" id="counselor_Cd">
+                         </div>
+                      </div>
+                      <div class="modal_mid_table1_row1">
+                         <div class="colored_cell modal_cell colered">
+                            연락처
+                         </div>
+                         <div class="uncolored_cell modal_cell uncolered" id="telNo">
+                         </div>
+                         <div class="colored_cell modal_cell colered">
+                            E-mail
+                         </div>
+                         <div class="uncolored_cell modal_cell uncolered" id="email">
+                         </div>                                     
+                      </div>
+                         
+                   </div>
+                   <div id="modal_mid_table2">
+                      <div class="modal_mid_table1_row2 modal_mid_table1_row_top">
+                         <div class="colored_cell modal_cell colered">
+                            비대면상담여부
+                         </div>
+                         <div class="uncolored_cell modal_cell uncolered" id="nonFace">
+                         </div>                                  
+                      </div>
+                      <div class="modal_mid_table1_row2">
+                         <div class="colored_cell modal_cell colered">
+                            상담장소
+                         </div>
+                         <div class="uncolored_cell modal_cell uncolered" id="cslLoc">
+                         </div>                                  
+                      </div>
+                      <div class="modal_mid_table1_row2">
+                         <div class="colored_cell modal_cell colered">
+                            담당 학부(전공)
+                         </div>
+                         <div class="uncolored_cell modal_cell uncolered" id="deptName">
+                         </div>                                  
+                      </div>
+                      <div class="modal_mid_table1_row2">
+                         <div class="colored_cell modal_cell colered">
+                            상담분야
+                         </div>
+                         <div class="uncolored_cell modal_cell uncolered" id="cslDetail">
+                         </div>                                  
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div id="modal_bottom">
+                닫기
+             </div>
+              
+          </div>
+      </div>
   
   <!-- Vendor JS Files -->
-	<script src="assets/vendor/php-email-form/validate.js"></script>
-	<script src="assets/vendor/aos/aos.js"></script>
-	<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-	<script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-	<script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-	<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-	<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+   <script src="assets/vendor/php-email-form/validate.js"></script>
+   <script src="assets/vendor/aos/aos.js"></script>
+   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+   <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
 	<!-- Main JS File -->
 	<script src="assets/js/main.js"></script>
@@ -287,7 +287,7 @@
 	</script>
 	
 
-	
+   
 </body>
 
   <footer id="footer">

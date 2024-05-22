@@ -61,6 +61,23 @@ public class NormalCslController {
 	    
 	}
 	
+	@GetMapping("/careerApplyPage")
+	public String showCareerApplyPage(Model model, HttpSession session) {
+	    String userNo = (String) session.getAttribute("userNo");
+
+	    if (userNo == null) {
+	        model.addAttribute("isLoggedIn", false);
+	        model.addAttribute("userNo", "null");
+	    } else {
+	        model.addAttribute("isLoggedIn", true);
+	        model.addAttribute("userNo", userNo);
+	        
+	        // 추가적인 비즈니스 로직이 필요하다면 여기에 추가
+	    }
+	    
+	    return "content/careerApplyPage"; // 이 뷰 파일이 존재해야 합니다.
+	}
+	
 	
 	@GetMapping("/schedule999")
 	public String psyCslApply(
