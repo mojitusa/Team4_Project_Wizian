@@ -36,6 +36,78 @@
 <link href="assets/css/main.css" rel="stylesheet">
 <link href="assets/css/professor.css" rel="stylesheet">
 <style type="text/css">
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* Header */
+.header {
+    background-color: #343a40;
+    color: white;
+    padding: 15px 0;
+}
+
+/* Main */
+.professor {
+    padding: 20px 0;
+}
+
+/* First row: 지도교수 여부, 학과 검색 */
+#professorSection .row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+#professorSection .row span {
+    display: flex;
+    align-items: center;
+}
+
+#professorSection .row label {
+    margin-right: 10px;
+}
+
+/* Second row: 검색창과 검색 버튼 */
+#professorSection .search-container {
+    margin-bottom: 20px;
+}
+
+#professorSection .search-container label {
+    margin-right: 10px;
+}
+
+/* Third row: 그리드 시스템으로 리스트 표시 */
+#professorSection table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#professorSection table, #professorSection th, #professorSection td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#professorSection th {
+    background-color: #f2f2f2;
+}
+
+/* Modal */
+.modal-header, .modal-footer {
+    background-color: #f2f2f2;
+}
+
+.modal-title {
+    color: #333;
+}
+
+.modal-body p {
+    margin: 10px 0;
+}
+
 </style>
 </head>
 
@@ -86,7 +158,7 @@
 								<td th:text="${prof.PF_NM}">ID</td>
 								<td th:text="${prof.PF_CS_PART}">Name</td>
 								<td>
-									<button type="button" class="btn btn-info" th:onclick="'showProfModal(\'' + ${prof.PF_NO} + '\')'">조회</button>
+									<button type="button" class="btn btn-info" th:onclick="showProfModal(11)">조회</button>
 								</td>
 								<td>캘린더</td>
 							</tr>
