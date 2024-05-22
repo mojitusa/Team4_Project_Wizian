@@ -47,10 +47,10 @@
       <div class="container">
         <!-- Content here -->
         <div class="week-nav">
-          <button id="prevWeek">이전 주</button>
+          <button id="prevWeek" class="cal_nav"><</button>
           <span id="calTitle">
           </span>
-          <button id="nextWeek">다음 주</button>
+          <button id="nextWeek" class="cal_nav">></button>
         </div>
         <div id="calendar"></div>
         <div class="div_hidden">
@@ -61,6 +61,7 @@
         	<div th:text="${student.users.email}" id="studentEmail"></div>
         	<div th:text="${cate}" id="cate"></div>
         	<div th:text="${name}" id="cslorName"></div>
+        	<div th:text="${cslorNo}" id="cslorNo"></div>
         	<div th:text="${cslLoc}" id="cslLoc"></div>
         </div>        
       </div>
@@ -85,6 +86,8 @@
 		    					상담구분
 		    				</div>
 		    				<div class="uncolored_cell modal_cell uncolered" id="modalCate">
+		    				</div>
+		    				<div id="modalCateHidden">
 		    				</div>
 		    			</div>
 		    				
@@ -142,7 +145,8 @@
 		    					상담상태
 		    				</div>
 		    				<div class="uncolored_cell modal_cell uncolered" id="modalIsBook">
-		    				</div>							    			
+		    				</div>
+		    				<div id="modalIsBookHidden"></div>							    			
 		    			</div>
 		    			<div class="modal_mid_table1_row1">
 		    				<div class="colored_cell modal_cell colered">
@@ -167,8 +171,10 @@
 		    		</div>
 		    	</div>
 		    </div>
+		    <div id=modalCslorNo></div>
+		    <div id=modalSchNo></div>
 	    	<div id="modal_bottom" >
-	    		<div class="modal_close">
+	    		<div id="modal_close">
 	    			닫기
 	    		</div>
 	    		<div class="modal_submit">
@@ -225,12 +231,17 @@
 
             // 달력을 페이지에 삽입
             document.getElementById('calendar').innerHTML = calendarHTML;
+            
+            // 달력 상단에 현재 월 표시
+            document.getElementById('calTitle').textContent = `${date.getFullYear()}년 ${date.getMonth() + 1}월`;            
 
          	// 스케줄 데이터를 달력에 추가
             schedules.forEach(schedule => {
                 const dateString = schedule.date;
                 const timeString = schedule.time;
                 const isbook = schedule.isbook;
+                const schNo = schedule.no;
+                
 
                 // date와 time을 결합하여 Date 객체 생성
                 const date = new Date(`${dateString}T${timeString}`);
@@ -244,7 +255,7 @@
                         buttonClass = 'completed-button';
                     }
 
-                    addDataToCalendar(date, time, content, buttonClass, isbook);
+                    addDataToCalendar(date, time, content, buttonClass, isbook, schNo);
                 } else {
                     console.error('Invalid date:', `${dateString}T${timeString}`);
                 }
@@ -252,7 +263,7 @@
         }
 
      	// 데이터를 달력에 추가하는 함수
-        function addDataToCalendar(date, time, content, buttonClass, isbook) {
+        function addDataToCalendar(date, time, content, buttonClass, isbook, schNo) {
             const cell = document.getElementById(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}-${time}`);
             if (cell) {
                 const button = document.createElement('button');
@@ -262,7 +273,7 @@
                 // 예약 가능 버튼 클릭 이벤트
                 if (isbook == '0') { // isbook이 '5'가 아닐 때만 모달을 열도록 함
                     button.addEventListener('click', () => {
-                        openModal(date, time, isbook);
+                        openModal(date, time, isbook, schNo);
                     });
                 }
 
@@ -296,7 +307,7 @@
         
         // 닫기 버튼과 모달 하단 영역 요소들을 정의
         let closeButton = document.getElementById('closeButton');
-        let modalBottom = document.getElementById('modal_bottom');
+        let modalBottom = document.getElementById('modal_close');
         
         // 닫기 버튼 클릭 시 모달 닫기
         closeButton.addEventListener('click', closeModal);
@@ -308,7 +319,7 @@
     });
     
     // 모달 열기 함수
-    function openModal(date, time, isbook) {
+    function openModal(date, time, isbook, schNo) {
         // 모달이 이미 열려 있는지 확인
         if (document.getElementById('myModal').style.display === 'block') return;
 
@@ -320,22 +331,27 @@
         const studentEmail = document.getElementById('studentEmail').innerText;
         const cate = document.getElementById('cate').innerText;
         const cslorName = document.getElementById('cslorName').innerText;
+        const cslorNo = document.getElementById('cslorNo').innerText;
         const cslLoc = document.getElementById('cslLoc').innerText;
 
         // 모달에 정보 전달
         if (cate == '1') {
 	        document.getElementById('modalCate').innerText = '진로·취업 상담';
         }
+        document.getElementById('modalCateHidden').innerText = cate;
         document.getElementById('modalStudentName').innerText = studentName;
         document.getElementById('modalStudNo').innerText = studNo;
         document.getElementById('modalDeptName').innerText = deptName;
         document.getElementById('modalStudentTelNo').innerText = studentTelNo;
         document.getElementById('modalStudentEmail').innerText = studentEmail;
+        document.getElementById('modalSchNo').innerText = schNo;
         document.getElementById('modalCslorName').innerText = cslorName;
+        document.getElementById('modalCslorNo').innerText = cslorNo;
         document.getElementById('modalCslLoc').innerText = cslLoc;
         document.getElementById('modalDate').innerText = formatDate(date);
         document.getElementById('modalTime').innerText = time;
         document.getElementById('modalIsBook').innerText = (isbook === '0') ? '예약 가능' : '';
+        document.getElementById('modalIsBookHidden').innerText = isbook;
 
         // 모달 열기
         document.getElementById('myModal').style.display = 'block';
@@ -355,6 +371,51 @@
         return `${year}.${month}.${day}`;
     }
    
+	
+	
+    document.querySelector('.modal_submit').addEventListener('click', function() {
+        // 모달 내용 가져오기
+        const data = {
+            cate: document.getElementById('modalCateHidden').innerText,
+            studentName: document.getElementById('modalStudentName').innerText,
+            studNo: document.getElementById('modalStudNo').innerText,
+            deptName: document.getElementById('modalDeptName').innerText,
+            studentTelNo: document.getElementById('modalStudentTelNo').innerText,
+            studentEmail: document.getElementById('modalStudentEmail').innerText,
+            date: document.getElementById('modalDate').innerText,
+            time: document.getElementById('modalTime').innerText,
+            isbook: document.getElementById('modalIsBookHidden').innerText,
+            schNo: document.getElementById('modalSchNo').innerText,
+            cslorName: document.getElementById('modalCslorName').innerText,
+            cslorNo: document.getElementById('modalCslorNo').innerText,
+            cslLoc: document.getElementById('modalCslLoc').innerText,
+            cslApplyText: document.getElementById('modalText').value // 텍스트영역 내용 추가
+            
+            // 기타 필요한 정보도 가져오세요
+        };
+
+        // 서버로 데이터 전송
+        fetch('/cslapply', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            // 성공적으로 저장되었을 때의 처리
+            alert("예약이 완료되었습니다.");
+            // 다른 페이지로 이동
+            window.location.href = "/index";             
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            // 저장 중 오류가 발생했을 때의 처리
+        });
+    });
+	
     
     
 </script>

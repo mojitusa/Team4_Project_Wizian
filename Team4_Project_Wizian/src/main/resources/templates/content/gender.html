@@ -26,7 +26,24 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
-  <link href="assets/css/sex.css" rel="stylesheet">
+  <link href="css/career.css" rel="stylesheet">
+  
+	<script type="text/javascript">
+    // Thymeleaf 표현식을 JavaScript 변수에 할당
+    const isLoggedIn = /*[[${isLoggedIn}]]*/ ;
+    const userNo = /*[[${userNo != null ? userNo : 'null'}]]*/ 'null';
+    
+    if (!isLoggedIn) {
+        alert("로그인 해 주세요.?")
+        window.location.href = "/"; // 메인 페이지로 이동
+    } else if (userNo !== 'null' && userNo.toString().substring(0, 2) !== '11') {
+        alert("학생만 신청가능합니다.");
+        window.location.href = "/"; // 메인 페이지로 이동
+    }	
+	
+	</script>  
+  
+  
 </head>
 
 <body class="index-page">
@@ -34,15 +51,243 @@
 		<div th:replace="../templates/fragments/header"></div>
 	</header>
   
-  <main class="sex">
-    <section id="sexSection">
+  <main class="ec">
+    <section id="ecSection" class="">
       <div class="container">
         <!-- Content here -->
-        test
+        <div id="main_contaner">
+        	<div id="top">
+        		<p id="top_title">온라인 상담 신청에 대한 답변은 상황에 따라 1~2일(주말제외) 소요될 수 있습니다.</p>
+        	</div>
+        	<div id="main_table">
+				<div class="table">
+				    <div class="table-header">
+				        <div class="table-row">
+				            <div class="table-cell cell-name cell-left">이름</div>
+				            <div class="table-cell cell-field">상담 분야</div>
+				            <div class="table-cell cell-profile">프로필</div>
+				            <div class="table-cell cell-apply">상담 신청</div>
+				        </div>
+				    </div>
+				    <div class="table-body">
+				        <div th:each="counselor : ${counselor}" class="table-row">
+				            <div class="table-cell cell-name cell-left cslor_name" th:text="${counselor.cslorNm}">이름</div>
+				            <div class="table-cell cell-field csl_detail" th:text="${counselor.cslDetail}">상담 분야</div>
+				            <div class="table-cell cell-profile" >
+				            	<button class="csl_btn profile">조회</button>
+				            </div>
+                                <div class="table-cell cell-apply">
+                                    <form th:action="@{/schedule}" method="GET">
+                                        <input type="hidden" name="cslorNo" th:value="${counselor.userNo}" />
+                                        <input type="hidden" name="name" th:value="${counselor.cslorNm}" />
+                                        <input type="hidden" name="cate" th:value="${counselor.cate}" />
+                                        <input type="hidden" name="telNo" th:value="${counselor.telNo}" />
+                                        <input type="hidden" name="email" th:value="${counselor.users.email}" />
+                                        <input type="hidden" name="nonFace" th:value="${counselor.nonFace}" />
+                                        <input type="hidden" name="cslLoc" th:value="${counselor.cslLoc}" />
+                                        <input type="hidden" name="deptName" th:value="${counselor.department.cNmk}" />
+                                        <input type="hidden" name="cslDetail" th:value="${counselor.cslDetail}" />
+                                        <button type="submit" class="csl_btn schedule">일정조회</button>
+                                    </form>
+                                </div>
+				            <div class="hidden_div">
+				            	<div class="cate" th:text="${counselor.cate}"></div>
+				            	<div class="telNo" th:text="${counselor.telNo}"></div>
+				            	<div class="email" th:text="${counselor.users.email}"></div>
+				            	<div class="nonFace" th:text="${counselor.nonFace}"></div>
+				            	<div class="cslLoc" th:text="${counselor.cslLoc}"></div>
+				            	<div class="dept_name" th:text="${counselor.department.cNmk}"></div>
+				            	<div class="cslDetail" th:text="${counselor.cslDetail}"></div>
+				            	
+				            </div>
+				            
+				        </div>
+				    </div>
+				</div>
+
+				<nav id="pageNav">
+				    <ul class="pagination">
+				        <li class="page-item" th:classappend="${page.first} ? 'disabled'">
+				            <a class="page-link" th:href="@{/career(page=${page.number - 1})}">Previous</a>
+				        </li>
+				        <li class="page-item" th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}" th:classappend="${page.number == i} ? 'active'">
+				            <a class="page-link" th:href="@{/career(page=${i})}" th:text="${i + 1}">1</a>
+				        </li>
+				        <li class="page-item" th:classappend="${page.last} ? 'disabled'">
+				            <a class="page-link" th:href="@{/career(page=${page.number + 1})}">Next</a>
+				        </li>
+				    </ul>
+				</nav>
+	                    		
+        	</div>
+        </div>
       </div>
     </section>
   </main>
   
+		<!-- 모달 창 -->
+		<div id="myModal" class="modal">
+		    <!-- 모달 내용 -->
+		    <div class="modal-content">
+		    	<div class="modal-content_top">
+			    	<div id="modal_top">
+			    		<span id=modal_top_title>프로필 관리</span>
+				        <span id="closeButton" class="close">&times;</span>
+			    	</div>
+			    	<div id="modal_mid">
+			    		<div id="modal_mid_title">
+			    			프로필 관리
+			    		</div>
+			    		<div id="modal_mid_table1">
+			    			<div class="modal_mid_table1_row1 modal_mid_table1_row_top">
+			    				<div class="colored_cell modal_cell colered">
+			    					이름
+			    				</div>
+			    				<div class="uncolored_cell modal_cell uncolered" id="cslorNm">
+			    				</div>
+			    				<div class="colored_cell modal_cell colered">
+			    					소속
+			    				</div>
+			    				<div class="uncolored_cell modal_cell uncolered" id="counselor_Cd">
+			    				</div>
+			    			</div>
+			    			<div class="modal_mid_table1_row1">
+			    				<div class="colored_cell modal_cell colered">
+			    					연락처
+			    				</div>
+			    				<div class="uncolored_cell modal_cell uncolered" id="telNo">
+			    				</div>
+			    				<div class="colored_cell modal_cell colered">
+			    					E-mail
+			    				</div>
+			    				<div class="uncolored_cell modal_cell uncolered" id="email">
+			    				</div>							    				
+			    			</div>
+			    				
+			    		</div>
+			    		<div id="modal_mid_table2">
+			    			<div class="modal_mid_table1_row2 modal_mid_table1_row_top">
+			    				<div class="colored_cell modal_cell colered">
+			    					비대면상담여부
+			    				</div>
+			    				<div class="uncolored_cell modal_cell uncolered" id="nonFace">
+			    				</div>							    			
+			    			</div>
+			    			<div class="modal_mid_table1_row2">
+			    				<div class="colored_cell modal_cell colered">
+			    					상담장소
+			    				</div>
+			    				<div class="uncolored_cell modal_cell uncolered" id="cslLoc">
+			    				</div>							    			
+			    			</div>
+			    			<div class="modal_mid_table1_row2">
+			    				<div class="colored_cell modal_cell colered">
+			    					담당 학부(전공)
+			    				</div>
+			    				<div class="uncolored_cell modal_cell uncolered" id="deptName">
+			    				</div>							    			
+			    			</div>
+			    			<div class="modal_mid_table1_row2">
+			    				<div class="colored_cell modal_cell colered">
+			    					상담분야
+			    				</div>
+			    				<div class="uncolored_cell modal_cell uncolered" id="cslDetail">
+			    				</div>							    			
+			    			</div>
+			    		</div>
+			    	</div>
+			    </div>
+		    	<div id="modal_bottom">
+		    		닫기
+		    	</div>
+		        
+		    </div>
+		</div>
+  
+  <!-- Vendor JS Files -->
+	<script src="assets/vendor/php-email-form/validate.js"></script>
+	<script src="assets/vendor/aos/aos.js"></script>
+	<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+	<script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+	<script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+	<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+	<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+	<!-- Main JS File -->
+	<script src="assets/js/main.js"></script>
+	
+	<script>
+	    // 모달 열기
+	    function openModal(counselorInfo) {
+	        var modal = document.getElementById('myModal');
+	        var modalContent = modal.querySelector('.modal-content');
+	        // 모달 내용 설정
+	        
+	        document.getElementById('cslorNm').innerText = counselorInfo.counselorName;
+	       	if (counselorInfo.cate == '1') 
+	        	document.getElementById('counselor_Cd').innerText = '학생·취업과';
+	        document.getElementById('telNo').innerText = counselorInfo.telNo;
+	        document.getElementById('email').innerText = counselorInfo.email;
+	        if (counselorInfo.nonFace == '1') {
+		        document.getElementById('nonFace').innerText = '비대면 상담 가능';
+	        }
+	        document.getElementById('cslLoc').innerText = counselorInfo.cslLoc;
+	        document.getElementById('deptName').innerText = counselorInfo.deptName;
+	        document.getElementById('cslDetail').innerText = counselorInfo.cslDetail;
+	        
+	        modal.style.display = "block";
+	    }
+	
+	    // 모달 닫기
+	    function closeModal() {
+	        var modal = document.getElementById('myModal');
+	        modal.style.display = "none";
+	    }
+	
+	    // 문서가 로드되면 각 버튼에 클릭 이벤트를 추가
+	    document.addEventListener('DOMContentLoaded', function() {
+	        var btns = document.querySelectorAll('.profile');
+	        btns.forEach(function(btn) {
+	            btn.addEventListener('click', function() {
+	            	// 클릭된 버튼의 부모 요소에서 상담자 정보 추출
+	            	let row = btn.closest('.table-row');
+	            	console.log(row);
+	            	const counselorInfo = {
+	            	    counselorName: row.querySelector('.cslor_name').textContent,
+	            	    cate: row.querySelector('.cate').textContent,
+	            	    telNo: row.querySelector('.telNo').textContent,
+	            	    email: row.querySelector('.email').textContent,
+	            	    nonFace: row.querySelector('.nonFace').textContent,
+	            	    cslLoc: row.querySelector('.cslLoc').textContent,
+	            	    deptName: row.querySelector('.dept_name').textContent,
+	            	    cslDetail: row.querySelector('.cslDetail').textContent
+	            	};
+	                openModal(counselorInfo);
+	            });
+	        });
+	
+	        // 모달 영역 외의 부분을 클릭하면 모달 닫기
+	        window.onclick = function(event) {
+	            var modal = document.getElementById('myModal');
+	            if (event.target == modal) {
+	                closeModal();
+	            }
+	        }
+	        
+	        // 닫기 버튼과 모달 하단 영역 요소들을 정의
+	        let closeButton = document.getElementById('closeButton');
+	        let modalBottom = document.getElementById('modal_bottom');
+	        
+	        // 닫기 버튼 클릭 시 모달 닫기
+	        closeButton.addEventListener('click', closeModal);
+	        
+	        // 모달 하단 영역 클릭 시 모달 닫기
+	        modalBottom.addEventListener('click', closeModal);	        
+	    });
+	</script>
+	
+
+	
 </body>
 
   <footer id="footer">

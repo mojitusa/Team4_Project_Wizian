@@ -1,9 +1,9 @@
 package com.Team4.web.mongodbrepository;
 
-import com.Team4.web.mongodbclass.Counselor;
+import com.Team4.web.mongodbclass.CounselorMongo;
 
 public interface CounselorCustomRepository {
 	
-	Counselor findByUsersUserNo(String userNo);
+	CounselorMongo findByUsersUserNo(String userNo);
 
 }

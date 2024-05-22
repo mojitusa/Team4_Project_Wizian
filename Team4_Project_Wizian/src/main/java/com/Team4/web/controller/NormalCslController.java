@@ -6,14 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Team4.web.entity.CslScheduleEntity;
 import com.Team4.web.entity.CslorEntity;
 import com.Team4.web.entity.StudentEntity;
+import com.Team4.web.mongodbclass.CslApplyMongo;
 import com.Team4.web.service.NormalCslService;
 import com.Team4.web.service.PsyCslService;
 
@@ -61,50 +65,37 @@ public class NormalCslController {
 	    
 	}
 	
-	@GetMapping("/careerApplyPage")
-	public String showCareerApplyPage(Model model, HttpSession session) {
-	    String userNo = (String) session.getAttribute("userNo");
-
-	    if (userNo == null) {
-	        model.addAttribute("isLoggedIn", false);
-	        model.addAttribute("userNo", "null");
-	    } else {
-	        model.addAttribute("isLoggedIn", true);
-	        model.addAttribute("userNo", userNo);
-	        
-	        // 추가적인 비즈니스 로직이 필요하다면 여기에 추가
-	    }
-	    
-	    return "content/careerApplyPage"; // 이 뷰 파일이 존재해야 합니다.
-	}
-	
-	
-	@GetMapping("/schedule999")
-	public String psyCslApply(
-			Model model, HttpSession session,
-            @RequestParam("name") String name,
-            @RequestParam("field") String field,
-            @RequestParam("career") String career,
-            @RequestParam("telNo") String telNo,
-            @RequestParam("email") String email,
-            @RequestParam("nonFace") String nonFace,
-            @RequestParam("cslLoc") String cslLoc,
-            @RequestParam("deptName") String deptName,
-            @RequestParam("cslDetail") String cslDetail
-			) {
+	@GetMapping("/gender")
+	public String showGenderPage(Model model, HttpSession session, @RequestParam(name = "page", defaultValue = "0") int page) {
+		String userNo = (String) session.getAttribute("userNo");
+		System.out.println("usebrNo : " + userNo);
 		
-        // 세션에서 로그인한 사용자 정보 가져오기
-		Object userNo = session.getAttribute("userNo");
-		System.out.println("userNo : " + userNo);
-		System.out.println("name : " + name);
+		if (userNo == null) {
+			model.addAttribute("isLoggedIn", false);
+			
+			model.addAttribute("userNo", "null");
+			
+			System.out.println("널 조건 안으로 들어왔습니다.");
+			System.out.println("usebrNo : " + userNo);
+			return "content/careerloginerror";
+			
+		} else {
+			model.addAttribute("isLoggedIn", true);
+			model.addAttribute("userNo", userNo);
+			
+			List<CslorEntity> cslorEntityList =  normalCslService.getJpaCslorByGender();
+			
+//			Pageable pageable = PageRequest.of(page, 10);  // 페이지 크기를 10으로 설정
+//			Page<CslorEntity> cslorPage = normalCslService.getJpaCounselorByCareer(pageable);
+//			
+//			model.addAttribute("counselor", cslorPage.getContent());
+//			model.addAttribute("page", cslorPage);
+			
+			model.addAttribute(cslorEntityList);
+			
+			return "content/gender";
+		}
 		
-		
-		if (userNo != null) { StudentEntity studentEntity =
-		psyCslService.getJpaStudentByUserNo((String) userNo);
-		model.addAttribute("student", studentEntity); }
-		else { return "/"; }
-		 
-		return "/index";
 	}
 	
 	@GetMapping("/cslsch")
@@ -122,7 +113,7 @@ public class NormalCslController {
 	@GetMapping("/schedule")
 	public String cslsch3(
 			Model model, HttpSession session,
-			@RequestParam("cslNo") String cslNo,
+			@RequestParam("cslorNo") String cslorNo,
             @RequestParam("name") String name,
             @RequestParam("cate") String cate,
             @RequestParam("telNo") String telNo,
@@ -136,16 +127,15 @@ public class NormalCslController {
 		String userNo = (String) session.getAttribute("userNo");
 		
 		if (userNo != null) {
-			StudentEntity studentEntity =
-			psyCslService.getJpaStudentByUserNo((String) userNo);
+			StudentEntity studentEntity = psyCslService.getJpaStudentByUserNo((String) userNo);
 			model.addAttribute("student", studentEntity);
 		} else { 
 			return "content/careerloginerror";
 		}
 		
-		List<CslScheduleEntity> SclScheduleList = normalCslService.getJpaCslSchduleByCounselor(cslNo);
+		List<CslScheduleEntity> SclScheduleList = normalCslService.getJpaCslSchduleByCounselor(cslorNo);
 		model.addAttribute("schedules", SclScheduleList);
-		model.addAttribute("cslNo", cslNo);
+		model.addAttribute("cslorNo", cslorNo);
 		model.addAttribute("name", name);
 		model.addAttribute("cate", cate);
 		model.addAttribute("telNo", telNo);
@@ -157,5 +147,15 @@ public class NormalCslController {
 		return "content/counselorSchedule3";
 	}
 	
+	
+	@PostMapping("/cslapply")
+	public ResponseEntity<String> cslapply(@RequestBody CslApplyMongo cslApply) {
+		System.out.println(cslApply);
+		
+		normalCslService.saveCslApply(cslApply);
+		
+		return ResponseEntity.ok("{\"message\": \"redirect:/career\"}");
+
+	}
 	
 }

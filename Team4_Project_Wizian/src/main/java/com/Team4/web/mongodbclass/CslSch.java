@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class CslSch{
 
 	@DBRef
-	private Counselor counselor;
+	private CounselorMongo counselor;
 	
 	private LocalDate open_date;
 	private String time_cd;
