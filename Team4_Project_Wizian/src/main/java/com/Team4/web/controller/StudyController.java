@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.Team4.web.mongodbclass.Counselor;
+import com.Team4.web.mongodbclass.CounselorMongo;
 import com.Team4.web.service.JoinExamRepoService;
 import com.Team4.web.service.StudyRepoService;
 import com.Team4.web.service.UserRepoService;

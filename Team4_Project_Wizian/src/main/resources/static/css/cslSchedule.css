@@ -17,7 +17,7 @@
 }
 .week-nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-bottom: 10px;
 }
 
@@ -211,4 +211,42 @@ span.close {
 
 #modalText {
 	width: 90%;
+}
+
+#modalCateHidden {
+	display: none;
+}
+
+#modalIsBookHidden {
+	display: none;
+}
+
+#modalCslorNo {
+	display: none;
+}
+
+#modalSchNo {
+	display: none;
+}
+
+.cal_nav {
+	font-size: 30px;
+	background-color: inherit;
+	border: none;
+}
+
+#prevWeek {
+	
+}
+
+#nextWeek {
+	
+}
+
+#calTitle {
+	margin: 14px;
+    display: flex;
+    align-items: center; /* 세로 가운데 정렬 */
+    font-size: 30px;
+    font-weight: bold;
 }

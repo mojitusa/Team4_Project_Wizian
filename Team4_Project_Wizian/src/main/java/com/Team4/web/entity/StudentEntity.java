@@ -1,5 +1,8 @@
 package com.Team4.web.entity;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -19,20 +22,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "STUD_INFO")
 public class StudentEntity {
-	
-	@Id
-	@Column(name = "STUD_NO")
-	private String userNoInStudent;
-	
+    
+    @Id
+    @Column(name = "STUD_NO")
+    private String userNoInStudent;
+    
     @OneToOne
-    @JoinColumn(name = "STUD_NO") // 외래 키 및 참조할 엔티티의 기본 키 지정
+    @JoinColumn(name = "STUD_NO", referencedColumnName = "STUD_NO", insertable = false, updatable = false)
     private UsersEntity users;
 
     @Column(name = "REAL_STUD_NO")
     private String studNo;
     
     @Column(name = "ST")
-	private String st;
+    private String st;
     
     @ManyToOne
     @JoinColumn(name = "C_CD")
@@ -58,5 +61,4 @@ public class StudentEntity {
     
     @Column(name = "N_CD")
     private String nationCd;
-
 }

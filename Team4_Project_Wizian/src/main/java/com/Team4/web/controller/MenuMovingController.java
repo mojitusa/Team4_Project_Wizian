@@ -35,10 +35,6 @@ public class MenuMovingController {
 	    HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
 	    return "index";
 	}
-	@GetMapping("/gender")
-	public String showSexPage() {
-		return "content/gender";
-	}
 	
 	@GetMapping("/professor")
 	public String showProfessorPage(HttpSession session, Model model) {

@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Repository;
 
-import com.Team4.web.mongodbclass.Counselor;
+import com.Team4.web.mongodbclass.CounselorMongo;
 
 @Repository
 public class CounselorCustomRepositoryImpl implements CounselorCustomRepository {
@@ -20,12 +20,12 @@ public class CounselorCustomRepositoryImpl implements CounselorCustomRepository 
     }
 
     @Override
-    public Counselor findByUsersUserNo(String userNo) {
+    public CounselorMongo findByUsersUserNo(String userNo) {
         Aggregation aggregation = newAggregation(
                 match(Criteria.where("users.user_no").is(userNo))
         );
         
-        return mongoTemplate.aggregate(aggregation, "counselor", Counselor.class).getUniqueMappedResult();
+        return mongoTemplate.aggregate(aggregation, "counselor", CounselorMongo.class).getUniqueMappedResult();
     }
 
 }

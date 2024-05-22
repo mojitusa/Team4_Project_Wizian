@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Component //빈으로 연결
-public class Counselor{
+public class CounselorMongo{
 
 	@Id
 	private String id;
