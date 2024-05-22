@@ -30,11 +30,11 @@
   
 	<script type="text/javascript">
     // Thymeleaf 표현식을 JavaScript 변수에 할당
-    const isLoggedIn = [[${isLoggedIn}]];
-    const userNo = [[${userNo} != 'null' ? ${userNo} : 'null']] ;
+    const isLoggedIn = /*[[${isLoggedIn}]]*/ ;
+    const userNo = /*[[${userNo != null ? userNo : 'null'}]]*/ 'null';
     
     if (!isLoggedIn) {
-        alert("로그인 해 주세요.")
+        alert("로그인 해 주세요.?")
         window.location.href = "/"; // 메인 페이지로 이동
     } else if (userNo !== 'null' && userNo.toString().substring(0, 2) !== '11') {
         alert("학생만 신청가능합니다.");
@@ -67,7 +67,6 @@
 				            <div class="table-cell cell-field">상담 분야</div>
 				            <div class="table-cell cell-profile">프로필</div>
 				            <div class="table-cell cell-apply">상담 신청</div>
-				            <div class="table-cell cell-online cell-right">온라인 상담</div>
 				        </div>
 				    </div>
 				    <div class="table-body">
@@ -77,15 +76,22 @@
 				            <div class="table-cell cell-profile" >
 				            	<button class="csl_btn profile">조회</button>
 				            </div>
-				            <div class="table-cell cell-apply" >
-				            	<button class="csl_btn schedule">일정조회</button>
-				            </div>
-				            <div class="table-cell cell-online cell-right" >
-				            	<button th:if="${counselor.isOnlineAvailable}" class="csl_btn online">온라인상담 신청</button>
-				            	<span th:unless="${counselor.isOnlineAvailable}">불가능</span>
-				            </div>
+                                <div class="table-cell cell-apply">
+                                    <form th:action="@{/schedule}" method="GET">
+                                        <input type="hidden" name="cslNo" th:value="${counselor.userNo}" />
+                                        <input type="hidden" name="name" th:value="${counselor.cslorNm}" />
+                                        <input type="hidden" name="cate" th:value="${counselor.cate}" />
+                                        <input type="hidden" name="telNo" th:value="${counselor.telNo}" />
+                                        <input type="hidden" name="email" th:value="${counselor.users.email}" />
+                                        <input type="hidden" name="nonFace" th:value="${counselor.nonFace}" />
+                                        <input type="hidden" name="cslLoc" th:value="${counselor.cslLoc}" />
+                                        <input type="hidden" name="deptName" th:value="${counselor.department.cNmk}" />
+                                        <input type="hidden" name="cslDetail" th:value="${counselor.cslDetail}" />
+                                        <button type="submit" class="csl_btn schedule">일정조회</button>
+                                    </form>
+                                </div>
 				            <div class="hidden_div">
-				            	<div class="career" th:text="${counselor.career}"></div>
+				            	<div class="cate" th:text="${counselor.cate}"></div>
 				            	<div class="telNo" th:text="${counselor.telNo}"></div>
 				            	<div class="email" th:text="${counselor.users.email}"></div>
 				            	<div class="nonFace" th:text="${counselor.nonFace}"></div>
@@ -218,7 +224,7 @@
 	        // 모달 내용 설정
 	        
 	        document.getElementById('cslorNm').innerText = counselorInfo.counselorName;
-	       	if (counselorInfo.isCareer == '1') 
+	       	if (counselorInfo.cate == '1') 
 	        	document.getElementById('counselor_Cd').innerText = '학생·취업과';
 	        document.getElementById('telNo').innerText = counselorInfo.telNo;
 	        document.getElementById('email').innerText = counselorInfo.email;
@@ -248,7 +254,7 @@
 	            	console.log(row);
 	            	const counselorInfo = {
 	            	    counselorName: row.querySelector('.cslor_name').textContent,
-	            	    isCareer: row.querySelector('.career').textContent,
+	            	    cate: row.querySelector('.cate').textContent,
 	            	    telNo: row.querySelector('.telNo').textContent,
 	            	    email: row.querySelector('.email').textContent,
 	            	    nonFace: row.querySelector('.nonFace').textContent,

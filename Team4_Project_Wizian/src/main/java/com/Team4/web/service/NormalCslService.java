@@ -23,20 +23,20 @@ public class NormalCslService {
 
 	public List<CslorEntity> getJpaCounselorByCareer() {
 		
-		return counselorRepo.findAllByCareer("1");
+		return counselorRepo.findAllByCate("1");
 	}
 	
 	// 페이징 기능 추가
 	public Page<CslorEntity> getJpaCounselorByCareer(Pageable pageable) {
-		return counselorRepo.findAllByCareer("1", pageable);
+		return counselorRepo.findAllByCate("1", pageable);
 	}
 
 	public List<CslorEntity> getJpaCslorByGender() {
-		return counselorRepo.findAllByGender("1");
+		return counselorRepo.findAllByCate("2");
 	}
 
-	public List<CslScheduleEntity> getJpaCslSchduleByCounselor() {
-		return cslScheduleRepo.findAllByCounselor(counselorRepo.findById("1300000014"));
+	public List<CslScheduleEntity> getJpaCslSchduleByCounselor(String cslNo) {
+		return cslScheduleRepo.findAllByCounselor(counselorRepo.findById(cslNo));
 	}
 	
 	

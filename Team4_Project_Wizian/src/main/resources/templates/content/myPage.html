@@ -44,7 +44,14 @@
 	<!-- Main JS File -->
 	<script src="assets/js/main.js"></script>
 </head>
-
+<style>
+.added-content {
+        margin-top: 150px; /* 이미지와 추가된 HTML 요소 사이의 간격 조정 */
+    }
+    .guide_wrap {
+    font-weight: bold;
+}
+</style>
 <body class="index-page">
 	<header class="header">
 		<div th:replace="../templates/fragments/header"></div>
@@ -97,24 +104,33 @@
 						columns: [{
 							header: '번호',
 							name: 'CSL_NO',
-							width: 50
-
+							width: 70,
+							align: 'center',
+							sortable: true
 						}, {
 							header: '문의 종류',
 							name: 'CSL_CATEGORY',
 							width: 200,
+							align: 'center',
+							sortable: true
 						}, {
 							header: '제목',
 							name: 'CSL_TITLE',
 							width: 400,
+							align: 'center',
+							sortable: true
 						}, {
 							header: '날짜',
 							width: 250,
 							name: 'CSL_DATE',
+							align: 'center',
+							sortable: true
 						}, {
 							header: '답변 상태',
-							width: 150,
+							width: 200,
 							name: 'CSL_STATUS',
+							align: 'center',
+							sortable: true
 						}]
 					});
 			$.ajax({
@@ -206,6 +222,7 @@
 					$('#counLog').empty();
 					$('#counLog').html(result);
 					$('#grid').hide();
+					$('#info').hide();
 					grid2.refreshLayout();
 				},
 				error: function () {
@@ -222,13 +239,23 @@
 				success: function (result) {
 					var h2 = '<h2>1:1 문의 내역</h2>'
 					var imgHtml = '<img src="/image/ono2.jpg" alt="Image" id="onoImage" class="right-aligned">';
+					var guideHtml = '<div class="guide_wrap">' +
+                    '<ul>' +
+                    '<li class="first">상담이 접수 되고 상담원이 답변 전 까지 답변 대기 상태 입니다.</li>' +
+                    '<li class="last">상담원이 답변을 완료 할 경우 답변 완료 상태가 되고 게시글을 눌러 답변을 ' +
+                    '확인 하실 수 있습니다.</li>' +
+                    '</ul>' +
+                    '</div>';
 					grid.resetData(result);
 					$('#counLog').empty();
+					$('#info .guide_wrap').remove();
 					$('#counLog').append(h2);
 					$('#counLog').append(imgHtml);
+					$('#info').append(guideHtml).addClass('added-content');
 					$('#grid').show();
 					grid.refreshLayout();
 					$('#grid2').hide();
+					$('#info').show();
 				},
 				error: function () {
 					$('#counLog').html('<p>1:1 문의 내역을 불러오는 중 오류가 발생했습니다.</p>');
