@@ -10,11 +10,12 @@ import com.Team4.web.entity.CslorEntity;
 
 public interface CounselorRepoJpa extends JpaRepository<CslorEntity, String>{
 
-	List<CslorEntity> findAllByCareer(String string);
 	
+	List<CslorEntity> findAllByCate(String string);
     // 페이징 기능 추가
-    Page<CslorEntity> findAllByCareer(String career, Pageable pageable);
+	Page<CslorEntity> findAllByCate(String string, Pageable pageable);
 
-	List<CslorEntity> findAllByGender(String string);
+
+
 
 }
