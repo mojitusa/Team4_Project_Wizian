@@ -28,83 +28,6 @@
 
 <link href="assets/css/main.css" rel="stylesheet">
 <link href="assets/css/professor.css" rel="stylesheet">
-<style type="text/css">
-
-/* Main */
-.professor {
-	padding: 20px 0;
-}
-
-/* First row: 지도교수 여부, 학과 검색 */
-#professorSection .row {
-	display: flex;
-	justify-content: space-between;
-	margin-bottom: 20px;
-}
-
-#professorSection .row span {
-	display: flex;
-	align-items: center;
-}
-
-#professorSection .row label {
-	margin-right: 10px;
-}
-
-/* Second row: 검색창과 검색 버튼 */
-#professorSection .search-container {
-	margin-bottom: 20px;
-}
-
-#professorSection .search-container label {
-	margin-right: 10px;
-}
-
-/* Third row: 그리드 시스템으로 리스트 표시 */
-#professorSection table {
-	width: 100%;
-	border-collapse: collapse;
-}
-
-#professorSection table, #professorSection th, #professorSection td {
-	border: 1px solid #ddd;
-	padding: 8px;
-}
-
-#professorSection th {
-	background-color: #f2f2f2;
-}
-
-.modal-header, .modal-footer {
-	background-color: #f2f2f2;
-}
-
-.modal-title {
-	color: #333;
-}
-
-.modal-body p {
-	margin: 10px 0;
-}
-
-.table-custom {
-	width: 100%;
-	border: none;
-}
-
-.table-custom td {
-	padding: 8px 0;
-}
-
-.table-custom th, .table-custom td {
-	border-bottom: 1px solid #ddd;
-}
-
-.table-custom th {
-	background-color: #f2f2f2;
-	font-weight: bold;
-}
-</style>
 </head>
 
 <body class="index-page">
@@ -113,16 +36,15 @@
 	</header>
 
 	<main class="professor">
-		<section id="professorSection">
-			<div class="container">
-				<div class="row">
+																							<div class="row">
 					<span> <label for="map_professor">지도교수여부</label> <select
 						id="map_professor">
 							<option value="yes">Y</option>
 							<option value="no">N</option>
 					</select>
-					</span> <span> <label for="department">학과</label> <input
-						type="text" id="department_search" placeholder="학과를 입력하세요">
+					</span> 
+					<span> <label for="department">학과</label> 
+					<input type="text" id="department_search" placeholder="학과를 입력하세요">
 						<button id="department_search_button">검색</button>
 					</span>
 				</div>
@@ -132,27 +54,35 @@
 						placeholder="검색어를 입력하세요">
 					<button id="search_button">검색하기</button>
 				</div>
+				
+				
+				
+				
+				
+		<section id="professorSection">
+			<div class="container">
+				
 
 				<div th:if="${profData}">
-					<table border="1">
-						<thead>
-							<tr>
-								<th>번호</th>
-								<th>이름</th>
-								<th>상담분야</th>
-								<th>프로필</th>
-								<th>상담신청</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="prof, iterStat : ${profData}">
-								<td th:text="${iterStat.count}">No</td>
-								<td th:text="${prof.PF_NM}">ID</td>
-								<td th:text="${prof.PF_CS_PART}">Name</td>
-								<td>
-									<button type="button" class="btn btn-info"
-										th:attr="onclick='showProfModal(' + ${prof.PF_NO} + ')'">조회</button>
-								</td>
+			<div id="main_table" th:if="${profData}">
+				<div class="table">
+						<div class="table-header">
+					        <div class="table-row">
+					            <div class="table-cell cell-name cell-left">번호</div>
+					            <div class="table-cell cell-name cell-left">이름</div>
+					            <div class="table-cell cell-field">상담 분야</div>
+					            <div class="table-cell cell-profile">프로필</div>
+					            <div class="table-cell cell-apply">상담 신청</div>
+					        </div>
+				    	</div>
+						<div class="table-body">
+							<div th:each="prof, iterStat : ${profData}">
+								<div class="table-cell cell-name cell-left cslor_name" th:text="${iterStat.count}"></div>
+								<div class="table-cell cell-field csl_detail" th:text="${prof.PF_NM}"></div>
+								<div class="table-cell cell-field csl_detail" th:text="${prof.PF_CS_PART}"></div>
+								<div class="table-cell cell-profile" >
+									<button class="csl_btn profile" th:attr="onclick='showProfModal(' + ${prof.PF_NO} + ')'">조회</button>
+								</div>
 								<td><a th:href="@{'/calendar?profNo=' + ${prof.PF_NO}}"
 									class="btn btn-primary">일정조회</a></td>
 							</tr>
