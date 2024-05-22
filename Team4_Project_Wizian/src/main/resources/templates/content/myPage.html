@@ -51,6 +51,13 @@
     .guide_wrap {
     font-weight: bold;
 }
+.container{
+	margin-left : 30px;
+}
+#head{
+margin-top:10px;
+
+}
 </style>
 <body class="index-page">
 	<header class="header">
@@ -185,6 +192,7 @@
 					if (!html) {
 						throw new Error('Empty response received from server');
 					}
+					$('#info .guide_wrap').remove();
 					// 외부 HTML 파일의 내용을 특정 요소에 삽입
 					const container = document.getElementById("counLog");
 					container.innerHTML = html;
@@ -237,7 +245,7 @@
 				dataType: "JSON",
 				contentType: "application/json; charset=UTF-8",
 				success: function (result) {
-					var h2 = '<h2>1:1 문의 내역</h2>'
+					var h2 = '<h2 id="head">1:1 문의 내역</h2>'
 					var imgHtml = '<img src="/image/ono2.jpg" alt="Image" id="onoImage" class="right-aligned">';
 					var guideHtml = '<div class="guide_wrap">' +
                     '<ul>' +

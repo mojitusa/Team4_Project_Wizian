@@ -8,6 +8,7 @@
 <!-- CSS File -->
 <link href="assets/css/main.css" rel="stylesheet">
 <link href="assets/css/disability.css" rel="stylesheet">
+<link href="css/modal.css" rel="stylesheet">
 <!-- Bootstrap CSS -->
 <link
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -158,8 +159,7 @@ function initializeCounLog(userNo) {
                 options: {
                     text: '조회하기',
                     onClick: function(ev) {
-                        $('#modalContent').text('상세보기 클릭: ' + ev.rowKey);
-                        $('#customModal').modal('show');
+                    	document.getElementById('myModal').style.display = 'block';
                     },
                     className: 'btn btn-primary custom-btn'
                 }
@@ -173,8 +173,6 @@ function initializeCounLog(userNo) {
                 options: {
                     text: '예약취소',
                     onClick: function(ev) {
-                        $('#modalContent').text('예약취소 클릭: ' + ev.rowKey);
-                        $('#customModal').modal('show');
                     },
                     className: 'btn btn-primary custom-btn'
                 }
@@ -237,5 +235,180 @@ CustomButtonRenderer.prototype.getElement = function() {
 }
 </script>
 
+<!-- 모달 창 -->
+	<div id="myModal" class="modal">
+	    <!-- 모달 내용 -->
+	    <div class="modal-content">
+	    	<div class="modal-content_top">
+		    	<div id="modal_top">
+		    		<span id=modal_top_title>상담신청</span>
+			        <span id="closeButton" class="close">&times;</span>
+		    	</div>
+		    	<div id="modal_mid">
+		    		<div id="modal_mid_title">
+		    		</div>
+		    		<div id="modal_mid_table1">
+		    			<div class="modal_mid_table1_row2 modal_mid_table1_row_top">
+		    				<div class="colored_cell modal_cell colered">
+		    					상담구분
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id="modalCate">
+		    				</div>
+		    			</div>
+		    				
+		    		</div>
+		    		<div id="modal_mid_table2">
+		    			<div class="modal_mid_table1_row1 modal_mid_table1_row_top">
+		    				<div class="colored_cell modal_cell colered">
+		    					이름
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id="modalStudentName">
+		    				</div>							    			
+		    				<div class="colored_cell modal_cell colered">
+		    					학번
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id="modalStudNo">
+		    				</div>							    			
+		    			</div>
+		    			<div class="modal_mid_table1_row2">
+		    				<div class="colored_cell modal_cell colered">
+		    					소속
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id="modalDeptName">
+		    				</div>							    			
+		    			</div>
+		    			<div class="modal_mid_table1_row1">
+		    				<div class="colored_cell modal_cell colered">
+		    					연락처
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id="modalStudentTelNo">
+		    				</div>							    			
+		    			</div>
+		    			<div class="modal_mid_table1_row2">
+		    				<div class="colored_cell modal_cell colered">
+		    					이메일
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id="modalStudentEmail">
+		    				</div>							    			
+		    			</div>
+		    		</div>
+		    		<div id="modal_mid_table3">
+		    			<div class="modal_mid_table1_row1 modal_mid_table1_row_top">
+		    				<div class="colored_cell modal_cell colered">
+		    					상담일자
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id=modalDate>
+		    				</div>							    			
+		    				<div class="colored_cell modal_cell colered">
+		    					상담시간
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id="modalTime">
+		    				</div>							    			
+		    			</div>
+		    			<div class="modal_mid_table1_row2">
+		    				<div class="colored_cell modal_cell colered">
+		    					상담상태
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id="modalIsBook">
+		    				</div>							    			
+		    			</div>
+		    			<div class="modal_mid_table1_row1">
+		    				<div class="colored_cell modal_cell colered">
+		    					상담자
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id="modalCslorName">
+		    				</div>							    			
+		    				<div class="colored_cell modal_cell colered">
+		    					상담장소
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id="modalCslLoc">
+		    				</div>							    			
+		    			</div>
+		    			<div class="modal_mid_table1_row2">
+		    				<div class="colored_cell modal_cell colered">
+		    					신청 내용
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id="modalTime">
+		    					<textarea id="modalText" rows="5" cols="50"></textarea>
+		    				</div>						    			
+		    			</div>
+		    		</div>
+		    	</div>
+		    </div>
+	    	<div id="modal_bottom" >
+	    		<div class="modal_close">
+	    			닫기
+	    		</div>
+	    		<div class="modal_submit">
+	    			등록
+	    		</div>
+	    	</div>
+	        
+	    </div>
+	</div>
+
+
+
 </body>
+<script>
+//모달 영역 외의 부분을 클릭하면 모달 닫기
+window.onclick = function(event) {
+    var modal = document.getElementById('myModal');
+    if (event.target == modal) {
+        closeModal();
+    }
+}
+
+// 닫기 버튼과 모달 하단 영역 요소들을 정의
+let closeButton = document.getElementById('closeButton');
+let modalBottom = document.getElementById('modal_bottom');
+
+// 닫기 버튼 클릭 시 모달 닫기
+closeButton.addEventListener('click', closeModal);
+
+// 모달 하단 영역 클릭 시 모달 닫기
+modalBottom.addEventListener('click', closeModal);	  
+
+
+
+// 모달 열기 함수
+function openModal(date, time, isbook) {
+// 모달이 이미 열려 있는지 확인
+if (document.getElementById('myModal').style.display === 'block') return;
+
+// 모달에 전달할 정보 가져오기
+const studentName = document.getElementById('studentName').innerText;
+const studNo = document.getElementById('studNo').innerText;
+const deptName = document.getElementById('deptName').innerText;
+const studentTelNo = document.getElementById('studentTelNo').innerText;
+const studentEmail = document.getElementById('studentEmail').innerText;
+const cate = document.getElementById('cate').innerText;
+const cslorName = document.getElementById('cslorName').innerText;
+const cslLoc = document.getElementById('cslLoc').innerText;
+
+// 모달에 정보 전달
+if (cate == '1') {
+    document.getElementById('modalCate').innerText = '진로·취업 상담';
+}
+document.getElementById('modalStudentName').innerText = studentName;
+document.getElementById('modalStudNo').innerText = studNo;
+document.getElementById('modalDeptName').innerText = deptName;
+document.getElementById('modalStudentTelNo').innerText = studentTelNo;
+document.getElementById('modalStudentEmail').innerText = studentEmail;
+document.getElementById('modalCslorName').innerText = cslorName;
+document.getElementById('modalCslLoc').innerText = cslLoc;
+document.getElementById('modalDate').innerText = formatDate(date);
+document.getElementById('modalTime').innerText = time;
+document.getElementById('modalIsBook').innerText = (isbook === '0') ? '예약 가능' : '';
+
+// 모달 열기
+document.getElementById('myModal').style.display = 'block';
+}
+
+// 모달 닫기 함수
+function closeModal() {
+// 모달 닫기
+document.getElementById('myModal').style.display = 'none';
+}
+</script>
 </html>
