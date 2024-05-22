@@ -111,7 +111,7 @@ public class NormalCslController {
 	}
 	
 	@GetMapping("/schedule")
-	public String cslsch3(
+	public String schedule(
 			Model model, HttpSession session,
 			@RequestParam("cslorNo") String cslorNo,
             @RequestParam("name") String name,

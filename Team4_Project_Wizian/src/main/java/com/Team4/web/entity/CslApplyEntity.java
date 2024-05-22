@@ -37,12 +37,10 @@ public class CslApplyEntity {
     @ManyToOne
     @JoinColumn(name = "CSLOR_NO")
     private CslorEntity counselor;
-                
-    @Column(name = "CSL_DATE")
-    private String date;
     
-    @Column(name = "CSL_TIME_CD")
-    private String time;
+    @OneToOne
+    @JoinColumn(name = "SCH_NO")
+    private CslScheduleEntity cschedule;
     
     @Column(name = "CSL_APL_DETAIL")
     private String cslDetail;

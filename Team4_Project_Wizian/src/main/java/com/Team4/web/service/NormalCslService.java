@@ -61,15 +61,16 @@ public class NormalCslService {
 		cslApp.setCate(cslApply.getCate());
 		cslApp.setStudent(student);
 		cslApp.setCounselor(couselor);
-		cslApp.setDate(cslApply.getDate());
-		cslApp.setTime(cslApply.getTime());
+		
+		CslScheduleEntity schedule = cslScheduleRepo.findById(Integer.parseInt(cslApply.getSchNo())).orElse(null);
+		schedule.setIsbook("5");
+		cslScheduleRepo.save(schedule);
+		
+		cslApp.setCschedule(schedule);
 		cslApp.setCslDetail(cslApply.getCslApplyText());
 		cslApplyRepoJpa.save(cslApp);
 		
 		cslApplyRepoMongo.save(cslApply);
-		CslScheduleEntity schedule = cslScheduleRepo.findById(Integer.parseInt(cslApply.getSchNo())).orElse(null);
-		schedule.setIsbook("5");
-		cslScheduleRepo.save(schedule);
 	}
 	
 	
