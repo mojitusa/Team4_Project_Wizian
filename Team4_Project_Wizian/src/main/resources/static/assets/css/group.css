@@ -9,13 +9,11 @@
     border-radius: 10px; /* 둥근 모서리 */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
     margin-bottom: 20px; /* 아래 여백 */
-}
-
-.upBox .gcpa {
     font-size: 24px; /* 큰 글자 크기 */
     font-weight: bold; /* 굵은 글자 */
     margin-bottom: 10px; /* 아래 여백 */
 }
+
 
 .upBox p {
     font-size: 16px; /* 일반 텍스트 크기 */
@@ -56,7 +54,7 @@
     border-radius: 5px; /* 둥근 모서리 */
 }
 
-.upBox .search-box button {
+.upBox {
     padding: 8px 16px; /* 내부 여백 */
     border: none; /* 테두리 제거 */
     background-color: #007bff; /* 파란색 배경 */
@@ -65,25 +63,8 @@
     cursor: pointer; /* 마우스 포인터 변경 */
 }
 
-.upBox .search-box button:hover {
-    background-color: #0056b3; /* 어두운 파란색 배경 (호버 시) */
-}
-
 .upBox .write-box {
     margin-left: 20px; /* 왼쪽 여백 */
-}
-
-.upBox .write-box .write-button {
-    padding: 8px 16px; /* 내부 여백 */
-    border: none; /* 테두리 제거 */
-    background-color: #28a745; /* 녹색 배경 */
-    color: white; /* 흰색 글자 */
-    border-radius: 5px; /* 둥근 모서리 */
-    cursor: pointer; /* 마우스 포인터 변경 */
-}
-
-.upBox .write-box .write-button:hover {
-    background-color: #218838; /* 어두운 녹색 배경 (호버 시) */
 }
 
 .gcpaGroup{
