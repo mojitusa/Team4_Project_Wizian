@@ -27,6 +27,9 @@ public class CslorEntity {
 	@Column(name = "CAREER")
 	private String career;
 	
+	@Column(name = "GENDER")
+	private String gender;
+	
     @Column(name = "CSLOR_NM")
     private String cslorNm;
     

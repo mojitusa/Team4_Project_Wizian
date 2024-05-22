@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.Team4.web.entity.CslScheduleEntity;
 import com.Team4.web.entity.CslorEntity;
 import com.Team4.web.entity.StudentEntity;
 import com.Team4.web.service.NormalCslService;
@@ -69,6 +70,31 @@ public class NormalCslController {
 		}
 		return "content/psycslapply";
 	}
+	
+	@GetMapping("/cslsch")
+	public String cslsch() {
+		
+		return "content/counselorSchedule";
+	}
+	
+	@GetMapping("/cslsch2")
+	public String cslsch2() {
+		
+		return "content/counselorSchedule2";
+	}
+	
+	@GetMapping("/cslsch3")
+	public String cslsch3(Model model) {
+		List<CslorEntity> cslorList = normalCslService.getJpaCslorByGender();
+		System.out.println(cslorList);
+		
+		List<CslScheduleEntity> SclScheduleList = normalCslService.getJpaCslSchduleByCounselor();
+		System.out.println(SclScheduleList);
+		model.addAttribute("schedules", SclScheduleList);
+		return "content/counselorSchedule3";
+	}
+	
+	
 	
 //	@PostMapping("/psycslapplysubmit")
 //	public String psyCslApplySubmit(@RequestBody PsyCslSurvey formData) {

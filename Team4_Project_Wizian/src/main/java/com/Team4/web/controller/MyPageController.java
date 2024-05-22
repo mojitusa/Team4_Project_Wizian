@@ -20,6 +20,7 @@ import com.Team4.web.entity.Inquiry;
 import com.Team4.web.service.InquiryService;
 import com.Team4.web.service.MyPageService;
 import com.Team4.web.service.PsyCslService;
+import com.Team4.web.util.Util;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -28,7 +29,8 @@ public class MyPageController {
 
 	@Autowired
 	private PsyCslService psyCslService;
-
+	@Autowired
+	private Util util;
 	@Autowired
 	private MyPageService myPageService;
 
@@ -74,7 +76,12 @@ public class MyPageController {
 	public ResponseEntity<String> updatePrivacy(@RequestParam("stud_no") String studNo,
 			@RequestParam("phoneNumber") String phoneNumber, @RequestParam("email") String email,
 			HttpSession httpSession, Model model) {
-		int updated = myPageService.updatePrivacy(phoneNumber, email, studNo);
+		System.out.println("왔니?");
+		String sudNo2 = (String) httpSession.getAttribute("userNo");
+		System.out.println(sudNo2);
+		System.out.println(phoneNumber);
+		System.out.println(email);
+		int updated = myPageService.updatePrivacy(phoneNumber, email, sudNo2);
 		String message;
 		if (updated >= 1) {
 			message = "개인 정보가 성공적으로 업데이트되었습니다.";
@@ -83,17 +90,17 @@ public class MyPageController {
 			message = "프라이버시 정보 업데이트에 실패했습니다.";
 			System.out.println("업데이트 동작 확인2");
 		}
-		return ResponseEntity.ok(message);
+		return null;
 	}
 
 	@PostMapping("/updatePwCheck")
 	public ResponseEntity<Map<String, Boolean>> updatePwCheck(HttpSession httpSession,
 			@RequestBody Map<String, String> requestBody) {
 		String originalPassword = requestBody.get("originalPassword");
+		String originalPassword2 = util.encryptSHA256(originalPassword);
 		String userNo = (String) httpSession.getAttribute("userNo");
 		// 비밀번호 검증 로직 수행
-		boolean isValid = myPageService.checkPassword(originalPassword, userNo);
-		// 검증 결과를 Map에 담아 JSON 형식으로 반환
+		boolean isValid = myPageService.checkPassword(originalPassword2, userNo);
 		Map<String, Boolean> response = new HashMap<>();
 		response.put("valid", isValid);
 
@@ -117,14 +124,14 @@ public class MyPageController {
 		}
 	}
 
-	@GetMapping("/counselHistory")
-	@ResponseBody
-	public Map<String, Object> inquiryHistoryJson(HttpSession httpSession) {
-		String userNo = (String) httpSession.getAttribute("userNo");
-		List<Inquiry> inquiries = myPageService.getAllBoard(userNo);
-		System.out.println("counselHistory: " + inquiries);
-		Map<String, Object> response = new HashMap<>();
-		response.put("inquiries", inquiries);
-		return response; // JSON 데이터를 직접 반환
-	}
+//	@GetMapping("/counselHistory")
+//	@ResponseBody
+//	public Map<String, Object> inquiryHistoryJson(HttpSession httpSession) {
+//		String userNo = (String) httpSession.getAttribute("userNo");
+//		List<Inquiry> inquiries = myPageService.getAllBoard(userNo);
+//		System.out.println("counselHistory: " + inquiries);
+//		Map<String, Object> response = new HashMap<>();
+//		response.put("inquiries", inquiries);
+//		return response; // JSON 데이터를 직접 반환
+//	}
 }

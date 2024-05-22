@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Team4.web.service.LoginService;
+import com.Team4.web.util.Util;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -18,9 +19,14 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
+    @Autowired
+    private Util util;
     @PostMapping("/login")
     public String logIn(@RequestParam("user_no") String id, @RequestParam("pw") String pw, HttpSession session, Model model) {
-        boolean loggedIn = loginService.checkLogin(id, pw);
+    	System.out.println(pw);
+    	String pw2 = util.encryptSHA256(pw);
+    	System.out.println(pw2);
+        boolean loggedIn = loginService.checkLogin(id, pw2);
         if (loggedIn == false) {
         	model.addAttribute("errorMessage", "입력한 정보가 올바르지 않습니다. 다시 시도해주세요.");
         	return "/login";
@@ -40,7 +46,9 @@ public class LoginController {
             		String mbr_telno = (String) userInfo.get("mbr_telno");
             		String C_NMK = (String) userInfo.get("C_NMK");
             		String ST = (String) userInfo.get("ST");
+            		String REAL_STUD_NO = (String) userInfo.get("REAL_STUD_NO");
             		session.setAttribute("username", name);
+            		session.setAttribute("REAL_STUD_NO", REAL_STUD_NO);
             		session.setAttribute("userNo", userNo);
             		session.setAttribute("real_stud_no", realStudNo);
             		session.setAttribute("email", email);
@@ -80,7 +88,6 @@ public class LoginController {
             	if (loggedIn && id.toString().substring(0, 2).equals("13")) {
             		System.out.println("13동작홗인");
             		Map<String, Object> userInfoCoun = loginService.getInfoCounselor(id);
-            		System.out.println(userInfoCoun);
             		String USER_NO = (String) userInfoCoun.get("USER_NO");
             		String C_CD = (String) userInfoCoun.get("C_CD");
             		String CSL_DETAIL = (String) userInfoCoun.get("CSL_DETAIL");
@@ -89,7 +96,7 @@ public class LoginController {
             		String TEL_NO = (String) userInfoCoun.get("TEL_NO");
             		String CSL_LOC = (String) userInfoCoun.get("CSL_LOC");
             		String NON_FACE = (String) userInfoCoun.get("NON_FACE");
-            		String ONLINE = (String) userInfoCoun.get("ONLINE");
+            		int ONLINE = (int) userInfoCoun.get("ONLINE");
             		String CHAT = (String) userInfoCoun.get("CHAT");
             		String ISRT_TIME = (String) userInfoCoun.get("ISRT_TIME");
             		String ISRT_IP = (String) userInfoCoun.get("ISRT_IP");
@@ -97,6 +104,7 @@ public class LoginController {
             		String UDP_IP = (String) userInfoCoun.get("UDP_IP");
             		String DEL = (String) userInfoCoun.get("DEL");
             		String DEL_IP = (String) userInfoCoun.get("DEL_IP");
+            		session.setAttribute("SE_CD", userPrefix);
             		session.setAttribute("userNo", USER_NO);
             		session.setAttribute("C_CD", C_CD);
             		session.setAttribute("CSL_DETAIL", CSL_DETAIL);

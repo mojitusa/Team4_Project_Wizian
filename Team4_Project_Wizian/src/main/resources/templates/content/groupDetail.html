@@ -34,46 +34,42 @@
 		<div th:replace="~{../templates/fragments/header}"></div>
 	</header>
   
-  <main class="groupBox">
+  <main class="groupContainer">
     <section id="groupSection">
-		<div class="gcpage2">
-			<div class="gcpa">
+		<div class="gcpage2"  th:each="pd : ${proDetail}">
+			<div class="groupTitle">
 		      	집단 상담 프로그램 신청
 	    	</div>
-			<div class="proDetailPage" th:each="pd : ${proDetail}">
+   			<div class="applyMemberDetail">
+		        <div>
+		            <th:block th:text="${pd.APPLY_CNT}"></th:block>/<th:block th:text="${pd.NOPE}"></th:block>
+		        </div>
+		    </div>
+			<div class="programDetail">
 			    <div id="gcdFont">
-				    <div class="applyMember">
-				        <div>
-				            <th:block th:text="${pd.APPLY_CNT}"></th:block>/<th:block th:text="${pd.NOPE}"></th:block>
-				        </div>
-				        <div>
-				            
-				        </div>
-				    </div>
-			        <div>
-			            <b>운영조직 - </b><th:block th:text="${pd.GC_OG_NM}"></th:block>
+			        <div style="border-bottom: 1px solid lightgray; padding-bottom: 10px; margin-bottom: 10px;">
+			            <b style="font-size: 20px;">운영조직 - </b><th:block th:text="${pd.GC_OG_NM}"></th:block>
 			        </div>
-			        <div>
-			            <b>혁신 프로그램 유형 - </b><th:block th:text="${pd.PRGRM_TYPE}"></th:block>
+			        <div style="border-bottom: 1px solid lightgray; padding-bottom: 10px; margin-bottom: 10px;">
+			            <b style="font-size: 20px;">혁신 프로그램 유형 - </b><th:block th:text="${pd.PRGRM_TYPE}"></th:block>
 			        </div>
-			        <div>
-			            <b>신청기간 - </b><th:block th:text="${pd.SCHDL_BGNG_YMD}"></th:block> ~ <th:block th:text="${pd.SCHDL_END_YMD}"></th:block>
+			        <div style="border-bottom: 1px solid lightgray; padding-bottom: 10px; margin-bottom: 10px;">
+			            <b style="font-size: 20px;">신청기간 - </b><th:block th:text="${pd.SCHDL_BGNG_YMD}"></th:block> ~ <th:block th:text="${pd.SCHDL_END_YMD}"></th:block>
 			        </div>
-			        <div>
-			            <b>신청대상 - </b><th:block>전학년</th:block>
+			        <div style="border-bottom: 1px solid lightgray; padding-bottom: 10px; margin-bottom: 10px;">
+			            <b style="font-size: 20px;">신청대상 - </b><th:block>전학년</th:block>
 			        </div>
-			        <div>
-			            <b>교육일시 - </b><th:block th:text="${pd.GC_OG_NM}"></th:block>
+			        <div style="border-bottom: 1px solid lightgray; padding-bottom: 10px; margin-bottom: 10px;">
+			            <b style="font-size: 20px;">교육일시 - </b><th:block th:text="${pd.GC_OG_NM}"></th:block>
 			        </div>
 			    </div>
-
-			    <div>
-			        포스터 이미지
-			    </div>
-			    <a th:text="${session.username}"></a>
-			    <div>
-			        강좌 정보
-			    </div>
+	            <div class="posterSection" style="border-bottom: 1px solid lightgray; padding-bottom: 10px; margin-bottom: 10px;">
+	                포스터 이미지
+	            </div>
+	            <div class="courseInfo" style="border-bottom: 1px solid lightgray; padding-bottom: 10px; margin-bottom: 10px;">
+		            <b style="font-size: 20px;">강좌 정보 - </b><th:block th:text="${pd.GC_DTL_CN}"></th:block>
+		        </div>
+		        <br><br><br><br>
 			    <div style="display: flex; justify-content: space-between;">
 				    <div>
 				    	<a th:href="@{./group}">

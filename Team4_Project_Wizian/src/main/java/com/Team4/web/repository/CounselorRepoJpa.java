@@ -15,4 +15,6 @@ public interface CounselorRepoJpa extends JpaRepository<CslorEntity, String>{
     // 페이징 기능 추가
     Page<CslorEntity> findAllByCareer(String career, Pageable pageable);
 
+	List<CslorEntity> findAllByGender(String string);
+
 }
