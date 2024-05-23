@@ -42,8 +42,8 @@ public class NormalCslService {
 	}
 	
 	// 페이징 기능 추가
-	public Page<CslorEntity> getJpaCounselorByCareer(Pageable pageable) {
-		return counselorRepoJpa.findAllByCate("1", pageable);
+	public Page<CslorEntity> getJpaCounselorByCate(Pageable pageable , String cate) {
+		return counselorRepoJpa.findAllByCate(cate, pageable);
 	}
 
 	public List<CslorEntity> getJpaCslorByGender() {
@@ -61,9 +61,10 @@ public class NormalCslService {
 		cslApp.setCate(cslApply.getCate());
 		cslApp.setStudent(student);
 		cslApp.setCounselor(couselor);
+		cslApp.setStat("2");
 		
 		CslScheduleEntity schedule = cslScheduleRepo.findById(Integer.parseInt(cslApply.getSchNo())).orElse(null);
-		schedule.setIsbook("5");
+		schedule.setIsbook("2");
 		cslScheduleRepo.save(schedule);
 		
 		cslApp.setCschedule(schedule);
@@ -71,6 +72,10 @@ public class NormalCslService {
 		cslApplyRepoJpa.save(cslApp);
 		
 		cslApplyRepoMongo.save(cslApply);
+	}
+
+	public Page<CslorEntity> getJpaCounselorByGender(Pageable pageable) {
+		return null;
 	}
 	
 	
