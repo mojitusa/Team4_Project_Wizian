@@ -19,11 +19,20 @@ public class BoardDAO {
 		return sqlSession.selectList("board.boardList", session);
 	}
 
-	public List<Map<String, Object>> getCounselDetail(int cslNo, String category) {
+	public List<Map<String, Object>> getCounselDetail(int cslNo, String category, Object session) {
 		Map<String, Object> parameters = new HashMap<>();
 	    parameters.put("CSL_NO", cslNo);
 	    parameters.put("category", category);
+	    parameters.put("userNo", session);
 		return sqlSession.selectList("Mymapper.getCounselDetail", parameters);
+	}
+
+	public int cancelReservation(String cslNo, String cslCate, Object session) {
+		Map<String, Object> parameters = new HashMap<>();
+	    parameters.put("CSL_NO", cslNo);
+	    parameters.put("category", cslCate);
+	    parameters.put("userNo", session);
+		return sqlSession.update("updateReservation", parameters);
 	}
 	
 	

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Team4.web.entity.Inquiry;
-import com.Team4.web.mongodbrepository.InquiryDAO;
+import com.Team4.web.repository.InquiryDAO;
 import com.Team4.web.repository.InquiryRepository;
 
 @Service
