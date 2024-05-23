@@ -1,5 +1,90 @@
 @charset "UTF-8";
 
+.main_top {
+	border: 1px solid #E6E6E6;
+	padding: 5px 0;
+}
+
+.main_top_row {
+	display: flex;
+	padding: 0 5px;
+}
+
+.main_top_row_title {
+	margin: 14px 0;
+	padding: 0 20px;
+	border-right: 1px solid #E6E6E6;
+	font-weight: bold;
+}
+
+.main_top_row_content {
+	margin-left: 40px;
+	display: flex;
+	align-items: center; 
+}
+
+.each_stat {
+	margin-right: 20px;
+	padding: 7px 10px;
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
+	border: none;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+	transition: box-shadow 0.3s ease; /* 호버 시 애니메이션을 위한 트랜지션 */
+}
+
+.each_stat:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15); /* 호버 시 그림자 확대 */
+}
+
+.avail {
+    background-color: #3a86ff;
+    color: white;
+}
+
+.avail.unselected {
+	background-color: #ced4da;
+    color: #3a86ff;
+}
+
+.booked {
+    background-color: #caf0f8;
+    color: #00b4d8;
+}
+
+.booked.unselected {
+    background-color: #ced4da;
+    color: #caf0f8;
+}
+
+.canceled {
+    background-color: #778da9;
+}
+
+.canceled.unselected {
+	background-color: #ced4da;
+    color: #778da9;
+}
+
+.completed {
+    background-color: #74c69d;
+}
+
+.completed.unselected {
+	background-color: #ced4da;
+    color: #74c69d;
+}
+
+button.hidden {
+    display: none;
+}
+
+.icon {
+    width: 25px;
+    padding-right: 5px;
+}
+
 #calendar {
   margin: 20px 0;
 }
@@ -61,10 +146,11 @@ th, td {
     font-weight: bold;
 }
 
-.completed-button {
+.booked-button {
     background-color: #caf0f8;
     color: #00b4d8;
     font-weight: bold;
+    
 }
 
 /* 모달 전체 영역 */
