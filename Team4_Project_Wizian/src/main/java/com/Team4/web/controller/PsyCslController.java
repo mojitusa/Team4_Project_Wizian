@@ -41,7 +41,9 @@ public class PsyCslController {
 	
 	@PostMapping("/psycslapplysubmit")
 	public String psyCslApplySubmit(@RequestBody PsyCslSurvey formData) {
+		System.out.println(formData);
 		psyCslService.savePsyCslSurvey(formData);
+		
 		
 	    return "redirect:/psy"; // 리다이렉트할 URL을 반환
 	}

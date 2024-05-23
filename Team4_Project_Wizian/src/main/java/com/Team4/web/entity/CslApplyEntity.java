@@ -42,7 +42,11 @@ public class CslApplyEntity {
     @JoinColumn(name = "SCH_NO")
     private CslScheduleEntity cschedule;
     
+    @Column(name = "CSL_STAT_CD")
+    private String stat;
+    
     @Column(name = "CSL_APL_DETAIL")
     private String cslDetail;
 
+    
 }

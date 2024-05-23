@@ -66,7 +66,7 @@
 				            <div class="table-cell cell-name cell-left">이름</div>
 				            <div class="table-cell cell-field">상담 분야</div>
 				            <div class="table-cell cell-profile">프로필</div>
-				            <div class="table-cell cell-apply">상담 신청</div>
+				            <div class="table-cell cell-apply cell-right">상담 신청</div>
 				        </div>
 				    </div>
 				    <div class="table-body">
@@ -76,20 +76,20 @@
 				            <div class="table-cell cell-profile" >
 				            	<button class="csl_btn profile">조회</button>
 				            </div>
-                                <div class="table-cell cell-apply">
-                                    <form th:action="@{/schedule}" method="GET">
-                                        <input type="hidden" name="cslorNo" th:value="${counselor.userNo}" />
-                                        <input type="hidden" name="name" th:value="${counselor.cslorNm}" />
-                                        <input type="hidden" name="cate" th:value="${counselor.cate}" />
-                                        <input type="hidden" name="telNo" th:value="${counselor.telNo}" />
-                                        <input type="hidden" name="email" th:value="${counselor.users.email}" />
-                                        <input type="hidden" name="nonFace" th:value="${counselor.nonFace}" />
-                                        <input type="hidden" name="cslLoc" th:value="${counselor.cslLoc}" />
-                                        <input type="hidden" name="deptName" th:value="${counselor.department.cNmk}" />
-                                        <input type="hidden" name="cslDetail" th:value="${counselor.cslDetail}" />
-                                        <button type="submit" class="csl_btn schedule">일정조회</button>
-                                    </form>
-                                </div>
+                            <div class="table-cell cell-apply cell-right">
+                                <form th:action="@{/schedule}" method="GET">
+                                    <input type="hidden" name="cslorNo" th:value="${counselor.userNo}" />
+                                    <input type="hidden" name="name" th:value="${counselor.cslorNm}" />
+                                    <input type="hidden" name="cate" th:value="${counselor.cate}" />
+                                    <input type="hidden" name="telNo" th:value="${counselor.telNo}" />
+                                    <input type="hidden" name="email" th:value="${counselor.users.email}" />
+                                    <input type="hidden" name="nonFace" th:value="${counselor.nonFace}" />
+                                    <input type="hidden" name="cslLoc" th:value="${counselor.cslLoc}" />
+                                    <input type="hidden" name="deptName" th:value="${counselor.department.cNmk}" />
+                                    <input type="hidden" name="cslDetail" th:value="${counselor.cslDetail}" />
+                                    <button type="submit" class="csl_btn schedule">일정조회</button>
+                                </form>
+                            </div>
 				            <div class="hidden_div">
 				            	<div class="cate" th:text="${counselor.cate}"></div>
 				            	<div class="telNo" th:text="${counselor.telNo}"></div>
@@ -224,8 +224,8 @@
 	        // 모달 내용 설정
 	        
 	        document.getElementById('cslorNm').innerText = counselorInfo.counselorName;
-	       	if (counselorInfo.cate == '1') 
-	        	document.getElementById('counselor_Cd').innerText = '학생·취업과';
+	       	if (counselorInfo.cate == '2') 
+	        	document.getElementById('counselor_Cd').innerText = '성평등센터';
 	        document.getElementById('telNo').innerText = counselorInfo.telNo;
 	        document.getElementById('email').innerText = counselorInfo.email;
 	        if (counselorInfo.nonFace == '1') {
