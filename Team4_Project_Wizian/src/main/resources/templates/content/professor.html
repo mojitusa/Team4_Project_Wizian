@@ -28,83 +28,6 @@
 
 <link href="assets/css/main.css" rel="stylesheet">
 <link href="assets/css/professor.css" rel="stylesheet">
-<style type="text/css">
-
-/* Main */
-.professor {
-	padding: 20px 0;
-}
-
-/* First row: 지도교수 여부, 학과 검색 */
-#professorSection .row {
-	display: flex;
-	justify-content: space-between;
-	margin-bottom: 20px;
-}
-
-#professorSection .row span {
-	display: flex;
-	align-items: center;
-}
-
-#professorSection .row label {
-	margin-right: 10px;
-}
-
-/* Second row: 검색창과 검색 버튼 */
-#professorSection .search-container {
-	margin-bottom: 20px;
-}
-
-#professorSection .search-container label {
-	margin-right: 10px;
-}
-
-/* Third row: 그리드 시스템으로 리스트 표시 */
-#professorSection table {
-	width: 100%;
-	border-collapse: collapse;
-}
-
-#professorSection table, #professorSection th, #professorSection td {
-	border: 1px solid #ddd;
-	padding: 8px;
-}
-
-#professorSection th {
-	background-color: #f2f2f2;
-}
-
-.modal-header, .modal-footer {
-	background-color: #f2f2f2;
-}
-
-.modal-title {
-	color: #333;
-}
-
-.modal-body p {
-	margin: 10px 0;
-}
-
-.table-custom {
-	width: 100%;
-	border: none;
-}
-
-.table-custom td {
-	padding: 8px 0;
-}
-
-.table-custom th, .table-custom td {
-	border-bottom: 1px solid #ddd;
-}
-
-.table-custom th {
-	background-color: #f2f2f2;
-	font-weight: bold;
-}
-</style>
 </head>
 
 <body class="index-page">
@@ -115,14 +38,16 @@
 	<main class="professor">
 		<section id="professorSection">
 			<div class="container">
+			<!-- 검색창입니다.  -->
 				<div class="row">
 					<span> <label for="map_professor">지도교수여부</label> <select
 						id="map_professor">
 							<option value="yes">Y</option>
 							<option value="no">N</option>
 					</select>
-					</span> <span> <label for="department">학과</label> <input
-						type="text" id="department_search" placeholder="학과를 입력하세요">
+					</span> 
+					<span> <label for="department">학과</label> 
+					<input type="text" id="department_search" placeholder="학과를 입력하세요">
 						<button id="department_search_button">검색</button>
 					</span>
 				</div>
@@ -134,30 +59,34 @@
 				</div>
 
 				<div th:if="${profData}">
-					<table border="1">
-						<thead>
-							<tr>
-								<th>번호</th>
-								<th>이름</th>
-								<th>상담분야</th>
-								<th>프로필</th>
-								<th>상담신청</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="prof, iterStat : ${profData}">
-								<td th:text="${iterStat.count}">No</td>
-								<td th:text="${prof.PF_NM}">ID</td>
-								<td th:text="${prof.PF_CS_PART}">Name</td>
-								<td>
-									<button type="button" class="btn btn-info"
-										th:attr="onclick='showProfModal(' + ${prof.PF_NO} + ')'">조회</button>
-								</td>
-								<td><a th:href="@{'/calendar?profNo=' + ${prof.PF_NO}}"
-									class="btn btn-primary">일정조회</a></td>
-							</tr>
-						</tbody>
-					</table>
+					<div id="main_table" th:if="${profData}">
+						<div class="table">
+							<div class="table-header">
+								<div class="table-row">
+							            <div class="table-cell cell-name cell-left">번호</div>
+							            <div class="table-cell cell-name cell-left">이름</div>
+							            <div class="table-cell cell-field">상담 분야</div>
+							            <div class="table-cell cell-profile">프로필</div>
+							            <div class="table-cell cell-apply">상담 신청</div>
+							        </div>
+						   		</div>
+						   		
+								<div class="table-body">
+									<div th:each="prof, iterStat : ${profData}" class="table-row">
+										<div class="table-cell cell-name cell-left cslor_name" th:text="${iterStat.count}"></div>
+										<div class="table-cell cell-field csl_detail" th:text="${prof.PF_NM}"></div>
+										<div class="table-cell cell-field csl_detail" th:text="${prof.PF_CS_PART}"></div>
+										<div class="table-cell cell-profile" >
+											<button class="csl_btn profile" th:attr="onclick='showProfModal(' + ${prof.PF_NO} + ')'">조회</button>
+										</div>
+										<div class="table-cell cell-apply">
+										<a th:href="@{'/calendar?profNo=' + ${prof.PF_NO}}"
+											class="btn btn-primary">일정조회</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 				</div>
 				<div th:if="${#lists.isEmpty(profData)}">
 					<p>No professor data found.</p>
@@ -165,64 +94,113 @@
 			</div>
 
 
-			<div class="modal fade" id="professorModal" tabindex="-1"
-				aria-labelledby="professorModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="professorModalLabel">교수 상세 정보</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal"
-								aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<table class="table table-custom">
-								<tr>
-									<th>이름:</th>
-									<td id="profName"></td>
-									<th>소속:</th>
-									<td id="profDepartment"></td>
-								</tr>
-								<tr>
-									<th>연락처:</th>
-									<td id="profContact"></td>
-									<th>E-mail:</th>
-									<td id="profEmail"></td>
-								</tr>
-								<tr>
-									<th>최종수정일:</th>
-									<td id="profLastUpdated"></td>
-								</tr>
-								<tr>
-									<th>비대면상담여부:</th>
-									<td id="profNonFaceConsult"></td>
-								</tr>
-								<tr>
-									<th>상담장소:</th>
-									<td id="profLocation"></td>
-								</tr>
-								<tr>
-									<th>담당 학부(전공):</th>
-									<td id="profCollege"></td>
-								</tr>
-								<tr>
-									<th>상담분야:</th>
-									<td id="profField"></td>
-								</tr>
-							</table>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-bs-dismiss="modal">닫기</button>
-						</div>
-					</div>
-				</div>
-			</div>
+			<div id="myModal" class="modal">
+		    <!-- 모달 내용 -->
+		    <div class="modal-content">
+		    	<div class="modal-content_top">
+			    	<div id="modal_top">
+			    		<span id=modal_top_title>프로필 관리</span>
+				        <span id="closeButton" class="close">&times;</span>
+			    	</div>
+			    	<div id="modal_mid">
+			    		<div id="modal_mid_title">
+			    			프로필 관리
+			    		</div>
+			    		<div id="modal_mid_table1">
+			    			<div class="modal_mid_table1_row1 modal_mid_table1_row_top">
+			    				<div class="colored_cell modal_cell colered">
+			    					이름
+			    				</div>
+			    				<div class="uncolored_cell modal_cell uncolered" id="cslorNm">
+			    				</div>
+			    				<div class="colored_cell modal_cell colered">
+			    					소속
+			    				</div>
+			    				<div class="uncolored_cell modal_cell uncolered" id="counselor_Cd">
+			    				</div>
+			    			</div>
+			    			<div class="modal_mid_table1_row1">
+			    				<div class="colored_cell modal_cell colered">
+			    					연락처
+			    				</div>
+			    				<div class="uncolored_cell modal_cell uncolered" id="telNo">
+			    				</div>
+			    				<div class="colored_cell modal_cell colered">
+			    					E-mail
+			    				</div>
+			    				<div class="uncolored_cell modal_cell uncolered" id="email">
+			    				</div>							    				
+			    			</div>
+			    				
+			    		</div>
+			    		<div id="modal_mid_table2">
+			    			<div class="modal_mid_table1_row2 modal_mid_table1_row_top">
+			    				<div class="colored_cell modal_cell colered">
+			    					비대면상담여부
+			    				</div>
+			    				<div class="uncolored_cell modal_cell uncolered" id="nonFace">
+			    				</div>							    			
+			    			</div>
+			    			<div class="modal_mid_table1_row2">
+			    				<div class="colored_cell modal_cell colered">
+			    					상담장소
+			    				</div>
+			    				<div class="uncolored_cell modal_cell uncolered" id="cslLoc">
+			    				</div>							    			
+			    			</div>
+			    			<div class="modal_mid_table1_row2">
+			    				<div class="colored_cell modal_cell colered">
+			    					담당 학부(전공)
+			    				</div>
+			    				<div class="uncolored_cell modal_cell uncolered" id="deptName">
+			    				</div>							    			
+			    			</div>
+			    			<div class="modal_mid_table1_row2">
+			    				<div class="colored_cell modal_cell colered">
+			    					상담분야
+			    				</div>
+			    				<div class="uncolored_cell modal_cell uncolered" id="cslDetail">
+			    				</div>							    			
+			    			</div>
+			    		</div>
+			    	</div>
+			    </div>
+		    	<div id="modal_bottom">
+		    		닫기
+		    	</div>
+		    </div>
+		    </div>
 
 
 		</section>
 	</main>
 
 	<script th:inline="javascript">
+		// 모달 영역 외의 부분을 클릭하면 모달 닫기
+	    window.onclick = function(event) {
+	        var modal = document.getElementById('myModal');
+	        if (event.target == modal) {
+	            closeModal();
+	        }
+	    }
+	    
+	    // 닫기 버튼과 모달 하단 영역 요소들을 정의
+	    let closeButton = document.getElementById('closeButton');
+	    let modalBottom = document.getElementById('modal_bottom');
+	    
+	    // 닫기 버튼 클릭 시 모달 닫기
+	    closeButton.addEventListener('click', closeModal);
+	    
+	    // 모달 하단 영역 클릭 시 모달 닫기
+	    modalBottom.addEventListener('click', closeModal);
+	
+		// 모달 닫기
+		function closeModal() {
+	        var modal = document.getElementById('myModal');
+	        modal.style.display = "none";
+	    }
+	
+	
 		//교수 프로필 보기
 		function showProfModal(pfNo) {
 			console.log(pfNo);
@@ -236,18 +214,18 @@
 
 			if (selectedProf) {
 				// 모달에 교수 정보를 표시하는 코드를 여기에 추가합니다.
-				document.getElementById('profName').innerText = selectedProf.PF_NM;
-				document.getElementById('profContact').innerText = selectedProf.PF_TELNO;
-				document.getElementById('profDepartment').innerText = selectedProf.C_NMK;
-				document.getElementById('profEmail').innerText = selectedProf.email;
-				document.getElementById('profLocation').innerText = selectedProf.PF_PLC_NM;
-				document.getElementById('profField').innerText = selectedProf.PF_CS_PART;
+				document.getElementById('cslorNm').innerText = selectedProf.PF_NM;
+				document.getElementById('telNo').innerText = selectedProf.PF_TELNO;
+				document.getElementById('counselor_Cd').innerText = selectedProf.C_NMK;
+				document.getElementById('email').innerText = selectedProf.email;
+				document.getElementById('cslLoc').innerText = selectedProf.PF_PLC_NM;
+				document.getElementById('deptName').innerText = selectedProf.PF_CS_PART;
 				// document.getElementById('profLastUpdated').innerText = selectedProf.lastUpdated; 최종수정일
         		// document.getElementById('profNonFaceConsult').innerText = selectedProf.nonFaceConsult;	비대면상담여부
         		// document.getElementById('profCollege').innerText = selectedProf.PF_CLG;	담당학부(전공)
 
-				// 모달을 표시합니다.
-				$('#professorModal').modal('show');
+				document.getElementById('myModal').style.display = "block";
+        		
 			} else {
 				console.log("교수 정보를 찾을 수 없습니다.");
 			}

@@ -14,8 +14,7 @@ public interface CounselorRepoJpa extends JpaRepository<CslorEntity, String>{
 	List<CslorEntity> findAllByCate(String string);
     // 페이징 기능 추가
 	Page<CslorEntity> findAllByCate(String string, Pageable pageable);
-
-
-
+	
+	CslorEntity findByUserNo(String cslorNo);
 
 }

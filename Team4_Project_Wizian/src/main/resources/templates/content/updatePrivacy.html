@@ -31,6 +31,20 @@
 		float: left;
 		margin-top: 10px;
 	}
+	.title-container {
+    display: flex;
+}
+
+.title_text {
+    margin-right: 10px; /* 텍스트와 이미지 사이의 간격 조절 */
+}
+
+#privacy2 {
+    margin-left: auto; /* 이미지를 가장 오른쪽으로 이동 */
+}
+.privacy{
+	margin-left : 30px;
+}
 </style>
 </head>
 <script>
@@ -99,7 +113,10 @@
 			<div class="container">
 				<div id="top">
 					<form id="updateForm" action="/updatePrivacy" method="post">
-						<p class="title_text">나의 정보</p>
+						<div class="title-container">
+                            <h2>나의 정보</h2>
+                            <img id="privacy2" alt="" src="/image/privacy2.jpg">
+                        </div>
 						<div id="top_table">
 							<div class="table_row">
 								<div class="table_row_colored">이름</div>

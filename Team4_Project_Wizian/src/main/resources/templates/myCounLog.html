@@ -1,43 +1,46 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>중앙 - 상담 시스템</title>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<title>중앙 - 상담 시스템</title>
 
-<!-- CSS File -->
-<link href="assets/css/main.css" rel="stylesheet">
-<link href="assets/css/disability.css" rel="stylesheet">
-<!-- Bootstrap CSS -->
-<link
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	rel="stylesheet">
-<style>
-#counselingOptions {
-	margin-top: 20px;
-	margin-bottom: 10px;
-	width: 50%;
-	font-size: 16px;
-}
+	<!-- CSS File -->
+	<link href="assets/css/main.css" rel="stylesheet">
+	<link href="assets/css/disability.css" rel="stylesheet">
+	<link href="css/modal.css" rel="stylesheet">
+	<!-- Bootstrap CSS -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		#counselingOptions {
+			margin-top: 20px;
+			margin-bottom: 10px;
+			width: 50%;
+			font-size: 16px;
+		}
 
-.tui-grid-cell {
-	font-size: 14px; /* 원하는 폰트 크기로 조정 */
-	color: #333; /* 원하는 색상으로 조정 */
-	text-align: center;
-}
+		.tui-grid-cell {
+			font-size: 14px;
+			/* 원하는 폰트 크기로 조정 */
+			color: #333;
+			/* 원하는 색상으로 조정 */
+			text-align: center;
+		}
 
-.custom-btn {
-	padding: 1px 4px;
-	font-size: 14px;
-}
+		.custom-btn {
+			padding: 1px 4px;
+			font-size: 14px;
+		}
 
-.custom-btn-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-</style>
+		.custom-btn-container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	</style>
 </head>
+
 <body class="index-page">
 	<main class="myCounLog">
 		<section id="myCounLog">
@@ -52,9 +55,8 @@
 					</ul>
 				</div>
 				<div class="mb-3 d-flex align-items-center">
-					<span class="me-3" style="font-weight: bold;">상담 종류 선택 :</span> <select
-						id="counselingOptions" class="form-select"
-						style="margin-top: 7px;">
+					<span class="me-3" style="font-weight: bold;">상담 종류 선택 :</span> <select id="counselingOptions"
+						class="form-select" style="margin-top: 7px;">
 						<option value="1">취업상담</option>
 						<option value="2">성평등상담</option>
 						<option value="3">장애상담</option>
@@ -69,14 +71,13 @@
 	</main>
 
 	<!-- Modal -->
-	<div class="modal fade" id="customModal" tabindex="-1" role="dialog"
-		aria-labelledby="customModalLabel" aria-hidden="true">
+	<div class="modal fade" id="customModal" tabindex="-1" role="dialog" aria-labelledby="customModalLabel"
+		aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="customModalLabel">상세보기</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
@@ -85,157 +86,338 @@
 					<p id="modalContent">모달 내용</p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">닫기</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/tui-grid@4.19.0/dist/tui-grid.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/tui-grid@4.19.0/dist/tui-grid.min.css"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/tui-grid@4.19.0/dist/tui-grid.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/tui-grid@4.19.0/dist/tui-grid.min.css"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
-var grid2; // 전역 변수로 선언
+		var grid2; // 전역 변수로 선언
 
-$(document).ready(function () {
-    var userNo = [[${session.userNo}]]; // 사용자 번호를 실제 값으로 설정
-    initializeCounLog(userNo);
+		$(document).ready(function () {
+			var userNo = [[${session.userNo}]]; // 사용자 번호를 실제 값으로 설정
+			initializeCounLog(userNo);
 
-    $('#counselingOptions').change(function() {
-        var selectedOption = $(this).val();
-        fetchCounselingData(selectedOption, userNo);
-    });
+			$('#counselingOptions').change(function () {
+				var selectedOption = $(this).val();
+				fetchCounselingData(selectedOption, userNo);
+			});
 
-    $('#grid').hide();
-    $('#grid2').show();
-});
+			$('#grid').hide();
+			$('#grid2').show();
+		});
 
-function initializeCounLog(userNo) {
-    var selectedOption = $('#counselingOptions').val();
-    
-    grid2 = new tui.Grid({
-        el: document.getElementById('grid2'),
-        pageOptions: {
-            useClient: true,
-            perPage: 10
-        },
-        scrollX: false,
-        scrollY: false,
-        columns: [{
-            header: '번호',
-            name: 'CSL_NO',
-            width: 110,
-            align: 'center',
-            	sortable: true
-        }, {
-            header: '신청일',
-            name: 'CSL_DATE',
-            width: 210,
-            align: 'center',
-            sortable: true
-        }, {
-            header: '상담종류',
-            width: 260,
-            name: 'CSL_CATEGORY',
-            align: 'center',
-        }, {
-            header: '상태',
-            width: 150,
-            name: 'CSL_STATUS',
-            align: 'center',
-            sortable: true
-        }, {
-            header: '상세보기',
-            width: 160,
-            align: 'center',
-            renderer: {
-                type: CustomButtonRenderer,
-                options: {
-                    text: '조회하기',
-                    onClick: function(ev) {
-                        $('#modalContent').text('상세보기 클릭: ' + ev.rowKey);
-                        $('#customModal').modal('show');
-                    },
-                    className: 'btn btn-primary custom-btn'
-                }
-            }
-        }, {
-            header: '예약취소',
-            width: 200,
-            align: 'center',
-            renderer: {
-                type: CustomButtonRenderer,
-                options: {
-                    text: '예약취소',
-                    onClick: function(ev) {
-                        $('#modalContent').text('예약취소 클릭: ' + ev.rowKey);
-                        $('#customModal').modal('show');
-                    },
-                    className: 'btn btn-primary custom-btn'
-                }
-            }
-        }]
-    });
-    fetchCounselingData(selectedOption, userNo);
-}
+		function initializeCounLog(userNo) {
+			var selectedOption = $('#counselingOptions').val();
 
-function fetchCounselingData(option, userNo) {
-    $.ajax({
-        url: "/counselHistory/json",
-        type: "get",
-        data: { category: option, userNo: userNo },
-        dataType: "json",
-        contentType: "application/json; charset=UTF-8",
-        success: function (result) {
-            console.log("Success:", result);
-            var counselHistory = result.counselHistory;
-            if (!Array.isArray(counselHistory)) {
-                console.error("Unexpected data format:", counselHistory);
-                return;
-            }
-            counselHistory.forEach((item, index) => {
-                item.CSL_NO = index + 1; // 자동 인덱스 부여
-            });
-            grid2.resetData(counselHistory);
-            grid2.refreshLayout();
-        },
-        error: function (xhr, status, error) {
-            console.error('Error fetching counsel history data:', status, error);
-            console.log('Response:', xhr.responseText);
-            if (xhr.responseText) {
-                try {
-                    const jsonResponse = JSON.parse(xhr.responseText);
-                    console.log('Parsed JSON:', jsonResponse);
-                } catch (e) {
-                    console.error('Failed to parse JSON response:', e);
-                }
-            }
-        }
-    });
-}
+			grid2 = new tui.Grid({
+				el: document.getElementById('grid2'),
+				pageOptions: {
+					useClient: true,
+					perPage: 10
+				},
+				scrollX: false,
+				scrollY: false,
+				columns: [{
+					header: '번호',
+					name: 'CSL_NO',
+					width: 110,
+					align: 'center',
+					sortable: true
+				}, {
+					header: '신청일',
+					name: 'CSL_DATE',
+					width: 210,
+					align: 'center',
+					sortable: true
+				}, {
+					header: '상담종류',
+					width: 260,
+					name: 'CSL_CATEGORY',
+					align: 'center',
+				}, {
+					header: '상태',
+					width: 150,
+					name: 'CSL_STATUS',
+					align: 'center',
+					sortable: true
+				}, {
+					header: '상세보기',
+					width: 160,
+					align: 'center',
+					renderer: {
+						type: CustomButtonRenderer,
+						options: {
+							text: '조회하기',
+							onClick: function (ev) {
 
-function CustomButtonRenderer(props) {
-    const container = document.createElement('div');
-    container.className = 'custom-btn-container'; // Add class for flex container
-    const button = document.createElement('button');
-    button.textContent = props.columnInfo.renderer.options.text;
-    button.className = props.columnInfo.renderer.options.className;
-    button.addEventListener('click', () => {
-        props.columnInfo.renderer.options.onClick(props);
-    });
-    container.appendChild(button);
-    this.el = container; // Set container as element
-}
+							},
+							className: 'btn btn-primary custom-btn'
+						}
+					}
+				}, {
+					header: '예약취소',
+					width: 200,
+					align: 'center',
+					renderer: {
+						type: CustomButtonRenderer,
+						options: {
+							text: '예약취소',
+							onClick: function (ev) {
+							},
+							className: 'btn btn-primary custom-btn'
+						}
+					}
+				}]
+			});
+			fetchCounselingData(selectedOption, userNo);
+			grid2.on('click', ev => {
+				const rowKey = ev.rowKey; // 클릭된 행의 고유한 키 값 추출
+				const rowData = grid2.getRow(rowKey); // 클릭된 행의 데이터 가져오기
+				const cslNo = rowData.CSL_NO; // 클릭된 행의 csl_no 값 가져오기
+				const selectedOption = document.getElementById('counselingOptions').value; // 선택된 옵션 값 가져오기
 
-CustomButtonRenderer.prototype.getElement = function() {
-    return this.el;
-}
-</script>
+				// Fetch API를 사용하여 서버로 요청을 보냄
+				fetch('/selectDetail', {
+					method: 'POST', // 또는 GET 등 HTTP 메서드 지정
+					headers: {
+						'Content-Type': 'application/json' // 요청 헤더에 JSON 형식으로 데이터를 전송함을 명시
+					},
+					body: JSON.stringify({cslNo: cslNo, selectedOption: selectedOption}) // 요청 본문에 JSON 형식으로 데이터를 전송
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw new Error('Network response was not ok');
+						}
+						return response.json(); // JSON 형식의 응답을 파싱하여 반환
+					})
+					.then(data => {
+						// 서버로부터 받은 응답 데이터를 처리
+						console.log('Response:', data);
+						// 여기에 응답 데이터를 처리하는 로직 추가
+					})
+					.catch(error => {
+						console.error('Error:', error);
+						// 오류 발생 시 처리하는 로직 추가
+					});
+			});
+		}
+
+		function fetchCounselingData(option, userNo) {
+			$.ajax({
+				url: "/counselHistory/json",
+				type: "get",
+				data: {category: option, userNo: userNo},
+				dataType: "json",
+				contentType: "application/json; charset=UTF-8",
+				success: function (result) {
+					console.log("Success:", result);
+					console.log(result.counselHistory)
+					var counselHistory = result.counselHistory;
+					if (!Array.isArray(counselHistory)) {
+						console.error("Unexpected data format:", counselHistory);
+						return;
+					}
+					counselHistory.forEach((item, index) => {
+						item.CSL_NO = index + 1; // 자동 인덱스 부여
+					});
+					grid2.resetData(counselHistory);
+					grid2.refreshLayout();
+				},
+				error: function (xhr, status, error) {
+					console.error('Error fetching counsel history data:', status, error);
+					console.log('Response:', xhr.responseText);
+					if (xhr.responseText) {
+						try {
+							const jsonResponse = JSON.parse(xhr.responseText);
+							console.log('Parsed JSON:', jsonResponse);
+						} catch (e) {
+							console.error('Failed to parse JSON response:', e);
+						}
+					}
+				}
+			});
+		}
+
+		function CustomButtonRenderer(props) {
+			const container = document.createElement('div');
+			container.className = 'custom-btn-container'; // Flex 컨테이너 클래스 추가
+
+			// 선택 박스의 값을 가져옴
+			const selectedValue = document.getElementById('counselingOptions').value;
+
+			// 선택된 값이 '6'인지 확인
+			if (selectedValue === '6') {
+				// 값이 '6'일 경우 '-'를 표시
+				const span = document.createElement('span');
+				span.textContent = '-';
+				container.appendChild(span);
+				document.getElementById('myModal').style.display = 'none';
+			} else {
+				// 그렇지 않으면 버튼을 렌더링
+				const button = document.createElement('button');
+				button.textContent = props.columnInfo.renderer.options.text;
+				button.className = props.columnInfo.renderer.options.className;
+				button.addEventListener('click', () => {
+					props.columnInfo.renderer.options.onClick(props);
+				});
+				container.appendChild(button);
+			}
+
+			this.el = container; // 컨테이너를 요소로 설정
+		}
+		CustomButtonRenderer.prototype.getElement = function () {
+			return this.el;
+		}
+	</script>
+	<!-- 모달 창 -->
+	<div id="myModal" class="modal">
+		<!-- 모달 내용 -->
+		<div class="modal-content">
+			<div class="modal-content_top">
+				<div id="modal_top">
+					<span id=modal_top_title>상담신청</span>
+					<span id="closeButton" class="close">&times;</span>
+				</div>
+				<div id="modal_mid">
+					<div id="modal_mid_title">
+					</div>
+					<div id="modal_mid_table1">
+						<div class="modal_mid_table1_row2 modal_mid_table1_row_top">
+							<div class="colored_cell modal_cell colered">
+								상담구분
+							</div>
+							<div class="uncolored_cell modal_cell uncolered" id="modalCate">
+							</div>
+						</div>
+
+					</div>
+					<div id="modal_mid_table2">
+						<div class="modal_mid_table1_row1 modal_mid_table1_row_top">
+							<div class="colored_cell modal_cell colered">
+								이름
+							</div>
+							<div class="uncolored_cell modal_cell uncolered" id="modalStudentName">
+							</div>
+							<div class="colored_cell modal_cell colered">
+								학번
+							</div>
+							<div class="uncolored_cell modal_cell uncolered" id="modalStudNo">
+							</div>
+						</div>
+						<div class="modal_mid_table1_row2">
+							<div class="colored_cell modal_cell colered">
+								소속
+							</div>
+							<div class="uncolored_cell modal_cell uncolered" id="modalDeptName">
+							</div>
+						</div>
+						<div class="modal_mid_table1_row1">
+							<div class="colored_cell modal_cell colered">
+								연락처
+							</div>
+							<div class="uncolored_cell modal_cell uncolered" id="modalStudentTelNo">
+							</div>
+						</div>
+						<div class="modal_mid_table1_row2">
+							<div class="colored_cell modal_cell colered">
+								이메일
+							</div>
+							<div class="uncolored_cell modal_cell uncolered" id="modalStudentEmail">
+							</div>
+						</div>
+					</div>
+					<div id="modal_mid_table3">
+						<div class="modal_mid_table1_row1 modal_mid_table1_row_top">
+							<div class="colored_cell modal_cell colered">
+								상담일자
+							</div>
+							<div class="uncolored_cell modal_cell uncolered" id=modalDate>
+							</div>
+							<div class="colored_cell modal_cell colered">
+								상담시간
+							</div>
+							<div class="uncolored_cell modal_cell uncolered" id="modalTime">
+							</div>
+						</div>
+						<div class="modal_mid_table1_row2">
+							<div class="colored_cell modal_cell colered">
+								상담상태
+							</div>
+							<div class="uncolored_cell modal_cell uncolered" id="modalIsBook">
+							</div>
+						</div>
+						<div class="modal_mid_table1_row1">
+							<div class="colored_cell modal_cell colered">
+								상담자
+							</div>
+							<div class="uncolored_cell modal_cell uncolered" id="modalCslorName">
+							</div>
+							<div class="colored_cell modal_cell colered">
+								상담장소
+							</div>
+							<div class="uncolored_cell modal_cell uncolered" id="modalCslLoc">
+							</div>
+						</div>
+						<div class="modal_mid_table1_row2">
+							<div class="colored_cell modal_cell colered">
+								신청 내용
+							</div>
+							<div class="uncolored_cell modal_cell uncolered" id="modalTime">
+								<textarea id="modalText" rows="5" cols="50"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="modal_bottom">
+				<div class="modal_close">닫기</div>
+			</div>
+		</div>
+	</div>
+
+
 
 </body>
+<script>
+	//모달 영역 외의 부분을 클릭하면 모달 닫기
+	window.onclick = function (event) {
+		var modal = document.getElementById('myModal');
+		if (event.target == modal) {
+			closeModal();
+		}
+	}
+
+	// 닫기 버튼과 모달 하단 영역 요소들을 정의
+	let closeButton = document.getElementById('closeButton');
+	let modalBottom = document.getElementById('modal_bottom');
+
+	// 닫기 버튼 클릭 시 모달 닫기
+	closeButton.addEventListener('click', closeModal);
+
+	// 모달 하단 영역 클릭 시 모달 닫기
+	modalBottom.addEventListener('click', closeModal);
+
+
+
+	// 모달 열기 함수
+	function openModal() {
+		// 모달이 이미 열려 있는지 확인
+		if (document.getElementById('myModal').style.display === 'block') return;
+		document.getElementById('myModal').style.display = 'block';
+	}
+
+
+	// 모달 닫기 함수
+	function closeModal() {
+		// 모달 닫기
+		document.getElementById('myModal').style.display = 'none';
+	}
+</script>
+
 </html>
