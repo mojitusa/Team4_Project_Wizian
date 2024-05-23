@@ -8,7 +8,7 @@ import lombok.Setter;
 @Data
 public class FileModel {
 
-	private int file_no, file_sn;
+	private int file_no, file_sn, PRG_CD;
 	private long file_sz;
 	private String actl_file_nm, uuid_file_Nm, file_path_nm, file_extn_nm;
 }

@@ -44,40 +44,59 @@
 		resultType="map">
 		<choose>
 			<when test="category == 1">
-				SELECT s.CSL_CATE_NM AS CSL_CATEGORY, c.STUD_NO, q.CS_ST_NM AS CSL_STATUS, c.CSL_DATE AS CSL_DATE
-				FROM CSL_APPLY c 
-				JOIN CSL_CATE s ON c.CSL_CATE_CD2 = s.CSl_CATE_CD
-				JOIN CON_ST_CD q ON q.CS_STATUS = c.CSL_STAT_CD
-				WHERE c.stud_no = #{userNo} AND c.CSL_CATE_CD2 = #{category}
+				SELECT c.CSL_NO,s.CSL_CATE_NM AS CSL_CATEGORY,
+				c.STUD_NO, q.CS_ST_NM AS CSL_STATUS, h.OPEN_DATE AS CSL_DATE,
+				c.CSL_APL_DETAIL
+				FROM CSL_APPLY c
+				JOIN CSL_CATE s ON c.CSL_CATE_CD = s.CSl_CATE_CD
+				JOIN CON_ST_CD q ON
+q.CS_STATUS = c.CSL_STAT_CD
+				JOIN CSL_SCH h ON h.SCH_NO = c.SCH_NO
+				WHERE c.stud_no = #{userNo} AND c.CSL_CATE_CD = #{category}
 			</when>
 			<when test="category == 2">
-				SELECT s.CSL_CATE_NM AS CSL_CATEGORY, c.STUD_NO, q.CS_ST_NM AS CSL_STATUS, c.CSL_DATE AS CSL_DATE
-				FROM CSL_APPLY c 
-				JOIN CSL_CATE s ON c.CSL_CATE_CD2 = s.CSl_CATE_CD
-				JOIN CON_ST_CD q ON q.CS_STATUS = c.CSL_STAT_CD
-				WHERE c.stud_no = #{userNo} AND c.CSL_CATE_CD2 = #{category}
+				SELECT c.CSL_NO,s.CSL_CATE_NM AS CSL_CATEGORY,
+				c.STUD_NO, q.CS_ST_NM AS CSL_STATUS, h.OPEN_DATE AS CSL_DATE,
+				c.CSL_APL_DETAIL
+				FROM CSL_APPLY c
+				JOIN CSL_CATE s ON c.CSL_CATE_CD = s.CSl_CATE_CD
+				JOIN CON_ST_CD q ON
+				q.CS_STATUS = c.CSL_STAT_CD
+				JOIN CSL_SCH h ON h.SCH_NO = c.SCH_NO
+				WHERE c.stud_no = #{userNo} AND c.CSL_CATE_CD = #{category}
 			</when>
 			<when test="category == 3">
-				SELECT s.CSL_CATE_NM AS CSL_CATEGORY, c.STUD_NO, q.CS_ST_NM AS CSL_STATUS, c.CSL_DATE AS CSL_DATE
-				FROM CSL_APPLY c 
-				JOIN CSL_CATE s ON c.CSL_CATE_CD2 = s.CSl_CATE_CD
-				JOIN CON_ST_CD q ON q.CS_STATUS = c.CSL_STAT_CD
-				WHERE c.stud_no = #{userNo} AND c.CSL_CATE_CD2 = #{category}
+				SELECT c.CSL_NO,s.CSL_CATE_NM AS CSL_CATEGORY,
+				c.STUD_NO, q.CS_ST_NM AS CSL_STATUS, h.OPEN_DATE AS CSL_DATE,
+				c.CSL_APL_DETAIL
+				FROM CSL_APPLY c
+				JOIN CSL_CATE s ON c.CSL_CATE_CD = s.CSl_CATE_CD
+				JOIN CON_ST_CD q ON
+				q.CS_STATUS = c.CSL_STAT_CD
+				JOIN CSL_SCH h ON h.SCH_NO = c.SCH_NO
+				WHERE c.stud_no = #{userNo} AND c.CSL_CATE_CD = #{category}
 			</when>
 			<when test="category == 4">
-				SELECT s.CSL_CATE_NM AS CSL_CATEGORY, c.STUD_NO, q.CS_ST_NM AS CSL_STATUS, c.CSL_DATE AS CSL_DATE
-				FROM CSL_APPLY c 
-				JOIN CSL_CATE s ON c.CSL_CATE_CD2 = s.CSl_CATE_CD
-				JOIN CON_ST_CD q ON q.CS_STATUS = c.CSL_STAT_CD
-				WHERE c.stud_no = #{userNo} AND c.CSL_CATE_CD2 = #{category}
+				SELECT c.CSL_NO,s.CSL_CATE_NM AS CSL_CATEGORY,
+				c.STUD_NO, q.CS_ST_NM AS CSL_STATUS, h.OPEN_DATE AS CSL_DATE,
+				c.CSL_APL_DETAIL
+				FROM CSL_APPLY c
+				JOIN CSL_CATE s ON c.CSL_CATE_CD = s.CSl_CATE_CD
+				JOIN CON_ST_CD q ON
+				q.CS_STATUS = c.CSL_STAT_CD
+				JOIN CSL_SCH h ON h.SCH_NO = c.SCH_NO
+				WHERE c.stud_no = #{userNo} AND c.CSL_CATE_CD = #{category}
 			</when>
 			<when test="category == 5">
-				SELECT DATE_FORMAT(p.PFCS_RV_DATE, '%Y-%m-%d') AS CSL_DATE, q.CS_ST_NM AS CSL_STATUS , p.STUD_NO, s.CSL_CATE_NM AS CSL_CATEGORY, p.PFCS_NO AS CSL_NO
-				FROM PROFESSER_CONSULTATION p 
-				JOIN 
+				SELECT DATE_FORMAT(p.PFCS_RV_DATE, '%Y-%m-%d') AS
+				CSL_DATE, q.CS_ST_NM AS CSL_STATUS , p.STUD_NO, s.CSL_CATE_NM AS
+				CSL_CATEGORY, p.PFCS_NO AS CSL_NO
+				FROM PROFESSER_CONSULTATION p
+				JOIN
 				CSL_CATE s ON p.CSL_CATE_CD = s.CSl_CATE_CD
 				JOIN
-				CON_ST_CD q ON q.CS_STATUS = p.PFCS_STATUS
+				CON_ST_CD q ON q.CS_STATUS =
+				p.PFCS_STATUS
 				WHERE stud_no = #{userNo}
 			</when>
 			<otherwise>
@@ -91,50 +110,105 @@
 				JOIN
 				GC_PROGRAM g ON p.PRGRM_CD = g.PRGRM_CD
 				JOIN
-				CON_ST_CD q ON q.CS_STATUS = p.ATND_YN
+				CON_ST_CD
+				q ON q.CS_STATUS = p.ATND_YN
 				WHERE
 				p.stud_no = #{userNo};
 			</otherwise>
 		</choose>
 	</select>
-	<select id="getCounselDetail" parameterType="map" resultType="map">
+	<select id="getCounselDetail" parameterType="map"
+		resultType="map">
 		<choose>
 			<when test="category == 1">
-				SELECT s.CSL_CATE_NM AS CSL_CATEGORY, c.STUD_NO, q.CS_ST_NM AS CSL_STATUS, c.CSL_DATE AS CSL_DATE
-				FROM CSL_APPLY c 
-				JOIN CSL_CATE s ON c.CSL_CATE_CD2 = s.CSl_CATE_CD
-				JOIN CON_ST_CD q ON q.CS_STATUS = c.CSL_STAT_CD
-				WHERE c.stud_no = #{userNo} AND c.CSL_CATE_CD2 = #{category}
+				SELECT s.CSL_CATE_NM AS CSL_CATEGORY, i.REAL_STUD_NO,
+				q.CS_ST_NM AS CSL_STATUS, h.OPEN_DATE AS CSL_DATE, c.CSL_APL_DETAIL,
+				i.STUD_NM, d.C_NMK, u.email, i.MBR_TELNO, r.CSLOR_NM, r.CSL_LOC,
+				DATE_FORMAT(h.CSL_TIME_CD, '%H:%i') AS CSL_TIME_CD
+				FROM CSL_APPLY c
+				JOIN CSL_CATE s ON c.CSL_CATE_CD = s.CSl_CATE_CD
+				JOIN CON_ST_CD q ON
+				q.CS_STATUS = c.CSL_STAT_CD
+				JOIN CSL_SCH h ON h.SCH_NO = c.SCH_NO
+				JOIN USERS u ON u.USER_NO = #{userNo}
+				JOIN STUD_INFO i ON i.STUD_NO =
+				#{userNo}
+				JOIN DEPT_CD d ON i.C_CD = d.C_CD
+				JOIN COUNSELOR r ON
+				r.USER_NO = c.CSLOR_NO
+				WHERE c.CSL_NO = #{CSL_NO} AND c.CSL_CATE_CD =
+				#{category}
 			</when>
 			<when test="category == 2">
-				SELECT s.CSL_CATE_NM AS CSL_CATEGORY, c.STUD_NO, q.CS_ST_NM AS CSL_STATUS, c.CSL_DATE AS CSL_DATE
-				FROM CSL_APPLY c 
-				JOIN CSL_CATE s ON c.CSL_CATE_CD2 = s.CSl_CATE_CD
-				JOIN CON_ST_CD q ON q.CS_STATUS = c.CSL_STAT_CD
-				WHERE c.stud_no = #{userNo} AND c.CSL_CATE_CD2 = #{category}
+				SELECT s.CSL_CATE_NM AS CSL_CATEGORY, i.REAL_STUD_NO,
+				q.CS_ST_NM AS CSL_STATUS, h.OPEN_DATE AS CSL_DATE, c.CSL_APL_DETAIL,
+				i.STUD_NM, d.C_NMK, u.email, i.MBR_TELNO, r.CSLOR_NM, r.CSL_LOC,
+				DATE_FORMAT(h.CSL_TIME_CD, '%H:%i') AS CSL_TIME_CD
+				FROM CSL_APPLY c
+				JOIN CSL_CATE s ON c.CSL_CATE_CD = s.CSl_CATE_CD
+				JOIN CON_ST_CD q ON
+				q.CS_STATUS = c.CSL_STAT_CD
+				JOIN CSL_SCH h ON h.SCH_NO = c.SCH_NO
+				JOIN USERS u ON u.USER_NO = #{userNo}
+				JOIN STUD_INFO i ON i.STUD_NO =
+				#{userNo}
+				JOIN DEPT_CD d ON i.C_CD = d.C_CD
+				JOIN COUNSELOR r ON
+				r.USER_NO = c.CSLOR_NO
+				WHERE c.CSL_NO = #{CSL_NO} AND c.CSL_CATE_CD =
+				#{category}
 			</when>
 			<when test="category == 3">
-				SELECT s.CSL_CATE_NM AS CSL_CATEGORY, c.STUD_NO, q.CS_ST_NM AS CSL_STATUS, c.CSL_DATE AS CSL_DATE
-				FROM CSL_APPLY c 
-				JOIN CSL_CATE s ON c.CSL_CATE_CD2 = s.CSl_CATE_CD
-				JOIN CON_ST_CD q ON q.CS_STATUS = c.CSL_STAT_CD
-				WHERE c.stud_no = #{userNo} AND c.CSL_CATE_CD2 = #{category}
+				SELECT s.CSL_CATE_NM AS CSL_CATEGORY, i.REAL_STUD_NO,
+				q.CS_ST_NM AS CSL_STATUS, h.OPEN_DATE AS CSL_DATE, c.CSL_APL_DETAIL,
+				i.STUD_NM, d.C_NMK, u.email, i.MBR_TELNO, r.CSLOR_NM, r.CSL_LOC,
+				DATE_FORMAT(h.CSL_TIME_CD, '%H:%i') AS CSL_TIME_CD
+				FROM CSL_APPLY c
+				JOIN CSL_CATE s ON c.CSL_CATE_CD = s.CSl_CATE_CD
+				JOIN CON_ST_CD q ON
+				q.CS_STATUS = c.CSL_STAT_CD
+				JOIN CSL_SCH h ON h.SCH_NO = c.SCH_NO
+				JOIN USERS u ON u.USER_NO = #{userNo}
+				JOIN STUD_INFO i ON i.STUD_NO =
+				#{userNo}
+				JOIN DEPT_CD d ON i.C_CD = d.C_CD
+				JOIN COUNSELOR r ON
+				r.USER_NO = c.CSLOR_NO
+				WHERE c.CSL_NO = #{CSL_NO} AND c.CSL_CATE_CD =
+				#{category}
 			</when>
 			<when test="category == 4">
-				SELECT s.CSL_CATE_NM AS CSL_CATEGORY, c.STUD_NO, q.CS_ST_NM AS CSL_STATUS, c.CSL_DATE AS CSL_DATE
-				FROM CSL_APPLY c 
-				JOIN CSL_CATE s ON c.CSL_CATE_CD2 = s.CSl_CATE_CD
-				JOIN CON_ST_CD q ON q.CS_STATUS = c.CSL_STAT_CD
-				WHERE c.stud_no = #{userNo} AND c.CSL_CATE_CD2 = #{category}
+				SELECT s.CSL_CATE_NM AS CSL_CATEGORY, i.REAL_STUD_NO,
+				q.CS_ST_NM AS CSL_STATUS, h.OPEN_DATE AS CSL_DATE, c.CSL_APL_DETAIL,
+				i.STUD_NM, d.C_NMK, u.email, i.MBR_TELNO, r.CSLOR_NM, r.CSL_LOC,
+				DATE_FORMAT(h.CSL_TIME_CD, '%H:%i') AS CSL_TIME_CD
+				FROM CSL_APPLY c
+				JOIN CSL_CATE s ON c.CSL_CATE_CD = s.CSl_CATE_CD
+				JOIN CON_ST_CD q ON
+				q.CS_STATUS = c.CSL_STAT_CD
+				JOIN CSL_SCH h ON h.SCH_NO = c.SCH_NO
+				JOIN USERS u ON u.USER_NO = #{userNo}
+				JOIN STUD_INFO i ON i.STUD_NO =
+				#{userNo}
+				JOIN DEPT_CD d ON i.C_CD = d.C_CD
+				JOIN COUNSELOR r ON
+				r.USER_NO = c.CSLOR_NO
+				WHERE c.CSL_NO = #{CSL_NO} AND c.CSL_CATE_CD =
+				#{category}
 			</when>
 			<when test="category == 5">
-				SELECT DATE_FORMAT(p.PFCS_RV_DATE, '%Y-%m-%d') AS CSL_DATE, q.CS_ST_NM AS CSL_STATUS , p.STUD_NO, s.CSL_CATE_NM AS CSL_CATEGORY, p.PFCS_NO AS CSL_NO
-				FROM PROFESSER_CONSULTATION p 
-				JOIN 
-				CSL_CATE s ON p.CSL_CATE_CD = s.CSl_CATE_CD
-				JOIN
-				CON_ST_CD q ON q.CS_STATUS = p.PFCS_STATUS
-				WHERE stud_no = #{userNo}
+				SELECT DATE_FORMAT(p.PFCS_RV_DATE, '%Y-%m-%d') AS CSL_DATE, q.CS_ST_NM AS CSL_STATUS,
+				i.REAL_STUD_NO, s.CSL_CATE_NM AS CSL_CATEGORY, i.STUD_NM, p.PFCS_NO AS CSL_NO , p.PFCS_RS_CN AS CSL_APL_DETAIL,
+				u.email, i.MBR_TELNO, t.T_TIME AS CSL_TIME_CD, pf.PF_NM AS CSLOR_NM , d.C_NMK, pf.PF_PLC_NM AS CSL_LOC
+				FROM PROFESSER_CONSULTATION p
+				JOIN CSL_CATE s ON p.CSL_CATE_CD = s.CSl_CATE_CD
+				JOIN CON_ST_CD q ON q.CS_STATUS = p.PFCS_STATUS
+				JOIN STUD_INFO i ON i.STUD_NO = #{userNo}
+				JOIN USERS u ON u.USER_NO = #{userNo}
+				JOIN T_CD t on t.T_CD = p.PFCS_TIME
+				JOIN PROFESSER pf on pf.PF_NO = p.PF_NO
+				JOIN DEPT_CD d ON i.C_CD = d.C_CD
+				WHERE p.stud_no = #{userNo}
 			</when>
 			<otherwise>
 				SELECT
@@ -147,22 +221,26 @@
 				JOIN
 				GC_PROGRAM g ON p.PRGRM_CD = g.PRGRM_CD
 				JOIN
-				CON_ST_CD q ON q.CS_STATUS = p.ATND_YN
+				CON_ST_CD
+				q ON q.CS_STATUS = p.ATND_YN
 				WHERE
 				p.stud_no = #{userNo};
 			</otherwise>
 		</choose>
 	</select>
 	<select id="getStudInfo" parameterType="String" resultType="map">
-		SELECT s.STUD_NO, s.REAL_STUD_NO, d.C_NMK AS C_CD, s.GEN_CD, s.STUD_NM,
+		SELECT s.STUD_NO, s.REAL_STUD_NO, d.C_NMK AS C_CD, s.GEN_CD,
+		s.STUD_NM,
 		s.REAL_STUD_NO,
-		s.BIRTHDAY, s.ST, s.MBR_TELNO, u.USER_NO, u.email
+		s.BIRTHDAY, s.ST, s.MBR_TELNO, u.USER_NO,
+		u.email
 		FROM
 		STUD_INFO s
 		JOIN
 		USERS u ON u.USER_NO = s.STUD_NO
 		JOIN
-		DEPT_CD d ON u.C_CD = d.C_CD
+		DEPT_CD
+		d ON s.C_CD = d.C_CD
 		WHERE s.STUD_NO =
 		#{userNo}
 	</select>
@@ -177,5 +255,35 @@
 		UPDATE USERS SET pw =
 		SHA2(#{password}, 256) WHERE user_no = #{userNo}
 	</update>
-
+	<update id="updateReservation" parameterType="map">
+		<choose>
+			<when test="category == 1">
+				UPDATE CSL_APPLY
+				SET CSL_STAT_CD = 3
+				WHERE STUD_NO = #{userNo}
+				AND CSL_CATE_CD = #{category}
+				AND CSL_NO = #{CSL_NO}
+			</when>
+			<when test="category == 2">
+				UPDATE CSL_APPLY SET CSL_STAT_CD = 3 WHERE STUD_NO =
+				#{userNo} AND CSL_CATE_CD = #{category} AND CSL_NO = #{CSL_NO}
+			</when>
+			<when test="category == 3">
+				UPDATE CSL_APPLY SET CSL_STAT_CD = 3 WHERE STUD_NO =
+				#{userNo} AND CSL_CATE_CD = #{category} AND CSL_NO = #{CSL_NO}
+			</when>
+			<when test="category == 4">
+				UPDATE CSL_APPLY SET CSL_STAT_CD = 3 WHERE STUD_NO =
+				#{userNo} AND CSL_CATE_CD = #{category} AND CSL_NO = #{CSL_NO}
+			</when>
+			<when test="category == 5">
+				UPDATE PROFESSER_CONSULTATION SET PFCS_STATUS = 3 WHERE STUD_NO =
+				#{userNo} AND CSL_CATE_CD = #{category} AND PFCS_NO = #{CSL_NO}
+			</when>
+			<otherwise>
+				UPDATE PROFESSER_CONSULTATION SET PFCS_STATUS = 3 WHERE STUD_NO =
+				#{userNo} AND CSL_CATE_CD = #{category} AND PFCS_NO = #{CSL_NO}
+			</otherwise>
+		</choose>
+	</update>
 </mapper>

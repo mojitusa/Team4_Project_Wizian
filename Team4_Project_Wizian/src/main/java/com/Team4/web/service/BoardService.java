@@ -17,8 +17,11 @@ public class BoardService {
 	public List<BoardModel> boardList(Object session) {
 		return boardDAO.boardList(session);
 	}
-	public List<Map<String, Object>> getCounselDetail(int cslNo, String category) {
-		return boardDAO.getCounselDetail(cslNo, category);
+	public List<Map<String, Object>> getCounselDetail(int cslNo, String category, Object session) {
+		return boardDAO.getCounselDetail(cslNo, category, session);
+	}
+	public int cancelReservation(String cslNo, String cslCate, Object session) {
+		return boardDAO.cancelReservation(cslNo, cslCate, session);
 	}
 
 }

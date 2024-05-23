@@ -1,4 +1,4 @@
-package com.Team4.web.mongodbrepository;
+package com.Team4.web.repository;
 
 import java.util.HashMap;
 import java.util.List;

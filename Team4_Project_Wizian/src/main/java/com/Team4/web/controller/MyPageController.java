@@ -120,6 +120,4 @@ public class MyPageController {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("현재 비밀번호가 일치하지 않습니다.");
 		}
 	}
-
-	
 }

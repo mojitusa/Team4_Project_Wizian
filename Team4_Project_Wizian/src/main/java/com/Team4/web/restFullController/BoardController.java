@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -97,15 +98,54 @@ public class BoardController {
 	    @PostMapping("/selectDetail")
 	    public Map<String, Object> getCounselDetail(@RequestBody Map<String, Object> request) {
 	        int cslNo = (int) request.get("cslNo");
+	        Object session = util.getSession().getAttribute("userNo");
 	        String category = (String) request.get("selectedOption");
-	        System.out.println("selectDetail동작확인" + cslNo);
-	        System.out.println("selectDetail동작확인" + category);
+	        System.out.println("selectDetail동작확인글번호" + cslNo);
+	        System.out.println("selectDetail동작확인카테고리" + category);
+	        System.out.println("selectDetail동작확인카테고리" + session);
 	        
-	        List<Map<String, Object>> counselDetail = boardService.getCounselDetail(cslNo, category);
+	        List<Map<String, Object>> counselDetail = boardService.getCounselDetail(cslNo, category, session);
 	        Map<String, Object> response = new HashMap<>();
 	        // 필요한 정보를 CounselDetailDto 객체에 담아서 반환
 	        response.put("counselDetail", counselDetail);
+	        System.out.println(counselDetail);
 	        return response ;// Map 형태로 변환하여 반환
+	    }
+	    
+	    @PostMapping("/selectDetail2")
+	    public Map<String, Object> getCounselDetail2(@RequestBody Map<String, Object> request) {
+	        int cslNo = (int) request.get("cslNo");
+	        Object session = util.getSession().getAttribute("userNo");
+	        String category = (String) request.get("selectedOption");
+	        System.out.println("selectDetail동작확인글번호" + cslNo);
+	        System.out.println("selectDetail동작확인카테고리" + category);
+	        System.out.println("selectDetail동작확인카테고리" + session);
+	        
+	        List<Map<String, Object>> counselDetail = boardService.getCounselDetail(cslNo, category, session);
+	        Map<String, Object> response = new HashMap<>();
+	        // 필요한 정보를 CounselDetailDto 객체에 담아서 반환
+	        response.put("counselDetail", counselDetail);
+	        System.out.println(counselDetail);
+	        return response ;// Map 형태로 변환하여 반환
+	    }
+	    
+	    @PostMapping("/cancelReservation")
+	    public ResponseEntity<Map<String, Object>> cancelReservation(@RequestBody Map<String, String> request) {
+	        String cslNo = request.get("cslNo");
+	        String cslCate = request.get("cslCate");
+	        Object session = util.getSession().getAttribute("userNo");
+	        System.out.println("예약취소확인"+cslNo);
+	        System.out.println("예약취소확인"+cslCate);
+	        int isCanceled = boardService.cancelReservation(cslNo, cslCate,session);
+	        System.out.println("예약취소확인"+isCanceled);
+	        Map<String, Object> response = new HashMap<>();
+	        if (isCanceled == 1) {
+	            response.put("message", "예약이 성공적으로 취소되었습니다.");
+	            return ResponseEntity.ok(response);
+	        } else {
+	            response.put("message", "예약 취소 중 오류가 발생했습니다.");
+	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+	        }
 	    }
 	
 }
