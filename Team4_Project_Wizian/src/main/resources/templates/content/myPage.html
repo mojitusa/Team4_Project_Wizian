@@ -167,6 +167,7 @@ margin-top:10px;
 					return response.text();
 				})
 				.then(html => {
+					$('#info .guide_wrap').remove();
 					$('#counLog').html(html);
 				})
 				.catch(error => {

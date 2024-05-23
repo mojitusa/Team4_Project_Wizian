@@ -42,14 +42,12 @@ public class BoardController {
 	    System.out.println(session);
 	    List<BoardModel> boardList = boardService.boardList(session);
 
-	    // ObjectMapper를 사용하여 List<BoardModel>을 JSON 문자열로 변환
 	    ObjectMapper objectMapper = new ObjectMapper();
 	    String jsonBoardList = "";
 	    try {
 	        jsonBoardList = objectMapper.writeValueAsString(boardList);
 	    } catch (JsonProcessingException e) {
 	        e.printStackTrace();
-	        // JSON 변환 중 예외가 발생한 경우 빈 문자열 반환
 	    }
 
 	    System.out.println("보컨확인" + jsonBoardList);
@@ -65,7 +63,7 @@ public class BoardController {
 	        if (category != null && !category.isEmpty() && userNo != null && !userNo.isEmpty()) {
 	            counselHistory = inquiryService.getCounselBoard(category, userNo);
 	        } else {
-	            counselHistory = inquiryService.getCounselBoard("", userNo);  // 전체 데이터 가져오기
+	            counselHistory = inquiryService.getCounselBoard("", userNo); 
 	        }
 		    ObjectMapper objectMapper = new ObjectMapper();
 		    String counselHistory2 = "";
@@ -106,10 +104,9 @@ public class BoardController {
 	        
 	        List<Map<String, Object>> counselDetail = boardService.getCounselDetail(cslNo, category, session);
 	        Map<String, Object> response = new HashMap<>();
-	        // 필요한 정보를 CounselDetailDto 객체에 담아서 반환
 	        response.put("counselDetail", counselDetail);
 	        System.out.println(counselDetail);
-	        return response ;// Map 형태로 변환하여 반환
+	        return response ;
 	    }
 	    
 	    @PostMapping("/selectDetail2")
@@ -123,10 +120,9 @@ public class BoardController {
 	        
 	        List<Map<String, Object>> counselDetail = boardService.getCounselDetail(cslNo, category, session);
 	        Map<String, Object> response = new HashMap<>();
-	        // 필요한 정보를 CounselDetailDto 객체에 담아서 반환
 	        response.put("counselDetail", counselDetail);
 	        System.out.println(counselDetail);
-	        return response ;// Map 형태로 변환하여 반환
+	        return response ;
 	    }
 	    
 	    @PostMapping("/cancelReservation")
