@@ -380,7 +380,8 @@ function initializeCounLog(userNo) {
 		        showCancelButton: true,
 		        confirmButtonColor: '#3085d6',
 		        cancelButtonColor: '#d33',
-		        confirmButtonText: '네, 취소합니다.'
+		        confirmButtonText: '네, 취소합니다.',
+		         cancelButtonText: '돌아가기'
 		    }).then((result) => {
 		        if (result.isConfirmed) {
 		            fetch('/cancelReservation', {
@@ -456,7 +457,7 @@ function initializeCounLog(userNo) {
 								id="modalStudentTelNo"></div>
 						</div>
 						<div class="modal_mid_table1_row2">
-							<div class="colored_cell modal_cell colered">이메일</div>
+							<div class="colored_cell modal_cell colered">E-mail</div>
 							<div class="uncolored_cell modal_cell uncolered"
 								id="modalStudentEmail"></div>
 						</div>
@@ -498,123 +499,6 @@ function initializeCounLog(userNo) {
 			</div>
 		</div>
 	</div>
-
-
-
-<!-- 모달 창 -->
-	<div id="myModal" class="modal">
-	    <!-- 모달 내용 -->
-	    <div class="modal-content">
-	    	<div class="modal-content_top">
-		    	<div id="modal_top">
-		    		<span id=modal_top_title>상담신청</span>
-			        <span id="closeButton" class="close">&times;</span>
-		    	</div>
-		    	<div id="modal_mid">
-		    		<div id="modal_mid_title">
-		    		</div>
-		    		<div id="modal_mid_table1">
-		    			<div class="modal_mid_table1_row2 modal_mid_table1_row_top">
-		    				<div class="colored_cell modal_cell colered">
-		    					상담구분
-		    				</div>
-		    				<div class="uncolored_cell modal_cell uncolered" id="modalCate">
-		    				</div>
-		    			</div>
-		    				
-		    		</div>
-		    		<div id="modal_mid_table2">
-		    			<div class="modal_mid_table1_row1 modal_mid_table1_row_top">
-		    				<div class="colored_cell modal_cell colered">
-		    					이름
-		    				</div>
-		    				<div class="uncolored_cell modal_cell uncolered" id="modalStudentName">
-		    				</div>							    			
-		    				<div class="colored_cell modal_cell colered">
-		    					학번
-		    				</div>
-		    				<div class="uncolored_cell modal_cell uncolered" id="modalStudNo">
-		    				</div>							    			
-		    			</div>
-		    			<div class="modal_mid_table1_row2">
-		    				<div class="colored_cell modal_cell colered">
-		    					소속
-		    				</div>
-		    				<div class="uncolored_cell modal_cell uncolered" id="modalDeptName">
-		    				</div>							    			
-		    			</div>
-		    			<div class="modal_mid_table1_row1">
-		    				<div class="colored_cell modal_cell colered">
-		    					연락처
-		    				</div>
-		    				<div class="uncolored_cell modal_cell uncolered" id="modalStudentTelNo">
-		    				</div>							    			
-		    			</div>
-		    			<div class="modal_mid_table1_row2">
-		    				<div class="colored_cell modal_cell colered">
-		    					이메일
-		    				</div>
-		    				<div class="uncolored_cell modal_cell uncolered" id="modalStudentEmail">
-		    				</div>							    			
-		    			</div>
-		    		</div>
-		    		<div id="modal_mid_table3">
-		    			<div class="modal_mid_table1_row1 modal_mid_table1_row_top">
-		    				<div class="colored_cell modal_cell colered">
-		    					상담일자
-		    				</div>
-		    				<div class="uncolored_cell modal_cell uncolered" id=modalDate>
-		    				</div>							    			
-		    				<div class="colored_cell modal_cell colered">
-		    					상담시간
-		    				</div>
-		    				<div class="uncolored_cell modal_cell uncolered" id="modalTime">
-		    				</div>							    			
-		    			</div>
-		    			<div class="modal_mid_table1_row2">
-		    				<div class="colored_cell modal_cell colered">
-		    					상담상태
-		    				</div>
-		    				<div class="uncolored_cell modal_cell uncolered" id="modalIsBook">
-		    				</div>							    			
-		    			</div>
-		    			<div class="modal_mid_table1_row1">
-		    				<div class="colored_cell modal_cell colered">
-		    					상담자
-		    				</div>
-		    				<div class="uncolored_cell modal_cell uncolered" id="modalCslorName">
-		    				</div>							    			
-		    				<div class="colored_cell modal_cell colered">
-		    					상담장소
-		    				</div>
-		    				<div class="uncolored_cell modal_cell uncolered" id="modalCslLoc">
-		    				</div>							    			
-		    			</div>
-		    			<div class="modal_mid_table1_row2">
-		    				<div class="colored_cell modal_cell colered">
-		    					신청 내용
-		    				</div>
-		    				<div class="uncolored_cell modal_cell uncolered" id="modalTime">
-		    					<textarea id="modalText" rows="5" cols="50"></textarea>
-		    				</div>						    			
-		    			</div>
-		    		</div>
-		    	</div>
-		    </div>
-	    	<div id="modal_bottom" >
-	    		<div class="modal_close">
-	    			닫기
-	    		</div>
-	    		<div class="modal_submit">
-	    			등록
-	    		</div>
-	    	</div>
-	        
-	    </div>
-	</div>
-
-
-
 </body>
 <script>
 //모달 영역 외의 부분을 클릭하면 모달 닫기
