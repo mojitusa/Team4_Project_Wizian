@@ -20,6 +20,9 @@ public class Professer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String PF_NO;
 	
+	@Column(length = 10)
+	private String PF_NM;
+	
 	@Column(length = 11)
 	private String PF_TELNO;
 	

@@ -3,8 +3,8 @@
 
 <mapper namespace="com.Team4.web.mapper.ProfCslInsertMapper">
 	<insert id="insertProfCslData" parameterType="com.Team4.web.model.ProfCslInsertModel" >
-		INSERT INTO PROFESSER_CONSULTATION (PFCS_YMD, PFCS_TIME, PFCS_CN, STUD_NO, PFCS_STATUS, PF_SCD_NO, PF_NO)
-		VALUES (#{PFCS_YMD}, #{PFCS_TIME}, #{PFCS_CN}, 1100000001, 1, 3, 2017125001)
+		INSERT INTO PROFESSER_CONSULTATION (PFCS_YMD, PFCS_TIME, PFCS_CN, STUD_NO, PFCS_STATUS, PF_SCD_NO, PF_NO, CSL_CATE_CD)
+		VALUES (#{PFCS_YMD}, #{PFCS_TIME}, #{PFCS_CN}, #{STUD_NO}, 1, 3, #{PF_NO}, 5)
 	</insert>
 	
 	<select id="searchProfDepartment" parameterType="String" resultType="map">
@@ -19,4 +19,5 @@
 		JOIN USERS U ON P.USER_NO = U.USER_NO
 		WHERE P.USER_NO = #{userNo};
 	</select>
+	
 </mapper>
