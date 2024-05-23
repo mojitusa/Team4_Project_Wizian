@@ -46,23 +46,70 @@
     <section id="sexSection">
       <div class="container">
         <!-- Content here -->
-        <div class="week-nav">
-          <button id="prevWeek" class="cal_nav"><</button>
-          <span id="calTitle">
-          </span>
-          <button id="nextWeek" class="cal_nav">></button>
+        <div class="main_top">
+        	<div class="main_top_row">
+        		<div class="main_top_row_title first">
+        			상담 종류
+        		</div>
+				<div class="main_top_row_content" th:switch="${cate}">
+				    <div th:case="'1'">
+				        진로·취업 상담
+				    </div>
+				    <div th:case="'2'">
+				        성평등 상담
+				    </div>
+				    <div th:case="'3'">
+				        장애지원 상담
+				    </div>
+				</div>
+        	</div>
+        	<div class="main_top_row second">
+        		<div class="main_top_row_title">
+					상담상태 조건으로 검색	        			
+        		</div>
+        		<div class="main_top_row_content" >
+				    <button class="each_stat avail" onclick="toggleButton(this)">
+				        <img src="./image/selected.png" alt="예약가능" class="icon selected-icon">
+				        <img src="./image/unselected.png" alt="예약가능" class="icon unselected-icon" style="display: none;">
+				        예약가능
+				    </button>
+				    <button class="each_stat booked" onclick="toggleButton(this)">
+				        <img src="./image/selected.png" alt="예약완료" class="icon selected-icon">
+				        <img src="./image/unselected.png" alt="예약가능" class="icon unselected-icon" style="display: none;">
+				        예약완료
+				    </button>
+				    <button class="each_stat canceled" onclick="toggleButton(this)">
+				        <img src="./image/selected.png" alt="상담 취소" class="icon selected-icon">
+				        <img src="./image/unselected.png" alt="예약가능" class="icon unselected-icon" style="display: none;">
+				        상담 취소
+				    </button>
+				    <button class="each_stat completed" onclick="toggleButton(this)">
+				        <img src="./image/selected.png" alt="상담 완료" class="icon selected-icon">
+				        <img src="./image/unselected.png" alt="예약가능" class="icon unselected-icon" style="display: none;">
+				        상담 완료
+				    </button>
+        		</div>        	
+        	</div>
         </div>
-        <div id="calendar"></div>
-        <div class="div_hidden">
-        	<div th:text="${student.name}" id="studentName"></div>
-        	<div th:text="${student.studNo}" id="studNo"></div>
-        	<div th:text="${student.department.cNmk}" id="deptName"></div>
-        	<div th:text="${student.telNo}" id="studentTelNo"></div>
-        	<div th:text="${student.users.email}" id="studentEmail"></div>
-        	<div th:text="${cate}" id="cate"></div>
-        	<div th:text="${name}" id="cslorName"></div>
-        	<div th:text="${cslorNo}" id="cslorNo"></div>
-        	<div th:text="${cslLoc}" id="cslLoc"></div>
+        <div class="main-cal">
+	        <div class="week-nav">
+	          <button id="prevWeek" class="cal_nav"><</button>
+	          <span id="calTitle">
+	          </span>
+	          <button id="nextWeek" class="cal_nav">></button>
+	        </div>
+	        <div id="calendar"></div>
+	        <div class="div_hidden">
+	        	<div th:text="${student.name}" id="studentName"></div>
+	        	<div th:text="${student.studNo}" id="studNo"></div>
+	        	<div th:text="${student.department.cNmk}" id="deptName"></div>
+	        	<div th:text="${student.telNo}" id="studentTelNo"></div>
+	        	<div th:text="${student.users.email}" id="studentEmail"></div>
+	        	<div th:text="${cate}" id="cate"></div>
+	        	<div th:text="${name}" id="cslorName"></div>
+	        	<div th:text="${cslorNo}" id="cslorNo"></div>
+	        	<div th:text="${cslLoc}" id="cslLoc"></div>
+	        </div>
         </div>        
       </div>
     </section>
@@ -259,7 +306,7 @@
 
                     if (isbook === '2') {
                         content = '예약 완료';
-                        buttonClass = 'completed-button';
+                        buttonClass = 'booked-button';
                     }
 
                     if (date >= tomorrow || isbook === '2') {
@@ -425,6 +472,43 @@
         });
     });
 	
+    function toggleButton(button) {
+        const selectedIcon = button.querySelector('.selected-icon');
+        const unselectedIcon = button.querySelector('.unselected-icon');
+
+        if (unselectedIcon) {
+            if (unselectedIcon.style.display === 'none') {
+                selectedIcon.style.display = 'none';
+                unselectedIcon.style.display = 'inline';
+                button.classList.add('unselected');
+            } else {
+                selectedIcon.style.display = 'inline';
+                unselectedIcon.style.display = 'none';
+                button.classList.remove('unselected');
+            }
+        } else {
+            button.classList.toggle('selected');
+        }
+        
+        toggleCalendarItems(button);
+    }    
+    
+    function toggleCalendarItems(button) {
+        const buttonClass = button.classList.contains('avail') ? 'available-button' : 'booked-button';
+        const calendarItems = document.querySelectorAll(`.calendar-button.${buttonClass}`);
+
+        calendarItems.forEach(item => {
+            if (item.classList.contains('hidden')) {
+                item.classList.remove('hidden');
+            } else {
+                item.classList.add('hidden');
+            }
+        });
+    }
+
+
+ 
+    
     
     
 </script>
