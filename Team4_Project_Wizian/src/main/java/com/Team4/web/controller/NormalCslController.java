@@ -55,7 +55,7 @@ public class NormalCslController {
 	        List<CslorEntity> cslorEntityList =  normalCslService.getJpaCounselorByCareer();
 	        
 	        Pageable pageable = PageRequest.of(page, 10);  // 페이지 크기를 10으로 설정
-	        Page<CslorEntity> cslorPage = normalCslService.getJpaCounselorByCareer(pageable);
+	        Page<CslorEntity> cslorPage = normalCslService.getJpaCounselorByCate(pageable , "1");
 	        
 			model.addAttribute("counselor", cslorPage.getContent());
 			model.addAttribute("page", cslorPage);
@@ -83,31 +83,44 @@ public class NormalCslController {
 			model.addAttribute("isLoggedIn", true);
 			model.addAttribute("userNo", userNo);
 			
-			List<CslorEntity> cslorEntityList =  normalCslService.getJpaCslorByGender();
+			Pageable pageable = PageRequest.of(page, 10);  // 페이지 크기를 10으로 설정
+			Page<CslorEntity> cslorPage = normalCslService.getJpaCounselorByCate(pageable , "2");
 			
-//			Pageable pageable = PageRequest.of(page, 10);  // 페이지 크기를 10으로 설정
-//			Page<CslorEntity> cslorPage = normalCslService.getJpaCounselorByCareer(pageable);
-//			
-//			model.addAttribute("counselor", cslorPage.getContent());
-//			model.addAttribute("page", cslorPage);
-			
-			model.addAttribute(cslorEntityList);
+			model.addAttribute("counselor", cslorPage.getContent());
+			model.addAttribute("page", cslorPage);
 			
 			return "content/gender";
 		}
 		
 	}
 	
-	@GetMapping("/cslsch")
-	public String cslsch() {
+	@GetMapping("/disability")
+	public String disablity(Model model, HttpSession session, @RequestParam(name = "page", defaultValue = "0") int page) {
+		String userNo = (String) session.getAttribute("userNo");
+		System.out.println("usebrNo : " + userNo);
 		
-		return "content/counselorSchedule";
-	}
-	
-	@GetMapping("/cslsch2")
-	public String cslsch2() {
+		if (userNo == null) {
+			model.addAttribute("isLoggedIn", false);
+			
+			model.addAttribute("userNo", "null");
+			
+			System.out.println("널 조건 안으로 들어왔습니다.");
+			System.out.println("usebrNo : " + userNo);
+			return "content/careerloginerror";
+			
+		} else {
+			model.addAttribute("isLoggedIn", true);
+			model.addAttribute("userNo", userNo);
+			
+			Pageable pageable = PageRequest.of(page, 10);  // 페이지 크기를 10으로 설정
+			Page<CslorEntity> cslorPage = normalCslService.getJpaCounselorByCate(pageable , "3");
+			
+			model.addAttribute("counselor", cslorPage.getContent());
+			model.addAttribute("page", cslorPage);
+			
+			return "content/gender";
+		}
 		
-		return "content/counselorSchedule2";
 	}
 	
 	@GetMapping("/schedule")

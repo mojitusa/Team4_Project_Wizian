@@ -26,10 +26,6 @@ public class MenuMovingController {
 		return "content/test";
 	}
 	
-	@GetMapping("/disability")
-	public String showDisabilityPage() {
-		return "content/disability";
-	}
 	@GetMapping("/")
 	public String root(HttpSession httpSession, Model model) {
 	    HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();

@@ -242,7 +242,14 @@
                 const isbook = schedule.isbook;
                 const schNo = schedule.no;
                 
-
+             	// 현재 날짜와 시간 구하기
+                const now = new Date();
+                now.setHours(0, 0, 0, 0); // 현재 날짜의 시작 시간을 설정
+                
+             	// 내일 날짜 구하기
+                const tomorrow = new Date(now);
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                
                 // date와 time을 결합하여 Date 객체 생성
                 const date = new Date(`${dateString}T${timeString}`);
                 if (!isNaN(date)) {
@@ -250,12 +257,14 @@
                     let content = '예약 가능';
                     let buttonClass = 'available-button';
 
-                    if (isbook === '5') {
+                    if (isbook === '2') {
                         content = '예약 완료';
                         buttonClass = 'completed-button';
                     }
 
-                    addDataToCalendar(date, time, content, buttonClass, isbook, schNo);
+                    if (date >= tomorrow || isbook === '2') {
+                        addDataToCalendar(date, time, content, buttonClass, isbook, schNo);
+                    }
                 } else {
                     console.error('Invalid date:', `${dateString}T${timeString}`);
                 }
