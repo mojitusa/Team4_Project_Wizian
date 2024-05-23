@@ -43,6 +43,7 @@
 
 <!-- Main CSS File -->
 <link href="assets/css/main.css" rel="stylesheet">
+<link href="assets/css/professor.css" rel="stylesheet">
 <style type="text/css">
 #calendar {
 	max-width: 800px;
@@ -61,45 +62,41 @@
 	background-color: #0056b3;
 }
 
-div.modal-overlay {
-	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.5); /* 반투명 검정 */
-	z-index: 10; /* 모달보다 아래 */
+#fileUp{
+	background-color: #4CAF50; /* 초록색 */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
 }
 
-div.modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    z-index: 20; /* 오버레이보다 위 */
-    max-width: 60%; /* 모달의 최대 너비를 화면 너비의 80%로 설정 */
-    max-height: 60%; /* 모달의 최대 높이를 화면 높이의 80%로 설정 */
-    overflow: auto; /* 모달 내용이 넘칠 경우 스크롤바를 추가 */
+#fileUp:hover{
+	background-color: #45a049;
 }
 
-div.modal-header {
-	font-size: 18px;
+#cslDetailText input[type="text"] {
+    width: 500px; /* 원하는 크기로 조절하세요 */
+    padding: 8px; /* 입력 필드 내부 여백 설정 */
+    font-size: 16px; /* 원하는 글자 크기로 조절하세요 */
+    height: 300px;
+}
+#modal_asign {
+	font-size: 26px;
 	font-weight: bold;
+	text-align: center;
+	padding: 18px 0 ;
+	background-color: blue;
+	color: white;
+	cursor: pointer; /* 손가락 모양의 커서로 설정 */
+	display: inline-block;
 }
 
-div.modal-body {
-	margin-top: 10px;
-}
-
-div.modal-footer {
-	text-align: right;
-}
 </style>
 </head>
 
@@ -115,42 +112,151 @@ div.modal-footer {
 				<div id='calendar'></div>
 				<button id="pfData">교수님 데이터 적용</button>
 				<button id="pfInformation">교수님 정보</button>
-				<div id="modal-overlay" class="modal-overlay"></div>
 				<!-- 모달 구조 -->
-				<div id="event-modal" class="modal">
-					<div class="modal-header modal-title">상담신청</div>
-					<div class="modal-body">
-						<table class="table t_view">
-							    <tbody>
-							        <tr>
-							            <th>이름</th>
-							            <td th:text="${session.username}"></td>
-							            <th>학번</th>
-							            <td th:text="${session.REAL_STUD_NO}"></td>
-							        </tr>
-							        <tr>
-							            <th>소속</th>
-							            <td colspan="3" th:text="${session.C_NMK}"></td>
-							        </tr>
-							        <tr>
-							            <th>연락처</th>
-							            <td th:text="${session.mbr_telno}"></td>
-							            <th>이메일</th>
-							            <td th:text="${session.email}"></td>
-							        </tr>
-							    </tbody>
-						</table>
-					</div>
-					<div class="modal-footer">
-						<button id="modal-close-btn" type="button">취소</button>
-						<button id="asign-prof-csl">상담 신청</button>
-					</div>
+				<div id="userNo" style="display: none;" th:text="${session.userNo}"></div>				
+				
+				<div id="myModal" class="modal">
+				    <!-- 모달 내용 -->
+				    
+				    <div class="modal-content">
+				    	<div class="modal-content_top">
+					    	<div id="modal_top">
+					    		<span id=modal_top_title>상담 신청</span>
+						        <span id="closeButton" class="close">&times;</span>
+					    	</div>
+					    	<div id="modal_mid">
+					    		<div id="modal_mid_table1">
+					    			<div class="modal_mid_table1_row1 modal_mid_table1_row_top">
+					    					<div class="colored_cell modal_cell colered">
+						    					이름
+						    				</div>
+						    				<div class="uncolored_cell modal_cell uncolered" th:text="${session.username}">111
+						    				</div>
+						    				<div class="colored_cell modal_cell colered">
+						    					학번
+						    				</div>
+						    				<div class="uncolored_cell modal_cell uncolered" id="studentId" th:text="${session.REAL_STUD_NO}">
+						    				</div>
+						    			</div>
+						    			<div class="modal_mid_table1_row1 modal_mid_table1_row_bottom">
+						    				<div class="colored_cell modal_cell colered">
+						    					소속
+						    				</div>
+						    				<div class="uncolored_cell modal_cell uncolered" th:text="${session.C_NMK}">
+						    				</div>
+						    				<div class="colored_cell modal_cell colered">
+						    					연락처
+						    				</div>
+						    				<div class="uncolored_cell modal_cell uncolered" th:text="${session.mbr_telno}">
+						    				</div>
+						    			</div>
+						    			<div class="modal_mid_table1_row1">
+						    				<div class="colored_cell modal_cell colered">
+						    					이메일
+						    				</div>
+						    				<div class="uncolored_cell modal_cell uncolered" th:text="${session.email}">
+						    				</div>							    				
+						    			</div>
+					    			</div>
+					    			
+					    		<div id="modal_mid_table2">
+					    			<div class="modal_mid_table1_row2 modal_mid_table1_row_top">
+					    				<div class="colored_cell modal_cell colered">
+					    					상담일자
+					    				</div>
+					    				<div class="uncolored_cell modal_cell uncolered" id="event-date">
+					    				</div>							    			
+					    			</div>
+					    			<div class="modal_mid_table1_row2">
+					    				<div class="colored_cell modal_cell colered">
+					    					상담시간
+					    				</div>
+					    				<div class="uncolored_cell modal_cell uncolered" id="event-time">
+					    				</div>							    			
+					    			</div>
+					    			<div class="modal_mid_table1_row2">
+					    				<div class="colored_cell modal_cell colered">
+					    					상담 상태
+					    				</div>
+					    				<div class="uncolored_cell modal_cell uncolered" id="deptName">
+					    					예약가능
+					    				</div>							    			
+					    			</div>
+					    			<div class="modal_mid_table1_row2">
+					    				<div class="colored_cell modal_cell colered">
+					    					상담자
+					    				</div>
+					    				<div class="uncolored_cell modal_cell uncolered" id="profName">
+					    				</div>							    			
+					    			</div>
+					    			<div class="modal_mid_table1_row2">
+					    				<div class="colored_cell modal_cell colered">
+					    					상담장소
+					    				</div>
+					    				<div class="uncolored_cell modal_cell uncolered" id="profLocation">
+					    				</div>							    			
+					    			</div>
+					    			<div class="modal_mid_table1_row2">
+					    				<div class="colored_cell modal_cell colered">
+					    					상담신청 내용
+					    				</div>
+					    				<div class="uncolored_cell modal_cell uncolered" id="cslDetailText">
+					    				<input type="text">
+					    				</div>							    			
+					    			</div>
+					    			<div class="modal_mid_table1_row2">
+					    				<div class="colored_cell modal_cell colered">
+					    					상담신청 첨부파일
+					    				</div>
+					    				<div class="uncolored_cell modal_cell uncolered" id="cslDetailFile">
+					    				<button id="fileUp" onclick="uploadFile()">파일 업로드</button>
+					    				</div>							    			
+					    			</div>
+					    		</div>
+					    	</div>
+					    </div>
+				    	<div id="modal_bottom">
+				    		닫기
+				    	</div>
+				    	<div id="modal_asign">
+				    		신청
+				    	</div>
+				    </div>
 				</div>
+				
+				
 			</div>
 		</section>
 	</main>
 
 <script type="text/javascript">
+
+
+
+//모달 영역 외의 부분을 클릭하면 모달 닫기
+window.onclick = function(event) {
+    var modal = document.getElementById('myModal');
+    if (event.target == modal) {
+        closeModal();
+    }
+}
+
+// 닫기 버튼과 모달 하단 영역 요소들을 정의
+let closeButton = document.getElementById('closeButton');
+let modalBottom = document.getElementById('modal_bottom');
+
+// 닫기 버튼 클릭 시 모달 닫기
+closeButton.addEventListener('click', closeModal);
+
+// 모달 하단 영역 클릭 시 모달 닫기
+modalBottom.addEventListener('click', closeModal);
+
+// 모달 닫기
+function closeModal() {
+    var modal = document.getElementById('myModal');
+    modal.style.display = "none";
+}
+
 
 //시간코드(t0900 기준) -> 시간으로 변환()
 function convertTime(timeString) {
@@ -241,16 +347,34 @@ function generateEventsForAllTimes() {
 
 
 	document.addEventListener('DOMContentLoaded', function() {
+		// 세션 값 가져오기
+		    
+
+
 		
 		
-		$('#asign-prof-csl').on('click', function() {
-	        // 상담시간, 상담일자, 상담내용 가져오기
+		
+		
+		// URLSearchParams 객체를 사용하여 URL에서 쿼리 매개변수를 추출
+        var urlParams = new URLSearchParams(window.location.search);
+        
+        // URLSearchParams의 get() 메서드를 사용하여 profNo(교번) 값을 가져옴
+        var profNo = urlParams.get('profNo');
+        console.log(profNo);
+		
+		$('#modal_asign').on('click', function() {
+	        // 상담시간, 상담일자, 상담내용, 학번, 교번 가져오기
 	        var eventTime = $('#event-time').text();
 	        var eventDate = $('#event-date').text();
-	        var cslContent = $('#csl-content').val();
+	        var inputField = document.getElementById("cslDetailText").querySelector("input[type='text']");
+	        var cslContent = inputField.value;
+	        var studentID = document.getElementById('userNo').innerText.trim();
+	        
 	        console.log(eventTime);
 	        console.log(eventDate);
 	        console.log(cslContent);
+	        console.log(studentID);
+	        console.log(profNo);
 	        
 	     	// eventDate 형식을 2024-05-20에서 20240520으로 변환
 	        var eventformattedDate = eventDate.replace(/-/g, '');
@@ -258,13 +382,6 @@ function generateEventsForAllTimes() {
 	     	// eventTime 형식을 16:00에서 T1600으로 변환
 	        var eventformattedTime = 'T' + eventTime.replace(':', '');
 	        
-	        var dataString = JSON.stringify({
-	            PFCS_TIME: eventformattedTime,
-	            PFCS_YMD: eventformattedDate,
-	            PFCS_CN: cslContent
-	        });
-	        
-	        console.log(dataString);
 
 	        // AJAX 요청을 통해 서버로 데이터 전송
 	        $.ajax({
@@ -273,11 +390,14 @@ function generateEventsForAllTimes() {
 	            data: {
 	            	PFCS_TIME: eventformattedTime,
 		            PFCS_YMD: eventformattedDate,
-		            PFCS_CN: cslContent
+		            PFCS_CN: cslContent,
+		            STUD_NO: studentID,
+		            PF_NO: profNo
 		        },
 	            success: function(response) {
 	                // 서버 응답 처리
 	                alert('상담 신청이 성공적으로 완료되었습니다.');
+	                window.location.href = '/index';
 	            },
 	            error: function(error) {
 	                // 오류 처리
@@ -289,21 +409,14 @@ function generateEventsForAllTimes() {
 		
 		
 		
-		// URLSearchParams 객체를 사용하여 URL에서 쿼리 매개변수를 추출
-        var urlParams = new URLSearchParams(window.location.search);
-        
-        // URLSearchParams의 get() 메서드를 사용하여 profNo 값을 가져옴
-        var profNo = urlParams.get('profNo');		
-        
-		
-		//스케쥴 테이블 불러오기 ->캘린더 만들기
-		$('#pfData').click(function(){
+		//스케쥴 테이블 불러오기 ->캘린더 event넣기
 			$.ajax({
 				url: '/calendarData',
 				method: 'Post',
 				data: {pfNo: profNo},
 				success: function(data){
 					if(data.length > 0) {
+						console.log(data);
 						var scheduleInfo = []; // 스케쥴의 모든 날짜와 시간을 담을 배열
 		                
 		                // 모든 스케쥴 데이터를 반복하여 날짜와 시간을 추출하여 배열에 추가
@@ -338,24 +451,18 @@ function generateEventsForAllTimes() {
 					console.error('에러' + error);
 				}
 			});
-		});
 		
 		//교수님(교번으로) 정보 불러오기(장소, 번호등) -> 모달에 넣기
-		$('#pfInformation').click(function(){
 			$.ajax({
 				url: '/pfInfoData',
 				method: 'Post',
 				data: {pfNo: profNo},
 				success: function(data){
 					if(data.length > 0) {
-						console.log(data);
-						console.log(data.PF_NM);
-						document.getElementById('profName').innerText = data.PF_NM;
-			            document.getElementById('profContact').innerText = data.PF_TELNO;
-			           	//document.getElementById('profDepartment').innerText = data.C_NMK;  
-			           	//document.getElementById('profEmail').innerText = data.email;	
-			            document.getElementById('profLocation').innerText = data.PF_PLC_NM;
-			            document.getElementById('profField').innerText = data.PF_CS_PART;
+						document.getElementById('profName').innerText = data[0].pf_NM;
+						document.getElementById('profLocation').innerText = data[0].pf_PLC_NM;
+						//$('profName').text(data[0].pf_NM);
+						//$('profLocation').text(data[0].pf_PLC_NM);
 			            
 		            } else {
 		                console.log('No data received');
@@ -365,7 +472,6 @@ function generateEventsForAllTimes() {
 					console.error('에러' + error);
 				}
 			});
-		});
 		
 		
 		
@@ -397,14 +503,13 @@ function generateEventsForAllTimes() {
 			    var eventTime = eventStart.getHours() + ':' + ('0' + eventStart.getMinutes()).slice(-2);
 			    var eventDate = eventStart.toISOString().split('T')[0];
 			    
-                
+			    document.getElementById('event-time').innerText = eventTime;
+				document.getElementById('event-date').innerText = eventDate;
 			    $('#event-time').text(eventTime);
     			$('#event-date').text(eventDate);
 			    
-
+    			document.getElementById('myModal').style.display = "block";
                      
-    			$('#event-modal').css('display', 'block');
-    		    $('#modal-overlay').css('display', 'block');
 		     }
 		});
 		
@@ -421,11 +526,6 @@ function generateEventsForAllTimes() {
 	    setClickableStatus(true);
 		
 		
-		//모달 끄기 버튼
-		$('#modal-close-btn').click(function() {
-	        $('#event-modal').hide();
-	        $('#modal-overlay').hide();
-	    });
 		
 	});
 </script>

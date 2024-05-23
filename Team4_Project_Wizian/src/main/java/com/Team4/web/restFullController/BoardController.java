@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -91,5 +93,19 @@ public class BoardController {
         response.put("counselHistory", counselHistory);
         return response;
     }
+	
+	    @PostMapping("/selectDetail")
+	    public Map<String, Object> getCounselDetail(@RequestBody Map<String, Object> request) {
+	        int cslNo = (int) request.get("cslNo");
+	        String category = (String) request.get("selectedOption");
+	        System.out.println("selectDetail동작확인" + cslNo);
+	        System.out.println("selectDetail동작확인" + category);
+	        
+	        List<Map<String, Object>> counselDetail = boardService.getCounselDetail(cslNo, category);
+	        Map<String, Object> response = new HashMap<>();
+	        // 필요한 정보를 CounselDetailDto 객체에 담아서 반환
+	        response.put("counselDetail", counselDetail);
+	        return response ;// Map 형태로 변환하여 반환
+	    }
 	
 }

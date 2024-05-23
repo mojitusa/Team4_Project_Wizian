@@ -28,5 +28,9 @@ public class ProfCslInsertService {
 		return profCslInsertMapper.profSearchById(userNo);
 	}
 
+	public List<Map<String, Object>> pfInfoData(String pfNo) {
+		return profCslInsertMapper.pfInfoData(pfNo);
+	}
+
 	
 }

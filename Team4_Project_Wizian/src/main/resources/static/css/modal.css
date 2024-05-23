@@ -3,7 +3,7 @@
 div.modal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 999;
 	left: 0;
 	top: 0;
 	width: 100%;
@@ -127,9 +127,9 @@ span.close {
 	background-color: #1b263b;
 	color: white;
 	cursor: pointer; /* 손가락 모양의 커서로 설정 */
- 	display: grid;
+ 	display: flex;
 	grid-template-columns: 1fr 1fr;
-
+    justify-content: center; /* 가로 정렬 */
 }
 
 .modal_submit {

@@ -18,4 +18,6 @@ public interface ProfCslInsertMapper {
 
 	List<Map<String, Object>> profSearchById(String userNo);
 
+	List<Map<String, Object>> pfInfoData(String pfNo);
+
 }
