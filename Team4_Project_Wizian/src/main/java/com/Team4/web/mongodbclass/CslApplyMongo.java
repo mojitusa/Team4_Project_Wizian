@@ -7,6 +7,9 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
+import com.Team4.web.entity.CslorEntity;
+import com.Team4.web.entity.StudentEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,23 +19,34 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Component //빈으로 연결
-public class Csl_Apply {
+public class CslApplyMongo {
 	
 	@Id
 	private String id;
 	
 	@DBRef
-	private StudentMongo student;
+	private StudentEntity student;
+	
+	@DBRef
+	private CslorEntity counselor;
 	
 	@DBRef
 	private CslSch cslSch;
 	
-	private String preCslNo;
-	private String CslCateCd;
-	private String cslState;
-	private int online;
-	private int onlineCslCd;
-    private String CslApplyContent;
+	private String cate;
+	private String studentName;
+	private String studNo;
+	private String deptName;
+	private String studentTelNo;
+	private String studentEmail;
+	private String date;
+	private String time;
+	private String isbook;
+	private String schNo;
+	private String cslorName;
+	private String cslorNo;
+	private String cslLoc;
+	private String cslApplyText;
     
     //이하는 심리상담에만 해당하는 요소
     private Date SecretAgree;
