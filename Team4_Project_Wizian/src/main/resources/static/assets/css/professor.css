@@ -1,88 +1,288 @@
 @charset "UTF-8";
 
-/*--------------------------------------------------------------
-# disability Section
---------------------------------------------------------------*/
-
-.professor{
-}
-#professorSection {
-  width: 100%;
-  min-height: 88.7vh
+#main_contaner {
+	/* border: 1px solid green; */	
+	margin: 0 auto;
 }
 
-.disability img {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
+#top_title {
+	color: #e63946;
+	font-size: 14px;
+	margin-bottom: 40px;
 }
 
-.disability:before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 2;
+#main_table {
+	border-top: 2px solid black;
 }
 
-.ec .container {
-  position: relative;
-  z-index: 3;
+div.table {
+    display: table;
+    border-collapse: collapse;
+    margin-bottom: 50px;
 }
 
-.disability h2 {
-  color: var(--contrast-color);
-  margin: 0;
-  font-size: 44px;
-  font-weight: 700;
+.table-header {
+    display: table-header-group;
+    background-color: #f5f5f5;
 }
 
-.disability p {
-  color: rgba(var(--default-color-rgb), 0.8);
-  margin: 5px 0 0 0;
-  font-size: 20px;
+.table-body {
+    display: table-row-group;
 }
 
-.disability .sign-up-form {
-  margin-top: 20px;
-  padding: 10px;
-  border-radius: 7px;
-  background: #fff;
-  box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.1);
+.table-row {
+    display: table-row;
 }
 
-.disability .sign-up-form .form-control {
-  border: none;
+.table-cell {
+    display: table-cell;
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: center;
+    vertical-align: middle; /* 세로 가운데 정렬 */
 }
 
-.disability .sign-up-form .form-control:active,
-.disability .sign-up-form .form-control:focus {
-  outline: none;
-  box-shadow: none;
+.cell-left {
+	border-left: none;
 }
 
-.disability .sign-up-form input[type=submit] {
-  box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
-  background-color: var(--accent-color);
-  border-color: var(--accent-color);
-  padding: 8px 20px 10px 20px;
-  border-radius: 7px;
-  color: var(--contrast-color);
+.cell-right {
+	border-right: none;
 }
 
-.disability .sign-up-form input[type=submit]:hover {
-  background-color: rgba(var(--accent-color-rgb), 0.9);
+/* Adjust the width of each column */
+.cell-name {
+    width: 15%; /* 15% of the total width */
 }
 
-@media (max-width: 768px) {
-  .disability h2 {
-    font-size: 32px;
-  }
+.cell-field {
+    width: 30%; /* 30% of the total width */
+}
 
-  .disability p {
-    font-size: 18px;
-  }
+.cell-profile {
+    width: 15%; /* 15% of the total width */
+}
+
+.cell-apply {
+    width: 20%; /* 20% of the total width */
+}
+
+.cell-online {
+    width: 20%; /* 20% of the total width */
+}
+
+/* Pagination styles */
+.pagination {
+    display: flex;
+    justify-content: center; /* 페이지네이션을 가로로 가운데 정렬 */
+    padding-left: 0;
+    list-style: none;
+    border-radius: 0.25rem;
+}
+
+.page-item {
+    margin: 0 3px; /* 페이지 아이템 간의 간격을 추가 */
+}
+
+.page-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}
+
+.page-link:hover {
+    color: #4895ef;
+    text-decoration: none;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.page-item.disabled .page-link {
+    color: #4895ef;
+    pointer-events: none;
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+
+
+/* Optional: Make the table responsive */
+@media screen and (max-width: 768px) {
+    .table-cell {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .table-row {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .table-header {
+        display: none;
+    }
+}
+
+.csl_btn {
+    display: inline-block;
+    padding: 10px 24px;
+    text-decoration: none;
+    border: 1px solid  #4895ef;
+    color:  #4895ef;
+    border-radius: 5px;		
+    background-color: white;
+}
+
+.csl_btn:hover {
+    background-color: #4895ef;
+    color: white;
+}
+
+#pageNav {
+}
+
+
+/* 모달 전체 영역 */
+div.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 배경 투명도 조절 */
+    overflow: auto;
+}
+
+
+/* 모달 내용 */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 900px;
+}
+
+/* 닫기 버튼 */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+div.modal-content {
+	margin-top: 100px;
+	padding: 0;
+	border-radius: 2%; /* 버튼을 원형으로 만듭니다. */
+	overflow: hidden; /* 자식 요소가 부모 div를 넘어가지 않도록 합니다. */
+}
+
+.modal-content_top {
+	padding: 40px 35px;
+}
+
+#modal_top {
+	margin-bottom: 40px;
+}
+
+#modal_top_title {
+	font-size: 30px;
+	font-weight: bold;
+	
+}
+
+#modal_mid_title {
+	font-weight: bold;
+	font-size: 18px;
+	margin-bottom: 20px;
+}
+
+#modal_mid_table1 {
+	margin-bottom: 40px;
+}
+
+#modal_mid_table2 {
+	margin-bottom: 20px;
+}
+
+.modal_mid_table1_row_top {
+	border-top: 2px solid black;
+}
+
+.modal_mid_table1_row1 {
+	display: grid;
+	grid-template-columns: 150px 300px 150px 300px; /* 각 열의 너비를 자동으로 설정 */
+	border-bottom: 1px solid #E6E6E6;
+}
+
+.modal_mid_table1_row2 {
+	display: grid;
+	grid-template-columns: 150px 750px; /* 각 열의 너비를 자동으로 설정 */
+	border-bottom: 1px solid #E6E6E6;
+}
+
+.colered {
+	padding: 14px;
+	background-color: #edf2fb;
+	text-align: center;
+}
+
+.uncolered {
+	padding: 14px;
+	align-items: center; /* 수직 가운데 정렬 */
+	
+}
+
+span.close {
+	width: 50px;
+	height: 50px;
+	background-color: #1b263b;
+	text-align: center;
+	display: flex;
+	justify-content: center; /* 수평 가운데 정렬 */
+	align-items: center; /* 수직 가운데 정렬 */
+	padding-bottom: 7px;
+    color: white; /* 닫기 버튼의 텍스트 색상 */
+    font-size: 28px; /* 닫기 버튼의 텍스트 크기 */
+    font-weight: bold; /* 닫기 버튼의 텍스트 굵기 */
+    cursor: pointer; /* 커서 모양 변경 */
+	border-radius: 5%; /* 버튼을 원형으로 만듭니다. */	
+}
+
+
+#modal_bottom {
+	font-size: 26px;
+	font-weight: bold;
+	text-align: center;
+	padding: 18px 0 ;
+	background-color: #1b263b;
+	color: white;
+	cursor: pointer; /* 손가락 모양의 커서로 설정 */
+}
+
+.hidden_div {
+	display: none;
 }

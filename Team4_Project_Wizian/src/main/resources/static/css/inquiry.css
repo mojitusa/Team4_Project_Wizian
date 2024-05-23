@@ -14,7 +14,6 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 48%; /* 부모 요소의 너비를 반반씩 나누기 위해 조정 */
 }
 
 /* 문의 등록 버튼 스타일 */
