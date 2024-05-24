@@ -284,6 +284,7 @@
 				JOIN CSL_SCH AS S ON A.SCH_NO = S.SCH_NO
 				SET A.CSL_STAT_CD = 3, S.BOOK = 0
 				WHERE A.STUD_NO = #{userNo}
+				AND A.CSL_NO = #{CSL_NO}
 				AND A.CSL_CATE_CD = #{category};
 			</when>
 			<when test="category == 2">
