@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+#headerheader {
+	border-radius: 15px;
+}
+
+/* 기본 스타일 */
+.navmenu ul {
+    list-style-type: none; /* 기본적으로 동그라미 제거 */
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center; /* 세로 가운데 정렬 */
+}
+
+.navmenu ul li {
+    margin: 0 10px;
+}
+
+.navmenu ul li a {
+    color: white; /* 원하는 기본 폰트 컬러 설정 */
+    text-decoration: none;
+    font-size: 18px;
+    padding: 18px 15px; /* 링크에 위아래 패딩 추가 */
+    display: inline-block; /* 패딩이 적용되도록 설정 */
+}
+
+/* 미디어 쿼리 */
+@media (max-width: 768px) {
+    .navmenu ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navmenu ul li {
+        margin: 5px 0;
+    }
+
+    .navmenu ul li a {
+        font-size: 18px; /* 작은 화면에 맞게 폰트 크기 조정 */
+        color: white; /* 작은 화면에서도 동일한 폰트 컬러 적용 */
+        padding: 15px 0; /* 작은 화면에서 더 넉넉한 위아래 패딩 */
+    }
+}
+
+/* 추가적인 스타일 (예시) */
+.logo h1.sitename {
+    color: white; /* 로고 텍스트 색상 설정 */
+}
+
+.container-fluid {
+    background-color: #14213d; /* 컨테이너 배경색 설정 (필요에 따라) */
+    padding: 10px 20px; /* 전체 컨테이너에 패딩 추가 */
+}
