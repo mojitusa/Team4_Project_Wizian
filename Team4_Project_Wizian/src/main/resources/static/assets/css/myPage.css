@@ -9,7 +9,8 @@
 	/* 페이지를 가운데 정렬합니다. */
 	display: flex;
 	flex-direction: column;
-	height: 100%;
+	/* height: 100%; */
+	position: relative;
 }
 
 #grid {
@@ -53,6 +54,7 @@
 
 footer {
 	width: 100%;
+	position: absolute;
 }
 
 .dropdown-content {
