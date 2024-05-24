@@ -110,9 +110,12 @@ margin-top:10px;
 						scrollY: false,
 						columns: [{
 							header: '번호',
-							name: 'CSL_NO',
+							name: 'rowNum',
 							width: 70,
 							align: 'center',
+							rowSpan: function(rowKey, colName, rowSpanMap) {
+				                return rowKey === 0 ? 1 : 0;
+				            },
 							sortable: true
 						}, {
 							header: '문의 종류',
@@ -167,7 +170,6 @@ margin-top:10px;
 					return response.text();
 				})
 				.then(html => {
-					$('#info .guide_wrap').remove();
 					$('#counLog').html(html);
 				})
 				.catch(error => {
@@ -254,12 +256,16 @@ margin-top:10px;
                     '확인 하실 수 있습니다.</li>' +
                     '</ul>' +
                     '</div>';
-					grid.resetData(result);
 					$('#counLog').empty();
 					$('#info .guide_wrap').remove();
 					$('#counLog').append(h2);
 					$('#counLog').append(imgHtml);
 					$('#info').append(guideHtml).addClass('added-content');
+					result.forEach((item, index) => {
+			                item.CSL_NO_REAL = item.CSL_NO;
+			                item.rowNum = index + 1;
+			            });
+					grid.resetData(result);
 					$('#grid').show();
 					grid.refreshLayout();
 					$('#grid2').hide();

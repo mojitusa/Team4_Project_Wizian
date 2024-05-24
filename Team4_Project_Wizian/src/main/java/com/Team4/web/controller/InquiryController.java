@@ -74,7 +74,7 @@ public class InquiryController {
     @ResponseBody
     public Map<String, Object> inquiryHistoryJson() {
         List<Inquiry> inquiries = inquiryService.getAllInquiries();
-        System.out.println("json동작확인1" + inquiries);
+        System.out.println("inquiryhistoryjson동작확인1" + inquiries);
         Map<String, Object> response = new HashMap<>();
         response.put("inquiries", inquiries);
 

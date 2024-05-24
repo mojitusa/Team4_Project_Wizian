@@ -98,9 +98,9 @@ public class BoardController {
 	        int cslNo = (int) request.get("cslNo");
 	        Object session = util.getSession().getAttribute("userNo");
 	        String category = (String) request.get("selectedOption");
-	        System.out.println("selectDetail동작확인글번호" + cslNo);
-	        System.out.println("selectDetail동작확인카테고리" + category);
-	        System.out.println("selectDetail동작확인카테고리" + session);
+	       // System.out.println("selectDetail동작확인글번호" + cslNo);
+	       // System.out.println("selectDetail동작확인카테고리" + category);
+	        //System.out.println("selectDetail동작확인카테고리" + session);
 	        
 	        List<Map<String, Object>> counselDetail = boardService.getCounselDetail(cslNo, category, session);
 	        Map<String, Object> response = new HashMap<>();
@@ -114,9 +114,9 @@ public class BoardController {
 	        int cslNo = (int) request.get("cslNo");
 	        Object session = util.getSession().getAttribute("userNo");
 	        String category = (String) request.get("selectedOption");
-	        System.out.println("selectDetail동작확인글번호" + cslNo);
-	        System.out.println("selectDetail동작확인카테고리" + category);
-	        System.out.println("selectDetail동작확인카테고리" + session);
+	       // System.out.println("selectDetail2동작확인글번호" + cslNo);
+	       // System.out.println("selectDetail2동작확인카테고리" + category);
+	       // System.out.println("selectDetail2동작확인카테고리" + session);
 	        
 	        List<Map<String, Object>> counselDetail = boardService.getCounselDetail(cslNo, category, session);
 	        Map<String, Object> response = new HashMap<>();
@@ -130,10 +130,10 @@ public class BoardController {
 	        String cslNo = request.get("cslNo");
 	        String cslCate = request.get("cslCate");
 	        Object session = util.getSession().getAttribute("userNo");
-	        System.out.println("예약취소확인"+cslNo);
-	        System.out.println("예약취소확인"+cslCate);
+	        //System.out.println("예약취소확인"+cslNo);
+	        //System.out.println("예약취소확인"+cslCate);
 	        int isCanceled = boardService.cancelReservation(cslNo, cslCate,session);
-	        System.out.println("예약취소확인"+isCanceled);
+	        //System.out.println("예약취소확인"+isCanceled);
 	        Map<String, Object> response = new HashMap<>();
 	        if (isCanceled == 1) {
 	            response.put("message", "예약이 성공적으로 취소되었습니다.");
