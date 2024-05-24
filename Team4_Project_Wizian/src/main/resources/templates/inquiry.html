@@ -51,16 +51,8 @@
     </form>
     </div>
 	<div>
-		<button id="inquiryBtn" onclick="showInquiryForm()">문의 등록</button>
 	</div>
 	<script>
-	function showInquiryForm() {
-        // 학번 표시
-        var studNo = document.getElementById("STUD_NO").value;
-        document.getElementById("studNoSpan").textContent = studNo;
-        // 폼 표시
-        document.getElementById("inquiryForm").style.display = "block";
-    }
 
 		function validateForm() {
 			var studNo = document.getElementById("STUD_NO").value;
