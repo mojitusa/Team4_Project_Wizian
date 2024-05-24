@@ -42,7 +42,7 @@ public class AdminController {
 	public String conselor(HttpSession httpSession, RedirectAttributes redirectAttributes){
 		Object userNoObj = httpSession.getAttribute("userNo");
         if (userNoObj == null) {
-            return "/login";
+            return "login";
         }
         
         String userNo = userNoObj.toString();
@@ -51,7 +51,7 @@ public class AdminController {
         if (userNoPrefix.equals("12")) {
 			return "/profcusl/myProf";
 		} else {
-	        return "/index";
+	        return "index";
 		}
 	}
 	

@@ -73,7 +73,7 @@ public class GroupController {
 
             return "content/groupApplyPage";
         } else {
-            return "/login";
+            return "login";
         }
     }
 
