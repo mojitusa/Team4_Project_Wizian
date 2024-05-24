@@ -7,8 +7,8 @@
 	        G.GC_OG_NM, 
 	        G.USER_NO, 
 	        G.NOPE, 
-	        DATE_FORMAT(G.SCHDL_BGNG_YMD, '%Y-%m-%d %H시') AS SCHDL_BGNG_YMD, 
-	        DATE_FORMAT(G.SCHDL_END_YMD, '%Y-%m-%d %H시') AS SCHDL_END_YMD,  
+	        DATE_FORMAT(G.SCHDL_BGNG_YMD, '%Y-%m-%d') AS SCHDL_BGNG_YMD, 
+	        DATE_FORMAT(G.SCHDL_END_YMD, '%Y-%m-%d') AS SCHDL_END_YMD,  
 	        DATE_FORMAT(G.GC_DT, '%Y-%m-%d %H시') AS GC_DT, 
 	        G.PRGRM_NM, 
 	        G.PRGRM_TYPE, 
@@ -30,8 +30,8 @@
 	        G.GC_OG_NM, 
 	        G.USER_NO, 
 	        G.NOPE, 
-	        DATE_FORMAT(G.SCHDL_BGNG_YMD, '%Y-%m-%d %H시') AS SCHDL_BGNG_YMD, 
-	        DATE_FORMAT(G.SCHDL_END_YMD, '%Y-%m-%d %H시') AS SCHDL_END_YMD,  
+	        DATE_FORMAT(G.SCHDL_BGNG_YMD, '%Y-%m-%d') AS SCHDL_BGNG_YMD, 
+	        DATE_FORMAT(G.SCHDL_END_YMD, '%Y-%m-%d') AS SCHDL_END_YMD,  
 	        DATE_FORMAT(G.GC_DT, '%Y-%m-%d %H시') AS GC_DT, 
 	        G.PRGRM_NM, 
 	        G.PRGRM_TYPE, 
@@ -82,6 +82,7 @@
 	    SELECT 
 	        G.PRGRM_CD, 
 	        G.GC_OG_NM, 
+	        G.FILE_URL, 
 	        G.USER_NO, 
 	        G.NOPE, 
 	        DATE_FORMAT(G.SCHDL_BGNG_YMD, '%Y-%m-%d %H시') AS SCHDL_BGNG_YMD, 
@@ -132,8 +133,8 @@
 	    WHERE PRGRM_CD = #{proCode}
 	</select>
 	
-	<insert id="insertRegister" parameterType="Map">
-	    INSERT INTO GC_PROGRAM (GC_OG_NM, NOPE, SCHDL_BGNG_YMD, SCHDL_END_YMD, GC_DT, PRGRM_NM, PRGRM_TYPE, GC_CONTS_CN, GC_DTL_CN, USER_NO) 
-	    VALUES (#{gC_OG_NM}, #{nOPE}, #{sCHDL_BGNG_YMD}, #{sCHDL_END_YMD}, #{gC_DT}, #{pRGRM_NM}, #{pRGRM_TYPE}, #{posterContent}, #{counselingContent}, #{userNumber})
+	<insert id="insertRegister" parameterType="map">
+	    INSERT INTO GC_PROGRAM (GC_OG_NM, NOPE, SCHDL_BGNG_YMD, SCHDL_END_YMD, GC_DT, PRGRM_NM, PRGRM_TYPE, GC_CONTS_CN, GC_DTL_CN, USER_NO, FILE_URL) 
+	    VALUES (#{gC_OG_NM}, #{nOPE}, #{sCHDL_BGNG_YMD}, #{sCHDL_END_YMD}, #{gC_DT}, #{pRGRM_NM}, #{pRGRM_TYPE}, #{posterContent}, #{counselingContent}, #{userNumber}, #{fileUrl})
 	</insert>
 </mapper>

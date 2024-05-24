@@ -35,7 +35,7 @@ public class FileUploadController {
 	public String fileInsert(@RequestParam("file1") MultipartFile upFile, FileModel dto, HttpServletRequest request) {
 	    if (request.getSession().getAttribute("username") != null) {
 	        // 파일 업로드 -> util
-	    	util.fileUploadAws(upFile);
+
 	    	String newFileName = util.fileUpload(upFile);
 	        String originalFilename = upFile.getOriginalFilename();
 	        int lastIndex = originalFilename.lastIndexOf(".");
@@ -50,6 +50,8 @@ public class FileUploadController {
 	        System.out.println(extension);
 	        int result = fileService.FileInsert(dto);
 	        System.out.println(result);
+	        
+	    	util.fileUploadAws(upFile);
 	        // 업로드를 요청한 이전 페이지의 URL 가져오기
 	        String referer = request.getHeader("referer");
 	        if (referer != null) {

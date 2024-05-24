@@ -1,113 +1,113 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>중앙 - 상담 시스템</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>중앙 - 상담 시스템</title>
 
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <!-- jQuery UI -->
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-  <!-- SweetAlert -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <!-- SweetAlert -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
-  <link href="assets/css/group.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="assets/css/group.css" rel="stylesheet">
 </head>
 
 <body class="index-page">
-	<header class="header">
-		<div th:replace="~{../templates/fragments/header}"></div>
-	</header>
-  
-  <main class="groupBox">
-    <section id="groupSection">
-	    <div class="gcpage1">
-	    <div class="upBox">
-	    	<div class="gcpaGroup">
-		      	집단 상담 프로그램 신청
-	    	</div>
-	    	<br>
-	    	<div class="programType">
-	    		프로그램 유형
-	    	</div>
-	    	<div class="container">
-				<div class="category-selector">
-				    <label><input type="checkbox" name="category" value="group-counseling"> 특강형</label>&nbsp;&nbsp;
-				    <label><input type="checkbox" name="category" value="group-counseling"> 참여형</label>&nbsp;&nbsp;
-				    <label><input type="checkbox" name="category" value="group-counseling"> 봉사형</label>&nbsp;&nbsp;
-				    <label><input type="checkbox" name="category" value="group-counseling"> 실습형</label>&nbsp;&nbsp;
-				    <label><input type="checkbox" name="category" value="group-counseling"> 자격형</label>
-				</div>
-			</div>
-			<br>
-			<div>
-		    	<div class="programType">
-		    		기간
-		    	</div>
-		    </div>		
-			<div class="container">
-			    <div class="search-box">
-			        <form id="searchForm" action="./group" method="get">
-			            <div class="category-selector">
-			                <label><input type="checkbox" name="category" value="001"> 모집중</label>&nbsp;&nbsp;
-			                <label><input type="checkbox" name="category" value="002"> 금일등록</label>&nbsp;&nbsp;
-			                <label><input type="checkbox" name="category" value="003"> 1주일 내 등록</label>&nbsp;&nbsp;
-			                <label><input type="checkbox" name="category" value="004"> 당일 마감</label>&nbsp;&nbsp;
-			                <label><input type="checkbox" name="category" value="005"> 1주일 내 마감</label>&nbsp;&nbsp;
-			                <label><input type="checkbox" name="category" value="006"> 모집마감</label>
-			            </div>
-			            <br>
-			            <input type="text" name="searchText" placeholder="프로그램명을 입력해 주세요">
-			            <button type="submit">검색</button>
-			        </form>
-			    </div>
-			    <div class="write-box">
-			        <button id="write-button" class="write-button" th:if="${userCode == '10' or userCode == '13'}">등록</button>
-			    </div>
-			</div>
-			<br>
-	    </div>
-	    <div class="groupCenter">
-			<div class="card" style="display: inline-block;" th:each="gc : ${gclist}">
-			    <div>
-			    	<div style="display: flex; align-items: center;">
-				        <img src="/image/teamlogo.png" alt="" style="width: 40%; height: auto;">
-				        <div class="applyMember">
-							<div class="applyNopePossibility" style="width: 100%;">
-							    <!-- 모집 상태 -->
-							    <th:block th:if="${gc.APPLY_CNT} &lt; ${gc.NOPE}">
-							        <span>모집중</span>
-							    </th:block>
-							    <th:block th:if="${gc.APPLY_CNT} == ${gc.NOPE}">
-							        <span>마감</span>
-							        
-							    </th:block>
-							    
-							    <!-- 수강신청/정원 -->
-							    <span th:text="${gc.APPLY_CNT}"></span>
-							    <span>/</span>
-							    <span th:text="${gc.NOPE}"></span>
-							</div>
-							<div class="applyPossibility">
-							    <!-- 모집 상태 -->
-		 					    <th:block th:if="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH') >= gc.SCHDL_BGNG_YMD and #dates.format(#dates.createNow(), 'yyyy-MM-dd HH') <= gc.SCHDL_END_YMD}">
-							        <span>신청 가능</span>
-							    </th:block>
-							    <th:block th:if="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH') &lt; gc.SCHDL_BGNG_YMD or #dates.format(#dates.createNow(), 'yyyy-MM-dd HH') &gt; gc.SCHDL_END_YMD}">
-							        <span>신청 불가</span>
-							    </th:block>
-							</div>
+    <header class="header">
+        <div th:replace="~{../templates/fragments/header}"></div>
+    </header>
+
+    <main class="groupBox">
+        <section id="groupSection">
+            <div class="gcpage1">
+                <div class="upBox">
+                    <div class="gcpaGroup">
+                        집단 상담 프로그램 신청
+                    </div>
+                    <br>
+                    <div class="programType">
+                        프로그램 유형
+                    </div>
+                    <div class="container">
+                        <div class="category-selector">
+                            <label><input type="checkbox" name="category" value="group-counseling"> 특강형</label>&nbsp;&nbsp;
+                            <label><input type="checkbox" name="category" value="group-counseling"> 참여형</label>&nbsp;&nbsp;
+                            <label><input type="checkbox" name="category" value="group-counseling"> 봉사형</label>&nbsp;&nbsp;
+                            <label><input type="checkbox" name="category" value="group-counseling"> 실습형</label>&nbsp;&nbsp;
+                            <label><input type="checkbox" name="category" value="group-counseling"> 자격형</label>
+                        </div>
+                    </div>
+                    <br>
+                    <div>
+                        <div class="programType">
+                            기간
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="search-box">
+                            <form id="searchForm" action="./group" method="get">
+                                <div class="category-selector">
+                                    <label><input type="checkbox" name="category" value="001"> 모집중</label>&nbsp;&nbsp;
+                                    <label><input type="checkbox" name="category" value="002"> 금일등록</label>&nbsp;&nbsp;
+                                    <label><input type="checkbox" name="category" value="003"> 1주일 내 등록</label>&nbsp;&nbsp;
+                                    <label><input type="checkbox" name="category" value="004"> 당일 마감</label>&nbsp;&nbsp;
+                                    <label><input type="checkbox" name="category" value="005"> 1주일 내 마감</label>&nbsp;&nbsp;
+                                    <label><input type="checkbox" name="category" value="006"> 모집마감</label>
+                                </div>
+                                <br>
+                                <input type="text" name="searchText" placeholder="프로그램명을 입력해 주세요">
+                                <button type="submit">검색</button>
+                            </form>
+                        </div>
+                        <div class="write-box">
+                            <button id="write-button" class="write-button" th:if="${userCode == '10' or userCode == '13'}">등록</button>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <div class="groupCenter">
+                    <div class="card" style="display: inline-block;" th:each="gc : ${gclist}">
+                        <div>
+                            <div style="display: flex; align-items: center;">
+                                <img src="/image/teamlogo.png" alt="" style="width: 40%; height: auto;">
+                                <div class="applyMember">
+                                    <div class="applyNopePossibility" style="width: 100%;">
+                                        <!-- 모집 상태 -->
+                                        <th:block th:if="${gc.APPLY_CNT} &lt; ${gc.NOPE}">
+                                            <span>모집중</span>
+                                        </th:block>
+                                        <th:block th:if="${gc.APPLY_CNT} == ${gc.NOPE}">
+                                            <span>마감</span>
+                                        </th:block>
+
+                                        <!-- 수강신청/정원 -->
+                                        <span th:text="${gc.APPLY_CNT}"></span>
+                                        <span>/</span>
+                                        <span th:text="${gc.NOPE}"></span>
+                                    </div>
+                                    <div class="applyPossibility" th:classappend="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH') &lt; gc.SCHDL_BGNG_YMD or #dates.format(#dates.createNow(), 'yyyy-MM-dd HH') &gt; gc.SCHDL_END_YMD} ? 'applyPossibility-unavailable' : 'applyPossibility-available'">
+					            <!-- 모집 상태 -->
+					            <th:block th:if="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH') >= gc.SCHDL_BGNG_YMD and #dates.format(#dates.createNow(), 'yyyy-MM-dd HH') <= gc.SCHDL_END_YMD}">
+					                <span>신청 가능</span>
+					            </th:block>
+					            <th:block th:if="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH') &lt; gc.SCHDL_BGNG_YMD or #dates.format(#dates.createNow(), 'yyyy-MM-dd HH') &gt; gc.SCHDL_END_YMD}">
+					                <span>신청 불가</span>
+					            </th:block>
+					        </div>
 					    </div>
-				    </div>
+					</div>
 				    <div>&nbsp;</div>
 			        <div class="context type">
 						<a th:href="@{./groupDetail(no=${gc.PRGRM_CD}) }" th:text="${gc.PRGRM_NM}" ></a>

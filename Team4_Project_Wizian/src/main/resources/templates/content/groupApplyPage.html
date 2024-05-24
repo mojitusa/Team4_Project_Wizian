@@ -28,7 +28,11 @@
   <link href="assets/css/main.css" rel="stylesheet">
   <link href="assets/css/group.css" rel="stylesheet">
 </head>
-
+<style>
+#preformatted {
+  white-space: pre-wrap; /* 공백과 줄바꿈을 반영 */
+}
+</style>
 <body class="index-page">
 	<header class="header">
 		<div th:replace="~{../templates/fragments/header}"></div>
@@ -63,10 +67,12 @@
      			<td class="detailLabel vvv">운영조직</td>
 			    <td class="detailValue" th:text="${pd.GC_OG_NM}"></td>
 			  </tr>
-			  <tr>
-			    <td class="detailLabel vvv">상담내용</td>
-			    <td colspan="3" class="detailValue" th:text="${pd.GC_DTL_CN}"></td>
-			  </tr>
+			<tr>
+			    <td class="detailLabel vvv">포스터</td>
+			    <td colspan="3" style="text-align: center;">
+			        <img th:if="${pd.FILE_URL != null}" th:src="@{'https://wizteam4.s3.ap-northeast-2.amazonaws.com/' + ${pd.FILE_URL}}" alt="이미지">
+			    </td>
+			</tr>
 			</table>
 	      <br><br>
 	      <div class="detailControls">

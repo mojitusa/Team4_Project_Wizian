@@ -81,7 +81,7 @@ public class Util {
 
             // S3에 업로드
             uploadToS3(tempFile, newFileName2, upFile.getContentType());
-
+            System.out.println("여기는 파일업로드aws");
             // 업로드 후 임시 파일 삭제
             tempFile.delete();
         } catch (IOException e) {
@@ -93,14 +93,11 @@ public class Util {
         return newFileName2;
     }
 
-    private String generateFileName(String originalFileName) {
-        String[] fileNameParts = originalFileName.split("\\.");
-        String extension = fileNameParts[fileNameParts.length - 1];
-        return UUID.randomUUID().toString() + "." + extension;
-    }
-
+    // S3에 파일 업로드 메소드 (util 클래스에 존재하는 메소드)
     private void uploadToS3(File file, String newFileName2, String contentType) throws IOException {
         // 클라이언트 구성 설정
+    	
+        System.out.println("여기는 업로드투s3가 호출되었는지");
         ClientConfiguration clientConfiguration = new ClientConfiguration();
         clientConfiguration.setProtocol(Protocol.HTTP); // 프로토콜 설정 (HTTP 또는 HTTPS)
 
@@ -117,28 +114,34 @@ public class Util {
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentType(contentType);
         request.setMetadata(metadata);
-
+        System.out.println("여기는 업로드투s3");
         // S3에 파일 업로드
         s3Client.putObject(request);
+    }	
+    
+    private String generateFileName(String originalFileName) {
+        String[] fileNameParts = originalFileName.split("\\.");
+        String extension = fileNameParts[fileNameParts.length - 1];
+        return UUID.randomUUID().toString() + "." + extension;
     }
 
     public String encryptSHA256(String str){
-    	String sha = ""; 
-    	try{
-    		MessageDigest sh = MessageDigest.getInstance("SHA-256"); 
-    		sh.update(str.getBytes()); 
-    		byte byteData[] = sh.digest();
-    		StringBuffer sb = new StringBuffer(); 
-    		for(int i = 0 ; i < byteData.length ; i++){
-    			sb.append(Integer.toString((byteData[i]&0xff) + 0x100, 16).substring(1));
-    		}
-    		sha = sb.toString();
-    	}catch(NoSuchAlgorithmException e){
-    		//e.printStackTrace(); 
-    		System.out.println("Encrypt Error - NoSuchAlgorithmException");
-    		sha = null; 
-    	}
-    	return sha;
+       String sha = ""; 
+       try{
+          MessageDigest sh = MessageDigest.getInstance("SHA-256"); 
+          sh.update(str.getBytes()); 
+          byte byteData[] = sh.digest();
+          StringBuffer sb = new StringBuffer(); 
+          for(int i = 0 ; i < byteData.length ; i++){
+             sb.append(Integer.toString((byteData[i]&0xff) + 0x100, 16).substring(1));
+          }
+          sha = sb.toString();
+       }catch(NoSuchAlgorithmException e){
+          //e.printStackTrace(); 
+          System.out.println("Encrypt Error - NoSuchAlgorithmException");
+          sha = null; 
+       }
+       return sha;
     }
 
 }

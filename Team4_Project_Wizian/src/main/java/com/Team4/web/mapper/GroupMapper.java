@@ -11,24 +11,24 @@ import com.Team4.web.model.GroupModel;
 @Repository
 @Mapper
 public interface GroupMapper {
-	List<GroupModel> getCategory();
+    List < GroupModel > getCategory();
 
-	List<Map<String, Object>> getgcList();
-	
-	List<Map<String, Object>> getgcListWithSearch(Map<String, Object> searchInfo);
+    List < Map < String, Object >> getgcList();
 
-	List<Map<String, Object>> getproDetail(int procd);
+    List < Map < String, Object >> getgcListWithSearch(Map < String, Object > searchInfo);
 
-	int insertApply(Map<String, Object> applyInfo);
+    List < Map < String, Object >> getproDetail(int procd);
 
-	int checkDuplicate(Map<String, Object> applyInfo);
+    int insertApply(Map < String, Object > applyInfo);
 
-	Map<String, Object> getProgramDates(String proCode);
-	
-	int deleteApply(Map<String, Object> applyInfo);
+    int checkDuplicate(Map < String, Object > applyInfo);
 
-	Map<String, Object> getProgramCancelDate(String proCode);
+    Map < String, Object > getProgramDates(String proCode);
 
-	int insertRegister(Map<String, Object> registerInfo);
+    int deleteApply(Map < String, Object > applyInfo);
+
+    Map < String, Object > getProgramCancelDate(String proCode);
+
+    int insertRegister(Map < String, Object > registerInfo);
 
 }

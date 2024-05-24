@@ -309,10 +309,19 @@
     padding-right: 30px;
 }
 
-.applyNopePossibility{
-   background-color: #7fffd4;
-   border-radius: 8% !important;
-   display: flex;
+.applyPossibility-available{
+    background-color: #7fffd4;
+    width: 100%;
+    border-radius: 8%;
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+}
+.applyPossibility-unavailable {
+    background-color: #ffcccc;
+    width: 100%;
+    border-radius: 8%;
+    display: flex;
     justify-content: center; /* 수평 가운데 정렬 */
     align-items: center; /* 수직 가운데 정렬 */
 }
