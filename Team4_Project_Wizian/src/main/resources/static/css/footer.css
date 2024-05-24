@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+div.menu {
+	margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* 요소 간의 간격을 조절 */
+}
+
+.mid {
+	text-align: center;
+}
+
+.copyright {
+	text-align: center;
+	margin-bottom: 10px;
+}
