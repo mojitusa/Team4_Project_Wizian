@@ -2,6 +2,8 @@
 
 .footer {
 	border-radius: 15px;
+	clear: both;
+   	position: relative;
 }
 
 div.menu {
