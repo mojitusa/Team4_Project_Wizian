@@ -503,7 +503,11 @@
     }    
     
     function toggleCalendarItems(button) {
-        const buttonClass = button.classList.contains('avail') ? 'available-button' : 'booked-button';
+        const buttonClass = button.classList.contains('avail') ? 'available-button' :
+            button.classList.contains('booked') ? 'booked-button' :
+            button.classList.contains('completed') ? 'completed-button' :
+            button.classList.contains('canceled') ? 'canceled-button' :
+            '';       
         const calendarItems = document.querySelectorAll(`.calendar-button.${buttonClass}`);
 
         calendarItems.forEach(item => {
