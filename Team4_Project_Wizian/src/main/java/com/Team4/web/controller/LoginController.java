@@ -29,7 +29,7 @@ public class LoginController {
         boolean loggedIn = loginService.checkLogin(id, pw2);
         if (loggedIn == false) {
         	model.addAttribute("errorMessage", "입력한 정보가 올바르지 않습니다. 다시 시도해주세요.");
-        	return "/login";
+        	return "login";
 		}
         String userPrefix = id.substring(0, 2);
         switch (userPrefix) {
@@ -59,7 +59,7 @@ public class LoginController {
             		return "redirect:/index";
             	} else {
             		model.addAttribute("errorMessage", "입력한 정보가 올바르지 않습니다. 다시 시도해주세요.");
-            		return "/login";
+            		return "login";
             	}
             case "12":
             	if (loggedIn && id.toString().substring(0, 2).equals("12")) {
@@ -82,7 +82,7 @@ public class LoginController {
             		return "redirect:/myPageProF";
             	} else {
             		model.addAttribute("errorMessage", "입력한 정보가 올바르지 않습니다. 다시 시도해주세요.");
-            		return "/login";
+            		return "login";
             	}
             case "13":
             	if (loggedIn && id.toString().substring(0, 2).equals("13")) {
@@ -124,7 +124,7 @@ public class LoginController {
             		return "redirect:/index";
             	} else {
             		model.addAttribute("errorMessage", "입력한 정보가 올바르지 않습니다. 다시 시도해주세요.");
-            		return "/login";
+            		return "login";
             	}
             default:
             	model.addAttribute("errorMessage", "입력한 정보가 올바르지 않습니다. 다시 시도해주세요.");
