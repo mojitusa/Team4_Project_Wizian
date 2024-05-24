@@ -37,7 +37,7 @@ public class MyPageController {
 	@GetMapping("/myPage")
 	public String showMyPage(HttpSession httpSession) {
 		if (httpSession.getAttribute("userNo") == null) {
-			return "/login";
+			return "login";
 		}
 		return "content/myPage";
 	}
@@ -45,7 +45,7 @@ public class MyPageController {
 	@GetMapping("/myPageProF")
 	public String showMyPageProf(HttpSession httpSession) {
 		if (httpSession.getAttribute("userNo") == null) {
-			return "/login";
+			return "login";
 		}
 		return "profcusl/myPageProF";
 	}
@@ -53,7 +53,7 @@ public class MyPageController {
 	@GetMapping("/myPageCounS")
 	public String showMyPageCounS(HttpSession httpSession) {
 		if (httpSession.getAttribute("userNo") == null) {
-			return "/login";
+			return "login";
 		}
 		return "content/myPageCounS";
 	}
@@ -61,7 +61,7 @@ public class MyPageController {
 	@GetMapping("/updatePrivacy")
 	public String showMyPagePri(HttpSession httpSession, Model model) {
 		if (httpSession.getAttribute("userNo") == null) {
-			return "/login";
+			return "login";
 		}
 		String userNo = (String) httpSession.getAttribute("userNo");
 		Map<String, Object> getStudInfo = myPageService.getStudInfo(userNo);

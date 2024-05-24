@@ -63,10 +63,10 @@ public class MenuMovingController {
 	
 	@GetMapping("/login")
 	public String showLoginPage() {
-		return "/login";
+		return "login";
 	}
 	@GetMapping("/counselor")
 	public String showCounselorPage() {
-		return "/counselor/counselor";
+		return "counselor/counselor";
 	} 
 }

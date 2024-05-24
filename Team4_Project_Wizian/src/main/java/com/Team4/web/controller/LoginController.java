@@ -35,7 +35,7 @@ public class LoginController {
         switch (userPrefix) {
             case "10":
             	session.invalidate();
-                return "/admin/admin";
+                return "admin/admin";
             case "11":
             	if (loggedIn && id.toString().substring(0, 2).equals("11")) {
             		Map<String, Object> userInfo = loginService.getName(id);
