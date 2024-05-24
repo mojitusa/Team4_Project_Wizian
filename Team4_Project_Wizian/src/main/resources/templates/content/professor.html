@@ -36,7 +36,10 @@
 	</header>
 
 	<main class="professor">
-																							<div class="row">
+				
+		<section id="professorSection">
+			<div class="container">
+				<div class="row">
 					<span> <label for="map_professor">지도교수여부</label> <select
 						id="map_professor">
 							<option value="yes">Y</option>
@@ -54,20 +57,12 @@
 						placeholder="검색어를 입력하세요">
 					<button id="search_button">검색하기</button>
 				</div>
-				
-				
-				
-				
-				
-		<section id="professorSection">
-			<div class="container">
-				
 
 				<div th:if="${profData}">
 					<div id="main_table" th:if="${profData}">
 						<div class="table">
 								<div class="table-header">
-							        <div class="table-row">
+									<div class="table-row">
 							            <div class="table-cell cell-name cell-left">번호</div>
 							            <div class="table-cell cell-name cell-left">이름</div>
 							            <div class="table-cell cell-field">상담 분야</div>
@@ -75,8 +70,9 @@
 							            <div class="table-cell cell-apply">상담 신청</div>
 							        </div>
 						    	</div>
+						    	
 								<div class="table-body">
-									<div th:each="prof, iterStat : ${profData}">
+									<div th:each="prof, iterStat : ${profData}" class="table-row">
 										<div class="table-cell cell-name cell-left cslor_name" th:text="${iterStat.count}"></div>
 										<div class="table-cell cell-field csl_detail" th:text="${prof.PF_NM}"></div>
 										<div class="table-cell cell-field csl_detail" th:text="${prof.PF_CS_PART}"></div>
