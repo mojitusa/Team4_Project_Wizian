@@ -16,7 +16,7 @@
 		WHERE u.user_no = #{userNo}
 	</select>
 	<select id="getInfoPro" resultType="map" parameterType="String">
-		SELECT s.PF_TELNO, s.PF_CS_PART, s.PF_CS_PART_DETAIL, s.PF_PLC_NM, s.C_CD, s.PF_SC_PART,s.PF_NO
+		SELECT s.PF_NO, s.PF_NM, s.PF_TELNO, s.PF_CS_PART, s.PF_CS_PART_DETAIL, s.PF_PLC_NM, s.C_CD
 		FROM PROFESSER s
 		JOIN USERS u ON s.PF_NO = u.user_no
 		WHERE u.user_no = #{userNo}
