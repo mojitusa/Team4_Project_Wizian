@@ -50,7 +50,7 @@ public class PsyCslService {
 		psyCslSurveyRepo.save(formData);
 		cslApp.setStudent(student);
 		cslApp.setCate("4");
-		cslApp.setStat("2");
+		cslApp.setStat("1");
 		
 		cslApplyRepoJpa.save(cslApp);
 		
