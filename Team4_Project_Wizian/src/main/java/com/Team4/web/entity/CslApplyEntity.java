@@ -38,7 +38,7 @@ public class CslApplyEntity {
     @JoinColumn(name = "CSLOR_NO")
     private CslorEntity counselor;
     
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "SCH_NO")
     private CslScheduleEntity cschedule;
     

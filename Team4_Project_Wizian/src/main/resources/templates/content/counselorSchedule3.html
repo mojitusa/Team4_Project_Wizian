@@ -300,16 +300,25 @@
                 // date와 time을 결합하여 Date 객체 생성
                 const date = new Date(`${dateString}T${timeString}`);
                 if (!isNaN(date)) {
-                    const time = `${date.getHours()}:${date.getMinutes() < 10 ? '0' : ''}${date.getMinutes()}`;
+                    const hours = date.getHours().toString().padStart(2, '0');
+                    const minutes = date.getMinutes().toString().padStart(2, '0');
+                    const time = `${hours}:${minutes}`;    
+                    
                     let content = '예약 가능';
                     let buttonClass = 'available-button';
 
-                    if (isbook === '2') {
+                    if (isbook === '1') {
                         content = '예약 완료';
                         buttonClass = 'booked-button';
+                    } else if (isbook === '2') {
+                    	content = '상담 완료';
+                        buttonClass = 'completed-button';
+                    } else if (isbook === '4') {
+                    	content = '상담 취소';
+                        buttonClass = 'canceled-button';
                     }
 
-                    if (date >= tomorrow || isbook === '2') {
+                    if (date >= tomorrow || isbook === '1' || isbook === '2' || isbook === '4') {
                         addDataToCalendar(date, time, content, buttonClass, isbook, schNo);
                     }
                 } else {
