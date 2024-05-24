@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.footer {
+	border-radius: 15px;
+}
+
 div.menu {
 	margin-top: 5px;
     display: flex;
