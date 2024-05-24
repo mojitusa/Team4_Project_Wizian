@@ -130,12 +130,12 @@ public class BoardController {
 	        String cslNo = request.get("cslNo");
 	        String cslCate = request.get("cslCate");
 	        Object session = util.getSession().getAttribute("userNo");
-	        //System.out.println("예약취소확인"+cslNo);
-	        //System.out.println("예약취소확인"+cslCate);
+	        System.out.println("예약취소확인"+cslNo);
+	        System.out.println("예약취소확인"+cslCate);
 	        int isCanceled = boardService.cancelReservation(cslNo, cslCate,session);
-	        //System.out.println("예약취소확인"+isCanceled);
+	        System.out.println("예약취소확인결과"+isCanceled);
 	        Map<String, Object> response = new HashMap<>();
-	        if (isCanceled == 1) {
+	        if (isCanceled != 0) {
 	            response.put("message", "예약이 성공적으로 취소되었습니다.");
 	            return ResponseEntity.ok(response);
 	        } else {

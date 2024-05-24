@@ -45,7 +45,8 @@
 	<script src="assets/js/main.js"></script>
 </head>
 <style>
-.added-content {
+
+.added-content{
         margin-top: 150px; /* 이미지와 추가된 HTML 요소 사이의 간격 조정 */
     }
     .guide_wrap {
@@ -170,6 +171,7 @@ margin-top:10px;
 					return response.text();
 				})
 				.then(html => {
+					$('#info .guide_wrap').remove();
 					$('#counLog').html(html);
 				})
 				.catch(error => {
@@ -260,7 +262,7 @@ margin-top:10px;
 					$('#info .guide_wrap').remove();
 					$('#counLog').append(h2);
 					$('#counLog').append(imgHtml);
-					$('#info').append(guideHtml).addClass('added-content');
+					$('#info').append(guideHtml).addClass('added-content').addClass('yh');
 					result.forEach((item, index) => {
 			                item.CSL_NO_REAL = item.CSL_NO;
 			                item.rowNum = index + 1;
