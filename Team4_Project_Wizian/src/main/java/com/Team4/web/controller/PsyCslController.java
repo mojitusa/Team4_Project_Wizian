@@ -34,7 +34,7 @@ public class PsyCslController {
 			model.addAttribute("student", studentEntity);
 			System.out.println(studentEntity);
 		} else {
-			 
+			return "content/careerloginerror";
 		}
 		return "content/psycslapply";
 	}
