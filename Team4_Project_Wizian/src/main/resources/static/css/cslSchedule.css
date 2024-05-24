@@ -150,7 +150,16 @@ th, td {
     background-color: #caf0f8;
     color: #00b4d8;
     font-weight: bold;
-    
+}
+
+.completed-button {
+    background-color: #74c69d;
+    font-weight: bold;
+}
+
+.canceled-button {
+    background-color: #778da9;
+    font-weight: bold;
 }
 
 /* 모달 전체 영역 */
