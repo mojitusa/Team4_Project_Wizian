@@ -61,10 +61,10 @@ public class NormalCslService {
 		cslApp.setCate(cslApply.getCate());
 		cslApp.setStudent(student);
 		cslApp.setCounselor(couselor);
-		cslApp.setStat("2");
+		cslApp.setStat("1");
 		
 		CslScheduleEntity schedule = cslScheduleRepo.findById(Integer.parseInt(cslApply.getSchNo())).orElse(null);
-		schedule.setIsbook("2");
+		schedule.setIsbook("1");
 		cslScheduleRepo.save(schedule);
 		
 		cslApp.setCschedule(schedule);
