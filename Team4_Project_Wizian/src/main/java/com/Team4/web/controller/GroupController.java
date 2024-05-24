@@ -175,7 +175,7 @@ public class GroupController {
         if (userCode.equals("13")) {
             return "content/groupWrite";
         } else {
-            return "/login";
+            return "login";
         }
     }
 
