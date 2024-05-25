@@ -29,13 +29,19 @@
 	border-radius: 5px;
 	display: flex;
 	align-items: center;
-	border: none;
+	border: 0.5px solid black;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
 	transition: box-shadow 0.3s ease; /* 호버 시 애니메이션을 위한 트랜지션 */
 }
 
 .each_stat:hover {
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15); /* 호버 시 그림자 확대 */
+}
+
+/* 버튼 클릭 효과 */
+.each_stat:active {
+    transform: translateY(1px); /* 클릭 시 아래로 1px 이동 */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* 클릭 시 그림자 확대 */
 }
 
 .avail {

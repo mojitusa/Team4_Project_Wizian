@@ -37,15 +37,15 @@ public class NormalCslController {
 	@GetMapping("/career")
 	public String showCareerPage(Model model, HttpSession session, @RequestParam(name = "page", defaultValue = "0") int page) {
 		String userNo = (String) session.getAttribute("userNo");
-		System.out.println("usebrNo : " + userNo);
+		//System.out.println("usebrNo : " + userNo);
 
 	    if (userNo == null) {
 	        model.addAttribute("isLoggedIn", false);
 	        
 	        model.addAttribute("userNo", "null");
 	        
-	        System.out.println("널 조건 안으로 들어왔습니다.");
-	        System.out.println("usebrNo : " + userNo);
+	        //System.out.println("널 조건 안으로 들어왔습니다.");
+	        //System.out.println("usebrNo : " + userNo);
 	        return "content/careerloginerror";
 	        
 	    } else {
@@ -75,8 +75,8 @@ public class NormalCslController {
 			
 			model.addAttribute("userNo", "null");
 			
-			System.out.println("널 조건 안으로 들어왔습니다.");
-			System.out.println("usebrNo : " + userNo);
+			//System.out.println("널 조건 안으로 들어왔습니다.");
+			//System.out.println("usebrNo : " + userNo);
 			return "content/careerloginerror";
 			
 		} else {
@@ -89,7 +89,7 @@ public class NormalCslController {
 			model.addAttribute("counselor", cslorPage.getContent());
 			model.addAttribute("page", cslorPage);
 			
-			return "content/gender";
+			return "content/career";
 		}
 		
 	}
@@ -104,8 +104,8 @@ public class NormalCslController {
 			
 			model.addAttribute("userNo", "null");
 			
-			System.out.println("널 조건 안으로 들어왔습니다.");
-			System.out.println("usebrNo : " + userNo);
+			//System.out.println("널 조건 안으로 들어왔습니다.");
+			//System.out.println("usebrNo : " + userNo);
 			return "content/careerloginerror";
 			
 		} else {
@@ -118,7 +118,7 @@ public class NormalCslController {
 			model.addAttribute("counselor", cslorPage.getContent());
 			model.addAttribute("page", cslorPage);
 			
-			return "content/gender";
+			return "content/career";
 		}
 		
 	}

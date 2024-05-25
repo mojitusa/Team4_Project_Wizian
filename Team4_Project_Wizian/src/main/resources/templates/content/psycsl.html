@@ -183,12 +183,12 @@
   	    let checkbox3 = document.getElementById("del_info_agree_checkbox");
   	    
         // Thymeleaf 표현식을 JavaScript 변수에 할당
-       	const isLoggedIn = [[${isLoggedIn}]];
-       	const userNo = [[${userNo} != 'null' ? ${userNo} : 'null']] ;
+	    const isLoggedIn = [[${isLoggedIn}]];
+	    const userNo = [[${userNo} != 'null' ? ${userNo} : 'null']];
         
   	    if (!isLoggedIn) {
   	    	alert("로그인 해 주세요.")
-  	    	window.location.href = "/"; // 메인 페이지로 이동
+  	    	window.location.href = "/login"; // 메인 페이지로 이동
   	    	return;
   	    } else if ( userNo !== 'null' && userNo.toString().substring(0, 2) != '11' ) {
   	    	alert("학생만 신청가능합니다.");
