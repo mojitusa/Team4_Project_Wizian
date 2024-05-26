@@ -209,10 +209,20 @@
 		    			</div>
 		    			<div class="modal_mid_table1_row2">
 		    				<div class="colored_cell modal_cell colered">
-		    					신청 내용
+		    					상담신청 내용
 		    				</div>
 		    				<div class="uncolored_cell modal_cell uncolered" id="modalTime">
 		    					<textarea id="modalText" rows="5" cols="50"></textarea>
+		    				</div>						    			
+		    			</div>
+		    			<div class="modal_mid_table1_row2">
+		    				<div class="colored_cell modal_cell colered">
+		    					상담신청<br>첨부파일
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id="modalTime">
+								<form id="attachment" th:action="@{/attachment}" method="post" enctype="multipart/form-data">
+								    <input type="file" name="file"> <br>
+								</form>
 		    				</div>						    			
 		    			</div>
 		    		</div>
@@ -455,29 +465,60 @@
             cslorNo: document.getElementById('modalCslorNo').innerText,
             cslLoc: document.getElementById('modalCslLoc').innerText,
             cslApplyText: document.getElementById('modalText').value // 텍스트영역 내용 추가
+			//attachmentNo: "" // 첨부파일 ID 추가
             
             // 기타 필요한 정보도 가져오세요
         };
+		
+		// FormData 객체 생성
+		let formData = new FormData();
+
+		// 파일 input에서 파일을 가져와 FormData에 추가
+		let fileInput = document.querySelector('input[type="file"]');
+		formData.append('file', fileInput.files[0]);		
+		
+		//let attachmentForm = document.getElementById('attachment');
+		//let formData = new FormData(attachmentForm);
 
         // 서버로 데이터 전송
-        fetch('/cslapply', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
+		// 파일 업로드 엔드포인트로 요청 전송
+		fetch('/attachment', {
+		    method: 'POST',
+		    body: formData
+		})
+		.then(response => response.json()) // JSON 형태로 변환
+		.then(res => {
+		    console.log('Attachment ID:', res.attNo);
+
+			// 업로드된 첨부파일 ID를 데이터에 추가
+			data.attachmentNo = res.attNo;
+
+		    // 파일 업로드가 성공하면 다른 데이터 전송
+		    return fetch('/cslapply', {
+		        method: 'POST',
+		        headers: {
+		            'Content-Type': 'application/json',
+		        },
+		        body: JSON.stringify(data)
+		    });
+		})
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
             // 성공적으로 저장되었을 때의 처리
             alert("예약이 완료되었습니다.");
-            // 다른 페이지로 이동
-            window.location.href = "/index";             
+			
+			//모달 닫기
+			closeModal();
+			
+            // 페이지 새로 고침
+            window.location.reload();          
         })
         .catch((error) => {
             console.error('Error:', error);
             // 저장 중 오류가 발생했을 때의 처리
+			window.location.href = "/index";  
+			
         });
     });
 	
