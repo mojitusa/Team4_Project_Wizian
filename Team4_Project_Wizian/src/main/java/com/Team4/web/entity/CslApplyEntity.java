@@ -47,6 +47,9 @@ public class CslApplyEntity {
     
     @Column(name = "CSL_APL_DETAIL")
     private String cslDetail;
-
+    
+    @OneToOne
+    @JoinColumn(name = "ATTACHMENT_NO")
+    private AttachmentEntity attachment;
     
 }

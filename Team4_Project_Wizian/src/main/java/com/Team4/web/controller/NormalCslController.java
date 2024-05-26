@@ -163,7 +163,8 @@ public class NormalCslController {
 	
 	@PostMapping("/cslapply")
 	public ResponseEntity<String> cslapply(@RequestBody CslApplyMongo cslApply) {
-		System.out.println(cslApply);
+		System.out.println("===================================");
+		System.out.println("cslApply : " + cslApply);
 		
 		normalCslService.saveCslApply(cslApply);
 		
