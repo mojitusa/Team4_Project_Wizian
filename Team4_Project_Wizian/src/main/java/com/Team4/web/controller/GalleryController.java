@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.Team4.web.dto.GalleryDto;
+import com.Team4.web.entity.GalleryEntity;
 import com.Team4.web.service.GalleryService;
 import com.Team4.web.service.S3Service;
 
@@ -60,9 +61,12 @@ public class GalleryController {
     
     @GetMapping("/gallerytest")
     public String gallerytest(Model model) {
-        List<GalleryDto> galleryDtoList = galleryService.getList();
+        GalleryEntity galleryEntity = galleryService.getFile(23);
+        galleryEntity.setImgFullPath("https://" + s3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + galleryEntity.getFilePath());
+        System.out.println(galleryEntity.getId());
+        System.out.println(galleryEntity.getFilePath());
 
-        model.addAttribute("galleryList", galleryDtoList);
+        model.addAttribute("galleryEntity", galleryEntity);
 
         return "content/gallerytest";
     }

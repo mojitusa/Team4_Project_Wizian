@@ -10,9 +10,11 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Setter
 @Entity
 @Table(name = "ATTACHMENT")
 public class GalleryEntity {
@@ -25,6 +27,11 @@ public class GalleryEntity {
 
     @Column(columnDefinition = "TEXT")
     private String filePath;
+    
+    
+    private String imgFullPath;
+    
+    
 
     @Builder
     public GalleryEntity(Long id, String filePath) {

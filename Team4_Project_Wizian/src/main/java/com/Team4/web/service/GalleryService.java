@@ -31,6 +31,10 @@ public class GalleryService {
 
         return galleryDtoList;
     }
+    
+    public GalleryEntity getFile (int no) {
+    	return galleryRepository.findById((long) no).orElse(null);
+    }
 
     private GalleryDto convertEntityToDto(GalleryEntity galleryEntity) {
         return GalleryDto.builder()
