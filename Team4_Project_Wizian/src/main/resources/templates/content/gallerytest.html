@@ -43,10 +43,10 @@
 
 		<hr>
 
-		<div th:each="gallery : ${galleryList}">
-		<div th:each="gallery : ${galleryList}">>
+		<div th:object="${galleryEntity}">
 		    <div style="margin-bottom: 30px">
-		        <img th:src="${gallery.imgFullPath}" style="width: 500px; height: 300px;">
+		        <!-- 파일 다운로드 링크 -->
+		        <a th:href="@{${galleryEntity.imgFullPath}}" download="filename.ext">Download File</a>
 		    </div>
 		</div>
       </div>
