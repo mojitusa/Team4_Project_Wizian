@@ -145,7 +145,7 @@
 				JOIN STUD_INFO i ON i.STUD_NO = #{userNo}
 				JOIN DEPT_CD d ON i.C_CD = d.C_CD
 				JOIN COUNSELOR r ON r.USER_NO = c.CSLOR_NO
-				JOIN ATTACHMENT a ON c.ATTACHMENT_NO = a.id
+				LEFT JOIN ATTACHMENT a ON c.ATTACHMENT_NO = a.id
 				WHERE c.CSL_NO = #{CSL_NO} AND c.CSL_CATE_CD = #{category}
 			</when>
 			<when test="category == 2">
