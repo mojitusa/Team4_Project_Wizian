@@ -49,6 +49,32 @@
 #modalText {
 	background-color: #f0f0f0; /* 또는 원하는 회색 코드 */
 }
+
+/* 버튼 디자인 */
+.download-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0077b6; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 180px;
+}
+
+.download-button:hover {
+    background-color: #45a049;
+}
+
+.fileContainer {
+	display: flex;
+	align-items: center;	
+}
 </style>
 </head>
 
@@ -295,11 +321,30 @@ function initializeCounLog(userNo) {
 		        document.getElementById('modalCslorName').textContent = counselDetail.CSLOR_NM;
 		        document.getElementById('modalCslLoc').textContent = counselDetail.CSL_LOC;
 		        document.getElementById('modalText').textContent = counselDetail.CSL_APL_DETAIL;
+		        
+		        // 파일 다운로드 링크 설정
+		        const filePath = counselDetail.filePath;
+		        console.log("파일패스 : " + filePath);
+		        const fileDownloadLink = document.getElementById('fileDownloadLink');
+		        if (filePath) {
+		            // 클라우드 프론트 도메인과 파일 경로를 결합하여 전체 URL 생성
+		            const cloudFrontDomainName = "d3pki4re3vxc24.cloudfront.net"; // 여기에 클라우드 프론트 도메인 이름을 입력하세요
+		            const fileUrl = "https://" + cloudFrontDomainName + "/" + filePath;
+
+		            // 파일 다운로드 링크 설정
+		            fileDownloadLink.href = fileUrl;
+		            fileDownloadLink.style.display = 'block';
+		        } else {
+		            fileDownloadLink.style.display = 'none';
+		        }
+		        
 
 		        document.getElementById('myModal').style.display = 'block';
 		    })
 		    .catch(error => {
 		        console.error('Error:', error);
+		        // 에러 발생 시에도 모달을 닫지 않음
+		        document.getElementById('myModal').style.display = 'block';
 		    });
 		}
 
@@ -426,6 +471,17 @@ function initializeCounLog(userNo) {
 								<textarea id="modalText" rows="5" cols="50" readonly></textarea>
 							</div>
 						</div>
+		    			<div class="modal_mid_table1_row2">
+		    				<div class="colored_cell modal_cell colered">
+		    					상담신청<br>첨부파일
+		    				</div>
+		    				<div class="uncolored_cell modal_cell uncolered" id="modalTime">
+					            <div class="fileContainer" ssstyle="margin-bottom: 30px">
+					                <!-- filePath가 있을 경우 다운로드 링크 생성 -->
+					                <a id="fileDownloadLink" href="#" class="download-button" style="display: none;">첨부파일 다운로드</a>
+					            </div>   					
+		    				</div>						    			
+		    			</div>						
 					</div>
 				</div>
 			</div>
@@ -492,8 +548,11 @@ document.getElementById('myModal').style.display = 'block';
 
 // 모달 닫기 함수
 function closeModal() {
-// 모달 닫기
-document.getElementById('myModal').style.display = 'none';
+	// 파일 다운로드 링크를 숨깁니다.
+    document.getElementById('fileDownloadLink').style.display = 'none';
+	
+	// 모달 닫기
+	document.getElementById('myModal').style.display = 'none';
 }
 </script>
 </html>
