@@ -21,20 +21,36 @@ public class PsyCslController {
 	@Autowired
 	PsyCslService psyCslService;
 	
+	@GetMapping("/psy")
+	public String showPsychoPage(Model model, HttpSession session) {
+		String userNo = (String) session.getAttribute("userNo");
+
+	    if (userNo == null) {
+	        model.addAttribute("isLoggedIn", false);
+	        model.addAttribute("userNo", "null");
+	    } else {
+	        model.addAttribute("isLoggedIn", true);
+	        model.addAttribute("userNo", userNo);
+	    }
+	    
+		return "content/psycsl";
+	}	
+	
+	
 	@GetMapping("/psycslapply")
 	public String psyCslApply(Model model, HttpSession session) {
 		//model.addAttribute("student", psyCslService.getStudentByUserNo("5010000003"));
 		
         // 세션에서 로그인한 사용자 정보 가져오기
 		Object userNo = session.getAttribute("userNo");
-		System.out.println("userNo : " + userNo);
+		//System.out.println("userNo : " + userNo);
 		
 		if (userNo != null) {
 			StudentEntity studentEntity =  psyCslService.getJpaStudentByUserNo((String) userNo);
 			model.addAttribute("student", studentEntity);
-			System.out.println(studentEntity);
+			//System.out.println(studentEntity);
 		} else {
-			 
+			return "content/careerloginerror";
 		}
 		return "content/psycslapply";
 	}

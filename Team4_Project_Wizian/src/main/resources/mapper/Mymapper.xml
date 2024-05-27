@@ -7,7 +7,7 @@
 		FROM (
 		SELECT COUNT(*) AS count
 		FROM CSL_BOARD
-		WHERE SUBSTRING(STUD_NO, 1, 2) = #{secd}
+		WHERE SUBSTRING(STUD_NO, 1, 2) = #{secd} AND CSL_STATUS = '답변대기중'
 
 		UNION ALL
 
@@ -21,13 +21,13 @@
 		SELECT COUNT(*) AS count
 		FROM PROFESSER_CONSULTATION
 		WHERE
-		SUBSTRING(STUD_NO, 1, 2) = #{secd}
+		SUBSTRING(STUD_NO, 1, 2) = #{secd} AND PFCS_STATUS = 1
 
 		UNION ALL
 
 		SELECT COUNT(*) AS count
 		FROM CSL_APPLY
-		WHERE SUBSTRING(STUD_NO, 1, 2) = #{secd}
+		WHERE SUBSTRING(STUD_NO, 1, 2) = #{secd} AND CSL_STAT_CD = 1
 		) AS cc;
 	</select>
 

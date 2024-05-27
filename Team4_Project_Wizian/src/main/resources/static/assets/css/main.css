@@ -232,7 +232,7 @@ h1, h2, h3, h4, h5, h6 {
 		padding-right: 0;
 	}
 	.navmenu li:hover>a, .navmenu .active, .navmenu .active:focus {
-		color: red;
+		color: #90e0ef;;
 	}
 	.navmenu .dropdown ul {
 		margin: 0;

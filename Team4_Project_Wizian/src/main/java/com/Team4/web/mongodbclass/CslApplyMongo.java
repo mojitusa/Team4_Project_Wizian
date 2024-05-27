@@ -47,6 +47,7 @@ public class CslApplyMongo {
 	private String cslorNo;
 	private String cslLoc;
 	private String cslApplyText;
+	private int attachmentNo;
     
     //이하는 심리상담에만 해당하는 요소
     private Date SecretAgree;

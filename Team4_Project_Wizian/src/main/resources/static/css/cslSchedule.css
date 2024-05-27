@@ -29,13 +29,19 @@
 	border-radius: 5px;
 	display: flex;
 	align-items: center;
-	border: none;
+	border: 0.5px solid black;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
 	transition: box-shadow 0.3s ease; /* 호버 시 애니메이션을 위한 트랜지션 */
 }
 
 .each_stat:hover {
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15); /* 호버 시 그림자 확대 */
+}
+
+/* 버튼 클릭 효과 */
+.each_stat:active {
+    transform: translateY(1px); /* 클릭 시 아래로 1px 이동 */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* 클릭 시 그림자 확대 */
 }
 
 .avail {
@@ -202,10 +208,10 @@ div.modal {
 }
 
 div.modal-content {
-	margin-top: 100px;
+	margin-top: 50px;
 	padding: 0;
 	border-radius: 2%; /* 버튼을 원형으로 만듭니다. */
-overflow: hidden; /* 자식 요소가 부모 div를 넘어가지 않도록 합니다. */
+	overflow: hidden; /* 자식 요소가 부모 div를 넘어가지 않도록 합니다. */
 }
 
 .modal-content_top {
@@ -256,12 +262,15 @@ overflow: hidden; /* 자식 요소가 부모 div를 넘어가지 않도록 합�
 	padding: 14px;
 	background-color: #edf2fb;
 	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .uncolered {
 	padding: 14px;
 	align-items: center; /* 수직 가운데 정렬 */
-	
+	display: flex;
 }
 
 span.close {

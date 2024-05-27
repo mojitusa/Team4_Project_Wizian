@@ -1,8 +1,34 @@
 @charset "UTF-8";
 
+/* 제목 부분 css */
+
 #headerheader {
+	font-family: "Jua", sans-serif;
 	border-radius: 15px;
 }
+
+.sitename {
+	margin-bottom: 0;
+}
+
+.logo.d-flex.align-items-center.me-auto.me-xl-0 {
+    text-decoration: none; /* 밑줄 제거 */
+	font-size: 24px;
+	margin: 0;
+	font-weight: 600;
+	/* color: white; */    
+}
+
+.sitename a {
+    text-decoration: none; /* 밑줄 제거 */
+    color: white; /* 기본 텍스트 색상 사용 */
+    transition: color 0.3s ease; /* 색상 변화에 대한 애니메이션 */
+}
+
+.sitename a:hover {
+    color: #90e0ef; /* 호버 시 텍스트 색상 변경 */
+}
+
 
 /* 기본 스타일 */
 .navmenu ul {
@@ -13,7 +39,11 @@
     flex-wrap: wrap;
     align-items: center; /* 세로 가운데 정렬 */
 }
-
+.jua-regular {
+  font-family: "Jua", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 .navmenu ul li {
     margin: 0 10px;
 }
@@ -52,4 +82,9 @@
 .container-fluid {
     background-color: #14213d; /* 컨테이너 배경색 설정 (필요에 따라) */
     padding: 10px 20px; /* 전체 컨테이너에 패딩 추가 */
+}
+
+/* 로그아웃 버튼 */
+.btn-dark {
+	background-color: #14213d;
 }

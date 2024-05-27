@@ -73,7 +73,7 @@ public class GroupController {
 
             return "content/groupApplyPage";
         } else {
-            return "/login";
+            return "login";
         }
     }
 
@@ -175,7 +175,7 @@ public class GroupController {
         if (userCode.equals("13")) {
             return "content/groupWrite";
         } else {
-            return "/login";
+            return "login";
         }
     }
 

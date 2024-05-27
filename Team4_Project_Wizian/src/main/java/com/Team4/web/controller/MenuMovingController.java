@@ -46,27 +46,12 @@ public class MenuMovingController {
 		}
 	}
 	
-	@GetMapping("/psy")
-	public String showPsychoPage(Model model, HttpSession session) {
-		String userNo = (String) session.getAttribute("userNo");
-
-	    if (userNo == null) {
-	        model.addAttribute("isLoggedIn", false);
-	        model.addAttribute("userNo", "null");
-	    } else {
-	        model.addAttribute("isLoggedIn", true);
-	        model.addAttribute("userNo", userNo);
-	    }
-	    
-		return "content/psycsl";
-	}
-	
 	@GetMapping("/login")
 	public String showLoginPage() {
-		return "/login";
+		return "login";
 	}
 	@GetMapping("/counselor")
 	public String showCounselorPage() {
-		return "/counselor/counselor";
+		return "counselor/counselor";
 	} 
 }

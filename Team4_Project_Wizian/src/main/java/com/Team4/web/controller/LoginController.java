@@ -29,13 +29,13 @@ public class LoginController {
         boolean loggedIn = loginService.checkLogin(id, pw2);
         if (loggedIn == false) {
         	model.addAttribute("errorMessage", "입력한 정보가 올바르지 않습니다. 다시 시도해주세요.");
-        	return "/login";
+        	return "login";
 		}
         String userPrefix = id.substring(0, 2);
         switch (userPrefix) {
             case "10":
             	session.invalidate();
-                return "/admin/admin";
+                return "admin/admin";
             case "11":
             	if (loggedIn && id.toString().substring(0, 2).equals("11")) {
             		Map<String, Object> userInfo = loginService.getName(id);
@@ -59,30 +59,30 @@ public class LoginController {
             		return "redirect:/index";
             	} else {
             		model.addAttribute("errorMessage", "입력한 정보가 올바르지 않습니다. 다시 시도해주세요.");
-            		return "/login";
+            		return "login";
             	}
             case "12":
             	if (loggedIn && id.toString().substring(0, 2).equals("12")) {
             		Map<String, Object> userInfoPro = loginService.getInfoPro(id);
             		String PF_NO = (String) userInfoPro.get("PF_NO");
-            		String PF_TELN = (String) userInfoPro.get("PF_TELNO");
+            		String PF_NM = (String) userInfoPro.get("PF_NM");
+            		String PF_TELNO = (String) userInfoPro.get("PF_TELNO");
             		String PF_CS_PART = (String) userInfoPro.get("PF_CS_PART");
             		String PF_CS_PART_DETAIL = (String) userInfoPro.get("PF_CS_PART_DETAIL");
-            		String PF_PLC_N = (String) userInfoPro.get("PF_PLC_NM");
+            		String PF_PLC_NM = (String) userInfoPro.get("PF_PLC_NM");
             		String C_CD = (String) userInfoPro.get("C_CD");
-            		String PF_SC_PART = (String) userInfoPro.get("PF_SC_PART");
             		session.setAttribute("userNo", PF_NO);
-            		session.setAttribute("PF_TELN", PF_TELN);
+            		session.setAttribute("PF_NM", PF_NM);
+            		session.setAttribute("PF_TELNO", PF_TELNO);
             		session.setAttribute("PF_CS_PART", PF_CS_PART);
             		session.setAttribute("PF_CS_PART_DETAIL", PF_CS_PART_DETAIL);
-            		session.setAttribute("PF_PLC_N", PF_PLC_N);
+            		session.setAttribute("PF_PLC_NM", PF_PLC_NM);
             		session.setAttribute("C_CD", C_CD);
-            		session.setAttribute("PF_SC_PART", PF_SC_PART);
             		session.setAttribute("SE_CD", userPrefix);
-            		return "redirect:/myPageProF";
+            		return "redirect:/index";
             	} else {
             		model.addAttribute("errorMessage", "입력한 정보가 올바르지 않습니다. 다시 시도해주세요.");
-            		return "/login";
+            		return "login";
             	}
             case "13":
             	if (loggedIn && id.toString().substring(0, 2).equals("13")) {
@@ -124,7 +124,7 @@ public class LoginController {
             		return "redirect:/index";
             	} else {
             		model.addAttribute("errorMessage", "입력한 정보가 올바르지 않습니다. 다시 시도해주세요.");
-            		return "/login";
+            		return "login";
             	}
             default:
             	model.addAttribute("errorMessage", "입력한 정보가 올바르지 않습니다. 다시 시도해주세요.");

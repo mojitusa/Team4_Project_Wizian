@@ -21,7 +21,7 @@ public class AsignProfController {
 	
 	@GetMapping("/profcusl/profComplite")
 	public String profResult() {
-		return "/profcusl/profComplite";
+		return "profcusl/profComplite";
 	}
 	
 	

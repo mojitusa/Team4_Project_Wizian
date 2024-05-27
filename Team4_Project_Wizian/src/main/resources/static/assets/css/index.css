@@ -8,6 +8,11 @@
 	position: relative;
 	margin: 0 auto;
 }
+.jua-regular {
+  font-family: "Jua", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
 #myPage {
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
@@ -31,7 +36,8 @@
     justify-content: center;
     align-items: center;
     padding: 20px;
-    background-color: #f5f5f5;
+    margin-bottom: 15px;
+    background-color: #f6f6f6;
 }
 
 .indexCardWrap {
@@ -181,8 +187,7 @@
 }
 
 #carouselExampleDark {
-	max-width: 800px;
-	padding: 10px;
+	max-width: 1300px;
 	margin-bottom: 10px;
 	max-height: 500px;
 }
@@ -225,21 +230,19 @@
 }
 
 #containerBox{
-	text-align: center; /* 자식 요소를 가운데 정렬 */
 	width: 100%;
 }
 
 .leftContent, .rightContent {
     display: inline-block; /* inline-block을 사용하여 한 줄에 배치 */
     vertical-align: top; /* 세로 방향 정렬 */
-    margin: 10px; /* 요소 사이의 간격 */
 }
 
 .leftContent {
     width: 70%; /* 원하는 비율에 따라 조정 가능 */
-    padding-left: 5%;
 }
 
 .rightContent {
     width: 25%; /* 원하는 비율에 따라 조정 가능 */
+    float: right;
 }
