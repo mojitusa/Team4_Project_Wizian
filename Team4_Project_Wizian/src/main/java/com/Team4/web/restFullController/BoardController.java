@@ -105,7 +105,7 @@ public class BoardController {
 	        List<Map<String, Object>> counselDetail = boardService.getCounselDetail(cslNo, category, session);
 	        Map<String, Object> response = new HashMap<>();
 	        response.put("counselDetail", counselDetail);
-	        System.out.println(counselDetail);
+	        System.out.println("조회버튼확인" + counselDetail);
 	        return response ;
 	    }
 	    

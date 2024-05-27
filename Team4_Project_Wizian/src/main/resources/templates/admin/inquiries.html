@@ -33,7 +33,7 @@
             <!-- 상담 상태 선택 -->
             <select class="form-select" id="statusSelect">
                 <option value="">상담 상태</option>
-                <option value="상담완료">상담완료</option>
+                <option value="상담 완료">상담 완료</option>
                 <option value="답변대기중">답변대기중</option>
             </select>
             
@@ -82,7 +82,7 @@
                     return $(this).find('td:nth-child(2)').text() === category;
                 }).show();
             } else if (status !== '') { 
-                if (status === '상담완료') { 
+                if (status === '상담 완료') { 
                     $('.inquiry-row').hide().filter(function () {
                         return $(this).find('td:nth-child(5)').text().trim() === status;
                     }).show();
