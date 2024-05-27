@@ -39,24 +39,7 @@
 				
 		<section id="professorSection">
 			<div class="container">
-				<div class="row">
-					<span> <label for="map_professor">지도교수여부</label> <select
-						id="map_professor">
-							<option value="yes">Y</option>
-							<option value="no">N</option>
-					</select>
-					</span> 
-					<span> <label for="department">학과</label> 
-					<input type="text" id="department_search" placeholder="학과를 입력하세요">
-						<button id="department_search_button">검색</button>
-					</span>
-				</div>
 
-				<div>
-					<label for="search">검색</label> <input type="text" id="search"
-						placeholder="검색어를 입력하세요">
-					<button id="search_button">검색하기</button>
-				</div>
 
 				<div th:if="${profData}">
 					<div id="main_table" th:if="${profData}">
@@ -135,9 +118,7 @@
 			    		</div>
 			    		<div id="modal_mid_table2">
 			    			<div class="modal_mid_table1_row2 modal_mid_table1_row_top">
-			    				<div class="colored_cell modal_cell colered">
-			    					비대면상담여부
-			    				</div>
+			    				
 			    				<div class="uncolored_cell modal_cell uncolered" id="nonFace">
 			    				</div>							    			
 			    			</div>
@@ -220,6 +201,7 @@
 				document.getElementById('email').innerText = selectedProf.email;
 				document.getElementById('cslLoc').innerText = selectedProf.PF_PLC_NM;
 				document.getElementById('deptName').innerText = selectedProf.PF_CS_PART;
+				document.getElementById('cslDetail').innerText = selectedProf.PF_CS_PART_DETAIL;
 				// document.getElementById('profLastUpdated').innerText = selectedProf.lastUpdated; 최종수정일
         		// document.getElementById('profNonFaceConsult').innerText = selectedProf.nonFaceConsult;	비대면상담여부
         		// document.getElementById('profCollege').innerText = selectedProf.PF_CLG;	담당학부(전공)
