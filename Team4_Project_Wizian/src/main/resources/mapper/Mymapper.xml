@@ -136,7 +136,7 @@
 				SELECT s.CSL_CATE_NM AS CSL_CATEGORY, i.REAL_STUD_NO,
 				q.CS_ST_NM AS CSL_STATUS, h.OPEN_DATE AS CSL_DATE, c.CSL_APL_DETAIL,
 				i.STUD_NM, d.C_NMK, u.email, i.MBR_TELNO, r.CSLOR_NM, r.CSL_LOC,
-				DATE_FORMAT(h.CSL_TIME_CD, '%H:%i') AS CSL_TIME_CD, a.filePath
+				DATE_FORMAT(h.CSL_TIME_CD, '%H:%i') AS CSL_TIME_CD , a.filePath
 				FROM CSL_APPLY c
 				JOIN CSL_CATE s ON c.CSL_CATE_CD = s.CSl_CATE_CD
 				JOIN CON_ST_CD q ON q.CS_STATUS = c.CSL_STAT_CD
@@ -152,58 +152,49 @@
 				SELECT s.CSL_CATE_NM AS CSL_CATEGORY, i.REAL_STUD_NO,
 				q.CS_ST_NM AS CSL_STATUS, h.OPEN_DATE AS CSL_DATE, c.CSL_APL_DETAIL,
 				i.STUD_NM, d.C_NMK, u.email, i.MBR_TELNO, r.CSLOR_NM, r.CSL_LOC,
-				DATE_FORMAT(h.CSL_TIME_CD, '%H:%i') AS CSL_TIME_CD
+				DATE_FORMAT(h.CSL_TIME_CD, '%H:%i') AS CSL_TIME_CD , a.filePath
 				FROM CSL_APPLY c
 				JOIN CSL_CATE s ON c.CSL_CATE_CD = s.CSl_CATE_CD
-				JOIN CON_ST_CD q ON
-				q.CS_STATUS = c.CSL_STAT_CD
+				JOIN CON_ST_CD q ON q.CS_STATUS = c.CSL_STAT_CD
 				JOIN CSL_SCH h ON h.SCH_NO = c.SCH_NO
 				JOIN USERS u ON u.USER_NO = #{userNo}
-				JOIN STUD_INFO i ON i.STUD_NO =
-				#{userNo}
+				JOIN STUD_INFO i ON i.STUD_NO = #{userNo}
 				JOIN DEPT_CD d ON i.C_CD = d.C_CD
-				JOIN COUNSELOR r ON
-				r.USER_NO = c.CSLOR_NO
-				WHERE c.CSL_NO = #{CSL_NO} AND c.CSL_CATE_CD =
-				#{category}
+				JOIN COUNSELOR r ON r.USER_NO = c.CSLOR_NO
+				JOIN ATTACHMENT a ON c.ATTACHMENT_NO = a.id
+				WHERE c.CSL_NO = #{CSL_NO} AND c.CSL_CATE_CD = #{category}
 			</when>
 			<when test="category == 3">
 				SELECT s.CSL_CATE_NM AS CSL_CATEGORY, i.REAL_STUD_NO,
 				q.CS_ST_NM AS CSL_STATUS, h.OPEN_DATE AS CSL_DATE, c.CSL_APL_DETAIL,
 				i.STUD_NM, d.C_NMK, u.email, i.MBR_TELNO, r.CSLOR_NM, r.CSL_LOC,
-				DATE_FORMAT(h.CSL_TIME_CD, '%H:%i') AS CSL_TIME_CD
+				DATE_FORMAT(h.CSL_TIME_CD, '%H:%i') AS CSL_TIME_CD , a.filePath
 				FROM CSL_APPLY c
 				JOIN CSL_CATE s ON c.CSL_CATE_CD = s.CSl_CATE_CD
-				JOIN CON_ST_CD q ON
-				q.CS_STATUS = c.CSL_STAT_CD
+				JOIN CON_ST_CD q ON q.CS_STATUS = c.CSL_STAT_CD
 				JOIN CSL_SCH h ON h.SCH_NO = c.SCH_NO
 				JOIN USERS u ON u.USER_NO = #{userNo}
-				JOIN STUD_INFO i ON i.STUD_NO =
-				#{userNo}
+				JOIN STUD_INFO i ON i.STUD_NO = #{userNo}
 				JOIN DEPT_CD d ON i.C_CD = d.C_CD
-				JOIN COUNSELOR r ON
-				r.USER_NO = c.CSLOR_NO
-				WHERE c.CSL_NO = #{CSL_NO} AND c.CSL_CATE_CD =
-				#{category}
+				JOIN COUNSELOR r ON r.USER_NO = c.CSLOR_NO
+				JOIN ATTACHMENT a ON c.ATTACHMENT_NO = a.id
+				WHERE c.CSL_NO = #{CSL_NO} AND c.CSL_CATE_CD = #{category}
 			</when>
 			<when test="category == 4">
 				SELECT s.CSL_CATE_NM AS CSL_CATEGORY, i.REAL_STUD_NO,
 				q.CS_ST_NM AS CSL_STATUS, h.OPEN_DATE AS CSL_DATE, c.CSL_APL_DETAIL,
 				i.STUD_NM, d.C_NMK, u.email, i.MBR_TELNO, r.CSLOR_NM, r.CSL_LOC,
-				DATE_FORMAT(h.CSL_TIME_CD, '%H:%i') AS CSL_TIME_CD
+				DATE_FORMAT(h.CSL_TIME_CD, '%H:%i') AS CSL_TIME_CD , a.filePath
 				FROM CSL_APPLY c
 				JOIN CSL_CATE s ON c.CSL_CATE_CD = s.CSl_CATE_CD
-				JOIN CON_ST_CD q ON
-				q.CS_STATUS = c.CSL_STAT_CD
+				JOIN CON_ST_CD q ON q.CS_STATUS = c.CSL_STAT_CD
 				JOIN CSL_SCH h ON h.SCH_NO = c.SCH_NO
 				JOIN USERS u ON u.USER_NO = #{userNo}
-				JOIN STUD_INFO i ON i.STUD_NO =
-				#{userNo}
+				JOIN STUD_INFO i ON i.STUD_NO = #{userNo}
 				JOIN DEPT_CD d ON i.C_CD = d.C_CD
-				JOIN COUNSELOR r ON
-				r.USER_NO = c.CSLOR_NO
-				WHERE c.CSL_NO = #{CSL_NO} AND c.CSL_CATE_CD =
-				#{category}
+				JOIN COUNSELOR r ON r.USER_NO = c.CSLOR_NO
+				JOIN ATTACHMENT a ON c.ATTACHMENT_NO = a.id
+				WHERE c.CSL_NO = #{CSL_NO} AND c.CSL_CATE_CD = #{category}
 			</when>
 			<when test="category == 5">
 				SELECT DATE_FORMAT(p.PFCS_RV_DATE, '%Y-%m-%d') AS
