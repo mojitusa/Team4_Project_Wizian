@@ -95,17 +95,18 @@ public class BoardController {
 	
 	    @PostMapping("/selectDetail")
 	    public Map<String, Object> getCounselDetail(@RequestBody Map<String, Object> request) {
+	    	System.out.println("컨트롤러 들어옴");
 	        int cslNo = (int) request.get("cslNo");
 	        Object session = util.getSession().getAttribute("userNo");
 	        String category = (String) request.get("selectedOption");
-	       // System.out.println("selectDetail동작확인글번호" + cslNo);
-	       // System.out.println("selectDetail동작확인카테고리" + category);
-	        //System.out.println("selectDetail동작확인카테고리" + session);
+	        System.out.println("selectDetail동작확인글번호" + cslNo);
+	        System.out.println("selectDetail동작확인카테고리" + category);
+	        System.out.println("selectDetail동작확인카테고리" + session);
 	        
 	        List<Map<String, Object>> counselDetail = boardService.getCounselDetail(cslNo, category, session);
 	        Map<String, Object> response = new HashMap<>();
 	        response.put("counselDetail", counselDetail);
-	        System.out.println("조회버튼확인" + counselDetail);
+	        System.out.println("조회버튼확인2" + counselDetail);
 	        return response ;
 	    }
 	    
